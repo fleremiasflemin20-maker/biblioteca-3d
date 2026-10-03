@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Paleta de reserva hasta que monte React; luego la escribe App.tsx. */
+:root {
+  --desde: #00E5D1;
+  --hasta: #2AC3FF;
+  --tinta: #3BE0D0;
+  color-scheme: dark;
+}
+
+@layer base {
+  html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+  body { @apply bg-ink text-paper antialiased; overflow-x: hidden; }
+  :focus-visible { @apply outline-none ring-2 ring-offset-2 ring-offset-ink; --tw-ring-color: var(--tinta); }
+  select option { background: #0A0A0B; }
+}
+
+@layer components {
+  .scene { @apply relative w-full; min-height: 100vh; min-height: 100dvh; }
+
+  /* El degradado del nombre en el portafolio, aquí en la palabra clave. */
+  .degradado {
+    background: linear-gradient(90deg, var(--desde), var(--hasta));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: none;
+  }
+
+  /* Rotulación con contorno de cartel, igual que el portafolio. */
+  .rotulo {
+    --borde: 0.035em;
+    --tinta-borde: #0A0A12;
+    letter-spacing: -0.02em;
+    text-shadow:
+      calc(var(--borde) * -1) calc(var(--borde) * -1) 0 var(--tinta-borde),
+      var(--borde) calc(var(--borde) * -1) 0 var(--tinta-borde),
+      calc(var(--borde) * -1) var(--borde) 0 var(--tinta-borde),
+      var(--borde) var(--borde) 0 var(--tinta-borde),
+      0.07em 0.08em 0 var(--tinta-borde);
+  }
+  /* El degradado recorta el texto: las sombras del rótulo lo ensuciarían. */
+  .rotulo .degradado { filter: drop-shadow(0.06em 0.07em 0 #0A0A12); }
+
+  /*
+   * Botón con borde en la tinta y relleno al pasar el puntero. Aquí por CSS y
+   * no por JavaScript como en el portafolio: `--t` lo pone cada tarjeta o
+   * ficha con su color, y si no hay, manda el de la categoría activa.
+   */
+  .boton {
+    border-color: var(--t, var(--tinta));
+    color: var(--t, var(--tinta));
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .boton:hover:not(:disabled) { background: var(--t, var(--tinta)); color: #0A0A0B; }
+
+  .flecha {
+    border-color: var(--t, var(--tinta));
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .flecha:hover { background: var(--t, var(--tinta)); color: #0A0A0B; }
+
+  .tarjeta { transition: border-color 0.3s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+  .tarjeta:hover { border-color: var(--t); transform: translateY(-4px); }
+
+  .grano {
+    animation: grano 8s steps(6) infinite;
+    opacity: 0.5;
+  }
+  @keyframes grano {
+    0%, 100% { background-position: 0 0 }
+    20% { background-position: -30px 12px }
+    40% { background-position: 18px -24px }
+    60% { background-position: -12px -18px }
+    80% { background-position: 24px 8px }
+  }
+
+  .entra { animation: entra 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  @keyframes entra {
+    from { opacity: 0; transform: translateY(10px) }
+    to { opacity: 1; transform: none }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .grano, .entra { animation: none }
+    .tarjeta:hover { transform: none }
+  }
+}

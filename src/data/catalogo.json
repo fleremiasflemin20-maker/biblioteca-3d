@@ -1,0 +1,221 @@
+[
+  {
+    "id": "gogeta-ssj4",
+    "nombre": "Gogeta SSJ4",
+    "categoria": "personajes",
+    "precio": 29,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Escaneo fotogramétrico de la figura, con mapas PBR a 2K. Pose de combate, lista para render o impresión.",
+    "archivo": "gogeta/gogeta.glb",
+    "peso": 708416,
+    "origen": "Escaneo fotogramétrico",
+    "destacado": true,
+    "alta": "2026-09-05",
+    "draco": true,
+    "texturas": {
+      "carpeta": "gogeta",
+      "map": "diffuse_2k.webp",
+      "normalMap": "normal_1k.webp",
+      "roughnessMap": "roughness_1k.webp",
+      "metalnessMap": "metallic_1k.webp"
+    },
+    "triangulos": 150000,
+    "portada": "gogeta-ssj4.webp"
+  },
+  {
+    "id": "cyber-draconian-sentinel",
+    "nombre": "Cyber Draconian Sentinel",
+    "categoria": "criaturas",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Dragón ciberarmado de pie, con placas metálicas y detalle de escamas horneado en la textura.",
+    "archivo": "meshy/cyber-draconian-sentinel.glb",
+    "peso": 7698788,
+    "origen": "Generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-09-05",
+    "triangulos": 1098132,
+    "portada": "cyber-draconian-sentinel.webp"
+  },
+  {
+    "id": "emerald-tyrant-throne",
+    "nombre": "Emerald Tyrant Throne",
+    "categoria": "props",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Trono esmeralda de tirano: pieza central para una escena de fantasía oscura.",
+    "archivo": "meshy/emerald-tyrant-throne.glb",
+    "peso": 10032268,
+    "origen": "Generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-09-05",
+    "triangulos": 1116358,
+    "portada": "emerald-tyrant-throne.webp"
+  },
+  {
+    "id": "starlight-sentinel",
+    "nombre": "Starlight Sentinel",
+    "categoria": "personajes",
+    "precio": 15,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Guardián estelar con armadura de placas y textura PBR horneada.",
+    "archivo": "meshy/starlight-sentinel.glb",
+    "peso": 4441364,
+    "origen": "Generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-09-05",
+    "triangulos": 615946,
+    "portada": "starlight-sentinel.webp"
+  },
+  {
+    "id": "figura-01",
+    "nombre": "Bestia Escamada · Escultura",
+    "categoria": "criaturas",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Escultura de bestia reptiliana en pose de ataque, sin texturizar: lista para pintar, texturizar a tu gusto o imprimir en 3D.",
+    "archivo": "meshy/figura-01.glb",
+    "peso": 3370416,
+    "origen": "Generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-09-05",
+    "triangulos": 1068898,
+    "portada": "figura-01.webp"
+  },
+  {
+    "id": "figura-02",
+    "nombre": "Casa Moderna · Volumen",
+    "categoria": "escenarios",
+    "precio": 9,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Volumetría de casa moderna de dos plantas, sin texturas. Base limpia para maquetas, estudios de luz o arquitectura.",
+    "archivo": "meshy/figura-02.glb",
+    "peso": 5967708,
+    "origen": "Generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-09-05",
+    "triangulos": 1917151,
+    "portada": "figura-02.webp"
+  },
+  {
+    "id": "figura-03",
+    "nombre": "Cuerpo Base Masculino",
+    "categoria": "personajes",
+    "precio": 8,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Cuerpo base masculino en pose A, sin texturas. Punto de partida para esculpir, vestir o riggear tu propio personaje.",
+    "archivo": "meshy/figura-03.glb",
+    "peso": 1772432,
+    "origen": "Generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-09-05",
+    "triangulos": 571630,
+    "portada": "figura-03.webp"
+  },
+  {
+    "id": "figura-04",
+    "nombre": "Urbano · Chaqueta de Cuero",
+    "categoria": "personajes",
+    "precio": 15,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Personaje urbano con chaqueta de cuero, gorra y textura PBR horneada. Listo para escenas de ciudad o como NPC.",
+    "archivo": "meshy/figura-04.glb",
+    "peso": 3380556,
+    "origen": "Generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-09-05",
+    "triangulos": 474668,
+    "portada": "figura-04.webp"
+  },
+  {
+    "id": "figura-05",
+    "nombre": "Flemin · Cuerpo Entero",
+    "categoria": "personajes",
+    "precio": 15,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Avatar de cuerpo entero en estilo realista, camiseta blanca y chaqueta al hombro. Textura PBR horneada.",
+    "archivo": "meshy/figura-05.glb",
+    "peso": 3140360,
+    "origen": "Generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-09-05",
+    "triangulos": 437090,
+    "portada": "figura-05.webp"
+  },
+  {
+    "id": "figura-06",
+    "nombre": "Flemin · Busto",
+    "categoria": "personajes",
+    "precio": 10,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Busto del mismo avatar, encuadre de medio cuerpo. Ideal para retratos, perfiles o impresión 3D.",
+    "archivo": "meshy/figura-06.glb",
+    "peso": 3600368,
+    "origen": "Generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-09-05",
+    "triangulos": 609050,
+    "portada": "figura-06.webp"
+  },
+  {
+    "id": "figura-07",
+    "nombre": "Villa Moderna con Piscina",
+    "categoria": "escenarios",
+    "precio": 25,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Villa moderna completa con piscina, vegetación y textura horneada. Escenario listo para render arquitectónico o juego.",
+    "archivo": "meshy/figura-07.glb",
+    "peso": 29036360,
+    "origen": "Generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-09-05",
+    "triangulos": 2366895,
+    "portada": "figura-07.webp"
+  }
+]
