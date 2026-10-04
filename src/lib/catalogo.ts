@@ -31,6 +31,8 @@ export type Modelo3D = {
   licencia?: string
   /** Autor original, cuando la pieza no es propia (lo exigen CC BY-SA y similares). */
   autor?: string
+  /** Se construye en el navegador con el nombre del cliente (ver llavero.ts). */
+  personalizable?: boolean
   draco?: boolean
   /** Mapas PBR sueltos, para mallas que no traen el material horneado. */
   texturas?: { carpeta: string; map: string; normalMap: string; roughnessMap: string; metalnessMap: string }
@@ -80,8 +82,10 @@ export const triangulos = (n?: number) =>
 export const WHATSAPP = '593979523040'
 export const CORREO = 'fleremias@outlook.com'
 
-export function enlaceCompra(m: Modelo3D) {
+export function enlaceCompra(m: Modelo3D, detalle?: string) {
   if (m.compra) return m.compra
-  const texto = `Hola, quiero comprar el modelo 3D "${m.nombre}" (${precio(m.precio)}). Formatos: ${m.formatos.join(', ')}.`
+  const texto = detalle
+    ? `Hola, quiero pedir el "${m.nombre}" (${precio(m.precio)}). ${detalle}.`
+    : `Hola, quiero comprar el modelo 3D "${m.nombre}" (${precio(m.precio)}). Formatos: ${m.formatos.join(', ')}.`
   return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`
 }

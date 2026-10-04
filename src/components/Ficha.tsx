@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { Visor } from './Visor'
 import type { Modo } from './Pieza'
 import { CATEGORIAS, CORREO, enlaceCompra, peso, precio, triangulos, type Modelo3D } from '../lib/catalogo'
+import { ICONOS, MEDIDAS, OPCIONES_INICIALES, PALETAS, describirPedido, type IconoId, type OpcionesLlavero, type PaletaId } from '../lib/llavero'
 
 const MODOS: { id: Modo; nombre: string }[] = [
   { id: 'textura', nombre: 'Textura' },
@@ -30,11 +31,16 @@ export function Ficha({
   onMover: (paso: 1 | -1) => void
 }) {
   const [modo, setModo] = useState<Modo>('textura')
+  const [opciones, setOpciones] = useState<OpcionesLlavero>({ ...OPCIONES_INICIALES, nombre: '' })
+  // Lo que se dibuja: con el campo vacío se enseña el ejemplo, no una placa en blanco.
+  const vista = { ...opciones, nombre: opciones.nombre.trim() || OPCIONES_INICIALES.nombre }
   const cat = CATEGORIAS.find((c) => c.id === modelo.categoria) ?? CATEGORIAS[0]
 
   useEffect(() => {
     const teclas = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onCerrar()
+      // Mientras se escribe el nombre, las flechas mueven el cursor, no la ficha.
+      if ((e.target as HTMLElement).closest('input, textarea, select')) return
       if (e.key === 'ArrowRight') onMover(1)
       if (e.key === 'ArrowLeft') onMover(-1)
     }
@@ -47,8 +53,12 @@ export function Ficha({
   }, [onCerrar, onMover])
 
   const datos = [
-    { etiqueta: 'Triángulos', valor: triangulos(modelo.triangulos) },
-    { etiqueta: 'Vista previa', valor: peso(modelo.peso) },
+    ...(modelo.personalizable
+      ? [{ etiqueta: 'Tamaño', valor: '~19 mm de alto · el largo según el nombre' }]
+      : [
+          { etiqueta: 'Triángulos', valor: triangulos(modelo.triangulos) },
+          { etiqueta: 'Vista previa', valor: peso(modelo.peso) },
+        ]),
     { etiqueta: 'Origen', valor: modelo.origen ?? '—' },
     { etiqueta: 'Licencia', valor: modelo.licencia ?? 'Uso personal y comercial' },
     ...(modelo.autor ? [{ etiqueta: 'Diseño original', valor: modelo.autor }] : []),
@@ -68,13 +78,16 @@ export function Ficha({
         onClick={(e) => e.stopPropagation()}
       >
         {/* El visor */}
-        <div className="relative h-[52vh] min-h-[320px] md:h-auto md:min-h-0">
+        {/* En el móvil el visor del llavero se queda arriba mientras se escribe el nombre. */}
+        <div
+          className={`relative md:h-auto md:min-h-0 ${modelo.personalizable ? 'sticky top-0 z-10 h-[34vh] min-h-[220px] bg-ink md:static' : 'h-[52vh] min-h-[320px]'}`}
+        >
           <div
             className="absolute inset-0"
             style={{ background: `radial-gradient(90% 70% at 50% 100%, ${cat.desde}55 0%, ${cat.hasta}22 45%, transparent 75%)` }}
             aria-hidden
           />
-          <Visor modelo={modelo} modo={modo} tinta={cat.tinta} zoom margen={1.25} />
+          <Visor modelo={modelo} modo={modo} tinta={cat.tinta} zoom margen={1.25} opciones={modelo.personalizable ? vista : undefined} />
 
           <p className="absolute left-4 top-4 font-mono text-[0.68rem] uppercase tracking-[0.2em]" style={{ color: cat.tinta }}>
             {String(numero).padStart(2, '0')} / {String(total).padStart(2, '0')}
@@ -125,6 +138,66 @@ export function Ficha({
           <h2 className="rotulo font-display text-headline uppercase">{modelo.nombre}</h2>
           <p className="text-body text-paper/70">{modelo.descripcion}</p>
 
+          {modelo.personalizable && (
+            <div className="flex flex-col gap-4 border border-paper/10 p-4">
+              <label className="block">
+                <span className="mb-1.5 block font-mono text-[0.62rem] uppercase tracking-[0.2em] text-paper/40">
+                  Tu nombre · {opciones.nombre.length}/{MEDIDAS.maxLetras}
+                </span>
+                <input
+                  value={opciones.nombre}
+                  maxLength={MEDIDAS.maxLetras}
+                  placeholder={OPCIONES_INICIALES.nombre}
+                  onChange={(e) => setOpciones((o) => ({ ...o, nombre: e.target.value }))}
+                  className="w-full border border-paper/15 bg-ink px-3 py-2.5 font-mono text-base text-paper outline-none transition-colors placeholder:text-paper/25 focus:border-[var(--t)]"
+                />
+              </label>
+              <div>
+                <p className="mb-1.5 font-mono text-[0.62rem] uppercase tracking-[0.2em] text-paper/40">Icono</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {(Object.keys(ICONOS) as IconoId[]).map((id) => (
+                    <button
+                      key={id}
+                      type="button"
+                      aria-pressed={opciones.icono === id}
+                      onClick={() => setOpciones((o) => ({ ...o, icono: id }))}
+                      className="border px-2.5 py-1 font-mono text-[0.68rem] tracking-[0.1em] transition-colors"
+                      style={opciones.icono === id ? { background: cat.tinta, borderColor: cat.tinta, color: '#0A0A0B' } : { borderColor: '#F5F4F126', color: '#F5F4F1AA' }}
+                    >
+                      {ICONOS[id]}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="mb-1.5 font-mono text-[0.62rem] uppercase tracking-[0.2em] text-paper/40">Colores</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {(Object.keys(PALETAS) as PaletaId[]).map((id) => {
+                    const p = PALETAS[id]
+                    const activa = opciones.paleta === id
+                    return (
+                      <button
+                        key={id}
+                        type="button"
+                        aria-pressed={activa}
+                        onClick={() => setOpciones((o) => ({ ...o, paleta: id }))}
+                        className="flex items-center gap-2 border px-2.5 py-1 font-mono text-[0.68rem] tracking-[0.1em] transition-colors"
+                        style={{ borderColor: activa ? cat.tinta : '#F5F4F126', color: activa ? '#F5F4F1' : '#F5F4F1AA' }}
+                      >
+                        <span className="flex" aria-hidden>
+                          {[p.placa, p.texto, p.icono].map((c) => (
+                            <span key={c} className="-mr-1 h-3.5 w-3.5 rounded-full border border-ink" style={{ background: c }} />
+                          ))}
+                        </span>
+                        <span className="ml-1">{p.nombre}</span>
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
+
           <div>
             <p className="mb-2.5 font-mono text-[0.62rem] uppercase tracking-[0.2em] text-paper/40">Formatos incluidos</p>
             <div className="flex flex-wrap gap-2">
@@ -151,13 +224,13 @@ export function Ficha({
               {modelo.precio > 0 && <span className="ml-1.5 font-mono text-xs text-paper/40">USD</span>}
             </p>
             <a
-              href={enlaceCompra(modelo)}
+              href={enlaceCompra(modelo, modelo.personalizable ? describirPedido(vista) : undefined)}
               target="_blank"
               rel="noreferrer"
               download={modelo.precio === 0 || undefined}
               className="boton inline-block border-2 px-9 py-3.5 font-mono text-caption font-bold uppercase"
             >
-              {modelo.precio === 0 ? 'Descargar gratis' : modelo.compra ? 'Comprar' : 'Comprar por WhatsApp'}
+              {modelo.precio === 0 ? 'Descargar gratis' : modelo.personalizable ? 'Pedir por WhatsApp' : modelo.compra ? 'Comprar' : 'Comprar por WhatsApp'}
             </a>
           </div>
           <p className="font-mono text-[0.62rem] leading-relaxed tracking-[0.08em] text-paper/35">

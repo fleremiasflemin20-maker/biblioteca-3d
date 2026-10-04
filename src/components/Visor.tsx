@@ -4,6 +4,7 @@ import { Bounds, ContactShadows, Environment, OrbitControls } from '@react-three
 import * as THREE from 'three'
 import { AlCargar, Pieza, type Modo } from './Pieza'
 import type { Modelo3D } from '../lib/catalogo'
+import type { OpcionesLlavero } from '../lib/llavero'
 
 /**
  * Cada pieza llega a su escala: unas miden 0,02 unidades y otras 80. Se lleva
@@ -37,12 +38,14 @@ export function Visor({
   tinta,
   zoom = false,
   margen = 1.3,
+  opciones,
 }: {
   modelo: Modelo3D
   modo?: Modo
   tinta: string
   zoom?: boolean
   margen?: number
+  opciones?: OpcionesLlavero
 }) {
   const [cargado, setCargado] = useState<string | null>(null)
   const listo = useCallback(() => setCargado(modelo.id), [modelo.id])
@@ -67,7 +70,7 @@ export function Visor({
         <Environment preset="sunset" />
         <Bounds key={modelo.id} fit clip observe margin={margen}>
           <Normalizar>
-            <Pieza modelo={modelo} modo={modo} />
+            <Pieza modelo={modelo} modo={modo} opciones={opciones} />
           </Normalizar>
         </Bounds>
         <AlCargar onListo={listo} />

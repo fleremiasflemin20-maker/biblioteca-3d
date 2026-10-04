@@ -1,5 +1,23 @@
 [
   {
+    "id": "llavero-con-nombre",
+    "nombre": "Llavero con tu Nombre",
+    "categoria": "props",
+    "precio": 7,
+    "formatos": [
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Escribe tu nombre, elige icono y colores, y míralo en 3D antes de pedirlo. Placa de 19 mm de alto con letras e icono en relieve y anilla reforzada. Lo imprimimos o te enviamos el archivo listo.",
+    "archivo": "",
+    "origen": "Diseño propio · personalizado",
+    "destacado": true,
+    "personalizable": true,
+    "alta": "2026-10-04",
+    "portada": "llavero-con-nombre.webp",
+    "triangulos": 4428
+  },
+  {
     "id": "aretes-colibri",
     "nombre": "Aretes Colibrí",
     "categoria": "criaturas",

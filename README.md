@@ -33,3 +33,16 @@ lleva ahí. Si no, abre WhatsApp con el pedido ya escrito.
 ```bash
 npx @gltf-transform/cli optimize entrada.glb salida.glb --compress meshopt --texture-compress webp --texture-size 1024
 ```
+
+## Llavero con nombre
+
+El cliente escribe su nombre, elige icono y colores, lo ve en 3D y el pedido
+llega por WhatsApp con todo escrito. Para generar el archivo de impresión:
+
+```bash
+~/Downloads/Disenos_Propios/Generador_Llaveros/llavero "María José" --icono colibri --paleta ecuador
+```
+
+Salen un STL por color y el 3MF en `Generador_Llaveros/pedidos/`. El script
+(`llavero_nombre.py`) y `src/lib/llavero.ts` comparten tipografía, siluetas y
+medidas: si se cambia una, hay que cambiar la otra.

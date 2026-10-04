@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useMemo } from 'react'
 import { useGLTF, useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import { DRACO, rutaModelo, rutaTextura, type Modelo3D } from '../lib/catalogo'
+import { OPCIONES_INICIALES, PALETAS, construirLlavero, type OpcionesLlavero } from '../lib/llavero'
 
 /**
  * Carga de un modelo del catálogo — la misma lógica que `ModeloPersonaje.tsx`
@@ -70,7 +71,26 @@ function PBR({ modelo, modo }: { modelo: Modelo3D; modo: Modo }) {
   )
 }
 
-export function Pieza({ modelo, modo = 'textura' }: { modelo: Modelo3D; modo?: Modo }) {
+/** El llavero con nombre no viene de un `.glb`: se construye con lo que escribe el cliente. */
+function LlaveroNombre({ opciones, modo }: { opciones: OpcionesLlavero; modo: Modo }) {
+  const piezas = useMemo(() => construirLlavero(opciones), [opciones])
+  useEffect(() => () => [piezas.placa, piezas.texto, piezas.icono].forEach((g) => g?.dispose()), [piezas])
+  const p = PALETAS[opciones.paleta]
+  const material = (color: string) =>
+    modo === 'malla' ? <meshBasicMaterial color="#3BE0D0" wireframe transparent opacity={0.55} />
+    : modo === 'arcilla' ? <meshStandardMaterial color="#d9d4cc" roughness={0.75} />
+    : <meshStandardMaterial color={color} roughness={0.45} />
+  return (
+    <group>
+      <mesh geometry={piezas.placa}>{material(p.placa)}</mesh>
+      <mesh geometry={piezas.texto}>{material(p.texto)}</mesh>
+      {piezas.icono && <mesh geometry={piezas.icono}>{material(p.icono)}</mesh>}
+    </group>
+  )
+}
+
+export function Pieza({ modelo, modo = 'textura', opciones }: { modelo: Modelo3D; modo?: Modo; opciones?: OpcionesLlavero }) {
+  if (modelo.personalizable) return <LlaveroNombre opciones={opciones ?? OPCIONES_INICIALES} modo={modo} />
   return modelo.texturas ? <PBR modelo={modelo} modo={modo} /> : <Simple modelo={modelo} modo={modo} />
 }
 
