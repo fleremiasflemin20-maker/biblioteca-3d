@@ -70,7 +70,7 @@ export const rutaPortada = (m: Modelo3D) => (m.portada ? `${BASE}/portadas/${m.p
 
 export const precio = (n: number) => (n === 0 ? 'Gratis' : `$${n.toFixed(n % 1 ? 2 : 0)}`)
 
-export const peso = (b?: number) => (b ? `${(b / 1048576).toFixed(1)} MB` : '—')
+export const peso = (b?: number) => (!b ? '—' : b < 1048576 ? `${Math.max(1, Math.round(b / 1024))} KB` : `${(b / 1048576).toFixed(1)} MB`)
 
 export const triangulos = (n?: number) =>
   !n ? '—' : n >= 1e6 ? `${(n / 1e6).toFixed(1)}M` : n >= 1e3 ? `${Math.round(n / 1e3)}K` : String(n)
