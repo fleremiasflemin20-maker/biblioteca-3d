@@ -1,5 +1,322 @@
 [
   {
+    "id": "cosmic-fusion-warrior-original",
+    "nombre": "Cosmic Fusion Warrior",
+    "categoria": "personajes",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Guerrero de fusión cósmica con textura PBR horneada. La versión base de la serie.",
+    "archivo": "descargas/cosmic-fusion-warrior-original.glb",
+    "peso": 1961784,
+    "origen": "Generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-10-03",
+    "portada": "cosmic-fusion-warrior-original.webp",
+    "triangulos": 281320
+  },
+  {
+    "id": "cosmic-fusion-warrior-vibrante",
+    "nombre": "Cosmic Fusion Warrior · Vibrante",
+    "categoria": "personajes",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Variante de color vibrante del guerrero de fusión cósmica.",
+    "archivo": "descargas/cosmic-fusion-warrior-vibrante.glb",
+    "peso": 1971940,
+    "origen": "Generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-03",
+    "portada": "cosmic-fusion-warrior-vibrante.webp",
+    "triangulos": 281320
+  },
+  {
+    "id": "cosmic-fusion-warrior-ultra-pop",
+    "nombre": "Cosmic Fusion Warrior · Ultra Pop",
+    "categoria": "personajes",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Variante Ultra Pop: colores saturados, estilo juguete coleccionable.",
+    "archivo": "descargas/cosmic-fusion-warrior-ultra-pop.glb",
+    "peso": 1985004,
+    "origen": "Generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-03",
+    "portada": "cosmic-fusion-warrior-ultra-pop.webp",
+    "triangulos": 281320
+  },
+  {
+    "id": "cosmic-fusion-warrior-anime-intenso",
+    "nombre": "Cosmic Fusion Warrior · Anime Intenso",
+    "categoria": "personajes",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Variante con paleta anime de alto contraste.",
+    "archivo": "descargas/cosmic-fusion-warrior-anime-intenso.glb",
+    "peso": 1980752,
+    "origen": "Generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-03",
+    "portada": "cosmic-fusion-warrior-anime-intenso.webp",
+    "triangulos": 281320
+  },
+  {
+    "id": "cosmic-fusion-warrior-escultura",
+    "nombre": "Cosmic Fusion Warrior · Escultura",
+    "categoria": "personajes",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "La malla del guerrero sin texturizar, lista para pintar o imprimir en 3D.",
+    "archivo": "descargas/cosmic-fusion-warrior-escultura.glb",
+    "peso": 2710184,
+    "origen": "Generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-03",
+    "portada": "cosmic-fusion-warrior-escultura.webp",
+    "triangulos": 386748
+  },
+  {
+    "id": "cosmic-fusion-warrior-segmentado",
+    "nombre": "Cosmic Fusion Warrior · Por Piezas",
+    "categoria": "personajes",
+    "precio": 22,
+    "formatos": [
+      "GLB",
+      "3MF",
+      "STL"
+    ],
+    "descripcion": "Versión segmentada en piezas para imprimir en multicolor o por partes.",
+    "archivo": "descargas/cosmic-fusion-warrior-segmentado.glb",
+    "peso": 1275008,
+    "origen": "Generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-03",
+    "portada": "cosmic-fusion-warrior-segmentado.webp",
+    "triangulos": 389854
+  },
+  {
+    "id": "black-ring-stands",
+    "nombre": "Soportes para Anillos",
+    "categoria": "props",
+    "precio": 6,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Par de soportes negros para exhibir anillos en escaparate, foto de producto o mesa de joyería.",
+    "archivo": "descargas/black-ring-stands.glb",
+    "peso": 276152,
+    "origen": "Generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-03",
+    "portada": "black-ring-stands.webp",
+    "triangulos": 39566
+  },
+  {
+    "id": "higgsfield-01",
+    "nombre": "Caballero Encapuchado",
+    "categoria": "personajes",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Caballero oscuro con capucha y capa larga, textura PBR horneada. Generado con Higgsfield a partir de imagen.",
+    "archivo": "descargas/higgsfield-01.glb",
+    "peso": 1280704,
+    "origen": "Generado con Higgsfield",
+    "destacado": false,
+    "alta": "2026-10-03",
+    "portada": "higgsfield-01.webp",
+    "triangulos": 145598
+  },
+  {
+    "id": "dragon-ball-sparking",
+    "nombre": "Cuadro Sparking Zero",
+    "categoria": "props",
+    "precio": 24,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Cuadro en caja con ilustración en relieve, listo para colgar o imprimir en 3D.",
+    "archivo": "descargas/dragon-ball-sparking.glb",
+    "peso": 4766092,
+    "origen": "Generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-03",
+    "portada": "dragon-ball-sparking.webp",
+    "triangulos": 724450
+  },
+  {
+    "id": "limit-break-clash-a",
+    "nombre": "Limit Break Clash · A",
+    "categoria": "escenarios",
+    "precio": 29,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Diorama de choque de poder: dos combatientes en plena colisión de energía.",
+    "archivo": "descargas/limit-break-clash-a.glb",
+    "peso": 7836276,
+    "origen": "Generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-10-03",
+    "portada": "limit-break-clash-a.webp",
+    "triangulos": 918700
+  },
+  {
+    "id": "limit-break-clash-b",
+    "nombre": "Limit Break Clash · B",
+    "categoria": "escenarios",
+    "precio": 29,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Segunda toma del diorama Limit Break Clash, con otra composición.",
+    "archivo": "descargas/limit-break-clash-b.glb",
+    "peso": 7511324,
+    "origen": "Generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-03",
+    "portada": "limit-break-clash-b.webp",
+    "triangulos": 986550
+  },
+  {
+    "id": "vibrant-saiyan-showdown",
+    "nombre": "Vibrant Saiyan Showdown",
+    "categoria": "escenarios",
+    "precio": 27,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Diorama de enfrentamiento saiyan con colores vibrantes y textura horneada.",
+    "archivo": "descargas/vibrant-saiyan-showdown.glb",
+    "peso": 4817892,
+    "origen": "Generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-03",
+    "portada": "vibrant-saiyan-showdown.webp",
+    "triangulos": 792080
+  },
+  {
+    "id": "vibrant-saiyan-escultura",
+    "nombre": "Vibrant Saiyan Showdown · Escultura",
+    "categoria": "escenarios",
+    "precio": 15,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "La malla del diorama sin texturizar, lista para imprimir en 3D.",
+    "archivo": "descargas/vibrant-saiyan-escultura.glb",
+    "peso": 2311548,
+    "origen": "Generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-03",
+    "portada": "vibrant-saiyan-escultura.webp",
+    "triangulos": 731006
+  },
+  {
+    "id": "vibrant-saiyan-segmentado",
+    "nombre": "Vibrant Saiyan Showdown · Por Piezas",
+    "categoria": "escenarios",
+    "precio": 32,
+    "formatos": [
+      "GLB",
+      "STL"
+    ],
+    "descripcion": "Diorama segmentado en piezas para impresión multicolor o por partes.",
+    "archivo": "descargas/vibrant-saiyan-segmentado.glb",
+    "peso": 2112832,
+    "origen": "Generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-03",
+    "portada": "vibrant-saiyan-segmentado.webp",
+    "triangulos": 656914
+  },
+  {
+    "id": "rueda-fecha",
+    "nombre": "Rueda de Fecha",
+    "categoria": "props",
+    "precio": 7,
+    "formatos": [
+      "STL"
+    ],
+    "descripcion": "Calendario perpetuo imprimible: base, rueda de día, rueda de mes y puntero. Sin soportes.",
+    "archivo": "descargas/rueda-fecha.glb",
+    "peso": 57988,
+    "origen": "Diseño propio para impresión 3D",
+    "destacado": false,
+    "alta": "2026-10-03",
+    "portada": "rueda-fecha.webp",
+    "triangulos": 18668
+  },
+  {
+    "id": "tapa-fecha-v3",
+    "nombre": "Tapa con Fecha v3",
+    "categoria": "props",
+    "precio": 8,
+    "formatos": [
+      "STL"
+    ],
+    "descripcion": "Tapa de rosca con anillos de día y mes para marcar la fecha. Seis piezas, incluye prueba de rosca.",
+    "archivo": "descargas/tapa-fecha-v3.glb",
+    "peso": 86576,
+    "origen": "Diseño propio para impresión 3D",
+    "destacado": false,
+    "alta": "2026-10-03",
+    "portada": "tapa-fecha-v3.webp",
+    "triangulos": 27920
+  },
+  {
+    "id": "cuadro-4-piezas",
+    "nombre": "Cuadro en Relieve · 4 Piezas",
+    "categoria": "props",
+    "precio": 10,
+    "formatos": [
+      "STL"
+    ],
+    "descripcion": "Cuadro en relieve dividido en cuatro piezas de 33 × 18 cm que encajan en una de 65 × 35 cm.",
+    "archivo": "descargas/cuadro-4-piezas.glb",
+    "peso": 1198128,
+    "origen": "Diseño propio para impresión 3D",
+    "destacado": false,
+    "alta": "2026-10-03",
+    "portada": "cuadro-4-piezas.webp",
+    "triangulos": 411812
+  },
+  {
     "id": "gogeta-ssj4",
     "nombre": "Gogeta SSJ4",
     "categoria": "personajes",
