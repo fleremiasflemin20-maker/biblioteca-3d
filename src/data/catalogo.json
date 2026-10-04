@@ -1,5 +1,77 @@
 [
   {
+    "id": "aretes-colibri",
+    "nombre": "Aretes Colibrí",
+    "categoria": "criaturas",
+    "precio": 6,
+    "formatos": [
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Par de aretes de colibrí de perfil, en espejo: cuerpo verde, ala turquesa en relieve, gorjal rojo y pico negro. 36 mm, cuatro colores, sin soportes.",
+    "archivo": "propios/aretes-colibri.glb",
+    "peso": 19504,
+    "origen": "Diseño propio · colección Ecuador",
+    "destacado": true,
+    "alta": "2026-10-04",
+    "portada": "aretes-colibri.webp",
+    "triangulos": 4604
+  },
+  {
+    "id": "medallon-cotopaxi",
+    "nombre": "Medallón Cotopaxi",
+    "categoria": "escenarios",
+    "precio": 6,
+    "formatos": [
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Medallón de 32 mm con el Cotopaxi nevado, el sol y el páramo. Cinco colores por capas. Sirve como colgante, llavero o adorno.",
+    "archivo": "propios/medallon-cotopaxi.glb",
+    "peso": 9344,
+    "origen": "Diseño propio · colección Ecuador",
+    "destacado": false,
+    "alta": "2026-10-04",
+    "portada": "medallon-cotopaxi.webp",
+    "triangulos": 2094
+  },
+  {
+    "id": "llavero-tortuga-galapagos",
+    "nombre": "Llavero Tortuga de Galápagos",
+    "categoria": "criaturas",
+    "precio": 6,
+    "formatos": [
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Tortuga gigante vista desde arriba, con placas hexagonales en relieve sobre el caparazón y argolla reforzada en la cola. 42 mm, cuatro colores.",
+    "archivo": "propios/llavero-tortuga-galapagos.glb",
+    "peso": 17836,
+    "origen": "Diseño propio · colección Ecuador",
+    "destacado": false,
+    "alta": "2026-10-04",
+    "portada": "llavero-tortuga-galapagos.webp",
+    "triangulos": 3950
+  },
+  {
+    "id": "aretes-mazorca",
+    "nombre": "Aretes Mazorca",
+    "categoria": "props",
+    "precio": 5,
+    "formatos": [
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Par de aretes de choclo con granos en relieve y hojas verdes. 35 mm, tres colores, sin soportes.",
+    "archivo": "propios/aretes-mazorca.glb",
+    "peso": 35660,
+    "origen": "Diseño propio · colección Ecuador",
+    "destacado": false,
+    "alta": "2026-10-04",
+    "portada": "aretes-mazorca.webp",
+    "triangulos": 9996
+  },
+  {
     "id": "aretes-sol-retro",
     "nombre": "Aretes Sol Retro",
     "categoria": "props",
