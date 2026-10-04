@@ -27,6 +27,10 @@ export type Modelo3D = {
   /** Enlace de compra externo (Gumroad, Cults3D, CGTrader…). Sin él, se compra por WhatsApp. */
   compra?: string
   alta?: string
+  /** Por defecto "Uso personal y comercial". Las piezas de terceros llevan la suya. */
+  licencia?: string
+  /** Autor original, cuando la pieza no es propia (lo exigen CC BY-SA y similares). */
+  autor?: string
   draco?: boolean
   /** Mapas PBR sueltos, para mallas que no traen el material horneado. */
   texturas?: { carpeta: string; map: string; normalMap: string; roughnessMap: string; metalnessMap: string }

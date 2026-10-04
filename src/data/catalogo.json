@@ -1,5 +1,138 @@
 [
   {
+    "id": "aretes-sol-retro",
+    "nombre": "Aretes Sol Retro",
+    "categoria": "props",
+    "precio": 6,
+    "formatos": [
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Par de aretes de 30 mm: sol con franjas synthwave, mar rosa y palmera en silueta. Cuatro colores por capas, sin soportes. Incluye un STL por color y el 3MF montado.",
+    "archivo": "propios/aretes-sol-retro.glb",
+    "peso": 19512,
+    "origen": "Diseño propio · colección Atardecer",
+    "destacado": true,
+    "alta": "2026-10-04",
+    "triangulos": 4566,
+    "portada": "aretes-sol-retro.webp"
+  },
+  {
+    "id": "aretes-palmera",
+    "nombre": "Aretes Palmera",
+    "categoria": "props",
+    "precio": 5,
+    "formatos": [
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Par de aretes colgantes de 44 mm en forma de palmera: tronco naranja y copa turquesa con argolla integrada. Dos colores, sin soportes.",
+    "archivo": "propios/aretes-palmera.glb",
+    "peso": 15508,
+    "origen": "Diseño propio · colección Atardecer",
+    "destacado": false,
+    "alta": "2026-10-04",
+    "triangulos": 3768,
+    "portada": "aretes-palmera.webp"
+  },
+  {
+    "id": "llavero-atardecer",
+    "nombre": "Llavero Atardecer",
+    "categoria": "props",
+    "precio": 5,
+    "formatos": [
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Llavero de 62 × 28 mm con atardecer retro, dos palmeras y argolla lateral reforzada. Cuatro colores por capas.",
+    "archivo": "propios/llavero-atardecer.glb",
+    "peso": 14724,
+    "origen": "Diseño propio · colección Atardecer",
+    "destacado": false,
+    "alta": "2026-10-04",
+    "triangulos": 3224,
+    "portada": "llavero-atardecer.webp"
+  },
+  {
+    "id": "meshy-1004001138",
+    "nombre": "Frasco Osito",
+    "categoria": "props",
+    "precio": 9,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Frasco de vidrio rojo con forma de osito y tapa dosificadora. Prop para escenas de cocina, cosmética o foto de producto.",
+    "archivo": "descargas/meshy-1004001138.glb",
+    "peso": 474536,
+    "origen": "Generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-04",
+    "portada": "meshy-1004001138.webp",
+    "triangulos": 58642
+  },
+  {
+    "id": "aretes-hongo",
+    "nombre": "Aretes Hongo",
+    "categoria": "props",
+    "precio": 0,
+    "formatos": [
+      "3MF"
+    ],
+    "descripcion": "Aretes de hongo en capas de color. Diseño de dominio público (CC0) de Ubermeisters.",
+    "archivo": "libres/aretes-hongo.glb",
+    "peso": 2353684,
+    "origen": "Diseño de la comunidad",
+    "destacado": false,
+    "alta": "2026-10-04",
+    "licencia": "CC0 · dominio público",
+    "autor": "Ubermeisters (MakerWorld)",
+    "compra": "descargas/aretes-hongo.3mf",
+    "triangulos": 946696,
+    "portada": "aretes-hongo.webp"
+  },
+  {
+    "id": "aretes-helados",
+    "nombre": "Aretes Helados de Verano",
+    "categoria": "props",
+    "precio": 0,
+    "formatos": [
+      "3MF"
+    ],
+    "descripcion": "Colección de aretes de helado para impresión multicolor. Remix CC0 de tomo3D.",
+    "archivo": "libres/aretes-helados.glb",
+    "peso": 44888,
+    "origen": "Diseño de la comunidad",
+    "destacado": false,
+    "alta": "2026-10-04",
+    "licencia": "CC0 · dominio público",
+    "autor": "tomo3D (MakerWorld)",
+    "compra": "descargas/aretes-helados.3mf",
+    "triangulos": 14492,
+    "portada": "aretes-helados.webp"
+  },
+  {
+    "id": "aretes-crocs",
+    "nombre": "Aretes Crocs",
+    "categoria": "props",
+    "precio": 0,
+    "formatos": [
+      "3MF"
+    ],
+    "descripcion": "Aretes con forma de zueco de verano. Se comparte bajo la misma licencia CC BY-SA del original.",
+    "archivo": "libres/aretes-crocs.glb",
+    "peso": 700244,
+    "origen": "Diseño de la comunidad",
+    "destacado": false,
+    "alta": "2026-10-04",
+    "licencia": "CC BY-SA 4.0",
+    "autor": "tomo3D (MakerWorld)",
+    "compra": "descargas/aretes-crocs.3mf",
+    "triangulos": 257360,
+    "portada": "aretes-crocs.webp"
+  },
+  {
     "id": "cosmic-fusion-warrior-original",
     "nombre": "Cosmic Fusion Warrior",
     "categoria": "personajes",

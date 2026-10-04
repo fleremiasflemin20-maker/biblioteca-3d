@@ -50,7 +50,8 @@ export function Ficha({
     { etiqueta: 'Triángulos', valor: triangulos(modelo.triangulos) },
     { etiqueta: 'Vista previa', valor: peso(modelo.peso) },
     { etiqueta: 'Origen', valor: modelo.origen ?? '—' },
-    { etiqueta: 'Licencia', valor: 'Uso personal y comercial' },
+    { etiqueta: 'Licencia', valor: modelo.licencia ?? 'Uso personal y comercial' },
+    ...(modelo.autor ? [{ etiqueta: 'Diseño original', valor: modelo.autor }] : []),
   ]
 
   return (
@@ -153,9 +154,10 @@ export function Ficha({
               href={enlaceCompra(modelo)}
               target="_blank"
               rel="noreferrer"
+              download={modelo.precio === 0 || undefined}
               className="boton inline-block border-2 px-9 py-3.5 font-mono text-caption font-bold uppercase"
             >
-              {modelo.compra ? 'Comprar' : 'Comprar por WhatsApp'}
+              {modelo.precio === 0 ? 'Descargar gratis' : modelo.compra ? 'Comprar' : 'Comprar por WhatsApp'}
             </a>
           </div>
           <p className="font-mono text-[0.62rem] leading-relaxed tracking-[0.08em] text-paper/35">
