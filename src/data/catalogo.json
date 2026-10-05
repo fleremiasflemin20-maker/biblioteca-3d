@@ -813,5 +813,138 @@
     "triangulos": 14008,
     "portada": "soporte-18650-lattice.webp",
     "licencia": "CC BY-SA 4.0"
+  },
+  {
+    "id": "espadachin-rubio-anime",
+    "nombre": "Espadachín Rubio",
+    "categoria": "personajes",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Espadachín de estilo anime con chaleco, botas y espada a la espalda. Textura PBR horneada.",
+    "archivo": "meshy/espadachin-rubio-anime.glb",
+    "peso": 1827708,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-05",
+    "triangulos": 709398,
+    "portada": "espadachin-rubio-anime.webp"
+  },
+  {
+    "id": "senor-guerra-acorazado",
+    "nombre": "Señor de la Guerra Acorazado",
+    "categoria": "personajes",
+    "precio": 24,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Guerrero de cuerpo entero con armadura ornamentada de bronce y maza. Incluye dos versiones de textura: 2K, ligera para juegos, y 8K, para render y primeros planos.",
+    "archivo": "meshy/senor-guerra-acorazado.glb",
+    "peso": 3794616,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-10-05",
+    "triangulos": 1515248,
+    "portada": "senor-guerra-acorazado.webp"
+  },
+  {
+    "id": "senor-guerra-escultura",
+    "nombre": "Señor de la Guerra · Escultura",
+    "categoria": "personajes",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "La malla del guerrero acorazado sin texturizar, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/senor-guerra-escultura.glb",
+    "peso": 2287832,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-05",
+    "triangulos": 1515248,
+    "portada": "senor-guerra-escultura.webp"
+  },
+  {
+    "id": "saiyan-legendario-chibi-dorado",
+    "nombre": "Saiyan Legendario Chibi · Dorado",
+    "categoria": "personajes",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Figura chibi de guerrero legendario con cabello dorado y pose de combate. Estilo juguete coleccionable.",
+    "archivo": "meshy/saiyan-legendario-chibi-dorado.glb",
+    "peso": 2227784,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-10-05",
+    "triangulos": 850532,
+    "portada": "saiyan-legendario-chibi-dorado.webp"
+  },
+  {
+    "id": "saiyan-legendario-chibi-verde",
+    "nombre": "Saiyan Legendario Chibi · Verde",
+    "categoria": "personajes",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Variante del guerrero legendario chibi con cabello verde intenso.",
+    "archivo": "meshy/saiyan-legendario-chibi-verde.glb",
+    "peso": 2164324,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-05",
+    "triangulos": 844838,
+    "portada": "saiyan-legendario-chibi-verde.webp"
+  },
+  {
+    "id": "saiyan-legendario-chibi-escultura-a",
+    "nombre": "Saiyan Legendario Chibi · Escultura A",
+    "categoria": "personajes",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la versión dorada, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/saiyan-legendario-chibi-escultura-a.glb",
+    "peso": 1354696,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-05",
+    "triangulos": 850532,
+    "portada": "saiyan-legendario-chibi-escultura-a.webp"
+  },
+  {
+    "id": "saiyan-legendario-chibi-escultura-b",
+    "nombre": "Saiyan Legendario Chibi · Escultura B",
+    "categoria": "personajes",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la versión verde, con otra pose, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/saiyan-legendario-chibi-escultura-b.glb",
+    "peso": 1324404,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-05",
+    "triangulos": 844838,
+    "portada": "saiyan-legendario-chibi-escultura-b.webp"
   }
 ]
