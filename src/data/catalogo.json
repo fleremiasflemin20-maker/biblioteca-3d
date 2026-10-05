@@ -946,5 +946,81 @@
     "alta": "2026-10-05",
     "triangulos": 844838,
     "portada": "saiyan-legendario-chibi-escultura-b.webp"
+  },
+  {
+    "id": "guerrero-futuro-chibi-a",
+    "nombre": "Guerrero del Futuro Chibi · A",
+    "categoria": "anime",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Figura chibi del guerrero del futuro: cabello lila, chaqueta azul de la Capsule Corp. y espada al hombro con una sonrisa desafiante. Estilo juguete coleccionable.",
+    "archivo": "meshy/guerrero-futuro-chibi-a.glb",
+    "peso": 2365060,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-10-05",
+    "triangulos": 857868,
+    "portada": "guerrero-futuro-chibi-a.webp"
+  },
+  {
+    "id": "guerrero-futuro-chibi-b",
+    "nombre": "Guerrero del Futuro Chibi · B",
+    "categoria": "anime",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Segunda pose del guerrero del futuro chibi, con la mano en la empuñadura y mirada seria.",
+    "archivo": "meshy/guerrero-futuro-chibi-b.glb",
+    "peso": 2426112,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-05",
+    "triangulos": 946294,
+    "portada": "guerrero-futuro-chibi-b.webp"
+  },
+  {
+    "id": "guerrero-futuro-chibi-escultura-a",
+    "nombre": "Guerrero del Futuro Chibi · Escultura A",
+    "categoria": "anime",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la pose A, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/guerrero-futuro-chibi-escultura-a.glb",
+    "peso": 1396844,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-05",
+    "triangulos": 857868,
+    "portada": "guerrero-futuro-chibi-escultura-a.webp"
+  },
+  {
+    "id": "guerrero-futuro-chibi-escultura-b",
+    "nombre": "Guerrero del Futuro Chibi · Escultura B",
+    "categoria": "anime",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la pose B, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/guerrero-futuro-chibi-escultura-b.glb",
+    "peso": 1538576,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-05",
+    "triangulos": 983336,
+    "portada": "guerrero-futuro-chibi-escultura-b.webp"
   }
 ]
