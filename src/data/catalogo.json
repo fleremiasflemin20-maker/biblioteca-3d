@@ -2,7 +2,7 @@
   {
     "id": "llavero-con-nombre",
     "nombre": "Llavero con tu Nombre",
-    "categoria": "props",
+    "categoria": "accesorios",
     "precio": 7,
     "formatos": [
       "STL",
@@ -20,7 +20,7 @@
   {
     "id": "aretes-colibri",
     "nombre": "Aretes Colibrí",
-    "categoria": "criaturas",
+    "categoria": "accesorios",
     "precio": 6,
     "formatos": [
       "STL",
@@ -38,7 +38,7 @@
   {
     "id": "medallon-cotopaxi",
     "nombre": "Medallón Cotopaxi",
-    "categoria": "escenarios",
+    "categoria": "accesorios",
     "precio": 6,
     "formatos": [
       "STL",
@@ -56,7 +56,7 @@
   {
     "id": "llavero-tortuga-galapagos",
     "nombre": "Llavero Tortuga de Galápagos",
-    "categoria": "criaturas",
+    "categoria": "accesorios",
     "precio": 6,
     "formatos": [
       "STL",
@@ -74,7 +74,7 @@
   {
     "id": "aretes-mazorca",
     "nombre": "Aretes Mazorca",
-    "categoria": "props",
+    "categoria": "accesorios",
     "precio": 5,
     "formatos": [
       "STL",
@@ -92,7 +92,7 @@
   {
     "id": "aretes-sol-retro",
     "nombre": "Aretes Sol Retro",
-    "categoria": "props",
+    "categoria": "accesorios",
     "precio": 6,
     "formatos": [
       "STL",
@@ -110,7 +110,7 @@
   {
     "id": "aretes-palmera",
     "nombre": "Aretes Palmera",
-    "categoria": "props",
+    "categoria": "accesorios",
     "precio": 5,
     "formatos": [
       "STL",
@@ -128,7 +128,7 @@
   {
     "id": "llavero-atardecer",
     "nombre": "Llavero Atardecer",
-    "categoria": "props",
+    "categoria": "accesorios",
     "precio": 5,
     "formatos": [
       "STL",
@@ -146,7 +146,7 @@
   {
     "id": "meshy-1004001138",
     "nombre": "Frasco Osito",
-    "categoria": "props",
+    "categoria": "accesorios",
     "precio": 9,
     "formatos": [
       "GLB",
@@ -165,7 +165,7 @@
   {
     "id": "aretes-hongo",
     "nombre": "Aretes Hongo",
-    "categoria": "props",
+    "categoria": "accesorios",
     "precio": 0,
     "formatos": [
       "3MF"
@@ -185,7 +185,7 @@
   {
     "id": "aretes-helados",
     "nombre": "Aretes Helados de Verano",
-    "categoria": "props",
+    "categoria": "accesorios",
     "precio": 0,
     "formatos": [
       "3MF"
@@ -205,7 +205,7 @@
   {
     "id": "aretes-crocs",
     "nombre": "Aretes Crocs",
-    "categoria": "props",
+    "categoria": "accesorios",
     "precio": 0,
     "formatos": [
       "3MF"
@@ -225,7 +225,7 @@
   {
     "id": "cosmic-fusion-warrior-original",
     "nombre": "Cosmic Fusion Warrior",
-    "categoria": "personajes",
+    "categoria": "anime",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -244,7 +244,7 @@
   {
     "id": "cosmic-fusion-warrior-vibrante",
     "nombre": "Cosmic Fusion Warrior · Vibrante",
-    "categoria": "personajes",
+    "categoria": "anime",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -263,7 +263,7 @@
   {
     "id": "cosmic-fusion-warrior-ultra-pop",
     "nombre": "Cosmic Fusion Warrior · Ultra Pop",
-    "categoria": "personajes",
+    "categoria": "anime",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -282,7 +282,7 @@
   {
     "id": "cosmic-fusion-warrior-anime-intenso",
     "nombre": "Cosmic Fusion Warrior · Anime Intenso",
-    "categoria": "personajes",
+    "categoria": "anime",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -301,7 +301,7 @@
   {
     "id": "cosmic-fusion-warrior-escultura",
     "nombre": "Cosmic Fusion Warrior · Escultura",
-    "categoria": "personajes",
+    "categoria": "anime",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -320,7 +320,7 @@
   {
     "id": "cosmic-fusion-warrior-segmentado",
     "nombre": "Cosmic Fusion Warrior · Por Piezas",
-    "categoria": "personajes",
+    "categoria": "anime",
     "precio": 22,
     "formatos": [
       "GLB",
@@ -339,7 +339,7 @@
   {
     "id": "black-ring-stands",
     "nombre": "Soportes para Anillos",
-    "categoria": "props",
+    "categoria": "accesorios",
     "precio": 6,
     "formatos": [
       "GLB",
@@ -358,7 +358,7 @@
   {
     "id": "higgsfield-01",
     "nombre": "Caballero Encapuchado",
-    "categoria": "personajes",
+    "categoria": "seres-flemin",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -377,7 +377,7 @@
   {
     "id": "dragon-ball-sparking",
     "nombre": "Cuadro Sparking Zero",
-    "categoria": "props",
+    "categoria": "manga",
     "precio": 24,
     "formatos": [
       "GLB",
@@ -396,7 +396,7 @@
   {
     "id": "limit-break-clash-a",
     "nombre": "Limit Break Clash · A",
-    "categoria": "escenarios",
+    "categoria": "anime",
     "precio": 29,
     "formatos": [
       "GLB",
@@ -415,7 +415,7 @@
   {
     "id": "limit-break-clash-b",
     "nombre": "Limit Break Clash · B",
-    "categoria": "escenarios",
+    "categoria": "anime",
     "precio": 29,
     "formatos": [
       "GLB",
@@ -434,7 +434,7 @@
   {
     "id": "vibrant-saiyan-showdown",
     "nombre": "Vibrant Saiyan Showdown",
-    "categoria": "escenarios",
+    "categoria": "anime",
     "precio": 27,
     "formatos": [
       "GLB",
@@ -453,7 +453,7 @@
   {
     "id": "vibrant-saiyan-escultura",
     "nombre": "Vibrant Saiyan Showdown · Escultura",
-    "categoria": "escenarios",
+    "categoria": "anime",
     "precio": 15,
     "formatos": [
       "GLB",
@@ -473,7 +473,7 @@
   {
     "id": "vibrant-saiyan-segmentado",
     "nombre": "Vibrant Saiyan Showdown · Por Piezas",
-    "categoria": "escenarios",
+    "categoria": "anime",
     "precio": 32,
     "formatos": [
       "GLB",
@@ -491,7 +491,7 @@
   {
     "id": "rueda-fecha",
     "nombre": "Rueda de Fecha",
-    "categoria": "props",
+    "categoria": "mecanica",
     "precio": 7,
     "formatos": [
       "STL"
@@ -508,7 +508,7 @@
   {
     "id": "tapa-fecha-v3",
     "nombre": "Tapa con Fecha v3",
-    "categoria": "props",
+    "categoria": "mecanica",
     "precio": 8,
     "formatos": [
       "STL"
@@ -525,7 +525,7 @@
   {
     "id": "cuadro-4-piezas",
     "nombre": "Cuadro en Relieve · 4 Piezas",
-    "categoria": "props",
+    "categoria": "tecnologia",
     "precio": 10,
     "formatos": [
       "STL"
@@ -542,7 +542,7 @@
   {
     "id": "gogeta-ssj4",
     "nombre": "Gogeta SSJ4",
-    "categoria": "personajes",
+    "categoria": "anime",
     "precio": 29,
     "formatos": [
       "GLB",
@@ -570,7 +570,7 @@
   {
     "id": "cyber-draconian-sentinel",
     "nombre": "Cyber Draconian Sentinel",
-    "categoria": "criaturas",
+    "categoria": "seres-flemin",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -589,7 +589,7 @@
   {
     "id": "emerald-tyrant-throne",
     "nombre": "Emerald Tyrant Throne",
-    "categoria": "props",
+    "categoria": "manga",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -608,7 +608,7 @@
   {
     "id": "starlight-sentinel",
     "nombre": "Starlight Sentinel",
-    "categoria": "personajes",
+    "categoria": "seres-flemin",
     "precio": 15,
     "formatos": [
       "GLB",
@@ -627,7 +627,7 @@
   {
     "id": "figura-01",
     "nombre": "Bestia Escamada · Escultura",
-    "categoria": "criaturas",
+    "categoria": "seres-flemin",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -646,7 +646,7 @@
   {
     "id": "figura-02",
     "nombre": "Casa Moderna · Volumen",
-    "categoria": "escenarios",
+    "categoria": "accesorios",
     "precio": 9,
     "formatos": [
       "GLB",
@@ -665,7 +665,7 @@
   {
     "id": "figura-03",
     "nombre": "Cuerpo Base Masculino",
-    "categoria": "personajes",
+    "categoria": "seres-flemin",
     "precio": 8,
     "formatos": [
       "GLB",
@@ -685,7 +685,7 @@
   {
     "id": "figura-04",
     "nombre": "Urbano · Chaqueta de Cuero",
-    "categoria": "personajes",
+    "categoria": "seres-flemin",
     "precio": 15,
     "formatos": [
       "GLB",
@@ -704,7 +704,7 @@
   {
     "id": "figura-05",
     "nombre": "Flemin · Cuerpo Entero",
-    "categoria": "personajes",
+    "categoria": "seres-flemin",
     "precio": 15,
     "formatos": [
       "GLB",
@@ -723,7 +723,7 @@
   {
     "id": "figura-06",
     "nombre": "Flemin · Busto",
-    "categoria": "personajes",
+    "categoria": "seres-flemin",
     "precio": 10,
     "formatos": [
       "GLB",
@@ -742,7 +742,7 @@
   {
     "id": "figura-07",
     "nombre": "Villa Moderna con Piscina",
-    "categoria": "escenarios",
+    "categoria": "accesorios",
     "precio": 25,
     "formatos": [
       "GLB",
@@ -761,7 +761,7 @@
   {
     "id": "bomba-tesla-hdd",
     "nombre": "Bomba Tesla con platos de HDD",
-    "categoria": "props",
+    "categoria": "mecanica",
     "precio": 9,
     "formatos": [
       "STL",
@@ -780,7 +780,7 @@
   {
     "id": "bandeja-bateria-universal",
     "nombre": "Bandeja universal para batería de auto",
-    "categoria": "props",
+    "categoria": "autos",
     "precio": 8,
     "formatos": [
       "STL",
@@ -799,7 +799,7 @@
   {
     "id": "soporte-18650-lattice",
     "nombre": "Soporte ultraligero para celdas 18650",
-    "categoria": "props",
+    "categoria": "tecnologia",
     "precio": 3,
     "formatos": [
       "STL",
@@ -817,7 +817,7 @@
   {
     "id": "espadachin-rubio-anime",
     "nombre": "Espadachín Rubio",
-    "categoria": "personajes",
+    "categoria": "manga",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -836,7 +836,7 @@
   {
     "id": "senor-guerra-acorazado",
     "nombre": "Señor de la Guerra Acorazado",
-    "categoria": "personajes",
+    "categoria": "seres-flemin",
     "precio": 24,
     "formatos": [
       "GLB",
@@ -855,7 +855,7 @@
   {
     "id": "senor-guerra-escultura",
     "nombre": "Señor de la Guerra · Escultura",
-    "categoria": "personajes",
+    "categoria": "seres-flemin",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -874,7 +874,7 @@
   {
     "id": "saiyan-legendario-chibi-dorado",
     "nombre": "Saiyan Legendario Chibi · Dorado",
-    "categoria": "personajes",
+    "categoria": "anime",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -893,7 +893,7 @@
   {
     "id": "saiyan-legendario-chibi-verde",
     "nombre": "Saiyan Legendario Chibi · Verde",
-    "categoria": "personajes",
+    "categoria": "anime",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -912,7 +912,7 @@
   {
     "id": "saiyan-legendario-chibi-escultura-a",
     "nombre": "Saiyan Legendario Chibi · Escultura A",
-    "categoria": "personajes",
+    "categoria": "anime",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -931,7 +931,7 @@
   {
     "id": "saiyan-legendario-chibi-escultura-b",
     "nombre": "Saiyan Legendario Chibi · Escultura B",
-    "categoria": "personajes",
+    "categoria": "anime",
     "precio": 12,
     "formatos": [
       "GLB",

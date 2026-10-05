@@ -18,7 +18,7 @@ export function Subir({ onCerrar }: { onCerrar: () => void }) {
   const [error, setError] = useState('')
   const [ficha, setFicha] = useState({
     nombre: '',
-    categoria: 'personajes' as CategoriaId,
+    categoria: 'seres-flemin' as CategoriaId,
     precio: 10,
     formatos: ['GLB', 'FBX', 'OBJ'],
     descripcion: '',

@@ -38,7 +38,7 @@ export type Modelo3D = {
   texturas?: { carpeta: string; map: string; normalMap: string; roughnessMap: string; metalnessMap: string }
 }
 
-export type CategoriaId = 'personajes' | 'criaturas' | 'props' | 'escenarios'
+export type CategoriaId = 'tecnologia' | 'mecanica' | 'autos' | 'anime' | 'manga' | 'seres-flemin' | 'accesorios'
 
 export type Categoria = {
   id: CategoriaId | 'todo'
@@ -56,10 +56,13 @@ export type Categoria = {
  */
 export const CATEGORIAS: Categoria[] = [
   { id: 'todo', nombre: 'Todo', clave: 'ALL', desde: '#00E5D1', hasta: '#2AC3FF', tinta: '#3BE0D0' },
-  { id: 'personajes', nombre: 'Personajes', clave: 'CHR', desde: '#FF2D8A', hasta: '#FF7A2F', tinta: '#FF9A4D' },
-  { id: 'criaturas', nombre: 'Criaturas', clave: 'MON', desde: '#7B2CFF', hasta: '#FF2D8A', tinta: '#C77DFF' },
-  { id: 'props', nombre: 'Props', clave: 'PRP', desde: '#FFB800', hasta: '#FF5E5E', tinta: '#FFC24D' },
-  { id: 'escenarios', nombre: 'Escenarios', clave: 'ENV', desde: '#2AC3FF', hasta: '#7B2CFF', tinta: '#7CC8FF' },
+  { id: 'tecnologia', nombre: 'Tecnología', clave: 'TEC', desde: '#00E5D1', hasta: '#2A7BFF', tinta: '#4DE8FF' },
+  { id: 'mecanica', nombre: 'Mecánica', clave: 'MEC', desde: '#FFB800', hasta: '#FF5E2F', tinta: '#FFC24D' },
+  { id: 'autos', nombre: 'Autos', clave: 'AUT', desde: '#FF3B3B', hasta: '#FF8A2F', tinta: '#FF7A6B' },
+  { id: 'anime', nombre: 'Anime', clave: 'ANI', desde: '#FF2D8A', hasta: '#FF7A2F', tinta: '#FF9A4D' },
+  { id: 'manga', nombre: 'Manga', clave: 'MNG', desde: '#F5F4F1', hasta: '#FF2D8A', tinta: '#FF8FC0' },
+  { id: 'seres-flemin', nombre: 'Seres Flemin', clave: 'FLM', desde: '#7B2CFF', hasta: '#FF2D8A', tinta: '#C77DFF' },
+  { id: 'accesorios', nombre: 'Hogar y accesorios', clave: 'ACC', desde: '#2AC3FF', hasta: '#7B2CFF', tinta: '#7CC8FF' },
 ]
 
 export const CATALOGO = datos as Modelo3D[]

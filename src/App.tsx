@@ -107,7 +107,7 @@ export default function App() {
                 <span className="degradado">3D</span>
               </h1>
               <p className="mt-6 max-w-md text-body text-paper/75">
-                Personajes, criaturas y props listos para tu juego, tu render o tu impresora. Cada pieza se gira aquí mismo
+                Tecnología, mecánica, autos, anime, manga y los Seres Flemin, listos para tu juego, tu render o tu impresora. Cada pieza se gira aquí mismo
                 en 3D antes de comprarla — lo que ves es lo que te llevas.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-5">
