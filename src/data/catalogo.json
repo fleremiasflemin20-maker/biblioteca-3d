@@ -776,5 +776,42 @@
     "triangulos": 48908,
     "portada": "bomba-tesla-hdd.webp",
     "licencia": "CC BY-SA 4.0"
+  },
+  {
+    "id": "bandeja-bateria-universal",
+    "nombre": "Bandeja universal para batería de auto",
+    "categoria": "props",
+    "precio": 8,
+    "formatos": [
+      "STL",
+      "SCAD"
+    ],
+    "descripcion": "Bandeja con estructura lattice isogrid que se ajusta a casi cualquier batería de auto: dos mordazas sobre cremallera dentada (paso de 5 mm, un tornillo M6) y 4 ganchos deslizables embutidos que agarran el soporte metálico del auto. Tallas S, M y L (NS40 hasta LN4/grupo 65) o a medida de tu auto. Sin soportes, cabe en una cama de 350 mm. Imprimir en ASA o PA-CF. El código paramétrico está abierto en GitHub (soportes-bateria-lattice).",
+    "archivo": "propios/bandeja-bateria-universal.glb",
+    "peso": 474440,
+    "origen": "Diseño propio · ingeniería paramétrica",
+    "destacado": true,
+    "alta": "2026-10-05",
+    "triangulos": 13846,
+    "portada": "bandeja-bateria-universal.webp",
+    "licencia": "CC BY-SA 4.0"
+  },
+  {
+    "id": "soporte-18650-lattice",
+    "nombre": "Soporte ultraligero para celdas 18650",
+    "categoria": "props",
+    "precio": 3,
+    "formatos": [
+      "STL",
+      "SCAD"
+    ],
+    "descripcion": "Soporte 4S2P para 8 celdas 18650 con paredes isogrid: menos material y la misma rigidez. Pestaña inferior para soldar la tira de níquel, orejas M3 y holgura ajustable. Se imprime sin soportes en PETG o ASA. Las celdas no están incluidas. El código paramétrico está abierto en GitHub (soportes-bateria-lattice).",
+    "archivo": "propios/soporte-18650-lattice.glb",
+    "peso": 442524,
+    "origen": "Diseño propio · ingeniería paramétrica",
+    "alta": "2026-10-05",
+    "triangulos": 14008,
+    "portada": "soporte-18650-lattice.webp",
+    "licencia": "CC BY-SA 4.0"
   }
 ]
