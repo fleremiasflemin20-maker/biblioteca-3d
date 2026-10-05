@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
-// Mismo sistema que el portafolio: tinta casi negra, papel casi blanco y el
-// acento real por variable CSS (cambia con la categoría activa).
+// Tienda clara y sobria (al estilo MakerWorld): fondo hueso, texto grafito y
+// un solo acento. `ink`/`paper` se quedan para el panel de subida y el modo
+// manos, que siguen siendo oscuros.
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
@@ -8,9 +9,13 @@ export default {
       colors: {
         ink: '#0A0A0B',
         paper: '#F5F4F1',
-        accent: '#3BE0D0',
+        accent: '#0E9F93',
+        hueso: '#FAFAF8',
+        grafito: '#18181B',
       },
       fontFamily: {
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        serif: ['Instrument Serif', 'Georgia', 'serif'],
         display: ['Archivo Black', 'Impact', 'sans-serif'],
         mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
       },

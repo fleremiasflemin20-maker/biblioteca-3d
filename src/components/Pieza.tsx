@@ -20,7 +20,7 @@ function aplicarModo(raiz: THREE.Object3D, modo: Modo) {
     // Se guarda el material original la primera vez para poder volver a él.
     mesh.userData.original ??= mesh.material
     if (modo === 'textura') mesh.material = mesh.userData.original
-    else if (modo === 'malla') mesh.material = new THREE.MeshBasicMaterial({ color: '#3BE0D0', wireframe: true, transparent: true, opacity: 0.55 })
+    else if (modo === 'malla') mesh.material = new THREE.MeshBasicMaterial({ color: '#0E9F93', wireframe: true, transparent: true, opacity: 0.6 })
     else mesh.material = new THREE.MeshStandardMaterial({ color: '#d9d4cc', roughness: 0.75 })
   })
 }
@@ -65,7 +65,7 @@ function PBR({ modelo, modo }: { modelo: Modelo3D; modo: Modo }) {
   return (
     <mesh geometry={geometry}>
       {modo === 'textura' && <meshStandardMaterial {...maps} />}
-      {modo === 'malla' && <meshBasicMaterial color="#3BE0D0" wireframe transparent opacity={0.55} />}
+      {modo === 'malla' && <meshBasicMaterial color="#0E9F93" wireframe transparent opacity={0.6} />}
       {modo === 'arcilla' && <meshStandardMaterial color="#d9d4cc" roughness={0.75} />}
     </mesh>
   )
@@ -77,7 +77,7 @@ function LlaveroNombre({ opciones, modo }: { opciones: OpcionesLlavero; modo: Mo
   useEffect(() => () => [piezas.placa, piezas.texto, piezas.icono].forEach((g) => g?.dispose()), [piezas])
   const p = PALETAS[opciones.paleta]
   const material = (color: string) =>
-    modo === 'malla' ? <meshBasicMaterial color="#3BE0D0" wireframe transparent opacity={0.55} />
+    modo === 'malla' ? <meshBasicMaterial color="#0E9F93" wireframe transparent opacity={0.6} />
     : modo === 'arcilla' ? <meshStandardMaterial color="#d9d4cc" roughness={0.75} />
     : <meshStandardMaterial color={color} roughness={0.45} />
   return (

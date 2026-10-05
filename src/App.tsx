@@ -1,17 +1,19 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import { ChevronLeft, ChevronRight, Plus, Search } from 'lucide-react'
-import { Grano, Palmeras, Puesta, Velo } from './components/Atmosfera'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { ArrowRight, ChevronLeft, ChevronRight, Hand, MessageCircle, Plus, Search } from 'lucide-react'
 import { Visor } from './components/Visor'
 import { Tarjeta } from './components/Tarjeta'
 import { Ficha } from './components/Ficha'
 import { Subir } from './components/Subir'
 import { Portadas } from './components/Portadas'
-import { CATALOGO, CATEGORIAS, CORREO, WHATSAPP, precio } from './lib/catalogo'
+import { ModoManos } from './components/ModoManos'
+import { CATALOGO, CATEGORIAS, CORREO, WHATSAPP, precio, type Modelo3D } from './lib/catalogo'
+import { ICONO_CATEGORIA } from './lib/iconos'
 
 type Orden = 'recientes' | 'barato' | 'caro' | 'nombre'
+type Manos = { lista: Modelo3D[]; indice: number; desdeFicha: boolean }
 
-const FORMATOS = [...new Set(CATALOGO.flatMap((m) => m.formatos))]
 const DESTACADOS = CATALOGO.filter((m) => m.destacado).length ? CATALOGO.filter((m) => m.destacado) : CATALOGO.slice(0, 3)
+const ENLACE_MEDIDA = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Hola, quiero un modelo 3D a medida.')}`
 
 export default function App() {
   const [cat, setCat] = useState(0)
@@ -21,15 +23,22 @@ export default function App() {
   const [destacado, setDestacado] = useState(0)
   const [subiendo, setSubiendo] = useState(false)
   const [sinPortada, setSinPortada] = useState(0)
+  const [manos, setManos] = useState<Manos | null>(null)
 
   const c = CATEGORIAS[cat]
+  const barra = useRef<HTMLElement>(null)
 
-  /* La paleta viaja por variables CSS, igual que en el portafolio. */
+  /* La barra de secciones se pega justo debajo de la superior, que cambia de alto entre móvil y escritorio. */
   useEffect(() => {
-    const r = document.documentElement.style
-    r.setProperty('--desde', c.desde)
-    r.setProperty('--hasta', c.hasta)
-    r.setProperty('--tinta', c.tinta)
+    const b = barra.current
+    if (!b) return
+    const ro = new ResizeObserver(() => document.documentElement.style.setProperty('--alto-barra', `${b.offsetHeight}px`))
+    ro.observe(b)
+    return () => ro.disconnect()
+  }, [])
+
+  useEffect(() => {
+    document.documentElement.style.setProperty('--tinta', c.punto)
   }, [c])
 
   const lista = useMemo(() => {
@@ -37,8 +46,9 @@ export default function App() {
     const l = CATALOGO.filter(
       (m) =>
         (c.id === 'todo' || m.categoria === c.id) &&
-        (!q || `${m.nombre} ${m.descripcion} ${m.formatos.join(' ')}`.toLowerCase().includes(q)),
+        (!q || `${m.nombre} ${m.descripcion} ${m.formatos.join(' ')} ${m.origen ?? ''}`.toLowerCase().includes(q)),
     )
+    if (orden === 'recientes') l.reverse()
     if (orden === 'barato') l.sort((a, b) => a.precio - b.precio)
     if (orden === 'caro') l.sort((a, b) => b.precio - a.precio)
     if (orden === 'nombre') l.sort((a, b) => a.nombre.localeCompare(b.nombre))
@@ -55,188 +65,213 @@ export default function App() {
   )
   const cerrar = useCallback(() => setAbierto(null), [])
 
+  /** El modo manos recorre lo que se está viendo: la sección y la búsqueda activas. */
+  const abrirManos = useCallback(
+    (id?: string) => {
+      const l = lista.length ? lista : CATALOGO
+      const i = id ? Math.max(0, l.findIndex((m) => m.id === id)) : 0
+      setManos({ lista: l, indice: i, desdeFicha: !!id })
+      setAbierto(null)
+    },
+    [lista],
+  )
+  /** Abre la ficha de una pieza aunque los filtros actuales la escondan. */
+  const verFicha = useCallback(
+    (id: string) => {
+      if (!lista.some((m) => m.id === id)) {
+        setCat(0)
+        setBusqueda('')
+      }
+      setAbierto(id)
+    },
+    [lista],
+  )
+  const cerrarManos = useCallback(
+    (id: string) => {
+      const volver = manos?.desdeFicha
+      setManos(null)
+      if (volver) verFicha(id)
+    },
+    [manos, verFicha],
+  )
+
   const estrella = DESTACADOS[destacado % DESTACADOS.length]
   const catEstrella = CATEGORIAS.find((x) => x.id === estrella.categoria) ?? c
   const pendientes = useMemo(() => (import.meta.env.DEV ? CATALOGO.filter((m) => !m.portada) : []), [])
 
-  const pasos = [
-    { n: '01', titulo: 'Gíralo', texto: 'Cada pieza se carga en 3D. Mírala por todos lados, en textura, arcilla o malla, antes de pagar.' },
-    { n: '02', titulo: 'Pídelo', texto: 'Botón de compra: te lleva al pago o abre WhatsApp con el pedido ya escrito.' },
-    { n: '03', titulo: 'Úsalo', texto: 'Entrega digital en los formatos de la ficha. Uso personal y comercial incluido.' },
-  ]
+  const irAlCatalogo = () => document.getElementById('catalogo')?.scrollIntoView({ behavior: 'smooth' })
 
   return (
     <>
-      {/* HUD: el mismo marco de videojuego que el portafolio. */}
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-40 flex items-start justify-between bg-gradient-to-b from-ink/90 via-ink/50 to-transparent p-5 pb-10 md:p-8 md:pb-12">
-        <a href="#" className="pointer-events-auto font-mono text-caption uppercase text-paper/80">
-          Fleremiasflemin <span className="text-paper/35">· Biblioteca 3D</span>
-        </a>
-        <div className="pointer-events-auto flex items-center gap-4">
-          {import.meta.env.DEV && (
-            <button type="button" onClick={() => setSubiendo(true)} className="boton flex items-center gap-1.5 border px-3 py-1.5 font-mono text-[0.62rem] font-bold uppercase tracking-[0.16em]">
-              <Plus size={14} strokeWidth={3} /> Subir modelo
+      {/* ── Barra superior ─────────────────────────────────────── */}
+      <header ref={barra} className="sticky top-0 z-40 border-b border-stone-200/80 bg-hueso/85 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-[1400px] flex-wrap items-center gap-x-4 gap-y-3 px-4 py-3 md:flex-nowrap md:px-8">
+          <a href="#" className="flex shrink-0 items-center gap-2.5">
+            <span className="grid h-8 w-8 place-items-center rounded-lg bg-grafito text-[13px] font-bold text-white">F</span>
+            <span className="leading-tight">
+              <span className="block text-[15px] font-semibold tracking-tight">Biblioteca 3D</span>
+              <span className="block text-[11px] text-stone-500">por Fleremiasflemin</span>
+            </span>
+          </a>
+
+          <form
+            className="order-last w-full md:order-none md:mx-auto md:max-w-xl"
+            onSubmit={(e) => {
+              e.preventDefault()
+              irAlCatalogo()
+            }}
+          >
+            <label className="flex items-center gap-2.5 rounded-full border border-stone-200 bg-white px-4 shadow-[0_1px_2px_rgba(0,0,0,0.03)] transition focus-within:border-stone-400 focus-within:shadow-[0_0_0_4px_rgba(24,24,27,0.06)]">
+              <Search size={17} className="shrink-0 text-stone-400" />
+              <input
+                type="search"
+                value={busqueda}
+                onChange={(e) => setBusqueda(e.target.value)}
+                placeholder="Busca figuras, piezas, formatos…"
+                aria-label="Buscar modelos"
+                className="w-full bg-transparent py-2.5 text-sm outline-none placeholder:text-stone-400"
+              />
+            </label>
+          </form>
+
+          <div className="ml-auto flex shrink-0 items-center gap-2 md:ml-0">
+            {import.meta.env.DEV && (
+              <button type="button" onClick={() => setSubiendo(true)} className="pildora-clara !px-3.5">
+                <Plus size={16} /> <span className="hidden lg:inline">Subir</span>
+              </button>
+            )}
+            <button type="button" onClick={() => abrirManos()} className="pildora-clara !px-3.5">
+              <Hand size={16} /> <span className="hidden sm:inline">Modo manos</span>
             </button>
-          )}
-          <p className="hidden font-mono text-caption uppercase sm:block" style={{ color: 'var(--tinta)' }}>
-            Tienda · en línea
-          </p>
+            <a href={ENLACE_MEDIDA} target="_blank" rel="noreferrer" className="pildora-negra hidden !px-4 sm:inline-flex">
+              A medida
+            </a>
+          </div>
         </div>
       </header>
-      <div className="pointer-events-none fixed inset-0 z-40 hidden md:block" aria-hidden>
-        <span className="absolute bottom-6 left-6 h-8 w-8 border-b border-l border-paper/30" />
-        <span className="absolute bottom-6 right-6 h-8 w-8 border-b border-r border-paper/30" />
-      </div>
 
       <main>
         {/* ── Portada ─────────────────────────────────────────── */}
-        <section className="scene relative flex items-center overflow-hidden">
-          <Puesta />
-          <Palmeras />
-          <Velo />
-          <Grano />
-
-          <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-8 px-5 pb-16 pt-28 md:grid-cols-[1.05fr_1fr] md:px-10">
-            <div>
-              <p className="entra font-mono text-caption uppercase" style={{ color: 'var(--tinta)' }}>
-                Catálogo 2026 · {CATALOGO.length} modelos
-              </p>
-              <h1 className="rotulo mt-4 font-display text-[clamp(3rem,7.4vw,7.5rem)] uppercase leading-[0.9] tracking-[-0.03em]">
-                Biblioteca
-                <br />
-                <span className="degradado">3D</span>
-              </h1>
-              <p className="mt-6 max-w-md text-body text-paper/75">
-                Tecnología, mecánica, autos, anime, manga y los Seres Flemin, listos para tu juego, tu render o tu impresora. Cada pieza se gira aquí mismo
-                en 3D antes de comprarla — lo que ves es lo que te llevas.
-              </p>
-              <div className="mt-8 flex flex-wrap items-center gap-5">
-                <a href="#catalogo" className="boton inline-block border-2 px-9 py-3.5 font-mono text-caption font-bold uppercase">
-                  Ver catálogo
-                </a>
-                <a
-                  href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Hola, quiero un modelo 3D a medida.')}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="font-mono text-caption uppercase text-paper/55 underline decoration-paper/20 underline-offset-[6px] transition-colors hover:text-paper hover:decoration-current"
-                >
-                  Pedir uno a medida
-                </a>
-              </div>
-
-              <dl className="mt-12 grid max-w-md grid-cols-3 gap-4 border-t border-paper/10 pt-5">
-                {[
-                  { etiqueta: 'Modelos', valor: String(CATALOGO.length) },
-                  { etiqueta: 'Formatos', valor: FORMATOS.slice(0, 3).join(' · ') },
-                  { etiqueta: 'Desde', valor: precio(Math.min(...CATALOGO.map((m) => m.precio))) },
-                ].map((s) => (
-                  <div key={s.etiqueta}>
-                    <dt className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-paper/40">{s.etiqueta}</dt>
-                    <dd className="mt-1 font-mono text-sm" style={{ color: 'var(--tinta)' }}>{s.valor}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-
-            {/* El destacado, girando. */}
-            <div className="relative">
-              <div className="relative h-[420px] border border-paper/10 bg-ink/40 backdrop-blur-[2px] md:h-[560px]">
-                <Visor modelo={estrella} tinta={catEstrella.tinta} />
-                <div className="pointer-events-none absolute inset-x-4 top-4 flex justify-between font-mono text-[0.62rem] uppercase tracking-[0.2em]">
-                  <span className="text-paper/45">Destacado</span>
-                  <span style={{ color: catEstrella.tinta }}>
-                    {String((destacado % DESTACADOS.length) + 1).padStart(2, '0')} / {String(DESTACADOS.length).padStart(2, '0')}
-                  </span>
-                </div>
-                {DESTACADOS.length > 1 &&
-                  [
-                    { paso: -1, Icono: ChevronLeft, lado: 'left-3', nombre: 'Destacado anterior' },
-                    { paso: 1, Icono: ChevronRight, lado: 'right-3', nombre: 'Destacado siguiente' },
-                  ].map(({ paso, Icono, lado, nombre }) => (
-                    <button
-                      key={paso}
-                      type="button"
-                      aria-label={nombre}
-                      onClick={() => setDestacado((d) => (d + paso + DESTACADOS.length) % DESTACADOS.length)}
-                      className={`flecha absolute ${lado} top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center border bg-ink/70 text-paper/70 backdrop-blur-sm`}
-                    >
-                      <Icono size={22} strokeWidth={2.5} />
-                    </button>
-                  ))}
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setCat(0)
-                  setAbierto(estrella.id)
-                }}
-                className="group flex w-full items-baseline justify-between gap-3 border border-t-0 border-paper/10 bg-ink/70 px-4 py-3.5 text-left backdrop-blur-sm"
-              >
-                <span className="font-display text-lg uppercase leading-none md:text-xl">{estrella.nombre}</span>
-                <span className="shrink-0 font-mono text-caption uppercase" style={{ color: catEstrella.tinta }}>
-                  {precio(estrella.precio)} · Ver ficha →
-                </span>
+        <section className="mx-auto grid max-w-[1400px] items-center gap-10 px-4 pb-12 pt-10 md:grid-cols-[1fr_1.15fr] md:px-8 md:pb-20 md:pt-16">
+          <div className="entra">
+            <button
+              type="button"
+              onClick={() => abrirManos()}
+              className="group inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white py-1 pl-1 pr-3 text-[13px] text-stone-600 transition hover:border-stone-300"
+            >
+              <span className="rounded-full bg-grafito px-2 py-0.5 text-[11px] font-medium text-white">Nuevo</span>
+              Sostén las figuras con tu mano
+              <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
+            </button>
+            <h1 className="mt-6 text-[clamp(2.6rem,5.6vw,5rem)] font-semibold leading-[1.02] tracking-[-0.035em]">
+              Modelos 3D <span className="font-serif font-normal italic tracking-[-0.01em]">listos</span> para imprimir, renderizar y jugar.
+            </h1>
+            <p className="mt-5 max-w-md text-[17px] leading-relaxed text-stone-600">
+              Tecnología, mecánica, autos, anime, manga y los Seres Flemin. Gira cada pieza en 3D antes de comprarla, o tómala con la mano desde tu cámara.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <button type="button" onClick={irAlCatalogo} className="pildora-negra !px-6 !py-3">
+                Explorar catálogo
               </button>
+              <button type="button" onClick={() => abrirManos()} className="pildora-clara !px-6 !py-3">
+                <Hand size={17} /> Probar con tus manos
+              </button>
+            </div>
+            <dl className="mt-10 flex gap-10 text-sm">
+              {[
+                { etiqueta: 'Modelos', valor: String(CATALOGO.length) },
+                { etiqueta: 'Secciones', valor: String(CATEGORIAS.length - 1) },
+                { etiqueta: 'Desde', valor: precio(Math.min(...CATALOGO.map((m) => m.precio))) },
+              ].map((s) => (
+                <div key={s.etiqueta}>
+                  <dd className="text-2xl font-semibold tracking-tight">{s.valor}</dd>
+                  <dt className="mt-0.5 text-stone-500">{s.etiqueta}</dt>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          {/* El destacado, girando. */}
+          <div className="entra relative" style={{ animationDelay: '80ms' }}>
+            <div className="relative h-[420px] overflow-hidden rounded-[28px] border border-stone-200 bg-gradient-to-b from-white to-stone-100 md:h-[560px]">
+              <div
+                className="absolute inset-0 opacity-60"
+                style={{ background: `radial-gradient(60% 45% at 50% 85%, ${catEstrella.punto}22, transparent 70%)` }}
+                aria-hidden
+              />
+              <Visor modelo={estrella} tinta={catEstrella.tinta} />
+              <div className="pointer-events-none absolute inset-x-5 top-5 flex items-center justify-between text-[12px] text-stone-500">
+                <span className="rounded-full border border-stone-200 bg-white/80 px-2.5 py-1 backdrop-blur">Destacado</span>
+                <span className="tabular-nums">
+                  {String((destacado % DESTACADOS.length) + 1).padStart(2, '0')} / {String(DESTACADOS.length).padStart(2, '0')}
+                </span>
+              </div>
+              <div className="absolute inset-x-4 bottom-4 flex items-center gap-3 rounded-2xl border border-stone-200/80 bg-white/85 p-2 pl-4 shadow-sm backdrop-blur-md">
+                <button type="button" onClick={() => verFicha(estrella.id)} className="min-w-0 flex-1 text-left">
+                  <p className="truncate text-[15px] font-semibold tracking-tight">{estrella.nombre}</p>
+                  <p className="text-[13px] text-stone-500">
+                    {catEstrella.nombre} · {precio(estrella.precio)}
+                  </p>
+                </button>
+                {DESTACADOS.length > 1 && (
+                  <div className="flex gap-1.5">
+                    {[
+                      { paso: -1, Icono: ChevronLeft, nombre: 'Destacado anterior' },
+                      { paso: 1, Icono: ChevronRight, nombre: 'Destacado siguiente' },
+                    ].map(({ paso, Icono, nombre }) => (
+                      <button
+                        key={paso}
+                        type="button"
+                        aria-label={nombre}
+                        onClick={() => setDestacado((d) => (d + paso + DESTACADOS.length) % DESTACADOS.length)}
+                        className="grid h-10 w-10 place-items-center rounded-full border border-stone-200 bg-white text-stone-700 transition hover:bg-stone-50"
+                      >
+                        <Icono size={18} />
+                      </button>
+                    ))}
+                  </div>
+                )}
+                <button type="button" onClick={() => verFicha(estrella.id)} className="pildora-negra hidden !py-2.5 sm:inline-flex">
+                  Ver ficha
+                </button>
+              </div>
             </div>
           </div>
         </section>
 
         {/* ── Catálogo ────────────────────────────────────────── */}
-        <section id="catalogo" className="relative scroll-mt-16 border-t border-paper/10 px-5 py-20 md:px-10 md:py-28">
-          <div
-            className="pointer-events-none absolute inset-x-0 top-0 h-[60vh] opacity-40 transition-[background] duration-700"
-            style={{ background: 'radial-gradient(70% 60% at 50% 0%, color-mix(in oklab, var(--desde) 45%, transparent), transparent 70%)' }}
-            aria-hidden
-          />
-          <div className="relative mx-auto max-w-7xl">
-            <p className="font-mono text-caption uppercase text-paper/45">El catálogo</p>
-            <h2 className="rotulo mt-3 font-display text-headline uppercase">
-              Elige tu <span className="degradado">próxima pieza</span>
-            </h2>
-
-            {/* Categorías: como la rueda del portafolio, elegir una tiñe la página. */}
-            <div className="mt-10 flex flex-wrap gap-2" role="tablist" aria-label="Categorías">
-              {CATEGORIAS.map((x, i) => {
-                const n = x.id === 'todo' ? CATALOGO.length : CATALOGO.filter((m) => m.categoria === x.id).length
-                const activa = i === cat
-                return (
-                  <button
-                    key={x.id}
-                    type="button"
-                    role="tab"
-                    aria-selected={activa}
-                    onClick={() => setCat(i)}
-                    className="flex items-baseline gap-2 border px-4 py-2.5 font-mono text-xs uppercase tracking-[0.14em] transition-all duration-300"
-                    style={
-                      activa
-                        ? { background: `linear-gradient(90deg, ${x.desde}, ${x.hasta})`, borderColor: 'transparent', color: '#0A0A0B', fontWeight: 700 }
-                        : { borderColor: '#F5F4F122', color: '#F5F4F1AA' }
-                    }
-                  >
-                    <span style={activa ? undefined : { color: x.tinta }}>{x.clave}</span>
-                    {x.nombre}
-                    <span className={activa ? 'opacity-60' : 'text-paper/30'}>{n}</span>
-                  </button>
-                )
-              })}
-            </div>
-
-            <div className="mt-4 flex flex-col gap-3 sm:flex-row">
-              <label className="flex flex-1 items-center gap-2.5 border border-paper/15 bg-ink/60 px-3.5 focus-within:border-[var(--tinta)]">
-                <Search size={16} className="text-paper/40" />
-                <input
-                  type="search"
-                  value={busqueda}
-                  onChange={(e) => setBusqueda(e.target.value)}
-                  placeholder="Buscar dragón, trono, STL…"
-                  className="w-full bg-transparent py-3 font-mono text-sm text-paper outline-none placeholder:text-paper/30"
-                />
-              </label>
+        <section id="catalogo" className="scroll-mt-20">
+          {/* Secciones: fijas bajo la barra al bajar. */}
+          <div className="sticky top-[var(--alto-barra,64px)] z-30 border-y border-stone-200/80 bg-hueso/85 backdrop-blur-xl">
+            <div className="mx-auto flex max-w-[1400px] items-center gap-3 px-4 py-3 md:px-8">
+              <div className="sin-barra -mx-1 flex flex-1 gap-2 overflow-x-auto px-1" role="tablist" aria-label="Secciones">
+                {CATEGORIAS.map((x, i) => {
+                  const n = x.id === 'todo' ? CATALOGO.length : CATALOGO.filter((m) => m.categoria === x.id).length
+                  const activa = i === cat
+                  const Icono = ICONO_CATEGORIA[x.id]
+                  return (
+                    <button
+                      key={x.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={activa}
+                      onClick={() => setCat(i)}
+                      className={`flex shrink-0 items-center gap-2 rounded-full border px-3.5 py-2 text-[13px] font-medium transition-all duration-200 ${
+                        activa ? 'border-grafito bg-grafito text-white' : 'border-stone-200 bg-white text-stone-700 hover:border-stone-300'
+                      }`}
+                    >
+                      <Icono size={15} style={activa ? undefined : { color: x.punto }} />
+                      {x.nombre}
+                      <span className={`tabular-nums ${activa ? 'text-white/55' : 'text-stone-400'}`}>{n}</span>
+                    </button>
+                  )
+                })}
+              </div>
               <select
                 value={orden}
                 onChange={(e) => setOrden(e.target.value as Orden)}
                 aria-label="Ordenar"
-                className="border border-paper/15 bg-ink px-3.5 py-3 font-mono text-xs uppercase tracking-[0.12em] text-paper/80 outline-none focus:border-[var(--tinta)]"
+                className="hidden shrink-0 rounded-full border border-stone-200 bg-white px-3.5 py-2 text-[13px] text-stone-700 outline-none transition hover:border-stone-300 sm:block"
               >
                 <option value="recientes">Más recientes</option>
                 <option value="barato">Precio: menor a mayor</option>
@@ -244,87 +279,113 @@ export default function App() {
                 <option value="nombre">Nombre A–Z</option>
               </select>
             </div>
+          </div>
+
+          <div className="mx-auto max-w-[1400px] px-4 pb-24 pt-8 md:px-8">
+            <div className="mb-6 flex items-baseline justify-between gap-4">
+              <h2 className="text-2xl font-semibold tracking-tight">
+                {c.id === 'todo' ? 'Todo el catálogo' : c.nombre}
+                {busqueda.trim() && <span className="font-normal text-stone-400"> · “{busqueda.trim()}”</span>}
+              </h2>
+              <p className="shrink-0 text-sm text-stone-500">
+                {lista.length} {lista.length === 1 ? 'modelo' : 'modelos'}
+              </p>
+            </div>
 
             {lista.length ? (
-              <div key={c.id} className="mt-8 grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <div key={`${c.id}-${orden}`} className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
                 {lista.map((m, i) => (
-                  <div key={m.id} className="entra" style={{ animationDelay: `${Math.min(i, 12) * 40}ms` }}>
-                    <Tarjeta modelo={m} numero={CATALOGO.indexOf(m) + 1} onAbrir={() => setAbierto(m.id)} />
+                  <div key={m.id} className="entra" style={{ animationDelay: `${Math.min(i, 12) * 35}ms` }}>
+                    <Tarjeta modelo={m} onAbrir={() => setAbierto(m.id)} />
                   </div>
                 ))}
               </div>
             ) : (
-              <p className="mt-16 text-center font-mono text-sm uppercase tracking-[0.14em] text-paper/40">
-                Nada por aquí todavía. {c.id !== 'todo' && 'Pronto habrá piezas en esta categoría.'}
-              </p>
+              <div className="rounded-3xl border border-dashed border-stone-300 px-6 py-20 text-center">
+                <p className="text-lg font-medium">Nada por aquí todavía</p>
+                <p className="mt-1 text-stone-500">Prueba con otra búsqueda o pide un modelo a medida.</p>
+                <a href={ENLACE_MEDIDA} target="_blank" rel="noreferrer" className="pildora-negra mt-6">
+                  Pedir a medida
+                </a>
+              </div>
             )}
           </div>
         </section>
 
-        {/* ── Cómo comprar ────────────────────────────────────── */}
-        <section className="border-t border-paper/10 px-5 py-20 md:px-10 md:py-28">
-          <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-3">
-            {pasos.map((p) => (
+        {/* ── Cómo funciona ───────────────────────────────────── */}
+        <section className="border-t border-stone-200 bg-white">
+          <div className="mx-auto grid max-w-[1400px] gap-10 px-4 py-20 md:grid-cols-3 md:px-8">
+            {[
+              { n: '1', titulo: 'Gíralo', texto: 'Cada pieza se carga en 3D: textura, arcilla o malla. O sostenla en tu mano con el modo manos.' },
+              { n: '2', titulo: 'Pídelo', texto: 'El botón de compra te lleva al pago o abre WhatsApp con el pedido ya escrito.' },
+              { n: '3', titulo: 'Úsalo', texto: 'Entrega digital en los formatos de la ficha, con uso personal y comercial.' },
+            ].map((p) => (
               <div key={p.n}>
-                <p className="font-display text-6xl text-paper/10">{p.n}</p>
-                <h3 className="mt-2 font-display text-title uppercase">{p.titulo}</h3>
-                <p className="mt-3 max-w-xs text-paper/60">{p.texto}</p>
+                <p className="font-serif text-5xl italic text-stone-300">{p.n}</p>
+                <h3 className="mt-3 text-lg font-semibold tracking-tight">{p.titulo}</h3>
+                <p className="mt-2 max-w-xs leading-relaxed text-stone-600">{p.texto}</p>
               </div>
             ))}
           </div>
         </section>
 
         {/* ── Contacto ────────────────────────────────────────── */}
-        <footer className="relative overflow-hidden border-t border-paper/10 px-5 pb-16 pt-20 md:px-10 md:pt-28">
-          <Puesta />
-          <Grano />
-          <div className="relative mx-auto max-w-7xl">
-            <h2 className="rotulo font-display text-headline uppercase">
-              ¿Buscas algo
-              <br />
-              <span className="degradado">que no está aquí?</span>
+        <footer className="bg-grafito text-white">
+          <div className="mx-auto max-w-[1400px] px-4 pb-12 pt-20 md:px-8">
+            <h2 className="max-w-2xl text-[clamp(2rem,4.2vw,3.5rem)] font-semibold leading-[1.05] tracking-[-0.03em]">
+              ¿Buscas algo <span className="font-serif font-normal italic">que no está aquí?</span>
             </h2>
-            <p className="mt-5 max-w-lg text-body text-paper/70">
-              Modelos a medida, adaptaciones para impresión 3D o retopología para juego. Cuéntame qué necesitas.
-            </p>
-            <div className="mt-10 grid max-w-2xl gap-6 sm:grid-cols-2">
-              <div>
-                <p className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-paper/40">Correo</p>
-                <a href={`mailto:${CORREO}`} className="mt-1 inline-block font-mono text-sm underline underline-offset-4" style={{ color: 'var(--tinta)' }}>
-                  {CORREO}
+            <p className="mt-4 max-w-lg text-white/60">Modelos a medida, adaptaciones para impresión 3D o retopología para juego. Cuéntame qué necesitas.</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a href={ENLACE_MEDIDA} target="_blank" rel="noreferrer" className="pildora bg-white text-grafito hover:bg-stone-200">
+                <MessageCircle size={16} /> WhatsApp
+              </a>
+              <a href={`mailto:${CORREO}`} className="pildora border border-white/20 text-white hover:bg-white/10">
+                {CORREO}
+              </a>
+            </div>
+            <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6 text-sm text-white/45">
+              <p>© 2026 Lenin Bonilla · Quito, EC</p>
+              <div className="flex gap-5">
+                <a href="https://fleremiasflemin20-maker.github.io/Portafolio-fleremiasflemin/" target="_blank" rel="noreferrer" className="hover:text-white">
+                  Portafolio
                 </a>
-              </div>
-              <div>
-                <p className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-paper/40">WhatsApp</p>
-                <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="mt-1 inline-block font-mono text-sm underline underline-offset-4" style={{ color: 'var(--tinta)' }}>
-                  +593 979 523 040
+                <a href="https://www.linkedin.com/in/fleremahiaslenin" target="_blank" rel="noreferrer" className="hover:text-white">
+                  LinkedIn
                 </a>
               </div>
             </div>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <a href="https://fleremiasflemin20-maker.github.io/Portafolio-fleremiasflemin/" target="_blank" rel="noreferrer" className="boton inline-block border-2 px-9 py-3.5 font-mono text-caption font-bold uppercase">
-                Portafolio
-              </a>
-              <a href="https://www.linkedin.com/in/fleremahiaslenin" target="_blank" rel="noreferrer" className="boton inline-block border-2 px-9 py-3.5 font-mono text-caption font-bold uppercase">
-                LinkedIn
-              </a>
-            </div>
-            <p className="mt-16 font-mono text-[0.62rem] uppercase tracking-[0.2em] text-paper/30">
-              © 2026 Lenin Bonilla · Quito, EC
-            </p>
           </div>
         </footer>
       </main>
 
       {indiceAbierto >= 0 && (
-        <Ficha modelo={lista[indiceAbierto]} numero={indiceAbierto + 1} total={lista.length} onCerrar={cerrar} onMover={mover} />
+        <Ficha
+          modelo={lista[indiceAbierto]}
+          numero={indiceAbierto + 1}
+          total={lista.length}
+          onCerrar={cerrar}
+          onMover={mover}
+          onManos={() => abrirManos(lista[indiceAbierto].id)}
+        />
+      )}
+      {manos && (
+        <ModoManos
+          lista={manos.lista}
+          indiceInicial={manos.indice}
+          onCerrar={cerrarManos}
+          onFicha={(id) => {
+            setManos(null)
+            verFicha(id)
+          }}
+        />
       )}
       {subiendo && <Subir onCerrar={() => setSubiendo(false)} />}
 
       {/* Solo en desarrollo: fotografía las piezas que aún no tienen portada. */}
       {pendientes.length > 0 && <Portadas pendientes={pendientes} alAvanzar={setSinPortada} />}
       {sinPortada > 0 && (
-        <p className="fixed bottom-6 left-1/2 z-40 -translate-x-1/2 border border-paper/15 bg-ink/90 px-4 py-2 font-mono text-[0.62rem] uppercase tracking-[0.18em] text-paper/70">
+        <p className="fixed bottom-6 left-1/2 z-40 -translate-x-1/2 rounded-full bg-grafito px-4 py-2 text-xs text-white">
           Generando portadas · faltan {sinPortada}
         </p>
       )}

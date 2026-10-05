@@ -2,53 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Paleta de reserva hasta que monte React; luego la escribe App.tsx. */
+/* El acento de la categoría activa; lo escribe App.tsx. */
 :root {
-  --desde: #00E5D1;
-  --hasta: #2AC3FF;
-  --tinta: #3BE0D0;
-  color-scheme: dark;
+  --tinta: #0E9F93;
+  color-scheme: light;
 }
 
 @layer base {
-  html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
-  body { @apply bg-ink text-paper antialiased; overflow-x: hidden; }
-  :focus-visible { @apply outline-none ring-2 ring-offset-2 ring-offset-ink; --tw-ring-color: var(--tinta); }
-  select option { background: #0A0A0B; }
+  html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; font-feature-settings: 'cv11', 'ss01'; }
+  body { @apply bg-hueso font-sans text-grafito antialiased; overflow-x: hidden; }
+  :focus-visible { @apply outline-none ring-2 ring-grafito/70 ring-offset-2 ring-offset-hueso; }
+  ::selection { background: #18181B; color: #FAFAF8; }
 }
 
 @layer components {
-  .scene { @apply relative w-full; min-height: 100vh; min-height: 100dvh; }
-
-  /* El degradado del nombre en el portafolio, aquí en la palabra clave. */
-  .degradado {
-    background: linear-gradient(90deg, var(--desde), var(--hasta));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-shadow: none;
-  }
-
-  /* Rotulación con contorno de cartel, igual que el portafolio. */
-  .rotulo {
-    --borde: 0.035em;
-    --tinta-borde: #0A0A12;
-    letter-spacing: -0.02em;
-    text-shadow:
-      calc(var(--borde) * -1) calc(var(--borde) * -1) 0 var(--tinta-borde),
-      var(--borde) calc(var(--borde) * -1) 0 var(--tinta-borde),
-      calc(var(--borde) * -1) var(--borde) 0 var(--tinta-borde),
-      var(--borde) var(--borde) 0 var(--tinta-borde),
-      0.07em 0.08em 0 var(--tinta-borde);
-  }
-  /* El degradado recorta el texto: las sombras del rótulo lo ensuciarían. */
-  .rotulo .degradado { filter: drop-shadow(0.06em 0.07em 0 #0A0A12); }
-
-  /*
-   * Botón con borde en la tinta y relleno al pasar el puntero. Aquí por CSS y
-   * no por JavaScript como en el portafolio: `--t` lo pone cada tarjeta o
-   * ficha con su color, y si no hay, manda el de la categoría activa.
-   */
+  /* Botón del panel de subida (oscuro, solo en desarrollo). */
   .boton {
     border-color: var(--t, var(--tinta));
     color: var(--t, var(--tinta));
@@ -56,26 +24,23 @@
   }
   .boton:hover:not(:disabled) { background: var(--t, var(--tinta)); color: #0A0A0B; }
 
-  .flecha {
-    border-color: var(--t, var(--tinta));
-    transition: background-color 0.2s, color 0.2s;
+  /* Píldoras: botones principales y secundarios. */
+  .pildora {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-200;
   }
-  .flecha:hover { background: var(--t, var(--tinta)); color: #0A0A0B; }
+  .pildora-negra { @apply pildora bg-grafito text-white hover:bg-black active:scale-[0.98]; }
+  .pildora-clara { @apply pildora border border-stone-200 bg-white text-grafito hover:border-stone-300 hover:bg-stone-50 active:scale-[0.98]; }
 
-  .tarjeta { transition: border-color 0.3s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-  .tarjeta:hover { border-color: var(--t); transform: translateY(-4px); }
+  .tarjeta-img {
+    transition: box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .group:hover .tarjeta-img {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px -18px rgba(24, 24, 27, 0.28), 0 2px 6px -2px rgba(24, 24, 27, 0.06);
+  }
 
-  .grano {
-    animation: grano 8s steps(6) infinite;
-    opacity: 0.5;
-  }
-  @keyframes grano {
-    0%, 100% { background-position: 0 0 }
-    20% { background-position: -30px 12px }
-    40% { background-position: 18px -24px }
-    60% { background-position: -12px -18px }
-    80% { background-position: 24px 8px }
-  }
+  .sin-barra { scrollbar-width: none; }
+  .sin-barra::-webkit-scrollbar { display: none; }
 
   .entra { animation: entra 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
   @keyframes entra {
@@ -84,7 +49,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .grano, .entra { animation: none }
-    .tarjeta:hover { transform: none }
+    .entra { animation: none }
+    .group:hover .tarjeta-img { transform: none }
   }
 }

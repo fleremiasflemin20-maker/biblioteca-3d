@@ -28,9 +28,8 @@ export function Normalizar({ children }: { children: ReactNode }) {
 }
 
 /**
- * El visor 3D: una pieza encuadrada sola, girando, con la contra en el color
- * de la categoría — la misma luz que ata la figura al atardecer en el
- * portafolio.
+ * El visor 3D: una pieza encuadrada sola, girando, con luz de estudio neutra
+ * y una contra suave en el color de la sección.
  */
 export function Visor({
   modelo,
@@ -53,8 +52,8 @@ export function Visor({
   return (
     <>
     {cargado !== modelo.id && (
-      <p className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center font-mono text-[0.68rem] uppercase tracking-[0.2em] text-paper/50">
-        Cargando modelo…
+      <p className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center gap-2 text-sm text-stone-400">
+        <span className="h-4 w-4 animate-spin rounded-full border-2 border-stone-200 border-t-stone-500" /> Cargando modelo…
       </p>
     )}
     <Canvas
@@ -64,17 +63,17 @@ export function Visor({
     >
       <ambientLight intensity={0.55} />
       <directionalLight position={[3, 5, 2]} intensity={1.4} />
-      <spotLight position={[-3, 4, -3]} intensity={50} angle={0.9} penumbra={1} color={tinta} />
+      <spotLight position={[-3, 4, -3]} intensity={30} angle={0.9} penumbra={1} color={tinta} />
 
       <Suspense fallback={null}>
-        <Environment preset="sunset" />
+        <Environment preset="city" />
         <Bounds key={modelo.id} fit clip observe margin={margen}>
           <Normalizar>
             <Pieza modelo={modelo} modo={modo} opciones={opciones} />
           </Normalizar>
         </Bounds>
         <AlCargar onListo={listo} />
-        <ContactShadows position={[0, -1.001, 0]} opacity={0.45} scale={6} blur={2.4} far={3} />
+        <ContactShadows position={[0, -1.001, 0]} opacity={0.35} scale={6} blur={2.6} far={3} />
       </Suspense>
 
       <OrbitControls

@@ -47,22 +47,24 @@ export type Categoria = {
   desde: string
   hasta: string
   tinta: string
+  /** Acento sobre fondo claro: el punto de la píldora y de la tarjeta. */
+  punto: string
 }
 
 /*
- * Mismo criterio que las facetas del portafolio: cada categoría es el mismo
- * atardecer mirado a otra hora. Al elegirla cambia la paleta de la página
- * entera, no solo el filtro.
+ * `desde`/`hasta`/`tinta` son la paleta de atardecer del portafolio (la usa la
+ * luz de contra del visor 3D); `punto` es el acento de la sección sobre la
+ * tienda clara.
  */
 export const CATEGORIAS: Categoria[] = [
-  { id: 'todo', nombre: 'Todo', clave: 'ALL', desde: '#00E5D1', hasta: '#2AC3FF', tinta: '#3BE0D0' },
-  { id: 'tecnologia', nombre: 'Tecnología', clave: 'TEC', desde: '#00E5D1', hasta: '#2A7BFF', tinta: '#4DE8FF' },
-  { id: 'mecanica', nombre: 'Mecánica', clave: 'MEC', desde: '#FFB800', hasta: '#FF5E2F', tinta: '#FFC24D' },
-  { id: 'autos', nombre: 'Autos', clave: 'AUT', desde: '#FF3B3B', hasta: '#FF8A2F', tinta: '#FF7A6B' },
-  { id: 'anime', nombre: 'Anime', clave: 'ANI', desde: '#FF2D8A', hasta: '#FF7A2F', tinta: '#FF9A4D' },
-  { id: 'manga', nombre: 'Manga', clave: 'MNG', desde: '#F5F4F1', hasta: '#FF2D8A', tinta: '#FF8FC0' },
-  { id: 'seres-flemin', nombre: 'Seres Flemin', clave: 'FLM', desde: '#7B2CFF', hasta: '#FF2D8A', tinta: '#C77DFF' },
-  { id: 'accesorios', nombre: 'Hogar y accesorios', clave: 'ACC', desde: '#2AC3FF', hasta: '#7B2CFF', tinta: '#7CC8FF' },
+  { id: 'todo', nombre: 'Todo', clave: 'ALL', desde: '#00E5D1', hasta: '#2AC3FF', tinta: '#3BE0D0', punto: '#18181B' },
+  { id: 'tecnologia', nombre: 'Tecnología', clave: 'TEC', desde: '#00E5D1', hasta: '#2A7BFF', tinta: '#4DE8FF', punto: '#0284C7' },
+  { id: 'mecanica', nombre: 'Mecánica', clave: 'MEC', desde: '#FFB800', hasta: '#FF5E2F', tinta: '#FFC24D', punto: '#D97706' },
+  { id: 'autos', nombre: 'Autos', clave: 'AUT', desde: '#FF3B3B', hasta: '#FF8A2F', tinta: '#FF7A6B', punto: '#DC2626' },
+  { id: 'anime', nombre: 'Anime', clave: 'ANI', desde: '#FF2D8A', hasta: '#FF7A2F', tinta: '#FF9A4D', punto: '#DB2777' },
+  { id: 'manga', nombre: 'Manga', clave: 'MNG', desde: '#F5F4F1', hasta: '#FF2D8A', tinta: '#FF8FC0', punto: '#4F46E5' },
+  { id: 'seres-flemin', nombre: 'Seres Flemin', clave: 'FLM', desde: '#7B2CFF', hasta: '#FF2D8A', tinta: '#C77DFF', punto: '#7C3AED' },
+  { id: 'accesorios', nombre: 'Hogar y accesorios', clave: 'ACC', desde: '#2AC3FF', hasta: '#7B2CFF', tinta: '#7CC8FF', punto: '#0D9488' },
 ]
 
 export const CATALOGO = datos as Modelo3D[]
