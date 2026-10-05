@@ -757,5 +757,24 @@
     "alta": "2026-09-05",
     "triangulos": 2366895,
     "portada": "figura-07.webp"
+  },
+  {
+    "id": "bomba-tesla-hdd",
+    "nombre": "Bomba Tesla con platos de HDD",
+    "categoria": "props",
+    "precio": 9,
+    "formatos": [
+      "STL",
+      "BLEND"
+    ],
+    "descripcion": "Bomba de agua sin álabes (principio de Tesla) que usa los platos y el motor de un disco duro viejo, con acople magnético sin sellos. 11 piezas en PETG ya orientadas, útil de centrado y cupón de tolerancias, con ajustes a presión verificados. Caben en una cama de 350 mm. El código y el visor 3D están abiertos en GitHub (bomba-tesla-hdd).",
+    "archivo": "propios/bomba-tesla-hdd.glb",
+    "peso": 2038640,
+    "origen": "Diseño propio · ingeniería paramétrica",
+    "destacado": true,
+    "alta": "2026-10-04",
+    "triangulos": 48908,
+    "portada": "bomba-tesla-hdd.webp",
+    "licencia": "CC BY-SA 4.0"
   }
 ]
