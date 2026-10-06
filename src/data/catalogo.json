@@ -315,7 +315,8 @@
     "destacado": false,
     "alta": "2026-10-03",
     "portada": "cosmic-fusion-warrior-escultura.webp",
-    "triangulos": 386748
+    "triangulos": 386748,
+    "sinTextura": true
   },
   {
     "id": "cosmic-fusion-warrior-segmentado",
@@ -468,7 +469,8 @@
     "destacado": false,
     "alta": "2026-10-03",
     "portada": "vibrant-saiyan-escultura.webp",
-    "triangulos": 731006
+    "triangulos": 731006,
+    "sinTextura": true
   },
   {
     "id": "vibrant-saiyan-segmentado",
@@ -503,7 +505,8 @@
     "destacado": false,
     "alta": "2026-10-03",
     "portada": "rueda-fecha.webp",
-    "triangulos": 18668
+    "triangulos": 18668,
+    "sinTextura": true
   },
   {
     "id": "tapa-fecha-v3",
@@ -537,7 +540,8 @@
     "destacado": false,
     "alta": "2026-10-03",
     "portada": "cuadro-4-piezas.webp",
-    "triangulos": 411812
+    "triangulos": 411812,
+    "sinTextura": true
   },
   {
     "id": "gogeta-ssj4",
@@ -641,7 +645,8 @@
     "destacado": false,
     "alta": "2026-09-05",
     "triangulos": 1068898,
-    "portada": "figura-01.webp"
+    "portada": "figura-01.webp",
+    "sinTextura": true
   },
   {
     "id": "figura-02",
@@ -660,7 +665,8 @@
     "destacado": false,
     "alta": "2026-09-05",
     "triangulos": 1917151,
-    "portada": "figura-02.webp"
+    "portada": "figura-02.webp",
+    "sinTextura": true
   },
   {
     "id": "figura-03",
@@ -680,7 +686,8 @@
     "destacado": false,
     "alta": "2026-09-05",
     "triangulos": 571630,
-    "portada": "figura-03.webp"
+    "portada": "figura-03.webp",
+    "sinTextura": true
   },
   {
     "id": "figura-04",
@@ -869,7 +876,8 @@
     "destacado": false,
     "alta": "2026-10-05",
     "triangulos": 1515248,
-    "portada": "senor-guerra-escultura.webp"
+    "portada": "senor-guerra-escultura.webp",
+    "sinTextura": true
   },
   {
     "id": "saiyan-legendario-chibi-dorado",
@@ -926,7 +934,8 @@
     "destacado": false,
     "alta": "2026-10-05",
     "triangulos": 850532,
-    "portada": "saiyan-legendario-chibi-escultura-a.webp"
+    "portada": "saiyan-legendario-chibi-escultura-a.webp",
+    "sinTextura": true
   },
   {
     "id": "saiyan-legendario-chibi-escultura-b",
@@ -945,7 +954,8 @@
     "destacado": false,
     "alta": "2026-10-05",
     "triangulos": 844838,
-    "portada": "saiyan-legendario-chibi-escultura-b.webp"
+    "portada": "saiyan-legendario-chibi-escultura-b.webp",
+    "sinTextura": true
   },
   {
     "id": "guerrero-futuro-chibi-a",
@@ -1002,7 +1012,8 @@
     "destacado": false,
     "alta": "2026-10-05",
     "triangulos": 857868,
-    "portada": "guerrero-futuro-chibi-escultura-a.webp"
+    "portada": "guerrero-futuro-chibi-escultura-a.webp",
+    "sinTextura": true
   },
   {
     "id": "guerrero-futuro-chibi-escultura-b",
@@ -1021,7 +1032,8 @@
     "destacado": false,
     "alta": "2026-10-05",
     "triangulos": 983336,
-    "portada": "guerrero-futuro-chibi-escultura-b.webp"
+    "portada": "guerrero-futuro-chibi-escultura-b.webp",
+    "sinTextura": true
   },
   {
     "id": "monje-guerrero-chibi",
@@ -1059,7 +1071,8 @@
     "destacado": false,
     "alta": "2026-10-06",
     "triangulos": 404774,
-    "portada": "monje-guerrero-chibi-escultura.webp"
+    "portada": "monje-guerrero-chibi-escultura.webp",
+    "sinTextura": true
   },
   {
     "id": "samurai-errante-chibi-escultura-b",
@@ -1078,7 +1091,8 @@
     "destacado": false,
     "alta": "2026-10-06",
     "triangulos": 531544,
-    "portada": "samurai-errante-chibi-escultura-b.webp"
+    "portada": "samurai-errante-chibi-escultura-b.webp",
+    "sinTextura": true
   },
   {
     "id": "samurai-errante-chibi-escultura-c",
@@ -1097,7 +1111,8 @@
     "destacado": false,
     "alta": "2026-10-06",
     "triangulos": 1025354,
-    "portada": "samurai-errante-chibi-escultura-c.webp"
+    "portada": "samurai-errante-chibi-escultura-c.webp",
+    "sinTextura": true
   },
   {
     "id": "samurai-errante-chibi-escultura-a",
@@ -1116,7 +1131,8 @@
     "destacado": false,
     "alta": "2026-10-06",
     "triangulos": 783148,
-    "portada": "samurai-errante-chibi-escultura-a.webp"
+    "portada": "samurai-errante-chibi-escultura-a.webp",
+    "sinTextura": true
   },
   {
     "id": "samurai-errante-chibi-b",
@@ -1192,7 +1208,8 @@
     "destacado": false,
     "alta": "2026-10-06",
     "triangulos": 1667142,
-    "portada": "guerrero-reptiliano-escultura.webp"
+    "portada": "guerrero-reptiliano-escultura.webp",
+    "sinTextura": true
   },
   {
     "id": "gato-sabio-chibi-escultura-b",
@@ -1211,7 +1228,8 @@
     "destacado": false,
     "alta": "2026-10-06",
     "triangulos": 279286,
-    "portada": "gato-sabio-chibi-escultura-b.webp"
+    "portada": "gato-sabio-chibi-escultura-b.webp",
+    "sinTextura": true
   },
   {
     "id": "gato-sabio-chibi-escultura-a",
@@ -1230,7 +1248,8 @@
     "destacado": false,
     "alta": "2026-10-06",
     "triangulos": 646980,
-    "portada": "gato-sabio-chibi-escultura-a.webp"
+    "portada": "gato-sabio-chibi-escultura-a.webp",
+    "sinTextura": true
   },
   {
     "id": "gato-sabio-chibi-b",
@@ -1306,7 +1325,8 @@
     "destacado": false,
     "alta": "2026-10-06",
     "triangulos": 1033542,
-    "portada": "saiyan-fase4-chibi-clasico-escultura-c.webp"
+    "portada": "saiyan-fase4-chibi-clasico-escultura-c.webp",
+    "sinTextura": true
   },
   {
     "id": "saiyan-fase4-chibi-clasico-escultura-b",
@@ -1325,7 +1345,8 @@
     "destacado": false,
     "alta": "2026-10-06",
     "triangulos": 879870,
-    "portada": "saiyan-fase4-chibi-clasico-escultura-b.webp"
+    "portada": "saiyan-fase4-chibi-clasico-escultura-b.webp",
+    "sinTextura": true
   },
   {
     "id": "saiyan-fase4-chibi-clasico-escultura-a",
@@ -1344,7 +1365,8 @@
     "destacado": false,
     "alta": "2026-10-06",
     "triangulos": 736180,
-    "portada": "saiyan-fase4-chibi-clasico-escultura-a.webp"
+    "portada": "saiyan-fase4-chibi-clasico-escultura-a.webp",
+    "sinTextura": true
   },
   {
     "id": "saiyan-fase4-chibi-daima-escultura-c",
@@ -1363,7 +1385,8 @@
     "destacado": false,
     "alta": "2026-10-06",
     "triangulos": 964420,
-    "portada": "saiyan-fase4-chibi-daima-escultura-c.webp"
+    "portada": "saiyan-fase4-chibi-daima-escultura-c.webp",
+    "sinTextura": true
   },
   {
     "id": "saiyan-fase4-chibi-daima-escultura-b",
@@ -1382,7 +1405,8 @@
     "destacado": false,
     "alta": "2026-10-06",
     "triangulos": 775152,
-    "portada": "saiyan-fase4-chibi-daima-escultura-b.webp"
+    "portada": "saiyan-fase4-chibi-daima-escultura-b.webp",
+    "sinTextura": true
   },
   {
     "id": "saiyan-fase4-chibi-daima-escultura-a",
@@ -1401,7 +1425,8 @@
     "destacado": false,
     "alta": "2026-10-06",
     "triangulos": 836654,
-    "portada": "saiyan-fase4-chibi-daima-escultura-a.webp"
+    "portada": "saiyan-fase4-chibi-daima-escultura-a.webp",
+    "sinTextura": true
   },
   {
     "id": "saiyan-fase4-chibi-clasico-c",

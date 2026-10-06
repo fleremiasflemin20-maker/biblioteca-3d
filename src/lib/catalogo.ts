@@ -31,6 +31,8 @@ export type Modelo3D = {
   licencia?: string
   /** Autor original, cuando la pieza no es propia (lo exigen CC BY-SA y similares). */
   autor?: string
+  /** Malla sin textura ni color (esculturas, piezas en blanco): va al final del catálogo y tiene su propio filtro. */
+  sinTextura?: boolean
   /** Se construye en el navegador con el nombre del cliente (ver llavero.ts). */
   personalizable?: boolean
   draco?: boolean

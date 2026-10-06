@@ -32,6 +32,11 @@ export function Tarjeta({ modelo, onAbrir }: { modelo: Modelo3D; onAbrir: () => 
         {modelo.destacado && (
           <span className="absolute left-3 top-3 rounded-full bg-grafito px-2.5 py-1 text-[11px] font-medium text-hueso">Destacado</span>
         )}
+        {modelo.sinTextura && (
+          <span className="absolute bottom-3 left-3 rounded-full border border-stone-200 bg-superficie/90 px-2.5 py-1 text-[11px] font-medium text-stone-600 backdrop-blur">
+            Sin textura
+          </span>
+        )}
         <span className="absolute bottom-3 right-3 translate-y-1 rounded-full bg-grafito/90 px-3 py-1.5 text-[12px] font-medium text-hueso opacity-0 backdrop-blur transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
           Ver en 3D
         </span>

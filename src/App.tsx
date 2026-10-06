@@ -11,6 +11,7 @@ import { ICONO_CATEGORIA } from './lib/iconos'
 import { useTema } from './lib/tema'
 
 type Orden = 'recientes' | 'barato' | 'caro' | 'nombre'
+type Acabado = 'todos' | 'color' | 'sin-textura'
 type Manos = { lista: Modelo3D[]; indice: number; desdeFicha: boolean }
 
 const DESTACADOS = CATALOGO.filter((m) => m.destacado).length ? CATALOGO.filter((m) => m.destacado) : CATALOGO.slice(0, 3)
@@ -20,6 +21,7 @@ export default function App() {
   const [cat, setCat] = useState(0)
   const [busqueda, setBusqueda] = useState('')
   const [orden, setOrden] = useState<Orden>('recientes')
+  const [acabado, setAcabado] = useState<Acabado>('todos')
   const [abierto, setAbierto] = useState<string | null>(null)
   const [destacado, setDestacado] = useState(0)
   const [subiendo, setSubiendo] = useState(false)
@@ -43,7 +45,7 @@ export default function App() {
     document.documentElement.style.setProperty('--tinta', c.punto)
   }, [c])
 
-  const lista = useMemo(() => {
+  const base = useMemo(() => {
     const q = busqueda.trim().toLowerCase()
     const l = CATALOGO.filter(
       (m) =>
@@ -54,8 +56,18 @@ export default function App() {
     if (orden === 'barato') l.sort((a, b) => a.precio - b.precio)
     if (orden === 'caro') l.sort((a, b) => b.precio - a.precio)
     if (orden === 'nombre') l.sort((a, b) => a.nombre.localeCompare(b.nombre))
+    // Las de color primero y las sin textura al final, sin romper el orden
+    // elegido dentro de cada grupo (`sort` es estable).
+    l.sort((a, b) => Number(!!a.sinTextura) - Number(!!b.sinTextura))
     return l
   }, [c, busqueda, orden])
+  const nSinTextura = base.filter((m) => m.sinTextura).length
+  const lista = useMemo(
+    () => (acabado === 'todos' ? base : base.filter((m) => (acabado === 'sin-textura') === !!m.sinTextura)),
+    [base, acabado],
+  )
+  const conColor = lista.filter((m) => !m.sinTextura)
+  const sinTextura = lista.filter((m) => m.sinTextura)
 
   const indiceAbierto = lista.findIndex((m) => m.id === abierto)
   const mover = useCallback(
@@ -298,23 +310,64 @@ export default function App() {
           </div>
 
           <div className="mx-auto max-w-[1400px] px-4 pb-24 pt-8 md:px-8">
-            <div className="mb-6 flex items-baseline justify-between gap-4">
+            <div className="mb-6 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
               <h2 className="text-2xl font-semibold tracking-tight">
                 {c.id === 'todo' ? 'Todo el catálogo' : c.nombre}
                 {busqueda.trim() && <span className="font-normal text-stone-400"> · “{busqueda.trim()}”</span>}
               </h2>
-              <p className="shrink-0 text-sm text-stone-500">
-                {lista.length} {lista.length === 1 ? 'modelo' : 'modelos'}
-              </p>
+              <div className="flex items-center gap-3">
+                {/* Acabado: con color o sin textura. Se combina con la sección y la búsqueda. */}
+                <div className="flex rounded-full border border-stone-200 bg-superficie p-1" role="tablist" aria-label="Acabado">
+                  {(
+                    [
+                      { id: 'todos', nombre: 'Todos', n: base.length },
+                      { id: 'color', nombre: 'A color', n: base.length - nSinTextura },
+                      { id: 'sin-textura', nombre: 'Sin textura', n: nSinTextura },
+                    ] as const
+                  ).map((o) => (
+                    <button
+                      key={o.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={acabado === o.id}
+                      onClick={() => setAcabado(o.id)}
+                      className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[13px] font-medium transition-colors ${
+                        acabado === o.id ? 'bg-grafito text-hueso' : 'text-stone-600 hover:text-grafito'
+                      }`}
+                    >
+                      {o.id === 'color' && <span className="h-2 w-2 rounded-full bg-gradient-to-br from-amber-400 via-pink-500 to-sky-500" aria-hidden />}
+                      {o.id === 'sin-textura' && <span className="h-2 w-2 rounded-full border border-current opacity-70" aria-hidden />}
+                      {o.nombre}
+                      <span className={`tabular-nums ${acabado === o.id ? 'text-hueso/55' : 'text-stone-400'}`}>{o.n}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
 
             {lista.length ? (
-              <div key={`${c.id}-${orden}`} className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
-                {lista.map((m, i) => (
-                  <div key={m.id} className="entra" style={{ animationDelay: `${Math.min(i, 12) * 35}ms` }}>
-                    <Tarjeta modelo={m} onAbrir={() => setAbierto(m.id)} />
-                  </div>
-                ))}
+              <div key={`${c.id}-${orden}-${acabado}`}>
+                {[conColor, sinTextura].map((grupo, g) =>
+                  grupo.length ? (
+                    <div key={g}>
+                      {/* Separador del bloque sin textura, solo cuando conviven los dos. */}
+                      {g === 1 && conColor.length > 0 && (
+                        <div className="mb-6 mt-14 flex items-center gap-4">
+                          <h3 className="shrink-0 text-lg font-semibold tracking-tight">Sin textura</h3>
+                          <p className="hidden shrink-0 text-sm text-stone-500 sm:block">Mallas en blanco, listas para pintar o imprimir · {grupo.length}</p>
+                          <span className="h-px flex-1 bg-stone-200" />
+                        </div>
+                      )}
+                      <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
+                        {grupo.map((m, i) => (
+                          <div key={m.id} className="entra" style={{ animationDelay: `${Math.min(i, 12) * 35}ms` }}>
+                            <Tarjeta modelo={m} onAbrir={() => setAbierto(m.id)} />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null,
+                )}
               </div>
             ) : (
               <div className="rounded-3xl border border-dashed border-stone-300 px-6 py-20 text-center">
