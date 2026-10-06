@@ -1060,5 +1060,100 @@
     "alta": "2026-10-06",
     "triangulos": 404774,
     "portada": "monje-guerrero-chibi-escultura.webp"
+  },
+  {
+    "id": "samurai-errante-chibi-escultura-b",
+    "nombre": "Samurái Errante Chibi · Escultura B",
+    "categoria": "anime",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la pose B, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/samurai-errante-chibi-escultura-b.glb",
+    "peso": 883520,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "triangulos": 531544,
+    "portada": "samurai-errante-chibi-escultura-b.webp"
+  },
+  {
+    "id": "samurai-errante-chibi-escultura-c",
+    "nombre": "Samurái Errante Chibi · Escultura C",
+    "categoria": "anime",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Tercera pose, solo en escultura: la calabaza en la mano y la katana a la cintura. Lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/samurai-errante-chibi-escultura-c.glb",
+    "peso": 1730892,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "triangulos": 1025354,
+    "portada": "samurai-errante-chibi-escultura-c.webp"
+  },
+  {
+    "id": "samurai-errante-chibi-escultura-a",
+    "nombre": "Samurái Errante Chibi · Escultura A",
+    "categoria": "anime",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la pose A, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/samurai-errante-chibi-escultura-a.glb",
+    "peso": 1273232,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "triangulos": 783148,
+    "portada": "samurai-errante-chibi-escultura-a.webp"
+  },
+  {
+    "id": "samurai-errante-chibi-b",
+    "nombre": "Samurái Errante Chibi · B",
+    "categoria": "anime",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Segunda pose del samurái errante, con ojos grandes de estilo kawaii y la katana lista.",
+    "archivo": "meshy/samurai-errante-chibi-b.glb",
+    "peso": 1584416,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "triangulos": 531544,
+    "portada": "samurai-errante-chibi-b.webp"
+  },
+  {
+    "id": "samurai-errante-chibi-a",
+    "nombre": "Samurái Errante Chibi · A",
+    "categoria": "anime",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Figura chibi del samurái errante: melena salvaje, gi naranja, katana a la cintura y su bolsa de provisiones. Estilo juguete coleccionable.",
+    "archivo": "meshy/samurai-errante-chibi-a.glb",
+    "peso": 2170164,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-10-06",
+    "triangulos": 783148,
+    "portada": "samurai-errante-chibi-a.webp"
   }
 ]
