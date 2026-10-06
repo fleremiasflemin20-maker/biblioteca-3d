@@ -2,17 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
-/* El acento de la categoría activa; lo escribe App.tsx. */
+/*
+ * Los dos temas. Cada color va en canales RGB sueltos para que Tailwind
+ * pueda aplicarle opacidad (`bg-hueso/85`). El oscuro es negro mate: nada de
+ * negro puro ni grises azulados, sino carbón neutro con relieve en las
+ * superficies en vez de sombras, que en negro no se ven.
+ *
+ * La escala `stone` se invierte en oscuro: `stone-200` sigue siendo "la línea
+ * suave" y `stone-500` "el texto secundario" en los dos temas.
+ */
 :root {
-  --tinta: #0E9F93;
+  --tinta: #0E9F93; /* el acento de la sección activa; lo escribe App.tsx */
+  --hueso: 250 250 248;
+  --grafito: 24 24 27;
+  --superficie: 255 255 255;
+  --s50: 250 250 249;
+  --s100: 245 245 244;
+  --s200: 231 229 228;
+  --s300: 214 211 209;
+  --s400: 168 162 158;
+  --s500: 120 113 108;
+  --s600: 87 83 78;
+  --s700: 68 64 60;
   color-scheme: light;
+}
+
+:root.dark {
+  --hueso: 11 11 12;
+  --grafito: 237 237 239;
+  --superficie: 20 20 21;
+  --s50: 23 23 24;
+  --s100: 28 28 30;
+  --s200: 42 42 45;
+  --s300: 58 58 62;
+  --s400: 112 112 118;
+  --s500: 146 146 152;
+  --s600: 172 172 178;
+  --s700: 205 205 210;
+  color-scheme: dark;
 }
 
 @layer base {
   html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; font-feature-settings: 'cv11', 'ss01'; }
   body { @apply bg-hueso font-sans text-grafito antialiased; overflow-x: hidden; }
+  /* Mientras cambia el tema sin View Transitions, un fundido corto en vez de un salto. */
+  .cambiando-tema, .cambiando-tema * { transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease !important; }
   :focus-visible { @apply outline-none ring-2 ring-grafito/70 ring-offset-2 ring-offset-hueso; }
-  ::selection { background: #18181B; color: #FAFAF8; }
+  ::selection { background: rgb(var(--grafito)); color: rgb(var(--hueso)); }
+
+  /* El cambio de tema con View Transitions: el nuevo se abre en círculo desde el botón. */
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
 }
 
 @layer components {
@@ -28,8 +67,8 @@
   .pildora {
     @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-200;
   }
-  .pildora-negra { @apply pildora bg-grafito text-white hover:bg-black active:scale-[0.98]; }
-  .pildora-clara { @apply pildora border border-stone-200 bg-white text-grafito hover:border-stone-300 hover:bg-stone-50 active:scale-[0.98]; }
+  .pildora-negra { @apply pildora bg-grafito text-hueso hover:opacity-90 active:scale-[0.98]; }
+  .pildora-clara { @apply pildora border border-stone-200 bg-superficie text-grafito hover:border-stone-300 hover:bg-stone-50 active:scale-[0.98]; }
 
   .tarjeta-img {
     transition: box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -37,6 +76,10 @@
   .group:hover .tarjeta-img {
     transform: translateY(-3px);
     box-shadow: 0 18px 40px -18px rgba(24, 24, 27, 0.28), 0 2px 6px -2px rgba(24, 24, 27, 0.06);
+  }
+  /* En negro una sombra no se ve: la tarjeta se levanta con un filo de luz. */
+  .dark .group:hover .tarjeta-img {
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 0.1), 0 24px 48px -24px rgb(0 0 0 / 0.9);
   }
 
   .sin-barra { scrollbar-width: none; }

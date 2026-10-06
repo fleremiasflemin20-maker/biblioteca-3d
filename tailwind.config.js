@@ -1,8 +1,15 @@
 /** @type {import('tailwindcss').Config} */
-// Tienda clara y sobria (al estilo MakerWorld): fondo hueso, texto grafito y
-// un solo acento. `ink`/`paper` se quedan para el panel de subida y el modo
-// manos, que siguen siendo oscuros.
+// Tienda sobria al estilo MakerWorld, en claro u oscuro (negro mate).
+//
+// Los colores del sitio son variables CSS (ver `index.css`): `hueso` es el
+// fondo, `grafito` el texto, `superficie` las tarjetas y `stone` la escala de
+// grises. El tema oscuro solo redefine las variables, así que ningún
+// componente necesita clases `dark:` para lo básico. `ink`/`paper` son fijos:
+// los usan el panel de subida y el modo manos, que son oscuros siempre.
+const v = (nombre) => `rgb(var(--${nombre}) / <alpha-value>)`
+
 export default {
+  darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
@@ -10,8 +17,10 @@ export default {
         ink: '#0A0A0B',
         paper: '#F5F4F1',
         accent: '#0E9F93',
-        hueso: '#FAFAF8',
-        grafito: '#18181B',
+        hueso: v('hueso'),
+        grafito: v('grafito'),
+        superficie: v('superficie'),
+        stone: Object.fromEntries([50, 100, 200, 300, 400, 500, 600, 700].map((n) => [n, v(`s${n}`)])),
       },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],

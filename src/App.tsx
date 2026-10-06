@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { ArrowRight, ChevronLeft, ChevronRight, Hand, MessageCircle, Plus, Search } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ChevronRight, Hand, MessageCircle, Moon, Plus, Search, Sun } from 'lucide-react'
 import { Visor } from './components/Visor'
 import { Tarjeta } from './components/Tarjeta'
 import { Ficha } from './components/Ficha'
@@ -8,6 +8,7 @@ import { Portadas } from './components/Portadas'
 import { ModoManos } from './components/ModoManos'
 import { CATALOGO, CATEGORIAS, CORREO, WHATSAPP, precio, type Modelo3D } from './lib/catalogo'
 import { ICONO_CATEGORIA } from './lib/iconos'
+import { useTema } from './lib/tema'
 
 type Orden = 'recientes' | 'barato' | 'caro' | 'nombre'
 type Manos = { lista: Modelo3D[]; indice: number; desdeFicha: boolean }
@@ -24,6 +25,7 @@ export default function App() {
   const [subiendo, setSubiendo] = useState(false)
   const [sinPortada, setSinPortada] = useState(0)
   const [manos, setManos] = useState<Manos | null>(null)
+  const { tema, alternar } = useTema()
 
   const c = CATEGORIAS[cat]
   const barra = useRef<HTMLElement>(null)
@@ -107,7 +109,7 @@ export default function App() {
       <header ref={barra} className="sticky top-0 z-40 border-b border-stone-200/80 bg-hueso/85 backdrop-blur-xl">
         <div className="mx-auto flex max-w-[1400px] flex-wrap items-center gap-x-4 gap-y-3 px-4 py-3 md:flex-nowrap md:px-8">
           <a href="#" className="flex shrink-0 items-center gap-2.5">
-            <span className="grid h-8 w-8 place-items-center rounded-lg bg-grafito text-[13px] font-bold text-white">F</span>
+            <span className="grid h-8 w-8 place-items-center rounded-lg bg-grafito text-[13px] font-bold text-hueso">F</span>
             <span className="leading-tight">
               <span className="block text-[15px] font-semibold tracking-tight">Biblioteca 3D</span>
               <span className="block text-[11px] text-stone-500">por Fleremiasflemin</span>
@@ -121,7 +123,7 @@ export default function App() {
               irAlCatalogo()
             }}
           >
-            <label className="flex items-center gap-2.5 rounded-full border border-stone-200 bg-white px-4 shadow-[0_1px_2px_rgba(0,0,0,0.03)] transition focus-within:border-stone-400 focus-within:shadow-[0_0_0_4px_rgba(24,24,27,0.06)]">
+            <label className="flex items-center gap-2.5 rounded-full border border-stone-200 bg-superficie px-4 shadow-[0_1px_2px_rgba(0,0,0,0.03)] transition focus-within:border-stone-400 focus-within:shadow-[0_0_0_4px_rgba(24,24,27,0.06)]">
               <Search size={17} className="shrink-0 text-stone-400" />
               <input
                 type="search"
@@ -143,6 +145,20 @@ export default function App() {
             <button type="button" onClick={() => abrirManos()} className="pildora-clara !px-3.5">
               <Hand size={16} /> <span className="hidden sm:inline">Modo manos</span>
             </button>
+            <button
+              type="button"
+              onClick={(e) => {
+                const r = e.currentTarget.getBoundingClientRect()
+                alternar({ x: r.left + r.width / 2, y: r.top + r.height / 2 })
+              }}
+              aria-label={tema === 'oscuro' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+              title={tema === 'oscuro' ? 'Modo claro' : 'Modo oscuro'}
+              className="pildora-clara relative h-10 w-10 overflow-hidden !p-0"
+            >
+              {/* Sol y luna giran al cruzarse: uno sale mientras entra el otro. */}
+              <Sun size={17} className={`absolute transition-all duration-500 ${tema === 'oscuro' ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-50 opacity-0'}`} />
+              <Moon size={17} className={`absolute transition-all duration-500 ${tema === 'oscuro' ? 'rotate-90 scale-50 opacity-0' : 'rotate-0 scale-100 opacity-100'}`} />
+            </button>
             <a href={ENLACE_MEDIDA} target="_blank" rel="noreferrer" className="pildora-negra hidden !px-4 sm:inline-flex">
               A medida
             </a>
@@ -157,9 +173,9 @@ export default function App() {
             <button
               type="button"
               onClick={() => abrirManos()}
-              className="group inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white py-1 pl-1 pr-3 text-[13px] text-stone-600 transition hover:border-stone-300"
+              className="group inline-flex items-center gap-2 rounded-full border border-stone-200 bg-superficie py-1 pl-1 pr-3 text-[13px] text-stone-600 transition hover:border-stone-300"
             >
-              <span className="rounded-full bg-grafito px-2 py-0.5 text-[11px] font-medium text-white">Nuevo</span>
+              <span className="rounded-full bg-grafito px-2 py-0.5 text-[11px] font-medium text-hueso">Nuevo</span>
               Sostén las figuras con tu mano
               <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
             </button>
@@ -193,7 +209,7 @@ export default function App() {
 
           {/* El destacado, girando. */}
           <div className="entra relative" style={{ animationDelay: '80ms' }}>
-            <div className="relative h-[420px] overflow-hidden rounded-[28px] border border-stone-200 bg-gradient-to-b from-white to-stone-100 md:h-[560px]">
+            <div className="relative h-[420px] overflow-hidden rounded-[28px] border border-stone-200 bg-gradient-to-b from-superficie to-stone-100 md:h-[560px]">
               <div
                 className="absolute inset-0 opacity-60"
                 style={{ background: `radial-gradient(60% 45% at 50% 85%, ${catEstrella.punto}22, transparent 70%)` }}
@@ -201,12 +217,12 @@ export default function App() {
               />
               <Visor modelo={estrella} tinta={catEstrella.tinta} />
               <div className="pointer-events-none absolute inset-x-5 top-5 flex items-center justify-between text-[12px] text-stone-500">
-                <span className="rounded-full border border-stone-200 bg-white/80 px-2.5 py-1 backdrop-blur">Destacado</span>
+                <span className="rounded-full border border-stone-200 bg-superficie/80 px-2.5 py-1 backdrop-blur">Destacado</span>
                 <span className="tabular-nums">
                   {String((destacado % DESTACADOS.length) + 1).padStart(2, '0')} / {String(DESTACADOS.length).padStart(2, '0')}
                 </span>
               </div>
-              <div className="absolute inset-x-4 bottom-4 flex items-center gap-3 rounded-2xl border border-stone-200/80 bg-white/85 p-2 pl-4 shadow-sm backdrop-blur-md">
+              <div className="absolute inset-x-4 bottom-4 flex items-center gap-3 rounded-2xl border border-stone-200/80 bg-superficie/85 p-2 pl-4 shadow-sm backdrop-blur-md">
                 <button type="button" onClick={() => verFicha(estrella.id)} className="min-w-0 flex-1 text-left">
                   <p className="truncate text-[15px] font-semibold tracking-tight">{estrella.nombre}</p>
                   <p className="text-[13px] text-stone-500">
@@ -224,7 +240,7 @@ export default function App() {
                         type="button"
                         aria-label={nombre}
                         onClick={() => setDestacado((d) => (d + paso + DESTACADOS.length) % DESTACADOS.length)}
-                        className="grid h-10 w-10 place-items-center rounded-full border border-stone-200 bg-white text-stone-700 transition hover:bg-stone-50"
+                        className="grid h-10 w-10 place-items-center rounded-full border border-stone-200 bg-superficie text-stone-700 transition hover:bg-stone-50"
                       >
                         <Icono size={18} />
                       </button>
@@ -257,12 +273,12 @@ export default function App() {
                       aria-selected={activa}
                       onClick={() => setCat(i)}
                       className={`flex shrink-0 items-center gap-2 rounded-full border px-3.5 py-2 text-[13px] font-medium transition-all duration-200 ${
-                        activa ? 'border-grafito bg-grafito text-white' : 'border-stone-200 bg-white text-stone-700 hover:border-stone-300'
+                        activa ? 'border-grafito bg-grafito text-hueso' : 'border-stone-200 bg-superficie text-stone-700 hover:border-stone-300'
                       }`}
                     >
                       <Icono size={15} style={activa ? undefined : { color: x.punto }} />
                       {x.nombre}
-                      <span className={`tabular-nums ${activa ? 'text-white/55' : 'text-stone-400'}`}>{n}</span>
+                      <span className={`tabular-nums ${activa ? 'text-hueso/55' : 'text-stone-400'}`}>{n}</span>
                     </button>
                   )
                 })}
@@ -271,7 +287,7 @@ export default function App() {
                 value={orden}
                 onChange={(e) => setOrden(e.target.value as Orden)}
                 aria-label="Ordenar"
-                className="hidden shrink-0 rounded-full border border-stone-200 bg-white px-3.5 py-2 text-[13px] text-stone-700 outline-none transition hover:border-stone-300 sm:block"
+                className="hidden shrink-0 rounded-full border border-stone-200 bg-superficie px-3.5 py-2 text-[13px] text-stone-700 outline-none transition hover:border-stone-300 sm:block"
               >
                 <option value="recientes">Más recientes</option>
                 <option value="barato">Precio: menor a mayor</option>
@@ -313,7 +329,7 @@ export default function App() {
         </section>
 
         {/* ── Cómo funciona ───────────────────────────────────── */}
-        <section className="border-t border-stone-200 bg-white">
+        <section className="border-t border-stone-200 bg-superficie">
           <div className="mx-auto grid max-w-[1400px] gap-10 px-4 py-20 md:grid-cols-3 md:px-8">
             {[
               { n: '1', titulo: 'Gíralo', texto: 'Cada pieza se carga en 3D: textura, arcilla o malla. O sostenla en tu mano con el modo manos.' },
@@ -330,17 +346,17 @@ export default function App() {
         </section>
 
         {/* ── Contacto ────────────────────────────────────────── */}
-        <footer className="bg-grafito text-white">
+        <footer className="bg-[#18181B] text-white dark:border-t dark:border-white/[0.06] dark:bg-[#0E0E0F]">
           <div className="mx-auto max-w-[1400px] px-4 pb-12 pt-20 md:px-8">
             <h2 className="max-w-2xl text-[clamp(2rem,4.2vw,3.5rem)] font-semibold leading-[1.05] tracking-[-0.03em]">
               ¿Buscas algo <span className="font-serif font-normal italic">que no está aquí?</span>
             </h2>
             <p className="mt-4 max-w-lg text-white/60">Modelos a medida, adaptaciones para impresión 3D o retopología para juego. Cuéntame qué necesitas.</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href={ENLACE_MEDIDA} target="_blank" rel="noreferrer" className="pildora bg-white text-grafito hover:bg-stone-200">
+              <a href={ENLACE_MEDIDA} target="_blank" rel="noreferrer" className="pildora bg-white text-[#18181B] hover:bg-[#E7E5E4]">
                 <MessageCircle size={16} /> WhatsApp
               </a>
-              <a href={`mailto:${CORREO}`} className="pildora border border-white/20 text-white hover:bg-white/10">
+              <a href={`mailto:${CORREO}`} className="pildora border border-white/20 text-white hover:bg-superficie/10">
                 {CORREO}
               </a>
             </div>
@@ -385,7 +401,7 @@ export default function App() {
       {/* Solo en desarrollo: fotografía las piezas que aún no tienen portada. */}
       {pendientes.length > 0 && <Portadas pendientes={pendientes} alAvanzar={setSinPortada} />}
       {sinPortada > 0 && (
-        <p className="fixed bottom-6 left-1/2 z-40 -translate-x-1/2 rounded-full bg-grafito px-4 py-2 text-xs text-white">
+        <p className="fixed bottom-6 left-1/2 z-40 -translate-x-1/2 rounded-full bg-grafito px-4 py-2 text-xs text-hueso">
           Generando portadas · faltan {sinPortada}
         </p>
       )}

@@ -9,6 +9,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
     <meta name="theme-color" content="#FAFAF8" />
+    <script>
+      // El tema se decide antes de pintar: sin destello blanco en oscuro. Ver src/lib/tema.ts.
+      try {
+        var t = localStorage.getItem('tema')
+        if (t === 'oscuro' || (!t && matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark')
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0B0B0C')
+        }
+      } catch (e) {}
+    </script>
     <meta name="description" content="Modelos 3D listos para imprimir, renderizar y jugar: tecnología, mecánica, autos, anime, manga y Seres Flemin. Gíralos en 3D, o sostenlos en tu mano con la cámara." />
     <meta property="og:title" content="Biblioteca 3D · Fleremiasflemin" />
     <meta property="og:description" content="Modelos 3D a la venta. Míralos en 3D, elige formato y llévatelos." />

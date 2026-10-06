@@ -14,7 +14,7 @@ export function Tarjeta({ modelo, onAbrir }: { modelo: Modelo3D; onAbrir: () => 
 
   return (
     <button type="button" onClick={onAbrir} className="group block w-full text-left">
-      <div className="tarjeta-img relative aspect-square overflow-hidden rounded-2xl border border-stone-200/80 bg-white">
+      <div className="tarjeta-img relative aspect-square overflow-hidden rounded-2xl border border-stone-200/80 bg-superficie">
         {portada ? (
           <img
             src={portada}
@@ -30,9 +30,9 @@ export function Tarjeta({ modelo, onAbrir }: { modelo: Modelo3D; onAbrir: () => 
         )}
 
         {modelo.destacado && (
-          <span className="absolute left-3 top-3 rounded-full bg-grafito px-2.5 py-1 text-[11px] font-medium text-white">Destacado</span>
+          <span className="absolute left-3 top-3 rounded-full bg-grafito px-2.5 py-1 text-[11px] font-medium text-hueso">Destacado</span>
         )}
-        <span className="absolute bottom-3 right-3 translate-y-1 rounded-full bg-grafito/90 px-3 py-1.5 text-[12px] font-medium text-white opacity-0 backdrop-blur transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+        <span className="absolute bottom-3 right-3 translate-y-1 rounded-full bg-grafito/90 px-3 py-1.5 text-[12px] font-medium text-hueso opacity-0 backdrop-blur transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
           Ver en 3D
         </span>
       </div>

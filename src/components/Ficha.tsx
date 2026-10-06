@@ -76,11 +76,11 @@ export function Ficha({
       role="dialog"
       aria-modal="true"
       aria-label={modelo.nombre}
-      className="fixed inset-0 z-50 flex items-stretch justify-center bg-grafito/40 backdrop-blur-sm md:items-center md:p-6"
+      className="fixed inset-0 z-50 flex items-stretch justify-center bg-black/50 backdrop-blur-sm md:items-center md:p-6"
       onClick={onCerrar}
     >
       <div
-        className="entra relative grid w-full max-w-6xl overflow-y-auto bg-white shadow-2xl md:h-[min(92vh,780px)] md:grid-cols-[1.3fr_1fr] md:overflow-hidden md:rounded-[28px]"
+        className="entra relative grid w-full max-w-6xl overflow-y-auto bg-superficie shadow-2xl ring-1 ring-stone-200/60 md:h-[min(92vh,780px)] md:grid-cols-[1.3fr_1fr] md:overflow-hidden md:rounded-[28px]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* El visor. En el móvil, el del llavero se queda arriba mientras se escribe el nombre. */}
@@ -92,18 +92,18 @@ export function Ficha({
           <div className="absolute inset-0" style={{ background: `radial-gradient(55% 45% at 50% 88%, ${cat.punto}1f, transparent 70%)` }} aria-hidden />
           <Visor modelo={modelo} modo={modo} tinta={cat.tinta} zoom margen={1.25} opciones={modelo.personalizable ? vista : undefined} />
 
-          <p className="absolute left-4 top-4 rounded-full border border-stone-200 bg-white/80 px-2.5 py-1 text-[12px] tabular-nums text-stone-500 backdrop-blur">
+          <p className="absolute left-4 top-4 rounded-full border border-stone-200 bg-superficie/80 px-2.5 py-1 text-[12px] tabular-nums text-stone-500 backdrop-blur">
             {String(numero).padStart(2, '0')} / {String(total).padStart(2, '0')}
           </p>
 
-          <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 rounded-full border border-stone-200 bg-white/90 p-1 shadow-sm backdrop-blur">
+          <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 rounded-full border border-stone-200 bg-superficie/90 p-1 shadow-sm backdrop-blur">
             {MODOS.map((m) => (
               <button
                 key={m.id}
                 type="button"
                 onClick={() => setModo(m.id)}
                 aria-pressed={modo === m.id}
-                className={`rounded-full px-3.5 py-1.5 text-[13px] font-medium transition-colors ${modo === m.id ? 'bg-grafito text-white' : 'text-stone-600 hover:text-grafito'}`}
+                className={`rounded-full px-3.5 py-1.5 text-[13px] font-medium transition-colors ${modo === m.id ? 'bg-grafito text-hueso' : 'text-stone-600 hover:text-grafito'}`}
               >
                 {m.nombre}
               </button>
@@ -119,7 +119,7 @@ export function Ficha({
               type="button"
               aria-label={nombre}
               onClick={() => onMover(paso)}
-              className={`absolute ${lado} top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-stone-200 bg-white/90 text-stone-700 shadow-sm backdrop-blur transition hover:bg-white`}
+              className={`absolute ${lado} top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-stone-200 bg-superficie/90 text-stone-700 shadow-sm backdrop-blur transition hover:bg-superficie`}
             >
               <Flecha size={18} />
             </button>
@@ -153,7 +153,7 @@ export function Ficha({
                   maxLength={MEDIDAS.maxLetras}
                   placeholder={OPCIONES_INICIALES.nombre}
                   onChange={(e) => setOpciones((o) => ({ ...o, nombre: e.target.value }))}
-                  className="w-full rounded-xl border border-stone-200 bg-white px-3.5 py-2.5 text-base outline-none transition placeholder:text-stone-300 focus:border-stone-400"
+                  className="w-full rounded-xl border border-stone-200 bg-superficie px-3.5 py-2.5 text-base outline-none transition placeholder:text-stone-300 focus:border-stone-400"
                 />
               </label>
               <div>
@@ -165,7 +165,7 @@ export function Ficha({
                       type="button"
                       aria-pressed={opciones.icono === id}
                       onClick={() => setOpciones((o) => ({ ...o, icono: id }))}
-                      className={`${chip} ${opciones.icono === id ? 'border-grafito bg-grafito text-white' : 'border-stone-200 text-stone-700 hover:border-stone-300'}`}
+                      className={`${chip} ${opciones.icono === id ? 'border-grafito bg-grafito text-hueso' : 'border-stone-200 text-stone-700 hover:border-stone-300'}`}
                     >
                       {ICONOS[id]}
                     </button>
@@ -188,7 +188,7 @@ export function Ficha({
                       >
                         <span className="flex" aria-hidden>
                           {[p.placa, p.texto, p.icono].map((c) => (
-                            <span key={c} className="-mr-1 h-3.5 w-3.5 rounded-full border-2 border-white" style={{ background: c }} />
+                            <span key={c} className="-mr-1 h-3.5 w-3.5 rounded-full border-2 border-superficie" style={{ background: c }} />
                           ))}
                         </span>
                         <span className="ml-1">{p.nombre}</span>
