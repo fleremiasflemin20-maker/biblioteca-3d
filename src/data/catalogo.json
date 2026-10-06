@@ -1288,5 +1288,233 @@
     "alta": "2026-10-06",
     "triangulos": 646980,
     "portada": "gato-sabio-chibi-a.webp"
+  },
+  {
+    "id": "saiyan-fase4-chibi-clasico-escultura-c",
+    "nombre": "Saiyan Fase 4 Chibi · Clásico · Escultura C",
+    "categoria": "anime",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la versión clásica, pose C, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/saiyan-fase4-chibi-clasico-escultura-c.glb",
+    "peso": 1765796,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "triangulos": 1033542,
+    "portada": "saiyan-fase4-chibi-clasico-escultura-c.webp"
+  },
+  {
+    "id": "saiyan-fase4-chibi-clasico-escultura-b",
+    "nombre": "Saiyan Fase 4 Chibi · Clásico · Escultura B",
+    "categoria": "anime",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la versión clásica, pose B, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/saiyan-fase4-chibi-clasico-escultura-b.glb",
+    "peso": 1459000,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "triangulos": 879870,
+    "portada": "saiyan-fase4-chibi-clasico-escultura-b.webp"
+  },
+  {
+    "id": "saiyan-fase4-chibi-clasico-escultura-a",
+    "nombre": "Saiyan Fase 4 Chibi · Clásico · Escultura A",
+    "categoria": "anime",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la versión clásica, pose A, con su base redonda: lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/saiyan-fase4-chibi-clasico-escultura-a.glb",
+    "peso": 1206416,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "triangulos": 736180,
+    "portada": "saiyan-fase4-chibi-clasico-escultura-a.webp"
+  },
+  {
+    "id": "saiyan-fase4-chibi-daima-escultura-c",
+    "nombre": "Saiyan Fase 4 Chibi · Daima · Escultura C",
+    "categoria": "anime",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la versión Daima, pose C, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/saiyan-fase4-chibi-daima-escultura-c.glb",
+    "peso": 1534256,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "triangulos": 964420,
+    "portada": "saiyan-fase4-chibi-daima-escultura-c.webp"
+  },
+  {
+    "id": "saiyan-fase4-chibi-daima-escultura-b",
+    "nombre": "Saiyan Fase 4 Chibi · Daima · Escultura B",
+    "categoria": "anime",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la versión Daima, pose B, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/saiyan-fase4-chibi-daima-escultura-b.glb",
+    "peso": 1300212,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "triangulos": 775152,
+    "portada": "saiyan-fase4-chibi-daima-escultura-b.webp"
+  },
+  {
+    "id": "saiyan-fase4-chibi-daima-escultura-a",
+    "nombre": "Saiyan Fase 4 Chibi · Daima · Escultura A",
+    "categoria": "anime",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la versión Daima, pose A, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/saiyan-fase4-chibi-daima-escultura-a.glb",
+    "peso": 1317820,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "triangulos": 836654,
+    "portada": "saiyan-fase4-chibi-daima-escultura-a.webp"
+  },
+  {
+    "id": "saiyan-fase4-chibi-clasico-c",
+    "nombre": "Saiyan Fase 4 Chibi · Clásico C",
+    "categoria": "anime",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Fase 4 clásica, pose C: brazos cruzados con el puño al frente y cabello negro plateado.",
+    "archivo": "meshy/saiyan-fase4-chibi-clasico-c.glb",
+    "peso": 2862224,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "triangulos": 1033542,
+    "portada": "saiyan-fase4-chibi-clasico-c.webp"
+  },
+  {
+    "id": "saiyan-fase4-chibi-clasico-b",
+    "nombre": "Saiyan Fase 4 Chibi · Clásico B",
+    "categoria": "anime",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Fase 4 clásica, pose B: guardia de combate, pelaje carmesí y cola en alto.",
+    "archivo": "meshy/saiyan-fase4-chibi-clasico-b.glb",
+    "peso": 2388700,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "triangulos": 879870,
+    "portada": "saiyan-fase4-chibi-clasico-b.webp"
+  },
+  {
+    "id": "saiyan-fase4-chibi-clasico-a",
+    "nombre": "Saiyan Fase 4 Chibi · Clásico A",
+    "categoria": "anime",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Figura chibi del saiyan en Fase 4 clásica: melena negra salvaje, pelaje carmesí, cola y pantalón amarillo, sobre una base redonda de exhibición. Estilo juguete coleccionable.",
+    "archivo": "meshy/saiyan-fase4-chibi-clasico-a.glb",
+    "peso": 2018684,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-10-06",
+    "triangulos": 736180,
+    "portada": "saiyan-fase4-chibi-clasico-a.webp"
+  },
+  {
+    "id": "saiyan-fase4-chibi-daima-c",
+    "nombre": "Saiyan Fase 4 Chibi · Daima C",
+    "categoria": "anime",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Fase 4 Daima, pose C: melena rosa, chaleco morado y gesto desafiante.",
+    "archivo": "meshy/saiyan-fase4-chibi-daima-c.glb",
+    "peso": 2463584,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "triangulos": 964420,
+    "portada": "saiyan-fase4-chibi-daima-c.webp"
+  },
+  {
+    "id": "saiyan-fase4-chibi-daima-b",
+    "nombre": "Saiyan Fase 4 Chibi · Daima B",
+    "categoria": "anime",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Fase 4 Daima, pose B: melena roja intensa y puño cargado al frente.",
+    "archivo": "meshy/saiyan-fase4-chibi-daima-b.glb",
+    "peso": 2138368,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "triangulos": 775152,
+    "portada": "saiyan-fase4-chibi-daima-b.webp"
+  },
+  {
+    "id": "saiyan-fase4-chibi-daima-a",
+    "nombre": "Saiyan Fase 4 Chibi · Daima A",
+    "categoria": "anime",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Figura chibi del saiyan en Fase 4 de Daima: melena rosa, ojos delineados en rojo, cola y botas azules. Estilo juguete coleccionable.",
+    "archivo": "meshy/saiyan-fase4-chibi-daima-a.glb",
+    "peso": 2171956,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-10-06",
+    "triangulos": 836654,
+    "portada": "saiyan-fase4-chibi-daima-a.webp"
   }
 ]
