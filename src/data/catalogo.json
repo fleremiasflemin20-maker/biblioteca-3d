@@ -1090,7 +1090,7 @@
       "OBJ",
       "STL"
     ],
-    "descripcion": "Tercera pose, solo en escultura: la calabaza en la mano y la katana a la cintura. Lista para pintar o imprimir en 3D.",
+    "descripcion": "Malla sin texturizar de la pose C, con la calabaza en la mano y la katana a la cintura. Lista para pintar o imprimir en 3D.",
     "archivo": "meshy/samurai-errante-chibi-escultura-c.glb",
     "peso": 1730892,
     "origen": "Diseño propio · generado con Meshy AI",
@@ -1155,5 +1155,24 @@
     "alta": "2026-10-06",
     "triangulos": 783148,
     "portada": "samurai-errante-chibi-a.webp"
+  },
+  {
+    "id": "samurai-errante-chibi-c",
+    "nombre": "Samurái Errante Chibi · C",
+    "categoria": "anime",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Tercera pose del samurái errante: ceño fruncido, la calabaza de provisiones en una mano y la katana lista en la otra. Textura a color, estilo juguete coleccionable.",
+    "archivo": "meshy/samurai-errante-chibi-c.glb",
+    "peso": 2826416,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "triangulos": 1025354,
+    "portada": "samurai-errante-chibi-c.webp"
   }
 ]
