@@ -1022,5 +1022,43 @@
     "alta": "2026-10-05",
     "triangulos": 983336,
     "portada": "guerrero-futuro-chibi-escultura-b.webp"
+  },
+  {
+    "id": "monje-guerrero-chibi",
+    "nombre": "Monje Guerrero Chibi",
+    "categoria": "anime",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Figura chibi del pequeño monje guerrero: cabeza rapada, uniforme naranja de la escuela de la tortuga y pose segura con las manos en la cintura. Estilo juguete coleccionable.",
+    "archivo": "meshy/monje-guerrero-chibi.glb",
+    "peso": 1138240,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-10-06",
+    "triangulos": 404774,
+    "portada": "monje-guerrero-chibi.webp"
+  },
+  {
+    "id": "monje-guerrero-chibi-escultura",
+    "nombre": "Monje Guerrero Chibi · Escultura",
+    "categoria": "anime",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "La malla del monje guerrero sin texturizar, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/monje-guerrero-chibi-escultura.glb",
+    "peso": 603132,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "triangulos": 404774,
+    "portada": "monje-guerrero-chibi-escultura.webp"
   }
 ]
