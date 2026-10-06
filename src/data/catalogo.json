@@ -254,6 +254,84 @@
     "portada": "aretes-crocs.webp"
   },
   {
+    "id": "saiyan-legendario-ova-chibi-a",
+    "nombre": "Saiyan Legendario Chibi · OVA A",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Guerrero legendario chibi al estilo de las OVAs: cabello verde, faja roja, brazaletes y collar dorados, ceño fruncido y puños en guardia. Estilo juguete coleccionable.",
+    "archivo": "meshy/saiyan-legendario-ova-chibi-a.glb",
+    "peso": 2682344,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "portada": "saiyan-legendario-ova-chibi-a.webp",
+    "triangulos": 422004
+  },
+  {
+    "id": "saiyan-legendario-ova-chibi-b",
+    "nombre": "Saiyan Legendario Chibi · OVA B",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Variante del guerrero legendario de las OVAs con sonrisa desafiante, cabello verde claro y gemas azules en el oro. Estilo juguete coleccionable.",
+    "archivo": "meshy/saiyan-legendario-ova-chibi-b.glb",
+    "peso": 2222072,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "portada": "saiyan-legendario-ova-chibi-b.webp",
+    "triangulos": 342508
+  },
+  {
+    "id": "saiyan-legendario-ova-chibi-escultura-a",
+    "nombre": "Saiyan Legendario Chibi · OVA · Escultura A",
+    "categoria": "dragon-ball-z",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la versión OVA A, con el ceño fruncido, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/saiyan-legendario-ova-chibi-escultura-a.glb",
+    "peso": 1624500,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "sinTextura": true,
+    "portada": "saiyan-legendario-ova-chibi-escultura-a.webp",
+    "triangulos": 394764
+  },
+  {
+    "id": "saiyan-legendario-ova-chibi-escultura-b",
+    "nombre": "Saiyan Legendario Chibi · OVA · Escultura B",
+    "categoria": "dragon-ball-z",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la versión OVA B, con la sonrisa desafiante, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/saiyan-legendario-ova-chibi-escultura-b.glb",
+    "peso": 1318768,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "sinTextura": true,
+    "portada": "saiyan-legendario-ova-chibi-escultura-b.webp",
+    "triangulos": 320066
+  },
+  {
     "id": "cosmic-fusion-warrior-original",
     "nombre": "Cosmic Fusion Warrior",
     "categoria": "dragon-ball-z",
