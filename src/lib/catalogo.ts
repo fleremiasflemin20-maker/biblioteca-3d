@@ -35,6 +35,8 @@ export type Modelo3D = {
   sinTextura?: boolean
   /** Se construye en el navegador con el nombre del cliente (ver llavero.ts). */
   personalizable?: boolean
+  /** Planos y documentación descargables (rutas dentro de `public/descargas/`). */
+  documentos?: { nombre: string; archivo: string }[]
   draco?: boolean
   /** Mapas PBR sueltos, para mallas que no traen el material horneado. */
   texturas?: { carpeta: string; map: string; normalMap: string; roughnessMap: string; metalnessMap: string }
@@ -76,7 +78,8 @@ const BASE = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '')
 export const DRACO = `${BASE}/draco/`
 export const rutaModelo = (m: Modelo3D) => `${BASE}/models/${m.archivo}`
 export const rutaTextura = (m: Modelo3D, archivo: string) => `${BASE}/textures/${m.texturas!.carpeta}/${archivo}`
-export const rutaPortada = (m: Modelo3D) => (m.portada ? `${BASE}/portadas/${m.portada}` : undefined)
+export const rutaDescarga = (archivo: string) => `${BASE}/descargas/${archivo}`
+export const rutaPortada =(m: Modelo3D) => (m.portada ? `${BASE}/portadas/${m.portada}` : undefined)
 
 export const precio = (n: number) => (n === 0 ? 'Gratis' : `$${n.toFixed(n % 1 ? 2 : 0)}`)
 

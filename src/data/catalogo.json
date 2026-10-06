@@ -1,5 +1,36 @@
 [
   {
+    "id": "soporte-motor-antivibracion",
+    "nombre": "Soporte de Motor Antivibración FLM-MECH-001",
+    "categoria": "mecanica",
+    "precio": 9,
+    "formatos": [
+      "STEP",
+      "STL",
+      "3MF",
+      "DXF",
+      "PDF"
+    ],
+    "descripcion": "Soporte paramétrico para motores de 1 a 5 kg sobre cuatro estaciones con insertos de TPU 95A de Ø20 mm reemplazables. Placa nervada de 120 × 100 × 20 mm en PETG-CF (o PA-CF para motores calientes) que se imprime sin soportes. La compresión del TPU la fija un tornillo con hombro ISO 7379, así que no se puede sobreapretar, y si un inserto falla el motor sigue capturado. Patrón de motor configurable con ranuras de ±3 mm. Atenúa el ruido de alta frecuencia (pasos, PWM, engranes) por encima de unos 320 Hz con 5 kg; no aísla la vibración del eje a 25–50 Hz. 19 comprobaciones de ingeniería con factor de seguridad ≥ 2. Incluye STEP, STL y 3MF orientados para impresión, probeta de ajuste, plano A3 con GD&T, lista de materiales y memoria de cálculo. La tornillería es metálica y no se incluye. Prototipo aún sin validar físicamente: no apto para usos críticos de seguridad.",
+    "archivo": "propios/soporte-motor-antivibracion.glb",
+    "peso": 1949664,
+    "origen": "Diseño propio · ingeniería paramétrica",
+    "destacado": true,
+    "alta": "2026-10-06",
+    "documentos": [
+      {
+        "nombre": "Plano técnico A3 (cotas, tolerancias y GD&T)",
+        "archivo": "soporte-motor-antivibracion/FLM-MECH-001-V1_plano-A3.pdf"
+      },
+      {
+        "nombre": "Lista de materiales",
+        "archivo": "soporte-motor-antivibracion/FLM-MECH-001-V1_lista-de-materiales.csv"
+      }
+    ],
+    "portada": "soporte-motor-antivibracion.webp",
+    "triangulos": 58674
+  },
+  {
     "id": "llavero-con-nombre",
     "nombre": "Llavero con tu Nombre",
     "categoria": "accesorios",

@@ -1,0 +1,12 @@
+Item,Part number,Description,Standard / spec,Material / grade,Qty,Make/Buy,Unit mass [g],Notes
+1,FLM-MECH-001-V1-P01,"Base plate, ribbed",This drawing,PETG-CF,1,MAKE (FDM),172,"Print deck-down, see manufacturing notes"
+2,FLM-MECH-001-V1-P02,Lower isolation insert Ø20×9.3,This drawing,TPU 95A,4,MAKE (FDM),3.1,+1 spare recommended
+3,FLM-MECH-001-V1-P03,Upper isolation insert Ø20×4,This drawing,TPU 95A,4,MAKE (FDM),1.6,+1 spare recommended
+4,H01,"Shoulder screw Ø8×25, M6 thread",ISO 7379,"Steel 12.9, black oxide",4,BUY,,Tighten 6 N·m (4.5 N·m if tapped in aluminium). DO NOT substitute a plain bolt + printed spacer.
+5,H02,Flat washer 8.4×16×1.6 (head side),ISO 7089-8,Steel 200 HV,4,BUY,,
+6,H03,Flat washer 6.4×12×1.6 under shoulder,ISO 7089-6,Steel 300 HV (hardened),4,BUY,,Spreads clamp load on frame
+7,H04,Socket head cap screw M5×30,ISO 4762,Steel 8.8,4,BUY,,Motor fixing; foot thickness assumed 6 mm
+8,H05,Flat washer 5.3×10×1 (in nut trap),ISO 7089-5,Steel,4,BUY,,
+9,H06,Prevailing-torque nut M5 (nyloc),ISO 10511,Steel 8,4,BUY,,Torque: prevailing + 0.45 N·m
+10,H07,Flat washer 5.3×10×1 (under screw head),ISO 7089-5,Steel,4,BUY,,
+11,H08,Nut M6 (only if frame hole is not tapped),ISO 10511,Steel 8,0-4,BUY,,Frame: tapped M6 ≥ 9 mm or Ø6.6 clearance + nut

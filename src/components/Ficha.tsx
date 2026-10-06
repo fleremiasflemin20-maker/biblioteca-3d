@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { ChevronLeft, ChevronRight, Hand, X } from 'lucide-react'
+import { ChevronLeft, ChevronRight, FileText, Hand, X } from 'lucide-react'
 import { Visor } from './Visor'
 import type { Modo } from './Pieza'
-import { CATEGORIAS, CORREO, enlaceCompra, peso, precio, triangulos, type Modelo3D } from '../lib/catalogo'
+import { CATEGORIAS, CORREO, enlaceCompra, peso, precio, rutaDescarga, triangulos, type Modelo3D } from '../lib/catalogo'
 import { ICONO_CATEGORIA } from '../lib/iconos'
 import { ICONOS, MEDIDAS, OPCIONES_INICIALES, PALETAS, describirPedido, type IconoId, type OpcionesLlavero, type PaletaId } from '../lib/llavero'
 
@@ -210,6 +210,28 @@ export function Ficha({
               ))}
             </div>
           </div>
+
+          {modelo.documentos && modelo.documentos.length > 0 && (
+            <div>
+              <p className={etiqueta}>Planos y documentación</p>
+              <ul className="flex flex-col gap-1.5">
+                {modelo.documentos.map((d) => (
+                  <li key={d.archivo}>
+                    <a
+                      href={rutaDescarga(d.archivo)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-2 rounded-xl border border-stone-200 px-3.5 py-2.5 text-[14px] text-grafito transition hover:border-stone-300 hover:bg-stone-50"
+                    >
+                      <FileText size={16} className="shrink-0 text-stone-500" />
+                      <span className="flex-1">{d.nombre}</span>
+                      <span className="font-mono text-[11px] uppercase text-stone-400">{d.archivo.split('.').pop()}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           <dl className="grid grid-cols-2 gap-x-6 gap-y-4 border-y border-stone-200 py-5">
             {datos.map((d) => (
