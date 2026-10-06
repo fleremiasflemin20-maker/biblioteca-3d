@@ -225,7 +225,7 @@
   {
     "id": "cosmic-fusion-warrior-original",
     "nombre": "Cosmic Fusion Warrior",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -244,7 +244,7 @@
   {
     "id": "cosmic-fusion-warrior-vibrante",
     "nombre": "Cosmic Fusion Warrior · Vibrante",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -263,7 +263,7 @@
   {
     "id": "cosmic-fusion-warrior-ultra-pop",
     "nombre": "Cosmic Fusion Warrior · Ultra Pop",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -282,7 +282,7 @@
   {
     "id": "cosmic-fusion-warrior-anime-intenso",
     "nombre": "Cosmic Fusion Warrior · Anime Intenso",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -301,7 +301,7 @@
   {
     "id": "cosmic-fusion-warrior-escultura",
     "nombre": "Cosmic Fusion Warrior · Escultura",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -321,7 +321,7 @@
   {
     "id": "cosmic-fusion-warrior-segmentado",
     "nombre": "Cosmic Fusion Warrior · Por Piezas",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 22,
     "formatos": [
       "GLB",
@@ -378,7 +378,7 @@
   {
     "id": "dragon-ball-sparking",
     "nombre": "Cuadro Sparking Zero",
-    "categoria": "manga",
+    "categoria": "dragon-ball-z",
     "precio": 24,
     "formatos": [
       "GLB",
@@ -397,7 +397,7 @@
   {
     "id": "limit-break-clash-a",
     "nombre": "Limit Break Clash · A",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 29,
     "formatos": [
       "GLB",
@@ -416,7 +416,7 @@
   {
     "id": "limit-break-clash-b",
     "nombre": "Limit Break Clash · B",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 29,
     "formatos": [
       "GLB",
@@ -435,7 +435,7 @@
   {
     "id": "vibrant-saiyan-showdown",
     "nombre": "Vibrant Saiyan Showdown",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 27,
     "formatos": [
       "GLB",
@@ -454,7 +454,7 @@
   {
     "id": "vibrant-saiyan-escultura",
     "nombre": "Vibrant Saiyan Showdown · Escultura",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 15,
     "formatos": [
       "GLB",
@@ -475,7 +475,7 @@
   {
     "id": "vibrant-saiyan-segmentado",
     "nombre": "Vibrant Saiyan Showdown · Por Piezas",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 32,
     "formatos": [
       "GLB",
@@ -546,7 +546,7 @@
   {
     "id": "gogeta-ssj4",
     "nombre": "Gogeta SSJ4",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 29,
     "formatos": [
       "GLB",
@@ -824,7 +824,7 @@
   {
     "id": "espadachin-rubio-anime",
     "nombre": "Espadachín Rubio",
-    "categoria": "manga",
+    "categoria": "anime",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -882,7 +882,7 @@
   {
     "id": "saiyan-legendario-chibi-dorado",
     "nombre": "Saiyan Legendario Chibi · Dorado",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -901,7 +901,7 @@
   {
     "id": "saiyan-legendario-chibi-verde",
     "nombre": "Saiyan Legendario Chibi · Verde",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -920,7 +920,7 @@
   {
     "id": "saiyan-legendario-chibi-escultura-a",
     "nombre": "Saiyan Legendario Chibi · Escultura A",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -940,7 +940,7 @@
   {
     "id": "saiyan-legendario-chibi-escultura-b",
     "nombre": "Saiyan Legendario Chibi · Escultura B",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -960,7 +960,7 @@
   {
     "id": "guerrero-futuro-chibi-a",
     "nombre": "Guerrero del Futuro Chibi · A",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -979,7 +979,7 @@
   {
     "id": "guerrero-futuro-chibi-b",
     "nombre": "Guerrero del Futuro Chibi · B",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -998,7 +998,7 @@
   {
     "id": "guerrero-futuro-chibi-escultura-a",
     "nombre": "Guerrero del Futuro Chibi · Escultura A",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -1018,7 +1018,7 @@
   {
     "id": "guerrero-futuro-chibi-escultura-b",
     "nombre": "Guerrero del Futuro Chibi · Escultura B",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -1038,7 +1038,7 @@
   {
     "id": "monje-guerrero-chibi",
     "nombre": "Monje Guerrero Chibi",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -1057,7 +1057,7 @@
   {
     "id": "monje-guerrero-chibi-escultura",
     "nombre": "Monje Guerrero Chibi · Escultura",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -1077,7 +1077,7 @@
   {
     "id": "samurai-errante-chibi-escultura-b",
     "nombre": "Samurái Errante Chibi · Escultura B",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -1097,7 +1097,7 @@
   {
     "id": "samurai-errante-chibi-escultura-c",
     "nombre": "Samurái Errante Chibi · Escultura C",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -1117,7 +1117,7 @@
   {
     "id": "samurai-errante-chibi-escultura-a",
     "nombre": "Samurái Errante Chibi · Escultura A",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -1137,7 +1137,7 @@
   {
     "id": "samurai-errante-chibi-b",
     "nombre": "Samurái Errante Chibi · B",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -1156,7 +1156,7 @@
   {
     "id": "samurai-errante-chibi-a",
     "nombre": "Samurái Errante Chibi · A",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -1175,7 +1175,7 @@
   {
     "id": "samurai-errante-chibi-c",
     "nombre": "Samurái Errante Chibi · C",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -1214,7 +1214,7 @@
   {
     "id": "gato-sabio-chibi-escultura-b",
     "nombre": "Gato Sabio Chibi · Escultura B",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -1234,7 +1234,7 @@
   {
     "id": "gato-sabio-chibi-escultura-a",
     "nombre": "Gato Sabio Chibi · Escultura A",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -1254,7 +1254,7 @@
   {
     "id": "gato-sabio-chibi-b",
     "nombre": "Gato Sabio Chibi · B",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -1292,7 +1292,7 @@
   {
     "id": "gato-sabio-chibi-a",
     "nombre": "Gato Sabio Chibi · A",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -1311,7 +1311,7 @@
   {
     "id": "saiyan-fase4-chibi-clasico-escultura-c",
     "nombre": "Saiyan Fase 4 Chibi · Clásico · Escultura C",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -1331,7 +1331,7 @@
   {
     "id": "saiyan-fase4-chibi-clasico-escultura-b",
     "nombre": "Saiyan Fase 4 Chibi · Clásico · Escultura B",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -1351,7 +1351,7 @@
   {
     "id": "saiyan-fase4-chibi-clasico-escultura-a",
     "nombre": "Saiyan Fase 4 Chibi · Clásico · Escultura A",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -1371,7 +1371,7 @@
   {
     "id": "saiyan-fase4-chibi-daima-escultura-c",
     "nombre": "Saiyan Fase 4 Chibi · Daima · Escultura C",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -1391,7 +1391,7 @@
   {
     "id": "saiyan-fase4-chibi-daima-escultura-b",
     "nombre": "Saiyan Fase 4 Chibi · Daima · Escultura B",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -1411,7 +1411,7 @@
   {
     "id": "saiyan-fase4-chibi-daima-escultura-a",
     "nombre": "Saiyan Fase 4 Chibi · Daima · Escultura A",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -1431,7 +1431,7 @@
   {
     "id": "saiyan-fase4-chibi-clasico-c",
     "nombre": "Saiyan Fase 4 Chibi · Clásico C",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -1450,7 +1450,7 @@
   {
     "id": "saiyan-fase4-chibi-clasico-b",
     "nombre": "Saiyan Fase 4 Chibi · Clásico B",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -1469,7 +1469,7 @@
   {
     "id": "saiyan-fase4-chibi-clasico-a",
     "nombre": "Saiyan Fase 4 Chibi · Clásico A",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -1488,7 +1488,7 @@
   {
     "id": "saiyan-fase4-chibi-daima-c",
     "nombre": "Saiyan Fase 4 Chibi · Daima C",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -1507,7 +1507,7 @@
   {
     "id": "saiyan-fase4-chibi-daima-b",
     "nombre": "Saiyan Fase 4 Chibi · Daima B",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -1526,7 +1526,7 @@
   {
     "id": "saiyan-fase4-chibi-daima-a",
     "nombre": "Saiyan Fase 4 Chibi · Daima A",
-    "categoria": "anime",
+    "categoria": "dragon-ball-z",
     "precio": 19,
     "formatos": [
       "GLB",

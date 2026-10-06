@@ -195,7 +195,7 @@ export default function App() {
               Modelos 3D <span className="font-serif font-normal italic tracking-[-0.01em]">listos</span> para imprimir, renderizar y jugar.
             </h1>
             <p className="mt-5 max-w-md text-[17px] leading-relaxed text-stone-600">
-              Tecnología, mecánica, autos, anime, manga y los Seres Flemin. Gira cada pieza en 3D antes de comprarla, o tómala con la mano desde tu cámara.
+              Tecnología, mecánica, autos, Dragon Ball Z, anime, manga y los Seres Flemin. Gira cada pieza en 3D antes de comprarla, o tómala con la mano desde tu cámara.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <button type="button" onClick={irAlCatalogo} className="pildora-negra !px-6 !py-3">
@@ -276,6 +276,8 @@ export default function App() {
                 {CATEGORIAS.map((x, i) => {
                   const n = x.id === 'todo' ? CATALOGO.length : CATALOGO.filter((m) => m.categoria === x.id).length
                   const activa = i === cat
+                  // Una sección sin modelos no se enseña (salvo que sea la activa).
+                  if (n === 0 && !activa) return null
                   const Icono = ICONO_CATEGORIA[x.id]
                   return (
                     <button

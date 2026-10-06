@@ -40,7 +40,7 @@ export type Modelo3D = {
   texturas?: { carpeta: string; map: string; normalMap: string; roughnessMap: string; metalnessMap: string }
 }
 
-export type CategoriaId = 'tecnologia' | 'mecanica' | 'autos' | 'anime' | 'manga' | 'seres-flemin' | 'accesorios'
+export type CategoriaId = 'tecnologia' | 'mecanica' | 'autos' | 'dragon-ball-z' | 'anime' | 'manga' | 'seres-flemin' | 'accesorios'
 
 export type Categoria = {
   id: CategoriaId | 'todo'
@@ -63,6 +63,7 @@ export const CATEGORIAS: Categoria[] = [
   { id: 'tecnologia', nombre: 'Tecnología', clave: 'TEC', desde: '#00E5D1', hasta: '#2A7BFF', tinta: '#4DE8FF', punto: '#0284C7' },
   { id: 'mecanica', nombre: 'Mecánica', clave: 'MEC', desde: '#FFB800', hasta: '#FF5E2F', tinta: '#FFC24D', punto: '#D97706' },
   { id: 'autos', nombre: 'Autos', clave: 'AUT', desde: '#FF3B3B', hasta: '#FF8A2F', tinta: '#FF7A6B', punto: '#DC2626' },
+  { id: 'dragon-ball-z', nombre: 'Dragon Ball Z', clave: 'DBZ', desde: '#FF8A00', hasta: '#FF2D2D', tinta: '#FFA94D', punto: '#EA580C' },
   { id: 'anime', nombre: 'Anime', clave: 'ANI', desde: '#FF2D8A', hasta: '#FF7A2F', tinta: '#FF9A4D', punto: '#DB2777' },
   { id: 'manga', nombre: 'Manga', clave: 'MNG', desde: '#F5F4F1', hasta: '#FF2D8A', tinta: '#FF8FC0', punto: '#4F46E5' },
   { id: 'seres-flemin', nombre: 'Seres Flemin', clave: 'FLM', desde: '#7B2CFF', hasta: '#FF2D8A', tinta: '#C77DFF', punto: '#7C3AED' },
