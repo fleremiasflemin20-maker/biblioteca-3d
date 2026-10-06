@@ -1174,5 +1174,119 @@
     "alta": "2026-10-06",
     "triangulos": 1025354,
     "portada": "samurai-errante-chibi-c.webp"
+  },
+  {
+    "id": "guerrero-reptiliano-escultura",
+    "nombre": "Guerrero Reptiliano · Escultura",
+    "categoria": "seres-flemin",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "La malla del guerrero reptiliano sin texturizar, con el detalle de escamas y placas esculpido: lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/guerrero-reptiliano-escultura.glb",
+    "peso": 2262072,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "triangulos": 1667142,
+    "portada": "guerrero-reptiliano-escultura.webp"
+  },
+  {
+    "id": "gato-sabio-chibi-escultura-b",
+    "nombre": "Gato Sabio Chibi · Escultura B",
+    "categoria": "anime",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la pose B, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/gato-sabio-chibi-escultura-b.glb",
+    "peso": 561040,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "triangulos": 279286,
+    "portada": "gato-sabio-chibi-escultura-b.webp"
+  },
+  {
+    "id": "gato-sabio-chibi-escultura-a",
+    "nombre": "Gato Sabio Chibi · Escultura A",
+    "categoria": "anime",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la pose A, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/gato-sabio-chibi-escultura-a.glb",
+    "peso": 1168948,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "triangulos": 646980,
+    "portada": "gato-sabio-chibi-escultura-a.webp"
+  },
+  {
+    "id": "gato-sabio-chibi-b",
+    "nombre": "Gato Sabio Chibi · B",
+    "categoria": "anime",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Segunda pose del gato sabio: de pie, apoyado en su bastón alto, con la cola en alto y la sonrisa tranquila.",
+    "archivo": "meshy/gato-sabio-chibi-b.glb",
+    "peso": 967616,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "triangulos": 279286,
+    "portada": "gato-sabio-chibi-b.webp"
+  },
+  {
+    "id": "guerrero-reptiliano",
+    "nombre": "Guerrero Reptiliano",
+    "categoria": "seres-flemin",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Ser reptiliano de cuerpo entero con armadura ornamentada de bronce sobre la piel escamada, garras y postura de guardia. Textura PBR horneada.",
+    "archivo": "meshy/guerrero-reptiliano.glb",
+    "peso": 3623924,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-10-06",
+    "triangulos": 1667142,
+    "portada": "guerrero-reptiliano.webp"
+  },
+  {
+    "id": "gato-sabio-chibi-a",
+    "nombre": "Gato Sabio Chibi · A",
+    "categoria": "anime",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Figura chibi del gato sabio de la torre: pelaje blanco y esponjoso, ojos entrecerrados y su bastón de madera. Estilo juguete coleccionable.",
+    "archivo": "meshy/gato-sabio-chibi-a.glb",
+    "peso": 1883152,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-10-06",
+    "triangulos": 646980,
+    "portada": "gato-sabio-chibi-a.webp"
   }
 ]
