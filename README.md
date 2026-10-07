@@ -46,3 +46,35 @@ llega por WhatsApp con todo escrito. Para generar el archivo de impresión:
 Salen un STL por color y el 3MF en `Generador_Llaveros/pedidos/`. El script
 (`llavero_nombre.py`) y `src/lib/llavero.ts` comparten tipografía, siluetas y
 medidas: si se cambia una, hay que cambiar la otra.
+
+## Taller 3D
+
+El botón **Taller 3D** (barra superior, portada y cada ficha) abre una vitrina
+interactiva. El visitante elige una pieza de la biblioteca, sube su modelo
+(`.3mf`, `.stl`, `.glb`, `.obj`) o una foto que la IA convierte en 3D, y:
+
+- **Pinta** con filamentos: pincel, relleno, gotero, deshacer, limpieza de
+  bordes y manchas. Una textura se agrupa sola en N filamentos (OKLab, k-medias).
+- **Separa en piezas**: cada color se corta por su frontera de pintura y se
+  tapa como sólido cerrado, con despiece animado, caras de corte resaltadas y
+  volumen, medidas y gramos por pieza.
+
+Lee la pintura multicolor de Bambu Studio, OrcaSlicer y PrusaSlicer con la
+misma subdivisión que el laminador (`src/lib/taller/pintura.ts`). Nada se
+descarga: el botón final es pedir la pieza impresa por WhatsApp. Los archivos
+del visitante se procesan en su navegador y no se suben.
+
+`npm test` comprueba la geometría (piezas cerradas, volúmenes, pintura) y el proxy.
+
+### Foto a 3D (Meshy)
+
+La clave de Meshy no puede ir en una página pública, así que vive en un proxy
+(`servidor/taller.ts`) que limita usos por IP y por día y sirve el modelo sin
+exponer su enlace.
+
+- **En local:** crea `.env.local` con `MESHY_API_KEY=msy_…` y `npm run dev`.
+- **Publicado:** despliega el repo en Netlify (función `netlify/functions/taller.mts`)
+  con las variables `MESHY_API_KEY` y `ORIGENES=https://fleremiasflemin20-maker.github.io`,
+  y en GitHub → Settings → Variables → Actions crea `TALLER_API` con
+  `https://<sitio>.netlify.app/api/taller`. Sin esa variable, la opción sale
+  como "Próximamente".

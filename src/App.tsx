@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { ArrowRight, ChevronLeft, ChevronRight, Hand, MessageCircle, Moon, Plus, Search, Sun } from 'lucide-react'
+import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { ArrowRight, ChevronLeft, ChevronRight, Hand, MessageCircle, Moon, Plus, Search, Sun, Wand2 } from 'lucide-react'
 import { Visor } from './components/Visor'
 import { Tarjeta } from './components/Tarjeta'
 import { Ficha } from './components/Ficha'
@@ -9,6 +9,9 @@ import { ModoManos } from './components/ModoManos'
 import { CATALOGO, CATEGORIAS, CORREO, WHATSAPP, precio, type Modelo3D } from './lib/catalogo'
 import { ICONO_CATEGORIA } from './lib/iconos'
 import { useTema } from './lib/tema'
+
+// El taller trae su propio peso (BVH, lectores de 3MF, cuantización): se carga al abrirlo.
+const Taller = lazy(() => import('./components/taller/Taller'))
 
 type Orden = 'recientes' | 'barato' | 'caro' | 'nombre'
 type Acabado = 'todos' | 'color' | 'sin-textura'
@@ -27,6 +30,7 @@ export default function App() {
   const [subiendo, setSubiendo] = useState(false)
   const [sinPortada, setSinPortada] = useState(0)
   const [manos, setManos] = useState<Manos | null>(null)
+  const [taller, setTaller] = useState<{ inicial?: Modelo3D } | null>(null)
   const { tema, alternar } = useTema()
 
   const c = CATEGORIAS[cat]
@@ -154,6 +158,9 @@ export default function App() {
                 <Plus size={16} /> <span className="hidden lg:inline">Subir</span>
               </button>
             )}
+            <button type="button" onClick={() => setTaller({})} className="pildora-clara !px-3.5">
+              <Wand2 size={16} /> <span className="hidden sm:inline">Taller 3D</span>
+            </button>
             <button type="button" onClick={() => abrirManos()} className="pildora-clara !px-3.5">
               <Hand size={16} /> <span className="hidden sm:inline">Modo manos</span>
             </button>
@@ -203,6 +210,9 @@ export default function App() {
               </button>
               <button type="button" onClick={() => abrirManos()} className="pildora-clara !px-6 !py-3">
                 <Hand size={17} /> Probar con tus manos
+              </button>
+              <button type="button" onClick={() => setTaller({})} className="pildora-clara !px-6 !py-3">
+                <Wand2 size={17} /> Pinta y separa en piezas
               </button>
             </div>
             <dl className="mt-10 flex gap-10 text-sm">
@@ -438,6 +448,10 @@ export default function App() {
           onCerrar={cerrar}
           onMover={mover}
           onManos={() => abrirManos(lista[indiceAbierto].id)}
+          onTaller={() => {
+            setTaller({ inicial: lista[indiceAbierto] })
+            setAbierto(null)
+          }}
         />
       )}
       {manos && (
@@ -452,6 +466,17 @@ export default function App() {
         />
       )}
       {subiendo && <Subir onCerrar={() => setSubiendo(false)} />}
+      {taller && (
+        <Suspense
+          fallback={
+            <div className="fixed inset-0 z-50 grid place-items-center bg-hueso">
+              <span className="h-6 w-6 animate-spin rounded-full border-2 border-stone-200 border-t-stone-500" />
+            </div>
+          }
+        >
+          <Taller inicial={taller.inicial} oscuro={tema === 'oscuro'} onCerrar={() => setTaller(null)} />
+        </Suspense>
+      )}
 
       {/* Solo en desarrollo: fotografía las piezas que aún no tienen portada. */}
       {pendientes.length > 0 && <Portadas pendientes={pendientes} alAvanzar={setSinPortada} />}

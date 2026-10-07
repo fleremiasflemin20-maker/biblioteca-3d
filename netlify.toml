@@ -1,0 +1,7 @@
+# Solo para el proxy de "Foto a 3D" del Taller (la tienda sigue en GitHub Pages).
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[functions]
+  directory = "netlify/functions"

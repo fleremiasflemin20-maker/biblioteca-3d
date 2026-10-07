@@ -32,6 +32,8 @@ jobs:
         run: npm run build
         env:
           BASE_PATH: /${{ github.event.repository.name }}/
+          # URL del proxy de "Foto a 3D" (ver servidor/taller.ts). Vacía = "próximamente".
+          VITE_TALLER_API: ${{ vars.TALLER_API }}
 
       # Es una sola página: sin esto, recargar en cualquier ruta da 404.
       - run: cp dist/index.html dist/404.html

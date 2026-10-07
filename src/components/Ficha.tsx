@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ChevronLeft, ChevronRight, FileText, Hand, Layers, X } from 'lucide-react'
+import { ChevronLeft, ChevronRight, FileText, Hand, Layers, Wand2, X } from 'lucide-react'
 import { Visor } from './Visor'
 import type { Modo } from './Pieza'
 import { CATEGORIAS, CORREO, enlaceCompra, peso, precio, rutaDescarga, triangulos, type Modelo3D } from '../lib/catalogo'
@@ -25,6 +25,7 @@ export function Ficha({
   onCerrar,
   onMover,
   onManos,
+  onTaller,
 }: {
   modelo: Modelo3D
   numero: number
@@ -32,6 +33,7 @@ export function Ficha({
   onCerrar: () => void
   onMover: (paso: 1 | -1) => void
   onManos: () => void
+  onTaller: () => void
 }) {
   const [modo, setModo] = useState<Modo>('textura')
   const [separado, setSeparado] = useState(false)
@@ -278,9 +280,16 @@ export function Ficha({
                 {precio(modelo.precio)}
                 {modelo.precio > 0 && <span className="ml-1.5 text-sm font-normal text-stone-400">USD</span>}
               </p>
-              <button type="button" onClick={onManos} className="pildora-clara">
-                <Hand size={16} /> Ver con tus manos
-              </button>
+              <div className="flex gap-2">
+                {!modelo.personalizable && (
+                  <button type="button" onClick={onTaller} className="pildora-clara" title="Píntalo y míralo separado en piezas">
+                    <Wand2 size={16} /> <span className="hidden sm:inline">Pintar y separar</span>
+                  </button>
+                )}
+                <button type="button" onClick={onManos} className="pildora-clara">
+                  <Hand size={16} /> <span className="hidden sm:inline">Ver con tus manos</span>
+                </button>
+              </div>
             </div>
             <a
               href={enlaceCompra(modelo, modelo.personalizable ? describirPedido(vista) : undefined)}
