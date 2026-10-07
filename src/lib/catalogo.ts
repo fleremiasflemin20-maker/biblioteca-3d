@@ -35,6 +35,12 @@ export type Modelo3D = {
   sinTextura?: boolean
   /** Se construye en el navegador con el nombre del cliente (ver llavero.ts). */
   personalizable?: boolean
+  /**
+   * Piezas que se imprimen por separado y se ensamblan. El `.glb` trae un nodo
+   * por pieza, nombrados "1-…", "2-…" en el orden en que se montan, y la ficha
+   * los separa para enseñar el armado.
+   */
+  piezas?: { nombre: string; color: string; detalle: string }[]
   /** Planos y documentación descargables (rutas dentro de `public/descargas/`). */
   documentos?: { nombre: string; archivo: string }[]
   draco?: boolean

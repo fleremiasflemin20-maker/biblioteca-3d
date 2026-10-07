@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ChevronLeft, ChevronRight, FileText, Hand, X } from 'lucide-react'
+import { ChevronLeft, ChevronRight, FileText, Hand, Layers, X } from 'lucide-react'
 import { Visor } from './Visor'
 import type { Modo } from './Pieza'
 import { CATEGORIAS, CORREO, enlaceCompra, peso, precio, rutaDescarga, triangulos, type Modelo3D } from '../lib/catalogo'
@@ -34,6 +34,7 @@ export function Ficha({
   onManos: () => void
 }) {
   const [modo, setModo] = useState<Modo>('textura')
+  const [separado, setSeparado] = useState(false)
   const [opciones, setOpciones] = useState<OpcionesLlavero>({ ...OPCIONES_INICIALES, nombre: '' })
   // Lo que se dibuja: con el campo vacío se enseña el ejemplo, no una placa en blanco.
   const vista = { ...opciones, nombre: opciones.nombre.trim() || OPCIONES_INICIALES.nombre }
@@ -90,7 +91,18 @@ export function Ficha({
           }`}
         >
           <div className="absolute inset-0" style={{ background: `radial-gradient(55% 45% at 50% 88%, ${cat.punto}1f, transparent 70%)` }} aria-hidden />
-          <Visor modelo={modelo} modo={modo} tinta={cat.tinta} zoom margen={1.25} opciones={modelo.personalizable ? vista : undefined} />
+          <Visor modelo={modelo} modo={modo} tinta={cat.tinta} zoom margen={1.25} opciones={modelo.personalizable ? vista : undefined} separado={separado} />
+
+          {modelo.piezas && (
+            <button
+              type="button"
+              onClick={() => setSeparado((v) => !v)}
+              aria-pressed={separado}
+              className="absolute right-4 top-4 flex items-center gap-1.5 rounded-full border border-stone-200 bg-superficie/90 px-3 py-1.5 text-[13px] font-medium text-grafito shadow-sm backdrop-blur transition hover:bg-superficie"
+            >
+              <Layers size={15} /> {separado ? 'Ver armado' : 'Ver por partes'}
+            </button>
+          )}
 
           <p className="absolute left-4 top-4 rounded-full border border-stone-200 bg-superficie/80 px-2.5 py-1 text-[12px] tabular-nums text-stone-500 backdrop-blur">
             {String(numero).padStart(2, '0')} / {String(total).padStart(2, '0')}
@@ -141,6 +153,24 @@ export function Ficha({
             <h2 className="text-[clamp(1.75rem,3vw,2.4rem)] font-semibold leading-[1.08] tracking-[-0.03em]">{modelo.nombre}</h2>
             <p className="mt-3 leading-relaxed text-stone-600">{modelo.descripcion}</p>
           </div>
+
+          {modelo.piezas && (
+            <div>
+              <p className={etiqueta}>Cómo se arma · {modelo.piezas.length} piezas</p>
+              <ol className="flex flex-col gap-2">
+                {modelo.piezas.map((p, i) => (
+                  <li key={p.nombre} className="flex gap-3 rounded-xl border border-stone-200 px-3.5 py-2.5">
+                    <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full text-[12px] font-semibold text-white ring-1 ring-black/10" style={{ background: p.color }}>
+                      {i + 1}
+                    </span>
+                    <span className="text-[14px] leading-snug text-stone-600">
+                      <span className="font-medium text-grafito">{p.nombre}.</span> {p.detalle}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
 
           {modelo.personalizable && (
             <div className="flex flex-col gap-5 rounded-2xl border border-stone-200 p-4">

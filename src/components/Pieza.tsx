@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useMemo } from 'react'
+import { useFrame } from '@react-three/fiber'
 import { useGLTF, useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import { DRACO, rutaModelo, rutaTextura, type Modelo3D } from '../lib/catalogo'
@@ -25,12 +26,35 @@ function aplicarModo(raiz: THREE.Object3D, modo: Modo) {
   })
 }
 
-function Simple({ modelo, modo }: { modelo: Modelo3D; modo: Modo }) {
+function Simple({ modelo, modo, separado = false }: { modelo: Modelo3D; modo: Modo; separado?: boolean }) {
   const { scene } = useGLTF(rutaModelo(modelo), DRACO)
   // Copia propia: la misma pieza puede estar a la vez en la portada y en la
   // ficha, y un objeto de three.js solo puede colgar de una escena.
   const copia = useMemo(() => scene.clone(true), [scene])
   useLayoutEffect(() => aplicarModo(copia, modo), [copia, modo])
+
+  // Vista por partes: cada pieza se aleja hacia delante (+Z, el frente de la
+  // placa) en el orden en que se monta, como un despiece de instrucciones.
+  const capas = useMemo(() => {
+    if (!modelo.piezas) return []
+    const caja = new THREE.Box3()
+    copia.traverse((o) => {
+      const g = (o as THREE.Mesh).geometry
+      if (!(o as THREE.Mesh).isMesh || !g) return
+      g.computeBoundingBox()
+      caja.union(g.boundingBox!)
+    })
+    const tam = caja.getSize(new THREE.Vector3())
+    const paso = Math.max(tam.x, tam.y, tam.z) * 0.22
+    return [...copia.children]
+      .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }))
+      .map((o, i) => ({ o, base: o.position.z, lejos: o.position.z + i * paso }))
+  }, [copia, modelo.piezas])
+
+  useFrame((_, dt) => {
+    for (const c of capas) c.o.position.z = THREE.MathUtils.damp(c.o.position.z, separado ? c.lejos : c.base, 5, dt)
+  })
+
   return <primitive object={copia} />
 }
 
@@ -89,9 +113,20 @@ function LlaveroNombre({ opciones, modo }: { opciones: OpcionesLlavero; modo: Mo
   )
 }
 
-export function Pieza({ modelo, modo = 'textura', opciones }: { modelo: Modelo3D; modo?: Modo; opciones?: OpcionesLlavero }) {
+export function Pieza({
+  modelo,
+  modo = 'textura',
+  opciones,
+  separado,
+}: {
+  modelo: Modelo3D
+  modo?: Modo
+  opciones?: OpcionesLlavero
+  /** Solo para piezas con `piezas`: las enseña desmontadas. */
+  separado?: boolean
+}) {
   if (modelo.personalizable) return <LlaveroNombre opciones={opciones ?? OPCIONES_INICIALES} modo={modo} />
-  return modelo.texturas ? <PBR modelo={modelo} modo={modo} /> : <Simple modelo={modelo} modo={modo} />
+  return modelo.texturas ? <PBR modelo={modelo} modo={modo} /> : <Simple modelo={modelo} modo={modo} separado={separado} />
 }
 
 /**

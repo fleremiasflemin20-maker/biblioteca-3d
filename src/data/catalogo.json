@@ -1,5 +1,73 @@
 [
   {
+    "id": "llavero-pata-oliver",
+    "nombre": "Placa Pata para Mascota · 3 Piezas",
+    "categoria": "accesorios",
+    "precio": 6,
+    "formatos": [
+      "STL"
+    ],
+    "descripcion": "Placa en forma de pata para el collar, que se imprime en tres colores sin cambiar filamento: cada color es una pieza y se arman a presión o con una gota de pegamento. Contorno rojo con huecos, cinco almohadillas negras y el nombre con su corazón en letras sueltas que se incrustan en la almohadilla grande. 42 × 45 mm, sin soportes. El nombre se cambia en el archivo paramétrico.",
+    "archivo": "propios/llavero-pata-oliver.glb",
+    "peso": 133736,
+    "origen": "Diseño propio · paramétrico",
+    "destacado": true,
+    "alta": "2026-10-06",
+    "piezas": [
+      {
+        "nombre": "Contorno",
+        "color": "#e8473b",
+        "detalle": "La pata roja con un hueco por almohadilla y la anilla. Va en la base."
+      },
+      {
+        "nombre": "Almohadillas",
+        "color": "#222222",
+        "detalle": "Cinco piezas negras que encajan a presión (0,12 mm de holgura) en el contorno."
+      },
+      {
+        "nombre": "Letras y corazón",
+        "color": "#ff7aa8",
+        "detalle": "Cada letra es una pieza suelta: entra 1 mm en su hueco y sobresale 0,6 mm. Se fija con una gota de cianoacrilato."
+      }
+    ],
+    "portada": "llavero-pata-oliver.webp",
+    "triangulos": 26736
+  },
+  {
+    "id": "llavero-pata-oliver-meshy",
+    "nombre": "Placa Pata Meshy · 3 Piezas",
+    "categoria": "accesorios",
+    "precio": 6,
+    "formatos": [
+      "STL"
+    ],
+    "descripcion": "La placa de pata que generamos con Meshy AI, rehecha para imprimir: se sacaron sus contornos y se convirtieron en tres piezas sólidas que encajan. Marco rosado, almohadillas negras, y el nombre y la patita en piezas sueltas. 42 × 46 mm para perros medianos y grandes, y una versión de 30 mm para razas toy como el schnauzer. Sin soportes.",
+    "archivo": "propios/llavero-pata-oliver-meshy.glb",
+    "peso": 286984,
+    "origen": "Diseño propio · forma generada con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-06",
+    "piezas": [
+      {
+        "nombre": "Marco",
+        "color": "#ff6470",
+        "detalle": "La silueta del modelo de Meshy con los huecos de las almohadillas y el agujero para la anilla."
+      },
+      {
+        "nombre": "Almohadillas",
+        "color": "#222222",
+        "detalle": "Cinco piezas negras con la forma exacta del modelo original; entran a presión en el marco."
+      },
+      {
+        "nombre": "Nombre y patita",
+        "color": "#ff9bb8",
+        "detalle": "Seis letras y los cinco trocitos de la patita, sueltos. Se colocan con pinza en sus huecos y se pegan."
+      }
+    ],
+    "portada": "llavero-pata-oliver-meshy.webp",
+    "triangulos": 58158
+  },
+  {
     "id": "soporte-motor-antivibracion",
     "nombre": "Soporte de Motor Antivibración FLM-MECH-001",
     "categoria": "mecanica",
