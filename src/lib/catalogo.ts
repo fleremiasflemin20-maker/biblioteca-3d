@@ -39,8 +39,12 @@ export type Modelo3D = {
    * Piezas que se imprimen por separado y se ensamblan. El `.glb` trae un nodo
    * por pieza, nombrados "1-…", "2-…" en el orden en que se montan, y la ficha
    * los separa para enseñar el armado.
+   *
+   * `salida` es la dirección en que la pieza se saca (ejes del `.glb`: +Y
+   * arriba, +Z el frente), en fracciones del lado mayor del modelo. Sin ella,
+   * las piezas se apilan hacia delante, como en las placas.
    */
-  piezas?: { nombre: string; color: string; detalle: string }[]
+  piezas?: { nombre: string; color: string; detalle: string; salida?: [number, number, number] }[]
   /** Planos y documentación descargables (rutas dentro de `public/descargas/`). */
   documentos?: { nombre: string; archivo: string }[]
   draco?: boolean

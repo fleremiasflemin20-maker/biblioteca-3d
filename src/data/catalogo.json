@@ -1663,6 +1663,55 @@
     "portada": "saiyan-fase4-chibi-clasico-a.webp"
   },
   {
+    "id": "saiyan-fase4-chibi-clasico-a-piezas",
+    "nombre": "Saiyan Fase 4 Chibi · Clásico A · 3 Piezas",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "STL"
+    ],
+    "descripcion": "La figura del Saiyan Fase 4 Clásico A dividida para imprimir sin cambiar su forma: el cuerpo, la cabeza con la cara y toda la melena, y la cola. Encajan a presión con pasadores, la D del cuello impide que la cabeza gire y el corte del pelo sobre los hombros queda oculto al armarla. 100 mm de alto; la cabeza y la cola se imprimen con soportes de árbol.",
+    "archivo": "meshy/saiyan-fase4-chibi-clasico-a-piezas.glb",
+    "peso": 3649484,
+    "origen": "Diseño propio · generado con Meshy AI, dividido para imprimir",
+    "destacado": true,
+    "alta": "2026-10-07",
+    "piezas": [
+      {
+        "nombre": "Cuerpo",
+        "color": "#d9443a",
+        "detalle": "La base y la figura sin cabeza. Lleva los dos pasadores: el del cuello, en forma de D, y el pequeño de la cola.",
+        "salida": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nombre": "Cabeza",
+        "color": "#222222",
+        "detalle": "Cara y melena en una sola pieza. Se apoya el pelo sobre los hombros y baja un poco inclinada hacia atrás hasta entrar a presión en la D (6,4 mm, 0,15 mm de holgura). Solo encaja mirando al frente.",
+        "salida": [
+          0,
+          0.22,
+          0.07
+        ]
+      },
+      {
+        "nombre": "Cola",
+        "color": "#a3352c",
+        "detalle": "Entra a presión en el pasador de 2,4 mm de la parte baja de la espalda.",
+        "salida": [
+          0.14,
+          -0.13,
+          -0.01
+        ]
+      }
+    ],
+    "portada": "saiyan-fase4-chibi-clasico-a-piezas.webp",
+    "triangulos": 338518
+  },
+  {
     "id": "saiyan-fase4-chibi-daima-c",
     "nombre": "Saiyan Fase 4 Chibi · Daima C",
     "categoria": "dragon-ball-z",

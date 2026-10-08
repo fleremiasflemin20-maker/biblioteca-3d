@@ -33,8 +33,9 @@ function Simple({ modelo, modo, separado = false }: { modelo: Modelo3D; modo: Mo
   const copia = useMemo(() => scene.clone(true), [scene])
   useLayoutEffect(() => aplicarModo(copia, modo), [copia, modo])
 
-  // Vista por partes: cada pieza se aleja hacia delante (+Z, el frente de la
-  // placa) en el orden en que se monta, como un despiece de instrucciones.
+  // Vista por partes: cada pieza se aleja por donde se saca (`salida`) o, si
+  // no la trae, hacia delante (+Z, el frente de la placa) en el orden en que
+  // se monta, como un despiece de instrucciones.
   const capas = useMemo(() => {
     if (!modelo.piezas) return []
     const caja = new THREE.Box3()
@@ -46,13 +47,27 @@ function Simple({ modelo, modo, separado = false }: { modelo: Modelo3D; modo: Mo
     })
     const tam = caja.getSize(new THREE.Vector3())
     const paso = Math.max(tam.x, tam.y, tam.z) * 0.22
+    // `salida` se mide con los nodos ya colocados: en un .glb cuantizado la
+    // geometría viene en su propia escala y la del nodo la corrige.
+    copia.updateMatrixWorld(true)
+    const real = new THREE.Box3().setFromObject(copia).getSize(new THREE.Vector3())
+    const lado = Math.max(real.x, real.y, real.z)
     return [...copia.children]
       .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }))
-      .map((o, i) => ({ o, base: o.position.z, lejos: o.position.z + i * paso }))
+      .map((o, i) => {
+        const base = o.position.clone()
+        const salida = modelo.piezas![i]?.salida
+        const lejos = salida
+          ? base.clone().addScaledVector(new THREE.Vector3(...salida), lado)
+          : base.clone().setZ(base.z + i * paso)
+        return { o, base, lejos }
+      })
   }, [copia, modelo.piezas])
 
   useFrame((_, dt) => {
-    for (const c of capas) c.o.position.z = THREE.MathUtils.damp(c.o.position.z, separado ? c.lejos : c.base, 5, dt)
+    // Mismo amortiguado que `MathUtils.damp` (λ = 5), en los tres ejes.
+    const t = 1 - Math.exp(-5 * dt)
+    for (const c of capas) c.o.position.lerp(separado ? c.lejos : c.base, t)
   })
 
   return <primitive object={copia} />
