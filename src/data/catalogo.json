@@ -1232,6 +1232,45 @@
     "portada": "monje-guerrero-chibi.webp"
   },
   {
+    "id": "monje-guerrero-chibi-piezas",
+    "nombre": "Monje Guerrero Chibi · 2 Piezas",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "STL"
+    ],
+    "descripcion": "El pequeño monje guerrero dividido para imprimir sin cambiar su forma: la cabeza, con las orejas, y el cuerpo. El corte va inclinado por el cuello, bajo la barbilla, y queda oculto al armarla; un pasador en D une las dos piezas a presión y no deja que la cabeza gire. En la espalda lleva el sello de la escuela con FLEMIN en relieve. 100 mm de alto; la cabeza se imprime apoyada sobre el corte.",
+    "archivo": "meshy/monje-guerrero-chibi-piezas.glb",
+    "peso": 1310724,
+    "origen": "Diseño propio · generado con Meshy AI, dividido para imprimir",
+    "destacado": true,
+    "alta": "2026-10-08",
+    "piezas": [
+      {
+        "nombre": "Cuerpo",
+        "color": "#f07a2a",
+        "detalle": "La figura sin cabeza, de pie sobre sus zapatos, con el sello FLEMIN en la espalda. Lleva en el cuello el pasador en D de 8 mm.",
+        "salida": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nombre": "Cabeza",
+        "color": "#f2c4a8",
+        "detalle": "Cabeza y orejas en una pieza. Baja un poco inclinada hacia atrás y entra a presión en la D (0,15 mm de holgura). Solo encaja mirando al frente.",
+        "salida": [
+          0,
+          0.27,
+          0.08
+        ]
+      }
+    ],
+    "portada": "monje-guerrero-chibi-piezas.webp",
+    "triangulos": 191226
+  },
+  {
     "id": "monje-guerrero-chibi-escultura",
     "nombre": "Monje Guerrero Chibi · Escultura",
     "categoria": "dragon-ball-z",
