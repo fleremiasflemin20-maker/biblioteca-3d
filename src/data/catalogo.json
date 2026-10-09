@@ -1154,6 +1154,45 @@
     "portada": "guerrero-futuro-chibi-a.webp"
   },
   {
+    "id": "guerrero-futuro-chibi-a-piezas",
+    "nombre": "Guerrero del Futuro Chibi · A · 2 Piezas",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "STL"
+    ],
+    "descripcion": "El guerrero del futuro dividido para imprimir sin cambiar su forma: la cabeza, con todo el cabello lila y la cara, y el cuerpo, que conserva la chaqueta, la mano y la espada al hombro. El corte sigue el borde del pelo donde la mano lo toca y va plano en el cuello; un pasador en D une las piezas a presión y no deja que la cabeza gire. 100 mm de alto.",
+    "archivo": "meshy/guerrero-futuro-chibi-a-piezas.glb",
+    "peso": 3199648,
+    "origen": "Diseño propio · generado con Meshy AI, dividido para imprimir",
+    "destacado": true,
+    "alta": "2026-10-08",
+    "piezas": [
+      {
+        "nombre": "Cuerpo",
+        "color": "#3b4bc8",
+        "detalle": "Chaqueta, mano y espada en una pieza, de pie sobre las botas. Lleva en el cuello el pasador en D de 7 mm.",
+        "salida": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nombre": "Cabeza",
+        "color": "#b79ae0",
+        "detalle": "Cabello y cara en una pieza. Baja inclinada hacia atrás y entra a presión en la D (0,15 mm de holgura), pasando junto a la mano de la espada. Solo encaja mirando al frente.",
+        "salida": [
+          0,
+          0.25,
+          0.125
+        ]
+      }
+    ],
+    "portada": "guerrero-futuro-chibi-a-piezas.webp",
+    "triangulos": 451156
+  },
+  {
     "id": "guerrero-futuro-chibi-b",
     "nombre": "Guerrero del Futuro Chibi · B",
     "categoria": "dragon-ball-z",
