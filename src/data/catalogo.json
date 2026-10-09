@@ -1076,6 +1076,45 @@
     "portada": "saiyan-legendario-chibi-dorado.webp"
   },
   {
+    "id": "saiyan-legendario-chibi-dorado-piezas",
+    "nombre": "Saiyan Legendario Chibi · Dorado · 2 Piezas",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "STL"
+    ],
+    "descripcion": "El guerrero legendario dividido para imprimir sin cambiar su forma: la cabeza con toda la melena dorada y la cara, y el cuerpo con los hombros y la espalda limpios. El corte sigue el borde del pelo donde descansa sobre la espalda y es plano dentro del cuello; un pasador en D une las piezas a presión y no deja que la cabeza gire. 100 mm de alto.",
+    "archivo": "meshy/saiyan-legendario-chibi-dorado-piezas.glb",
+    "peso": 2586984,
+    "origen": "Diseño propio · generado con Meshy AI, dividido para imprimir",
+    "destacado": true,
+    "alta": "2026-10-09",
+    "piezas": [
+      {
+        "nombre": "Cuerpo",
+        "color": "#f2c2a8",
+        "detalle": "El torso musculoso, la faja y las piernas, de pie sobre las botas. Lleva en el cuello el pasador en D de 7 mm.",
+        "salida": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nombre": "Cabeza",
+        "color": "#c9e04a",
+        "detalle": "Melena y cara en una pieza. Se apoya el pelo sobre la espalda y baja un poco inclinada hacia atrás hasta entrar a presión en la D (0,15 mm de holgura). Solo encaja mirando al frente.",
+        "salida": [
+          0,
+          0.26,
+          0.104
+        ]
+      }
+    ],
+    "portada": "saiyan-legendario-chibi-dorado-piezas.webp",
+    "triangulos": 380924
+  },
+  {
     "id": "saiyan-legendario-chibi-verde",
     "nombre": "Saiyan Legendario Chibi · Verde",
     "categoria": "dragon-ball-z",
