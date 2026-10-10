@@ -1474,9 +1474,9 @@
     "formatos": [
       "STL"
     ],
-    "descripcion": "El samurái errante dividido para imprimir sin cambiar su forma: la cabeza con toda la melena, que cae como una capa por la espalda, y el cuerpo con el gi, la katana y la bolsa. La cara interior de la capa de pelo se rebajó lo justo para que pase el pliegue del gi al montarla; por fuera no cambia nada. Un pasador en D une las piezas a presión y no deja que la cabeza gire. 100 mm de alto.",
+    "descripcion": "El samurái errante dividido para imprimir sin cambiar su forma: la cabeza entera, con la barbilla completa y toda la melena que cae como una capa por la espalda, y el cuerpo con el gi, la katana y la bolsa. El corte va justo bajo la barbilla, siguiendo el cuello del gi, y el pasador en D está centrado bajo el cráneo; une las piezas a presión y no deja que la cabeza gire. 100 mm de alto.",
     "archivo": "meshy/samurai-errante-chibi-a-piezas.glb",
-    "peso": 2876932,
+    "peso": 3392736,
     "origen": "Diseño propio · generado con Meshy AI, dividido para imprimir",
     "destacado": true,
     "alta": "2026-10-09",
@@ -1494,7 +1494,7 @@
       {
         "nombre": "Cabeza",
         "color": "#222222",
-        "detalle": "Cara y melena en una pieza. Se baja recta, deslizando la capa de pelo por la espalda, y entra a presión en la D (0,15 mm de holgura). Solo encaja mirando al frente.",
+        "detalle": "Cara, barbilla y melena en una pieza. Se baja recta deslizando la capa de pelo por la espalda y entra a presión en la D centrada (0,15 mm de holgura). Solo encaja mirando al frente.",
         "salida": [
           0,
           0.28,
