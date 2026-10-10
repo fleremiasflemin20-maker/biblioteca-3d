@@ -1468,15 +1468,15 @@
   },
   {
     "id": "samurai-errante-chibi-a-piezas",
-    "nombre": "Samurái Errante Chibi · A · 3 Piezas",
+    "nombre": "Samurái Errante Chibi · A · 4 Piezas",
     "categoria": "dragon-ball-z",
     "precio": 19,
     "formatos": [
       "STL"
     ],
-    "descripcion": "El samurái errante dividido para imprimir sin cambiar su forma: la cabeza entera con la barbilla y la melena, el cuerpo con el gi y la bolsa, y la katana aparte. La katana se imprime acostada, recta y sin soportes altos, y se desliza por un túnel que atraviesa el puño y la faja hasta que la guarda hace tope, igual que meterla en el cinturón. Un pasador en D centrado une la cabeza a presión. 100 mm de alto.",
+    "descripcion": "El samurái errante dividido para imprimir sin cambiar su forma: la cabeza entera con la barbilla y la melena, el cuerpo con el gi, la bolsa y el centro de la katana con su guarda, y las dos puntas libres de la katana aparte. La empuñadura y la vaina se imprimen acostadas, rectas y sin soportes altos, y entran a presión con un pasador en D en el muñón que queda en el cuerpo. Un pasador en D centrado une la cabeza. 100 mm de alto.",
     "archivo": "meshy/samurai-errante-chibi-a-piezas.glb",
-    "peso": 3507052,
+    "peso": 3439456,
     "origen": "Diseño propio · generado con Meshy AI, dividido para imprimir",
     "destacado": true,
     "alta": "2026-10-09",
@@ -1484,7 +1484,7 @@
       {
         "nombre": "Cuerpo",
         "color": "#f07a2a",
-        "detalle": "Gi, faja, puño y bolsa, de pie sobre las sandalias. Lleva el pasador en D del cuello y el túnel de la katana a través del puño y la faja.",
+        "detalle": "Gi, faja, puño y bolsa, con el tramo central de la katana y la guarda, que van metidos en la faja. Lleva el pasador en D del cuello y los huecos de las dos puntas de la katana.",
         "salida": [
           0,
           0,
@@ -1502,18 +1502,28 @@
         ]
       },
       {
-        "nombre": "Katana",
-        "color": "#e8c547",
-        "detalle": "Vaina, guarda y empuñadura en una pieza recta. Se mete por el túnel con la punta primero, de delante hacia atrás, hasta que la guarda toca la faja (0,1 mm de holgura; una gota de pegamento si queda floja).",
+        "nombre": "Vaina",
+        "color": "#8a5a9e",
+        "detalle": "La punta trasera de la katana. Su pasador en D de 2,2 mm entra a presión en el muñón de la cadera (0,15 mm de holgura).",
         "salida": [
-          -0.059,
-          0.191,
-          0.287
+          0.034,
+          -0.109,
+          -0.164
+        ]
+      },
+      {
+        "nombre": "Empuñadura",
+        "color": "#e8c547",
+        "detalle": "La punta delantera de la katana. Su pasador en D de 2,2 mm entra a presión en la guarda.",
+        "salida": [
+          -0.034,
+          0.109,
+          0.164
         ]
       }
     ],
     "portada": "samurai-errante-chibi-a-piezas.webp",
-    "triangulos": 469822
+    "triangulos": 464532
   },
   {
     "id": "samurai-errante-chibi-c",
