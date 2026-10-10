@@ -1467,6 +1467,45 @@
     "portada": "samurai-errante-chibi-a.webp"
   },
   {
+    "id": "samurai-errante-chibi-a-piezas",
+    "nombre": "Samurái Errante Chibi · A · 2 Piezas",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "STL"
+    ],
+    "descripcion": "El samurái errante dividido para imprimir sin cambiar su forma: la cabeza con toda la melena, que cae como una capa por la espalda, y el cuerpo con el gi, la katana y la bolsa. La cara interior de la capa de pelo se rebajó lo justo para que pase el pliegue del gi al montarla; por fuera no cambia nada. Un pasador en D une las piezas a presión y no deja que la cabeza gire. 100 mm de alto.",
+    "archivo": "meshy/samurai-errante-chibi-a-piezas.glb",
+    "peso": 2876932,
+    "origen": "Diseño propio · generado con Meshy AI, dividido para imprimir",
+    "destacado": true,
+    "alta": "2026-10-09",
+    "piezas": [
+      {
+        "nombre": "Cuerpo",
+        "color": "#f07a2a",
+        "detalle": "Gi, faja, katana y bolsa en una pieza, de pie sobre las sandalias. Lleva en el cuello el pasador en D de 6,6 mm.",
+        "salida": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nombre": "Cabeza",
+        "color": "#222222",
+        "detalle": "Cara y melena en una pieza. Se baja recta, deslizando la capa de pelo por la espalda, y entra a presión en la D (0,15 mm de holgura). Solo encaja mirando al frente.",
+        "salida": [
+          0,
+          0.28,
+          -0.03
+        ]
+      }
+    ],
+    "portada": "samurai-errante-chibi-a-piezas.webp",
+    "triangulos": 406108
+  },
+  {
     "id": "samurai-errante-chibi-c",
     "nombre": "Samurái Errante Chibi · C",
     "categoria": "dragon-ball-z",
