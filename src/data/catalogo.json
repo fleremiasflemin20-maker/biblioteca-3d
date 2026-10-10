@@ -999,6 +999,56 @@
     "licencia": "CC BY-SA 4.0"
   },
   {
+    "id": "organizador-consola",
+    "nombre": "Organizador de consola central a medida",
+    "categoria": "autos",
+    "precio": 8,
+    "formatos": [
+      "STL",
+      "SCAD"
+    ],
+    "descripcion": "Organizador para la consola del auto: un hueco para tarjetas (86 × 54 mm), otro para monedas, una bandeja larga para las gafas plegadas y un compartimento grande para el celular, separados por paredes de 2,4 mm. Cuerpo PETG de 230 × 150 × 70 mm y base de TPU 95A con bumps antideslizantes que abraza la bandeja con 0,4 mm de holgura, para que no resbale ni raspe el hueco. Es 100 % paramétrico en OpenSCAD: ajusta largo, ancho y la lista de huecos a la medida de tu auto y vuelve a exportar. Se imprime en dos piezas sin soportes: bandeja en PETG a 240–250 °C y base en TPU 95A a 20 mm/s.",
+    "archivo": "propios/organizador-consola.glb",
+    "peso": 801472,
+    "origen": "Diseño propio · paramétrico",
+    "destacado": true,
+    "alta": "2026-10-10",
+    "licencia": "CC BY-SA 4.0",
+    "piezas": [
+      {
+        "nombre": "Cuerpo PETG",
+        "color": "#3F6E9E",
+        "detalle": "La bandeja con los cuatro huecos: tarjetas, monedas, gafas plegadas y celular. Paredes y divisores de 2,4 mm, esquinas redondeadas.",
+        "salida": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nombre": "Base TPU antideslizante",
+        "color": "#363636",
+        "detalle": "Marco de TPU 95A que abraza la bandeja con 0,4 mm de holgura y bumps en el piso para que no se mueva ni raye la consola."
+      }
+    ],
+    "documentos": [
+      {
+        "nombre": "Código paramétrico (OpenSCAD)",
+        "archivo": "organizador-consola/organizador-consola.scad"
+      },
+      {
+        "nombre": "Cuerpo PETG · STL",
+        "archivo": "organizador-consola/organizador-consola-tray-PETG.stl"
+      },
+      {
+        "nombre": "Base TPU antideslizante · STL",
+        "archivo": "organizador-consola/organizador-consola-base-TPU.stl"
+      }
+    ],
+    "portada": "organizador-consola.webp",
+    "triangulos": 39978
+  },
+  {
     "id": "espadachin-rubio-anime",
     "nombre": "Espadachín Rubio",
     "categoria": "anime",
