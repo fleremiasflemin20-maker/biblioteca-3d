@@ -1,5 +1,43 @@
 [
   {
+    "id": "muelle-carga-todo-en-uno",
+    "nombre": "Muelle de Carga «Todo en Uno» Paramétrico",
+    "categoria": "tecnologia",
+    "precio": 8,
+    "formatos": [
+      "STL",
+      "SCAD",
+      "PDF"
+    ],
+    "descripcion": "Base de escritorio que carga a la vez celular, reloj y audífonos, generada a medida de los tres dispositivos de cada cliente. Usa los cargadores originales: disco MagSafe o Qi2 en un respaldo inclinado 15°, disco del reloj en una torre con espacio para la correa y el estuche de audífonos sobre un conector USB-C fijo; los cables van por ranuras abiertas y salen todos por detrás. Modelado por código en OpenSCAD: al elegir los modelos (iPhone, Galaxy, Pixel, Apple Watch, AirPods o medidas propias) se recalculan alojamientos, ángulos y base. Incluye probeta de ajuste, versión con el celular sobre USB-C y opción de nombre incrustado en segundo color. 203 × 95 × 117 mm en la configuración base, PLA mate, sin soportes. Los cargadores no se incluyen.",
+    "archivo": "propios/muelle-carga-todo-en-uno.glb",
+    "peso": 150596,
+    "origen": "Diseño propio · CAD paramétrico (OpenSCAD)",
+    "destacado": true,
+    "alta": "2026-10-10",
+    "licencia": "CC BY-NC-SA 4.0",
+    "piezas": [
+      {
+        "nombre": "Cuerpo",
+        "color": "#2b3035",
+        "detalle": "Base, respaldo del celular, torre del reloj y zócalo de los audífonos en una sola pieza, con los alojamientos de los cargadores y las ranuras de cable."
+      },
+      {
+        "nombre": "Nombre",
+        "color": "#f5b82e",
+        "detalle": "Texto de 0,8 mm que se incrusta en el frente; se imprime en segundo color en la misma placa con el CFS."
+      }
+    ],
+    "documentos": [
+      {
+        "nombre": "Planos técnicos A3 (vistas, secciones y parámetros)",
+        "archivo": "muelle-carga-todo-en-uno/FLM-MC-01_planos-A3.pdf"
+      }
+    ],
+    "portada": "muelle-carga-todo-en-uno.webp",
+    "triangulos": 8262
+  },
+  {
     "id": "llavero-pata-oliver",
     "nombre": "Placa Pata para Mascota · 3 Piezas",
     "categoria": "accesorios",
