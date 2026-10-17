@@ -1,5 +1,35 @@
 [
   {
+    "id": "perillas-ac-reemplazo",
+    "nombre": "Perillas de A/C de Reemplazo Paramétricas",
+    "categoria": "autos",
+    "precio": 5,
+    "formatos": [
+      "STL",
+      "SCAD",
+      "PDF"
+    ],
+    "descripcion": "Generador en OpenSCAD para reponer las perillas del aire acondicionado y la ventilación que se rompen o se pelan en autos de más de 10 años. Trae 9 presets de partida (GM Express/Savana 2008-2020, Toyota Hilux 2005-2015, Toyota Tundra 1999-2006, Jeep Wrangler TJ 1999-2006, Honda Civic 2006-2011, Chevrolet Aveo T250, VW Jetta A4/Golf Mk4, cubre-palanca de Nissan Tsuru B13 y una universal de eje D 6 mm) y acepta ejes en D, doble D, pala o estriados. Textura de estrías o moleteado, indicador en ranura o relieve, costillas de presión internas y una probeta de tres anillos (−0,1 / 0 / +0,1 mm) para acertar el ajuste antes de imprimir la perilla final. Solo el preset del GM Express/Savana tiene medidas publicadas (Dorman 76834); los otros ocho son estimados y hay que medir el eje del auto real antes de imprimir. Se imprime sin soportes en ASA, que aguanta el sol del tablero.",
+    "archivo": "propios/perillas-ac-reemplazo.glb",
+    "peso": 933452,
+    "origen": "Diseño propio · CAD paramétrico (OpenSCAD)",
+    "destacado": true,
+    "alta": "2026-10-15",
+    "licencia": "CC BY-NC-SA 4.0",
+    "documentos": [
+      {
+        "nombre": "Guía de medición, presets y fuentes",
+        "archivo": "perillas-ac-reemplazo/FLM-PA_guia-medicion-y-presets.pdf"
+      },
+      {
+        "nombre": "Resumen visual de los 9 presets",
+        "archivo": "perillas-ac-reemplazo/FLM-PA_resumen-presets.png"
+      }
+    ],
+    "portada": "perillas-ac-reemplazo.webp",
+    "triangulos": 51696
+  },
+  {
     "nombre": "Mano Robótica Colorida",
     "categoria": "mecanica",
     "precio": 18,
