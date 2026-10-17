@@ -30,6 +30,134 @@
     "triangulos": 51696
   },
   {
+    "nombre": "Mano Robótica Colorida",
+    "categoria": "mecanica",
+    "precio": 18,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Mano robótica estilizada con textura colorida, generada con Tripo AI. Lista para render o impresión.",
+    "destacado": false,
+    "origen": "Modelado propio",
+    "id": "mano-robotica-colorida",
+    "archivo": "subidos/mano-robotica-colorida.glb",
+    "peso": 67162952,
+    "alta": "2026-10-16",
+    "portada": "mano-robotica-colorida.webp",
+    "triangulos": 1969699
+  },
+  {
+    "nombre": "Personaje Anime en Relieve",
+    "categoria": "anime",
+    "precio": 8,
+    "formatos": [
+      "GLB",
+      "STL"
+    ],
+    "descripcion": "Personaje anime en relieve blanco sobre placa, generado con Tripo AI. Listo para pintar o imprimir.",
+    "destacado": false,
+    "origen": "Modelado propio",
+    "id": "personaje-anime-en-relieve",
+    "archivo": "subidos/personaje-anime-en-relieve.glb",
+    "peso": 23701856,
+    "alta": "2026-10-16",
+    "portada": "personaje-anime-en-relieve.webp",
+    "triangulos": 987313
+  },
+  {
+    "nombre": "Panel Decorativo en Relieve",
+    "categoria": "accesorios",
+    "precio": 8,
+    "formatos": [
+      "GLB",
+      "STL"
+    ],
+    "descripcion": "Panel decorativo de borde ornamentado en relieve blanco, generado con Tripo AI. Listo para pintar o imprimir.",
+    "destacado": false,
+    "origen": "Modelado propio",
+    "id": "panel-decorativo-en-relieve",
+    "archivo": "subidos/panel-decorativo-en-relieve.glb",
+    "peso": 23316276,
+    "alta": "2026-10-16",
+    "portada": "panel-decorativo-en-relieve.webp",
+    "triangulos": 971484
+  },
+  {
+    "nombre": "Figura en Relieve 01",
+    "categoria": "seres-flemin",
+    "precio": 8,
+    "formatos": [
+      "GLB",
+      "STL"
+    ],
+    "descripcion": "Placa en relieve blanco con base, generada con Tripo AI. Personaje sin identificar a la espera de revisión; listo para pintar o imprimir.",
+    "destacado": false,
+    "origen": "Modelado propio",
+    "id": "figura-en-relieve-01",
+    "archivo": "subidos/figura-en-relieve-01.glb",
+    "peso": 22867312,
+    "alta": "2026-10-16",
+    "portada": "figura-en-relieve-01.webp",
+    "triangulos": 952784
+  },
+  {
+    "nombre": "Vegeta Chibi en Relieve",
+    "categoria": "dragon-ball-z",
+    "precio": 10,
+    "formatos": [
+      "GLB",
+      "STL"
+    ],
+    "descripcion": "Vegeta chibi en relieve blanco sobre placa con base, generado con Tripo AI. Listo para pintar o imprimir.",
+    "destacado": false,
+    "origen": "Modelado propio",
+    "id": "vegeta-chibi-en-relieve",
+    "archivo": "subidos/vegeta-chibi-en-relieve.glb",
+    "peso": 23040596,
+    "alta": "2026-10-16",
+    "portada": "vegeta-chibi-en-relieve.webp",
+    "triangulos": 959981
+  },
+  {
+    "nombre": "Piccolo Busto en Relieve",
+    "categoria": "dragon-ball-z",
+    "precio": 10,
+    "formatos": [
+      "GLB",
+      "STL"
+    ],
+    "descripcion": "Busto chibi de Piccolo en relieve blanco, generado con Tripo AI a partir de referencia. Listo para pintar o imprimir sin soportes.",
+    "destacado": false,
+    "origen": "Modelado propio",
+    "id": "piccolo-busto-en-relieve",
+    "archivo": "subidos/piccolo-busto-en-relieve.glb",
+    "peso": 45913280,
+    "alta": "2026-10-16",
+    "portada": "piccolo-busto-en-relieve.webp",
+    "triangulos": 1913000
+  },
+  {
+    "nombre": "Piccolo Chibi",
+    "categoria": "dragon-ball-z",
+    "precio": 15,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Piccolo chibi con capa y turbante, generado con Tripo AI. Pose de pie, lista para render o impresión.",
+    "destacado": false,
+    "origen": "Modelado propio",
+    "id": "piccolo-chibi",
+    "archivo": "subidos/piccolo-chibi.glb",
+    "peso": 63013804,
+    "alta": "2026-10-16",
+    "portada": "piccolo-chibi.webp",
+    "triangulos": 1975945
+  },
+  {
     "id": "muelle-carga-todo-en-uno",
     "nombre": "Muelle de Carga «Todo en Uno» Paramétrico",
     "categoria": "tecnologia",
