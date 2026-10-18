@@ -1,5 +1,166 @@
 [
   {
+    "nombre": "Seiya de Pegaso Chibi",
+    "categoria": "caballeros-del-zodiaco",
+    "precio": 15,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Seiya con la armadura de Pegaso en versión chibi, peinado al viento y pose firme sobre peana redonda. Modelo a color generado con Tripo AI, listo para render o para imprimir y pintar.",
+    "destacado": false,
+    "origen": "Generado con Tripo AI",
+    "licencia": "Fan art · solo uso personal",
+    "id": "seiya-pegaso-chibi",
+    "archivo": "subidos/seiya-pegaso-chibi.glb",
+    "peso": 9954200,
+    "alta": "2026-10-17",
+    "portada": "seiya-pegaso-chibi.webp",
+    "triangulos": 1883672
+  },
+  {
+    "nombre": "Shiryu de Dragón Chibi",
+    "categoria": "caballeros-del-zodiaco",
+    "precio": 15,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Shiryu con la armadura del Dragón verde esmeralda, casco con cuernos dorados y su larga melena negra, en versión chibi sobre peana. Generado con Tripo AI, listo para render o impresión.",
+    "destacado": false,
+    "origen": "Generado con Tripo AI",
+    "licencia": "Fan art · solo uso personal",
+    "id": "shiryu-dragon-chibi",
+    "archivo": "subidos/shiryu-dragon-chibi.glb",
+    "peso": 10188580,
+    "alta": "2026-10-17",
+    "portada": "shiryu-dragon-chibi.webp",
+    "triangulos": 1934698
+  },
+  {
+    "nombre": "Hyoga de Cisne Chibi",
+    "categoria": "caballeros-del-zodiaco",
+    "precio": 15,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Hyoga con la armadura del Cisne azul y plata, alas en la diadema y pelo rubio, en versión chibi sobre peana. Generado con Tripo AI, listo para render o impresión.",
+    "destacado": false,
+    "origen": "Generado con Tripo AI",
+    "licencia": "Fan art · solo uso personal",
+    "id": "hyoga-cisne-chibi",
+    "archivo": "subidos/hyoga-cisne-chibi.glb",
+    "peso": 10438104,
+    "alta": "2026-10-17",
+    "portada": "hyoga-cisne-chibi.webp",
+    "triangulos": 1990813
+  },
+  {
+    "nombre": "Shun de Andrómeda Chibi",
+    "categoria": "caballeros-del-zodiaco",
+    "precio": 15,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Shun con la armadura rosa de Andrómeda y su cadena enrollada a los brazos, en versión chibi sobre peana. Generado con Tripo AI, listo para render o impresión.",
+    "destacado": false,
+    "origen": "Generado con Tripo AI",
+    "licencia": "Fan art · solo uso personal",
+    "id": "shun-andromeda-chibi",
+    "archivo": "subidos/shun-andromeda-chibi.glb",
+    "peso": 10164160,
+    "alta": "2026-10-17",
+    "portada": "shun-andromeda-chibi.webp",
+    "triangulos": 1916550
+  },
+  {
+    "nombre": "Ikki de Fénix Chibi",
+    "categoria": "caballeros-del-zodiaco",
+    "precio": 15,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Ikki con la armadura del Fénix azul oscuro, casco con cresta naranja y alas de fuego, en versión chibi sobre peana. Generado con Tripo AI, listo para render o impresión.",
+    "destacado": false,
+    "origen": "Generado con Tripo AI",
+    "licencia": "Fan art · solo uso personal",
+    "id": "ikki-fenix-chibi",
+    "archivo": "subidos/ikki-fenix-chibi.glb",
+    "peso": 10246684,
+    "alta": "2026-10-17",
+    "portada": "ikki-fenix-chibi.webp",
+    "triangulos": 1948562
+  },
+  {
+    "nombre": "Aioria de Leo Chibi",
+    "categoria": "caballeros-del-zodiaco",
+    "precio": 15,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Aioria con la armadura dorada de Leo y su casco de melena de león, en versión chibi sobre peana. Generado con Tripo AI, listo para render o impresión; queda muy bien con filamento seda dorado.",
+    "destacado": false,
+    "origen": "Generado con Tripo AI",
+    "licencia": "Fan art · solo uso personal",
+    "id": "aioria-leo-chibi",
+    "archivo": "subidos/aioria-leo-chibi.glb",
+    "peso": 10330088,
+    "alta": "2026-10-17",
+    "portada": "aioria-leo-chibi.webp",
+    "triangulos": 1959795
+  },
+  {
+    "nombre": "Saga de Géminis Chibi",
+    "categoria": "caballeros-del-zodiaco",
+    "precio": 15,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Saga con la armadura dorada de Géminis y su larga melena azul, en versión chibi sobre peana. Generado con Tripo AI, listo para render o impresión.",
+    "destacado": false,
+    "origen": "Generado con Tripo AI",
+    "licencia": "Fan art · solo uso personal",
+    "id": "saga-geminis-chibi",
+    "archivo": "subidos/saga-geminis-chibi.glb",
+    "peso": 10220340,
+    "alta": "2026-10-17",
+    "portada": "saga-geminis-chibi.webp",
+    "triangulos": 1951304
+  },
+  {
+    "nombre": "Athena (Saori) Chibi · Escultura",
+    "categoria": "caballeros-del-zodiaco",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Saori Kido como Athena, con vestido largo y el báculo de Niké, en versión chibi sobre peana. Malla blanca sin textura generada con Tripo AI, pensada para imprimir en una pieza y pintar a mano.",
+    "destacado": false,
+    "origen": "Generado con Tripo AI",
+    "licencia": "Fan art · solo uso personal",
+    "id": "athena-saori-chibi-escultura",
+    "archivo": "subidos/athena-saori-chibi-escultura.glb",
+    "peso": 6939100,
+    "alta": "2026-10-17",
+    "portada": "athena-saori-chibi-escultura.webp",
+    "triangulos": 1907021,
+    "sinTextura": true
+  },
+  {
     "id": "perillas-ac-reemplazo",
     "nombre": "Perillas de A/C de Reemplazo Paramétricas",
     "categoria": "autos",
