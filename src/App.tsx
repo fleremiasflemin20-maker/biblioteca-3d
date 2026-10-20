@@ -1,5 +1,5 @@
 import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { ArrowRight, ChevronLeft, ChevronRight, Hand, MessageCircle, Moon, Plus, Search, Sun, Wand2 } from 'lucide-react'
+import { ArrowRight, Box, ChevronLeft, ChevronRight, Hammer, Hand, MessageCircle, Moon, Plus, Search, Sun, Wand2 } from 'lucide-react'
 import { Visor } from './components/Visor'
 import { Tarjeta } from './components/Tarjeta'
 import { Ficha } from './components/Ficha'
@@ -12,6 +12,13 @@ import { useTema } from './lib/tema'
 
 // El taller trae su propio peso (BVH, lectores de 3MF, cuantización): se carga al abrirlo.
 const Taller = lazy(() => import('./components/taller/Taller'))
+// El Estudio 3D (sala y editor) carga three.js con Manifold en WASM: también bajo demanda.
+const Sala = lazy(() => import('./estudio/sala/Sala'))
+const Editor = lazy(() => import('./estudio/editor/Editor'))
+
+/** El estudio vive en el hash (#estudio, #editor) para poder enlazarlo directo. */
+type Estudio = { vista: 'sala' } | { vista: 'editor'; inicial?: Modelo3D }
+const estudioDesdeHash = (): Estudio | null => (location.hash === '#estudio' ? { vista: 'sala' } : location.hash === '#editor' ? { vista: 'editor' } : null)
 
 type Orden = 'recientes' | 'barato' | 'caro' | 'nombre'
 type Acabado = 'todos' | 'color' | 'sin-textura'
@@ -31,7 +38,19 @@ export default function App() {
   const [sinPortada, setSinPortada] = useState(0)
   const [manos, setManos] = useState<Manos | null>(null)
   const [taller, setTaller] = useState<{ inicial?: Modelo3D } | null>(null)
+  const [estudio, setEstudioCrudo] = useState<Estudio | null>(estudioDesdeHash)
   const { tema, alternar } = useTema()
+
+  const setEstudio = useCallback((e: Estudio | null) => {
+    setEstudioCrudo(e)
+    const hash = e ? (e.vista === 'sala' ? '#estudio' : '#editor') : ''
+    if (location.hash !== hash) history.replaceState(null, '', hash || location.pathname + location.search)
+  }, [])
+  useEffect(() => {
+    const cambio = () => setEstudioCrudo(estudioDesdeHash())
+    window.addEventListener('hashchange', cambio)
+    return () => window.removeEventListener('hashchange', cambio)
+  }, [])
 
   const c = CATEGORIAS[cat]
   const barra = useRef<HTMLElement>(null)
@@ -158,8 +177,11 @@ export default function App() {
                 <Plus size={16} /> <span className="hidden lg:inline">Subir</span>
               </button>
             )}
-            <button type="button" onClick={() => setTaller({})} className="pildora-clara !px-3.5">
-              <Wand2 size={16} /> <span className="hidden sm:inline">Taller 3D</span>
+            <button type="button" onClick={() => setEstudio({ vista: 'sala' })} className="pildora-negra !px-3.5">
+              <Box size={16} /> <span className="hidden sm:inline">Estudio 3D</span>
+            </button>
+            <button type="button" onClick={() => setTaller({})} className="pildora-clara hidden !px-3.5 md:inline-flex">
+              <Wand2 size={16} /> <span className="hidden lg:inline">Taller 3D</span>
             </button>
             <button type="button" onClick={() => abrirManos()} className="pildora-clara !px-3.5">
               <Hand size={16} /> <span className="hidden sm:inline">Modo manos</span>
@@ -191,11 +213,11 @@ export default function App() {
           <div className="entra">
             <button
               type="button"
-              onClick={() => abrirManos()}
+              onClick={() => setEstudio({ vista: 'sala' })}
               className="group inline-flex items-center gap-2 rounded-full border border-stone-200 bg-superficie py-1 pl-1 pr-3 text-[13px] text-stone-600 transition hover:border-stone-300"
             >
-              <span className="rounded-full bg-grafito px-2 py-0.5 text-[11px] font-medium text-hueso">Nuevo</span>
-              Sostén las figuras con tu mano
+              <span className="rounded-full bg-[#FF6A13] px-2 py-0.5 text-[11px] font-medium text-white">Nuevo</span>
+              Flemin Studio: recorre la sala y modela en 3D
               <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
             </button>
             <h1 className="mt-6 text-[clamp(2.6rem,5.6vw,5rem)] font-semibold leading-[1.02] tracking-[-0.035em]">
@@ -205,14 +227,17 @@ export default function App() {
               Tecnología, mecánica, autos, Dragon Ball Z, anime, manga y los Seres Flemin. Gira cada pieza en 3D antes de comprarla, o tómala con la mano desde tu cámara.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <button type="button" onClick={irAlCatalogo} className="pildora-negra !px-6 !py-3">
+              <button type="button" onClick={() => setEstudio({ vista: 'sala' })} className="pildora-negra !px-6 !py-3">
+                <Box size={17} /> Entrar al estudio
+              </button>
+              <button type="button" onClick={() => setEstudio({ vista: 'editor' })} className="pildora-clara !px-6 !py-3">
+                <Hammer size={17} /> Modelar en 3D
+              </button>
+              <button type="button" onClick={irAlCatalogo} className="pildora-clara !px-6 !py-3">
                 Explorar catálogo
               </button>
               <button type="button" onClick={() => abrirManos()} className="pildora-clara !px-6 !py-3">
                 <Hand size={17} /> Probar con tus manos
-              </button>
-              <button type="button" onClick={() => setTaller({})} className="pildora-clara !px-6 !py-3">
-                <Wand2 size={17} /> Pinta y separa en piezas
               </button>
             </div>
             <dl className="mt-10 flex gap-10 text-sm">
@@ -475,6 +500,36 @@ export default function App() {
           }
         >
           <Taller inicial={taller.inicial} oscuro={tema === 'oscuro'} onCerrar={() => setTaller(null)} />
+        </Suspense>
+      )}
+
+      {estudio && (
+        <Suspense
+          fallback={
+            <div className="fixed inset-0 z-50 grid place-items-center bg-[#0D0A14]">
+              <span className="h-6 w-6 animate-spin rounded-full border-2 border-white/15 border-t-[#FF6A13]" />
+            </div>
+          }
+        >
+          {estudio.vista === 'sala' ? (
+            <Sala
+              onCerrar={() => setEstudio(null)}
+              onEditor={(m) => setEstudio({ vista: 'editor', inicial: m })}
+              onFicha={(id) => {
+                setEstudio(null)
+                verFicha(id)
+              }}
+            />
+          ) : (
+            <Editor
+              inicial={estudio.inicial}
+              onCerrar={() => setEstudio(null)}
+              onTaller={() => {
+                setEstudio(null)
+                setTaller({})
+              }}
+            />
+          )}
         </Suspense>
       )}
 

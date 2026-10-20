@@ -27,6 +27,9 @@ export default {
         serif: ['Instrument Serif', 'Georgia', 'serif'],
         display: ['Archivo Black', 'Impact', 'sans-serif'],
         mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+        // Marca Flemin: el Estudio 3D (sala y editor).
+        flemin: ['Dela Gothic One', 'Archivo Black', 'Impact', 'sans-serif'],
+        chakra: ['Chakra Petch', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         display:  ['clamp(3rem, 9vw, 11rem)',    { lineHeight: '0.9',  letterSpacing: '-0.03em' }],

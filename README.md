@@ -47,6 +47,35 @@ Salen un STL por color y el 3MF en `Generador_Llaveros/pedidos/`. El script
 (`llavero_nombre.py`) y `src/lib/llavero.ts` comparten tipografía, siluetas y
 medidas: si se cambia una, hay que cambiar la otra.
 
+## Estudio 3D (Flemin Studio)
+
+Botón **Estudio 3D** (o `#estudio` / `#editor` en la URL). Todo corre en el
+navegador; no hay servidor.
+
+- **La sala** (`src/estudio/sala/`): las obras en pedestales alrededor de un
+  estudio circular. La cámara camina de una a otra, cada pieza se carga en 3D
+  al llegar, con luz de estudio, atardecer, neón o noche y modos color,
+  arcilla y malla. Dragon Ball y Caballeros del Zodiaco no entran en la sala pública
+  (`AJENAS` en `Sala.tsx`): siguen en la tienda.
+- **El editor** (`src/estudio/editor/`): formas básicas, texto, emblema Flemin
+  y SVG; mover, rotar y escalar con gizmo y atajos de Blender (G, R, S, 1/3/7,
+  F); rejilla en mm; regla; sólido/hueco y Combinar como en Tinkercad;
+  deshacer/rehacer; importar STL, 3MF, GLB, OBJ y SVG; exportar STL, 3MF
+  multicolor y GLB. La escena se guarda sola en el navegador.
+- **Imprimir**: perfiles K2 Plus (350³) y SPARKX i7 (260 × 260 × 255), revisar
+  malla (estanca, cuerpos, voladizo, gramos), auto-orientar, centrar, ajustar a
+  la cama y voladizos en rojo.
+- **Plantillas** (`src/estudio/geo/plantillas.ts`): funda BIC Mini/Maxi (tabla
+  `HUECOS`, la misma de `crear_funda.py`), anillos de prueba, grinder Flemin de
+  63 mm en 4 piezas (portado de `flemin_grinder.py`), caja con tapa, llavero con
+  nombre, test de tolerancias, maceta en espiral y engranaje.
+
+La geometría es [Manifold](https://github.com/elalish/manifold) en WASM, en un
+worker (`src/estudio/geo/geo.worker.ts`): toda unión o resta sale cerrada.
+Cuando el anillo de prueba diga la medida buena de la BIC Mini, cámbiala en
+`HUECOS` y también en `crear_funda.py`. Las piezas del catálogo se pueden abrir
+en el editor para mirarlas y combinarlas, pero no se exportan.
+
 ## Taller 3D
 
 El botón **Taller 3D** (barra superior, portada y cada ficha) abre una vitrina

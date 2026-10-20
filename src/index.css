@@ -96,3 +96,10 @@
     .group:hover .tarjeta-img { transform: none }
   }
 }
+
+/* Deslizadores del Estudio 3D: pista fina y tirador naranja Flemin. */
+.rango { -webkit-appearance: none; appearance: none; height: 18px; background: transparent; cursor: pointer; }
+.rango::-webkit-slider-runnable-track { height: 4px; border-radius: 9999px; background: rgb(255 255 255 / 0.1); }
+.rango::-moz-range-track { height: 4px; border-radius: 9999px; background: rgb(255 255 255 / 0.1); }
+.rango::-webkit-slider-thumb { -webkit-appearance: none; margin-top: -6px; height: 16px; width: 16px; border-radius: 9999px; background: #FF6A13; box-shadow: 0 0 0 3px rgb(255 106 19 / 0.25); }
+.rango::-moz-range-thumb { height: 16px; width: 16px; border: 0; border-radius: 9999px; background: #FF6A13; }
