@@ -50,7 +50,7 @@ medidas: si se cambia una, hay que cambiar la otra.
 ## Flemin Studio 3D (separador y editor)
 
 El separador de piezas y el editor 3D son **Flemin Studio 3D**, una web
-aparte: https://fleremiasflemin20-maker.github.io/flemin-studio-3d-web/
+aparte: https://flemin-studio-3d.analista-datos-pro.workers.dev/
 (su código está en el repo privado `flemin-studio-3d`).
 
 Los botones **Studio 3D**, **Separar en piezas** y **Modelar en 3D** abren
