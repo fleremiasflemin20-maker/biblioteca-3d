@@ -4,6 +4,7 @@ import { Visor } from './Visor'
 import type { Modo } from './Pieza'
 import { CATEGORIAS, CORREO, enlaceCompra, peso, precio, rutaDescarga, triangulos, type Modelo3D } from '../lib/catalogo'
 import { ICONO_CATEGORIA } from '../lib/iconos'
+import { enlaceStudio } from '../lib/studio'
 import { ICONOS, MEDIDAS, OPCIONES_INICIALES, PALETAS, describirPedido, type IconoId, type OpcionesLlavero, type PaletaId } from '../lib/llavero'
 
 const MODOS: { id: Modo; nombre: string }[] = [
@@ -25,7 +26,6 @@ export function Ficha({
   onCerrar,
   onMover,
   onManos,
-  onTaller,
 }: {
   modelo: Modelo3D
   numero: number
@@ -33,7 +33,6 @@ export function Ficha({
   onCerrar: () => void
   onMover: (paso: 1 | -1) => void
   onManos: () => void
-  onTaller: () => void
 }) {
   const [modo, setModo] = useState<Modo>('textura')
   const [separado, setSeparado] = useState(false)
@@ -282,9 +281,9 @@ export function Ficha({
               </p>
               <div className="flex gap-2">
                 {!modelo.personalizable && (
-                  <button type="button" onClick={onTaller} className="pildora-clara" title="Píntalo y míralo separado en piezas">
+                  <a href={enlaceStudio('separador', modelo)} className="pildora-clara" title="Píntalo y míralo separado en piezas en Flemin Studio 3D">
                     <Wand2 size={16} /> <span className="hidden sm:inline">Pintar y separar</span>
-                  </button>
+                  </a>
                 )}
                 <button type="button" onClick={onManos} className="pildora-clara">
                   <Hand size={16} /> <span className="hidden sm:inline">Ver con tus manos</span>

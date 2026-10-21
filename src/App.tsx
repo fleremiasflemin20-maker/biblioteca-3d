@@ -1,5 +1,5 @@
 import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { ArrowRight, Box, ChevronLeft, ChevronRight, Hammer, Hand, MessageCircle, Moon, Plus, Scissors, Search, Sun, Wand2 } from 'lucide-react'
+import { ArrowRight, Box, ChevronLeft, ChevronRight, Hammer, Hand, MessageCircle, Moon, Plus, Scissors, Search, Sun } from 'lucide-react'
 import { Visor } from './components/Visor'
 import { Tarjeta } from './components/Tarjeta'
 import { Ficha } from './components/Ficha'
@@ -11,8 +11,6 @@ import { ICONO_CATEGORIA } from './lib/iconos'
 import { enlaceStudio } from './lib/studio'
 import { useTema } from './lib/tema'
 
-// El taller trae su propio peso (BVH, lectores de 3MF, cuantización): se carga al abrirlo.
-const Taller = lazy(() => import('./components/taller/Taller'))
 // La sala del estudio carga three.js con su arquitectura: también bajo demanda.
 const Sala = lazy(() => import('./estudio/sala/Sala'))
 
@@ -40,7 +38,6 @@ export default function App() {
   const [subiendo, setSubiendo] = useState(false)
   const [sinPortada, setSinPortada] = useState(0)
   const [manos, setManos] = useState<Manos | null>(null)
-  const [taller, setTaller] = useState<{ inicial?: Modelo3D } | null>(null)
   const [estudio, setEstudioCrudo] = useState<Estudio | null>(estudioDesdeHash)
   const { tema, alternar } = useTema()
 
@@ -186,9 +183,6 @@ export default function App() {
             <a href={enlaceStudio('separador')} className="pildora-clara !px-3.5">
               <Scissors size={16} /> <span className="hidden sm:inline">Studio 3D</span>
             </a>
-            <button type="button" onClick={() => setTaller({})} className="pildora-clara hidden !px-3.5 md:inline-flex">
-              <Wand2 size={16} /> <span className="hidden lg:inline">Taller 3D</span>
-            </button>
             <button type="button" onClick={() => abrirManos()} className="pildora-clara !px-3.5">
               <Hand size={16} /> <span className="hidden sm:inline">Modo manos</span>
             </button>
@@ -482,10 +476,6 @@ export default function App() {
           onCerrar={cerrar}
           onMover={mover}
           onManos={() => abrirManos(lista[indiceAbierto].id)}
-          onTaller={() => {
-            setTaller({ inicial: lista[indiceAbierto] })
-            setAbierto(null)
-          }}
         />
       )}
       {manos && (
@@ -500,17 +490,6 @@ export default function App() {
         />
       )}
       {subiendo && <Subir onCerrar={() => setSubiendo(false)} />}
-      {taller && (
-        <Suspense
-          fallback={
-            <div className="fixed inset-0 z-50 grid place-items-center bg-hueso">
-              <span className="h-6 w-6 animate-spin rounded-full border-2 border-stone-200 border-t-stone-500" />
-            </div>
-          }
-        >
-          <Taller inicial={taller.inicial} oscuro={tema === 'oscuro'} onCerrar={() => setTaller(null)} />
-        </Suspense>
-      )}
 
       {estudio && (
         <Suspense

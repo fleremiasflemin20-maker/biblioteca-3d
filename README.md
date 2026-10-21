@@ -67,34 +67,10 @@ color, arcilla y malla (`src/estudio/sala/`). Dragon Ball y Caballeros del
 Zodiaco no entran en la sala pública (`AJENAS` en `Sala.tsx`): siguen en la
 tienda.
 
-## Taller 3D
+## Pintar y separar
 
-El botón **Taller 3D** (barra superior, portada y cada ficha) abre una vitrina
-interactiva. El visitante elige una pieza de la biblioteca, sube su modelo
-(`.3mf`, `.stl`, `.glb`, `.obj`) o una foto que la IA convierte en 3D, y:
-
-- **Pinta** con filamentos: pincel, relleno, gotero, deshacer, limpieza de
-  bordes y manchas. Una textura se agrupa sola en N filamentos (OKLab, k-medias).
-- **Separa en piezas**: cada color se corta por su frontera de pintura y se
-  tapa como sólido cerrado, con despiece animado, caras de corte resaltadas y
-  volumen, medidas y gramos por pieza.
-
-Lee la pintura multicolor de Bambu Studio, OrcaSlicer y PrusaSlicer con la
-misma subdivisión que el laminador (`src/lib/taller/pintura.ts`). Nada se
-descarga: el botón final es pedir la pieza impresa por WhatsApp. Los archivos
-del visitante se procesan en su navegador y no se suben.
-
-`npm test` comprueba la geometría (piezas cerradas, volúmenes, pintura) y el proxy.
-
-### Foto a 3D (Meshy)
-
-La clave de Meshy no puede ir en una página pública, así que vive en un proxy
-(`servidor/taller.ts`) que limita usos por IP y por día y sirve el modelo sin
-exponer su enlace.
-
-- **En local:** crea `.env.local` con `MESHY_API_KEY=msy_…` y `npm run dev`.
-- **Publicado:** despliega el repo en Netlify (función `netlify/functions/taller.mts`)
-  con las variables `MESHY_API_KEY` y `ORIGENES=https://fleremiasflemin20-maker.github.io`,
-  y en GitHub → Settings → Variables → Actions crea `TALLER_API` con
-  `https://<sitio>.netlify.app/api/taller`. Sin esa variable, la opción sale
-  como "Próximamente".
+El botón **Pintar y separar** de cada ficha y **Studio 3D** de la barra abren
+[Flemin Studio 3D](https://flemin-studio-3d.analista-datos-pro.workers.dev/),
+la web aparte con el separador por colores, cortes y cama, el editor y "Foto
+a 3D". Recibe la obra por la URL (`src/lib/studio.ts`) y la abre en modo
+protegido: se separa y se mide, pero no se descarga.
