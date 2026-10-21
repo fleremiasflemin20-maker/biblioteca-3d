@@ -5,7 +5,7 @@ import * as THREE from 'three'
 import { IMPRESORAS } from '../geo/tipos.ts'
 import { actualizar, transformarGrupo } from './acciones.ts'
 import { cajaMundo, desdeMatriz, useEditor, type NodoEditor } from './estado.ts'
-import { geometria, useMallaLocal } from './mallas.ts'
+import { geometria, geometriaColor, useMallaLocal } from './mallas.ts'
 import { camara, type Vista } from './camara.ts'
 import { AmbienteFlemin } from '../luces.tsx'
 
@@ -148,11 +148,13 @@ function ObjetoNodo({ n, elegido }: { n: NodoEditor; elegido: boolean }) {
   const alambre = useEditor((s) => s.alambre)
   const herramienta = useEditor((s) => s.herramienta)
   const grupo = useRef<THREE.Group>(null)
-  const geo = useMemo(() => (malla ? geometria(malla) : null), [malla])
+  const pintada = !!n.pintura && !n.hueco
+  const geo = useMemo(() => (malla ? (pintada && n.pintura ? geometriaColor(malla, n.pintura) : geometria(malla)) : null), [malla, pintada, n.pintura])
 
   const material = useMemo(() => {
     const m = new THREE.MeshStandardMaterial({
-      color: n.hueco ? '#9AA5B1' : n.color,
+      color: n.hueco ? '#9AA5B1' : pintada ? '#FFFFFF' : n.color,
+      vertexColors: pintada,
       roughness: 0.55,
       metalness: 0.05,
       transparent: n.hueco,
@@ -164,7 +166,7 @@ function ObjetoNodo({ n, elegido }: { n: NodoEditor; elegido: boolean }) {
       side: n.hueco ? THREE.DoubleSide : THREE.FrontSide,
     })
     return voladizos && !n.hueco ? conVoladizos(m) : m
-  }, [n.color, n.hueco, voladizos, alambre, elegido])
+  }, [n.color, n.hueco, voladizos, alambre, elegido, pintada])
   useEffect(() => () => material.dispose(), [material])
 
   useEffect(() => {

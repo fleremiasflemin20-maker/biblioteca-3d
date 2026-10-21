@@ -1,5 +1,5 @@
 import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { ArrowRight, Box, ChevronLeft, ChevronRight, Hammer, Hand, MessageCircle, Moon, Plus, Search, Sun, Wand2 } from 'lucide-react'
+import { ArrowRight, Box, ChevronLeft, ChevronRight, Hammer, Hand, MessageCircle, Moon, Plus, Scissors, Search, Sun, Wand2 } from 'lucide-react'
 import { Visor } from './components/Visor'
 import { Tarjeta } from './components/Tarjeta'
 import { Ficha } from './components/Ficha'
@@ -15,10 +15,15 @@ const Taller = lazy(() => import('./components/taller/Taller'))
 // El Estudio 3D (sala y editor) carga three.js con Manifold en WASM: también bajo demanda.
 const Sala = lazy(() => import('./estudio/sala/Sala'))
 const Editor = lazy(() => import('./estudio/editor/Editor'))
+const Separador = lazy(() => import('./estudio/separador/Separador'))
 
-/** El estudio vive en el hash (#estudio, #editor) para poder enlazarlo directo. */
-type Estudio = { vista: 'sala' } | { vista: 'editor'; inicial?: Modelo3D }
-const estudioDesdeHash = (): Estudio | null => (location.hash === '#estudio' ? { vista: 'sala' } : location.hash === '#editor' ? { vista: 'editor' } : null)
+/** El estudio vive en el hash (#estudio, #editor, #separador) para poder enlazarlo directo. */
+type Estudio = { vista: 'sala' } | { vista: 'editor'; inicial?: Modelo3D } | { vista: 'separador' }
+const HASH = { sala: '#estudio', editor: '#editor', separador: '#separador' } as const
+const estudioDesdeHash = (): Estudio | null => {
+  const v = (Object.keys(HASH) as (keyof typeof HASH)[]).find((k) => HASH[k] === location.hash)
+  return v ? ({ vista: v } as Estudio) : null
+}
 
 type Orden = 'recientes' | 'barato' | 'caro' | 'nombre'
 type Acabado = 'todos' | 'color' | 'sin-textura'
@@ -43,7 +48,7 @@ export default function App() {
 
   const setEstudio = useCallback((e: Estudio | null) => {
     setEstudioCrudo(e)
-    const hash = e ? (e.vista === 'sala' ? '#estudio' : '#editor') : ''
+    const hash = e ? HASH[e.vista] : ''
     if (location.hash !== hash) history.replaceState(null, '', hash || location.pathname + location.search)
   }, [])
   useEffect(() => {
@@ -180,6 +185,9 @@ export default function App() {
             <button type="button" onClick={() => setEstudio({ vista: 'sala' })} className="pildora-negra !px-3.5">
               <Box size={16} /> <span className="hidden sm:inline">Estudio 3D</span>
             </button>
+            <button type="button" onClick={() => setEstudio({ vista: 'separador' })} className="pildora-clara !px-3.5">
+              <Scissors size={16} /> <span className="hidden sm:inline">Separador</span>
+            </button>
             <button type="button" onClick={() => setTaller({})} className="pildora-clara hidden !px-3.5 md:inline-flex">
               <Wand2 size={16} /> <span className="hidden lg:inline">Taller 3D</span>
             </button>
@@ -217,7 +225,7 @@ export default function App() {
               className="group inline-flex items-center gap-2 rounded-full border border-stone-200 bg-superficie py-1 pl-1 pr-3 text-[13px] text-stone-600 transition hover:border-stone-300"
             >
               <span className="rounded-full bg-[#FF6A13] px-2 py-0.5 text-[11px] font-medium text-white">Nuevo</span>
-              Flemin Studio: recorre la sala y modela en 3D
+              Flemin Studio: separa por colores y cortes, recorre la sala y modela
               <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
             </button>
             <h1 className="mt-6 text-[clamp(2.6rem,5.6vw,5rem)] font-semibold leading-[1.02] tracking-[-0.035em]">
@@ -229,6 +237,9 @@ export default function App() {
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <button type="button" onClick={() => setEstudio({ vista: 'sala' })} className="pildora-negra !px-6 !py-3">
                 <Box size={17} /> Entrar al estudio
+              </button>
+              <button type="button" onClick={() => setEstudio({ vista: 'separador' })} className="pildora-clara !px-6 !py-3">
+                <Scissors size={17} /> Separar en piezas
               </button>
               <button type="button" onClick={() => setEstudio({ vista: 'editor' })} className="pildora-clara !px-6 !py-3">
                 <Hammer size={17} /> Modelar en 3D
@@ -511,10 +522,13 @@ export default function App() {
             </div>
           }
         >
-          {estudio.vista === 'sala' ? (
+          {estudio.vista === 'separador' ? (
+            <Separador onCerrar={() => setEstudio(null)} onEditor={() => setEstudio({ vista: 'editor' })} />
+          ) : estudio.vista === 'sala' ? (
             <Sala
               onCerrar={() => setEstudio(null)}
               onEditor={(m) => setEstudio({ vista: 'editor', inicial: m })}
+              onSeparador={() => setEstudio({ vista: 'separador' })}
               onFicha={(id) => {
                 setEstudio(null)
                 verFicha(id)
@@ -524,6 +538,7 @@ export default function App() {
             <Editor
               inicial={estudio.inicial}
               onCerrar={() => setEstudio(null)}
+              onSeparador={() => setEstudio({ vista: 'separador' })}
               onTaller={() => {
                 setEstudio(null)
                 setTaller({})

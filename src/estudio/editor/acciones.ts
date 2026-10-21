@@ -6,11 +6,14 @@ import { paramsIniciales, defForma } from '../geo/formas.ts'
 import { PLANTILLAS, paramsPlantilla } from '../geo/plantillas.ts'
 import { stl, tresmf, type PiezaExport } from '../geo/exportar.ts'
 import { soldar } from '../geo/impresion.ts'
-import type { Analisis, Params, TipoForma, Vec3 } from '../geo/tipos.ts'
+import type { Analisis, MallaIdx, Params, TipoForma, Vec3 } from '../geo/tipos.ts'
 import { importarArchivo, importarURL } from '../../lib/taller/importar.ts'
 import { rutaModelo, type Modelo3D } from '../../lib/catalogo.ts'
 import { cajaMundo, centrarMalla, desdeMatriz, impresoraActual, mallaMundo, matrizNodo, nuevoId, nuevoNodo, useEditor, type NodoEditor } from './estado.ts'
 import { mallaLocal } from './mallas.ts'
+import { entrada } from '../separador/estado.ts'
+import { aSopa } from './mallas.ts'
+import { camara } from './camara.ts'
 
 /**
  * Lo que hacen los botones y los atajos del editor. Todo pasa por
@@ -299,24 +302,20 @@ export async function importar(archivos: FileList | File[]) {
     await tarea(`Abriendo ${f.name}…`, async () => {
       if (f.name.toLowerCase().endsWith('.svg')) return importarSVG(f)
       const p = await importarArchivo(f)
-      const nombre = p.nombre
-      // Un 3MF o STL multicolor llega como una pieza por filamento.
-      const porColor = p.paleta.length > 1 && /\.(3mf|stl)$/i.test(f.name)
-      const grupos = porColor ? p.paleta.map((_, i) => i) : [-1]
-      const nuevos: NodoEditor[] = []
-      for (const g of grupos) {
-        const tris: number[] = []
-        for (let t = 0; t < p.malla.color.length; t++) if (g < 0 || p.malla.color[t] === g) tris.push(t)
-        if (!tris.length) continue
-        const sopa = new Float32Array(tris.length * 9)
-        tris.forEach((t, i) => sopa.set(p.malla.pos.subarray(t * 9, t * 9 + 9), i * 9))
-        const { malla, centro } = centrarMalla(soldar(sopa))
-        const color = g < 0 ? (p.paleta.length === 1 ? p.paleta[0].color : '#D9D4CC') : p.paleta[g].color
-        nuevos.push(nuevoNodo({ tipo: 'malla', nombre: g < 0 ? nombre : `${nombre} · ${p.paleta[g].nombre}`, malla, pos: centro, color }))
-      }
+      // Una sola pieza con sus colores (textura o filamentos): se ve como el
+      // original y "Separar por colores" la manda entera al Separador.
+      const { malla, centro } = centrarMalla(soldar(p.malla.pos))
+      const multicolor = p.paleta.length > 1
+      const pintura = multicolor ? { color: p.malla.color, paleta: p.paleta, rgb: p.rgb } : undefined
+      const nuevos: NodoEditor[] = [nuevoNodo({ tipo: 'malla', nombre: p.nombre, malla, pos: centro, color: p.paleta[0]?.color ?? '#D9D4CC', pintura })]
       await aUnLado(nuevos)
       agregar(nuevos)
-      avisar(`${f.name}: ${p.malla.color.length.toLocaleString('es')} triángulos`, 'ok')
+      avisar(
+        multicolor
+          ? `${f.name}: ${p.paleta.length} colores. Para imprimirlo en piezas por color, elígelo y pulsa "Separar por colores".`
+          : `${f.name}: ${p.malla.color.length.toLocaleString('es')} triángulos`,
+        'ok',
+      )
     })
   }
 }
@@ -406,3 +405,123 @@ export function nuevaEscena() {
   E().hacer(() => [])
 }
 
+
+/**
+ * Pasa al Separador lo visible de la cama (o lo elegido), con los huecos ya
+ * restados: allí se corta por planos, con conectores, o se divide para la cama.
+ */
+export async function enviarAlSeparador(abrir: () => void) {
+  await tarea('Preparando piezas…', async () => {
+    const lista = objetivo().filter((n) => n.visible && !n.hueco)
+    if (!lista.length) throw new Error('No hay sólidos en la cama para separar')
+    const huecos = await Promise.all(E().nodos.filter((n) => n.hueco && n.visible).map(async (n) => ({ malla: await mundo(n), caja: cajaMundo(n, await mallaLocal(n)) })))
+    entrada.piezas = []
+    for (const n of lista) {
+      let malla = await mundo(n)
+      const caja = cajaMundo(n, await mallaLocal(n))
+      const tocan = huecos.filter((h) => h.caja.intersectsBox(caja))
+      if (tocan.length) malla = await geo({ tipo: 'booleana', op: 'combinar', solidos: [malla], huecos: tocan.map((h) => h.malla) })
+      entrada.piezas.push({ nombre: n.nombre, color: n.color, malla, estanca: true, protegida: n.protegido })
+    }
+    abrir()
+  })
+}
+
+/** Lo que abre el Separador; lo pone el editor al montarse. */
+export const navegacion = { separador: () => {} }
+
+/** Una pieza cerrada por color de un objeto pintado, en coordenadas de la cama. */
+async function piezasPorColor(n: NodoEditor): Promise<{ nombre: string; color: string; malla: MallaIdx }[]> {
+  const pintura = n.pintura!
+  const malla = mallaMundo(n, await mallaLocal(n))
+  const cuenta = new Array<number>(pintura.paleta.length).fill(0)
+  for (const c of pintura.color) cuenta[c]++
+  const r = await geo({
+    tipo: 'sep-auto',
+    pos: aSopa(malla),
+    color: pintura.color.slice(),
+    opciones: { modo: 'frontera', tapa: 'auto', profundidad: 1, base: cuenta.indexOf(Math.max(...cuenta)), suavizado: 2, limpiar: true },
+  })
+  return r.piezas.map((p) => {
+    const f = pintura.paleta[p.color]
+    return { nombre: `${n.nombre} · ${f?.nombre ?? `Color ${p.color + 1}`}`, color: f?.color ?? '#D9D4CC', malla: p.malla }
+  })
+}
+
+/**
+ * Separar por colores en el sitio, de un clic: el objeto se cambia por una
+ * pieza cerrada por color, montadas como estaban (para imprimir multicolor de
+ * una vez o ver cómo encajan).
+ */
+export async function separarPorColores(id: string) {
+  const n = E().nodos.find((x) => x.id === id)
+  if (!n?.pintura) return avisar('Este objeto no trae colores: ábrelo en el Separador para pintarlo')
+  await tarea('Separando por colores…', async () => {
+    const piezas = await piezasPorColor(n)
+    if (piezas.length < 2) throw new Error('Después de limpiar las motas queda un solo color: ábrelo en el Separador y sube los colores de la textura')
+    const nuevos = piezas.map((p) => {
+      const { malla: m, centro } = centrarMalla(p.malla)
+      return nuevoNodo({ tipo: 'malla', nombre: p.nombre, malla: m, pos: centro, color: p.color, protegido: n.protegido })
+    })
+    E().hacer((l) => {
+      const i = l.findIndex((x) => x.id === id)
+      const resto = l.filter((x) => x.id !== id)
+      resto.splice(i, 0, ...nuevos)
+      return resto
+    })
+    E().seleccionar(nuevos.map((x) => x.id))
+    avisar(`${nuevos.length} piezas por color, montadas en su sitio. Exporta el 3MF multicolor o pulsa "Dividir por colores" para repartirlas en la cama.`, 'ok')
+  })
+}
+
+/**
+ * Dividir por colores: lo elegido (o todo lo visible) se parte en una pieza
+ * cerrada por color y las piezas se reparten por la cama de la impresora,
+ * cada una apoyada por su mejor cara y separada de las demás, listas para
+ * imprimir por separado. Los objetos sin colores se ordenan junto con ellas.
+ */
+export async function dividirPorColores() {
+  const lista = objetivo().filter((n) => n.visible && !n.hueco)
+  if (!lista.length) return avisar('No hay objetos en la cama')
+  if (!lista.some((n) => n.pintura) && lista.length < 2) return avisar('Este objeto no trae colores: ábrelo en el Separador para pintarlo')
+  const imp = impresoraActual()
+  await tarea('Dividiendo por colores…', async () => {
+    const piezas: { nombre: string; color: string; malla: MallaIdx; protegido?: boolean }[] = []
+    for (const n of lista) {
+      if (n.pintura) piezas.push(...(await piezasPorColor(n)).map((p) => ({ ...p, protegido: n.protegido })))
+      else piezas.push({ nombre: n.nombre, color: n.color, malla: mallaMundo(n, await mallaLocal(n)), protegido: n.protegido })
+    }
+    E().set({ ocupado: `Ordenando ${piezas.length} piezas en la cama…` })
+    const r = await geo({ tipo: 'sep-repartir', mallas: piezas.map((p) => p.malla), cama: imp.cama })
+    const nuevos = piezas.map((p, i) => {
+      const { malla, centro } = centrarMalla(r.mallas[i])
+      return nuevoNodo({ tipo: 'malla', nombre: p.nombre, malla, pos: centro, color: p.color, protegido: p.protegido })
+    })
+    const ids = new Set(lista.map((n) => n.id))
+    E().hacer((l) => [...l.filter((x) => !ids.has(x.id)), ...nuevos])
+    E().seleccionar([])
+    setTimeout(() => camara.ir('arriba'), 120)
+    avisar(
+      r.camas > 1
+        ? `${nuevos.length} piezas: no caben en una cama de la ${imp.nombre}, van ${r.camas} camas una al lado de otra`
+        : `${nuevos.length} piezas ordenadas en la cama de la ${imp.nombre}, cada una apoyada por su mejor cara`,
+      r.camas > 1 ? 'info' : 'ok',
+    )
+  })
+}
+
+/** Abre el Separador con el objeto y sus colores, para elegir cuántos colores sacar, cortar, etc. */
+export async function abrirEnSeparador(id: string) {
+  const n = E().nodos.find((x) => x.id === id)
+  if (!n?.pintura) return
+  const malla = mallaMundo(n, await mallaLocal(n))
+  entrada.proyecto = {
+    id: n.id,
+    nombre: n.nombre,
+    malla: { pos: aSopa(malla), color: n.pintura.color.slice() },
+    paleta: n.pintura.paleta,
+    rgb: n.pintura.rgb,
+    origen: n.protegido ? 'catalogo' : 'archivo',
+  }
+  navegacion.separador()
+}

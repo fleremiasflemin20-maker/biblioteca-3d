@@ -16,7 +16,14 @@ export type Luz = 'estudio' | 'atardecer' | 'noche' | 'neutra'
 /** Lo que una plantilla deja en sus piezas para poder regenerarlas con otros parámetros. */
 export type Lote = { id: string; plantilla: string; params: Params }
 
-export type NodoEditor = Nodo & { lote?: Lote }
+/**
+ * Colores de un modelo importado (textura de Meshy, 3MF pintado…), uno por
+ * triángulo de `malla` en el mismo orden: `rgb` es lo que se ve (sRGB, 0–1) y
+ * `color`/`paleta`, los filamentos con los que se separa.
+ */
+export type Pintura = { color: Uint8Array; paleta: { color: string; nombre: string }[]; rgb?: Float32Array }
+
+export type NodoEditor = Nodo & { lote?: Lote; pintura?: Pintura }
 
 type Estado = {
   nodos: NodoEditor[]

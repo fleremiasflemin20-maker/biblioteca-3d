@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import {
   Box, ChevronDown, Download, Grid3x3, Layers, Lightbulb, Magnet, Move, Printer, Redo2, RotateCw, Ruler, Scaling, Shapes, SlidersHorizontal,
-  Sparkles, Undo2, X, Focus, Scan, FilePlus2, Wand2,
+  Sparkles, Undo2, X, Focus, Scan, FilePlus2, Wand2, Scissors,
 } from 'lucide-react'
 import type { Modelo3D } from '../../lib/catalogo'
-import { abrirDelCatalogo, agregarPlantilla, alternarHueco, apoyarEnCama, combinar, duplicar, eliminar, exportar, importar, nuevaEscena, ACEPTA } from './acciones.ts'
+import { abrirDelCatalogo, agregarPlantilla, enviarAlSeparador, navegacion, alternarHueco, apoyarEnCama, combinar, duplicar, eliminar, exportar, importar, nuevaEscena, ACEPTA } from './acciones.ts'
 import { useEditor, type Herramienta, type Luz } from './estado.ts'
 import { guardarEscena, leerEscena } from './guardado.ts'
 import { PanelFormas, PanelImprimir, PanelObjetos, PanelPlantillas, PanelPropiedades } from './Paneles.tsx'
@@ -37,7 +37,7 @@ const LUCES: { id: Luz; nombre: string }[] = [
 ]
 const REJILLAS = [0, 0.1, 0.5, 1, 5, 10]
 
-export default function Editor({ inicial, onCerrar, onTaller }: { inicial?: Modelo3D; onCerrar: () => void; onTaller?: () => void }) {
+export default function Editor({ inicial, onCerrar, onTaller, onSeparador }: { inicial?: Modelo3D; onCerrar: () => void; onTaller?: () => void; onSeparador?: () => void }) {
   const [izq, setIzq] = useState<PanelIzq>('formas')
   const [der, setDer] = useState<PanelDer>('propiedades')
   const [movil, setMovil] = useState<PanelMovil>(null)
@@ -55,6 +55,10 @@ export default function Editor({ inicial, onCerrar, onTaller }: { inicial?: Mode
   const seleccion = useEditor((s) => s.seleccion)
   const puedeDeshacer = useEditor((s) => s.pasado.length > 0)
   const puedeRehacer = useEditor((s) => s.futuro.length > 0)
+
+  useEffect(() => {
+    if (onSeparador) navegacion.separador = onSeparador
+  }, [onSeparador])
 
   /* La escena anterior vuelve al abrir; la pieza del catálogo, si viene, se suma. */
   useEffect(() => {
@@ -166,6 +170,11 @@ export default function Editor({ inicial, onCerrar, onTaller }: { inicial?: Mode
         <BotonBarra titulo="Importar archivo" onClick={() => archivo.current?.click()}><Layers size={17} /></BotonBarra>
         <BotonBarra titulo="Deshacer (⌘Z)" onClick={() => useEditor.getState().deshacer()} disabled={!puedeDeshacer}><Undo2 size={17} /></BotonBarra>
         <BotonBarra titulo="Rehacer (⇧⌘Z)" onClick={() => useEditor.getState().rehacer()} disabled={!puedeRehacer}><Redo2 size={17} /></BotonBarra>
+        {onSeparador && (
+          <button type="button" onClick={() => enviarAlSeparador(onSeparador)} disabled={!!ocupado} className="ml-1 inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-[12.5px] text-white/65 transition hover:bg-white/[0.07] hover:text-white disabled:opacity-40">
+            <Scissors size={15} /> <span className="hidden md:inline">Separar piezas</span>
+          </button>
+        )}
         {onTaller && (
           <button type="button" onClick={onTaller} className="ml-1 hidden items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-[12.5px] text-white/65 transition hover:bg-white/[0.07] hover:text-white lg:inline-flex">
             <Wand2 size={15} /> Pintar y separar

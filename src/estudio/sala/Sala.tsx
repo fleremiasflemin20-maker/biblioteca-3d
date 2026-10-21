@@ -2,7 +2,7 @@ import { Suspense, useCallback, useEffect, useLayoutEffect, useMemo, useRef, use
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { ContactShadows, MeshReflectorMaterial, OrbitControls, useTexture } from '@react-three/drei'
 import * as THREE from 'three'
-import { ChevronLeft, ChevronRight, Hammer, MessageCircle, Pause, Play, ShoppingBag, X, Lightbulb } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Hammer, MessageCircle, Pause, Play, ShoppingBag, X, Lightbulb, Scissors } from 'lucide-react'
 import { CATALOGO, CATEGORIAS, enlaceCompra, peso, precio, rutaPortada, triangulos, type Modelo3D } from '../../lib/catalogo'
 import { AlCargar, Pieza, type Modo } from '../../components/Pieza'
 import { ICONO_CATEGORIA } from '../../lib/iconos'
@@ -232,7 +232,7 @@ function Paseo({ indice, n, entrada }: { indice: number; n: number; entrada: boo
 
 /* ── La sala ──────────────────────────────────────────────────────────── */
 
-export default function Sala({ onCerrar, onEditor, onFicha }: { onCerrar: () => void; onEditor: (m?: Modelo3D) => void; onFicha: (id: string) => void }) {
+export default function Sala({ onCerrar, onEditor, onFicha, onSeparador }: { onCerrar: () => void; onEditor: (m?: Modelo3D) => void; onFicha: (id: string) => void; onSeparador?: () => void }) {
   const [filtro, setFiltro] = useState<string>('todo')
   const obras = useMemo(() => OBRAS_PUBLICAS.filter((m) => filtro === 'todo' || m.categoria === filtro), [filtro])
   const [indice, setIndice] = useState(0)
@@ -297,6 +297,11 @@ export default function Sala({ onCerrar, onEditor, onFicha }: { onCerrar: () => 
           </span>
         </div>
         <div className="flex-1" />
+        {onSeparador && (
+          <button type="button" onClick={onSeparador} className="pointer-events-auto inline-flex h-11 items-center gap-2 rounded-2xl bg-[#120E1A]/80 px-4 text-[13.5px] font-semibold ring-1 ring-white/10 backdrop-blur transition hover:bg-[#1A1424]">
+            <Scissors size={17} /> <span className="hidden sm:inline">Separar piezas</span>
+          </button>
+        )}
         <button type="button" onClick={() => onEditor()} className="pointer-events-auto inline-flex h-11 items-center gap-2 rounded-2xl bg-[#FF6A13] px-4 text-[13.5px] font-semibold text-[#0D0A14] shadow-lg transition hover:bg-[#FF8A3D]">
           <Hammer size={17} /> <span className="hidden sm:inline">Modela en el estudio</span><span className="sm:hidden">Modelar</span>
         </button>

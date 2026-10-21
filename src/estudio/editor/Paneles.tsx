@@ -1,7 +1,7 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import {
   AlignCenterHorizontal, ArrowDownToLine, Box, Circle, Combine, Compass, Copy, Cone, Cylinder, Diamond, Eye, EyeOff, FlipHorizontal2,
-  Hexagon, Layers, Lock, Maximize, Pyramid, RefreshCw, Scissors, Shapes, SquareDashed, Trash2, Triangle, Type, Wrench, Sparkles,
+  Hexagon, Layers, LayoutGrid, Lock, Maximize, Palette, Pyramid, RefreshCw, Scissors, Shapes, SquareDashed, Trash2, Triangle, Type, Wrench, Sparkles,
 } from 'lucide-react'
 import { FORMAS, defForma } from '../geo/formas.ts'
 import { PLANTILLAS, paramsPlantilla, type Plantilla } from '../geo/plantillas.ts'
@@ -9,7 +9,7 @@ import { COLORES, IMPRESORAS, type Analisis, type Parametro, type Params, type T
 import { gramos, metros } from '../geo/impresion.ts'
 import {
   actualizar, agregarForma, agregarPlantilla, ajustarACama, alinear, alternarHueco, analizarSeleccion, apoyarEnCama, autoOrientar, centrarEnCama,
-  combinar, duplicar, eliminar, espejo, repararSeleccion, separarCuerpos,
+  abrirEnSeparador, combinar, dividirPorColores, duplicar, eliminar, espejo, repararSeleccion, separarCuerpos, separarPorColores,
 } from './acciones.ts'
 import { cajaMundo, useEditor, type NodoEditor } from './estado.ts'
 import { useMallaLocal } from './mallas.ts'
@@ -312,6 +312,9 @@ export function PanelPropiedades() {
             <Boton onClick={duplicar}><Copy size={15} /> Duplicar</Boton>
             <Boton peligro onClick={eliminar}><Trash2 size={15} /> Borrar</Boton>
           </div>
+          <Boton activo className="mt-2 h-11 w-full !text-[14px]" disabled={!!ocupado} onClick={dividirPorColores} titulo="Parte cada objeto con colores en una pieza por color y reparte todo en la cama">
+            <LayoutGrid size={16} /> {elegidos.some((x) => x.pintura) ? 'Dividir por colores' : 'Ordenar en la cama'}
+          </Boton>
           <p className="mt-3 text-[11.5px] leading-snug text-white/45">Marca como <b className="text-white/70">hueco</b> lo que quieras restar y pulsa Combinar: así se hacen agujeros, ranuras y grabados.</p>
         </Seccion>
         <Seccion titulo="Alinear">
@@ -343,6 +346,28 @@ export function PanelPropiedades() {
         </div>
         {n.protegido && <p className="mt-3 flex items-start gap-2 text-[11.5px] leading-snug text-white/45"><Lock size={13} className="mt-0.5 shrink-0" /> Pieza del catálogo: puedes mirarla, medirla y combinarla, pero no descargarla.</p>}
       </Seccion>
+
+      {n.pintura && (
+        <Seccion titulo={`Colores · ${n.pintura.paleta.length}`}>
+          <div className="flex flex-wrap gap-1.5">
+            {n.pintura.paleta.map((f, i) => (
+              <span key={i} title={f.nombre} className="h-6 w-6 rounded-full ring-1 ring-white/15" style={{ background: f.color }} />
+            ))}
+          </div>
+          <Boton activo className="mt-3 h-11 w-full !text-[14px]" disabled={!!ocupado} onClick={dividirPorColores}>
+            <LayoutGrid size={16} /> Dividir por colores
+          </Boton>
+          <div className="mt-2 grid grid-cols-2 gap-2">
+            <Boton disabled={!!ocupado} onClick={() => separarPorColores(n.id)} titulo="Cada color como pieza, montadas en su sitio (multicolor de una vez)">
+              <Scissors size={15} /> En su sitio
+            </Boton>
+            <Boton disabled={!!ocupado} onClick={() => abrirEnSeparador(n.id)} titulo="Elegir cuántos colores sacar, retocar la pintura, incrustar o cortar">
+              <Palette size={15} /> Separador
+            </Boton>
+          </div>
+          <p className="mt-2 text-[11.5px] leading-snug text-white/45"><b className="text-white/70">Dividir por colores</b>: cada color sale como pieza cerrada y todas quedan repartidas en la cama, apoyadas por su mejor cara. <b className="text-white/70">En su sitio</b>: montadas, para imprimir multicolor de una vez.</p>
+        </Seccion>
+      )}
 
       {def && (
         <Seccion titulo={def.nombre}>
@@ -459,6 +484,7 @@ export function PanelImprimir() {
           <Boton onClick={ajustarACama} disabled={!!ocupado}><Maximize size={15} /> Ajustar a cama</Boton>
           <Boton onClick={apoyarEnCama} disabled={!!ocupado}><ArrowDownToLine size={15} /> A la cama</Boton>
           <Boton activo={voladizos} onClick={() => useEditor.getState().set({ voladizos: !voladizos })}><Triangle size={15} className="rotate-180" /> Voladizos</Boton>
+          <Boton onClick={dividirPorColores} disabled={!!ocupado} className="col-span-2" titulo="Reparte las piezas por la cama, apoyadas y separadas (y divide por colores lo que tenga color)"><LayoutGrid size={15} /> Ordenar en la cama</Boton>
         </div>
         <p className="mt-3 text-[11.5px] leading-snug text-white/40">Sin nada elegido, se aplica a toda la cama. En rojo, las caras de más de 45° que piden soporte.</p>
       </Seccion>

@@ -31,6 +31,7 @@ const TAPAS: { id: Tapa; nombre: string; texto: string }[] = [
   { id: 'auto', nombre: 'Auto', texto: 'Plana donde el corte es plano, abanico donde se alabea.' },
   { id: 'plana', nombre: 'Plana', texto: 'Triangulación por orejas sobre el plano medio del corte.' },
   { id: 'centroide', nombre: 'Centroide', texto: 'Abanico desde el centro del borde: cierra cualquier corte.' },
+  { id: 'membrana', nombre: 'Membrana', texto: 'Película de jabón: la tapa se curva con el corte, para cuellos y brazos.' },
 ]
 
 const HERRAMIENTAS: { id: Herramienta; nombre: string; tecla: string; Icono: typeof Paintbrush }[] = [

@@ -47,6 +47,40 @@ Salen un STL por color y el 3MF en `Generador_Llaveros/pedidos/`. El script
 (`llavero_nombre.py`) y `src/lib/llavero.ts` comparten tipografía, siluetas y
 medidas: si se cambia una, hay que cambiar la otra.
 
+## Separador de piezas (Flemin Studio)
+
+Botón **Separador** (o `#separador`). Separa un modelo en piezas imprimibles,
+como Split3MF o el corte de Bambu Studio, en el navegador y sin subir nada
+(`src/estudio/separador/`, motor en `src/estudio/geo/separador.ts`):
+
+- **Por color**: pinta con pincel, relleno (por color o **por ángulo**, que
+  se detiene en las aristas vivas), gotero o **por altura** (o abre un 3MF
+  pintado de Bambu/Orca/Prusa, o un GLB con textura, que se limpia de motas
+  al abrir). **Frontera suave** vuelve a trazar los bordes de pintura como
+  curvas que cruzan los triángulos (`src/estudio/geo/frontera.ts`: unas 8
+  veces más fiel que la escalera de triángulos con 2 pasadas). Cada color
+  sale como pieza cerrada, cortada **por frontera** (tapa auto, plana,
+  centroide o **membrana**, una película de jabón relajada para cortes
+  curvos) o **incrustada** a la profundidad que elijas en el color "cuerpo".
+- **Por plano**: eje X/Y/Z, posición, inclinación y giro, con vista previa
+  en vivo. Conectores: espiga redonda, cuadrada o triangular, o clavija
+  suelta; diámetro, largo, cantidad y tolerancia por lado. Se colocan solos
+  en el punto más interior del corte, y avisa si el corte es muy estrecho.
+- **Por boceto**: dibuja un contorno sobre la vista y lo de dentro sale como
+  pieza aparte, atravesando el modelo en esa dirección.
+- **Dividir para la cama**: corta lo que no cabe en la K2 Plus o la SPARKX i7.
+- **Mallas abiertas** (Meshy, escaneos, STL descargados): antes de cortar,
+  unir o incrustar, sus agujeros se tapan solos con membrana y se avisa.
+- **Partes**: cuerpos sueltos, unir, escalar a una altura, recolorear.
+- **Exportar**: 3MF montado (multicolor, una pieza por objeto), 3MF con las
+  piezas apoyadas por su cara de corte y repartidas en la cama, o un .zip con
+  un STL por pieza. Las obras del catálogo se separan para verlas, no se
+  descargan. Desde el editor, **Separar piezas** manda la escena aquí.
+
+El mismo motor existe en Python para modelos grandes o por lotes:
+`~/Documents/3d trabajos/separador/flemin_separador.py` (trimesh +
+manifold3d 3.5.4, la misma versión que el WASM).
+
 ## Estudio 3D (Flemin Studio)
 
 Botón **Estudio 3D** (o `#estudio` / `#editor` en la URL). Todo corre en el

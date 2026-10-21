@@ -243,10 +243,14 @@ export function areas(pos: Float32Array): Float32Array {
  *    cuando el corte es plano (lo normal en piezas mecánicas).
  *  - centroide: abanico desde el centro del borde. Cierra cualquier borde,
  *    aunque esté alabeado.
+ *  - membrana: película de jabón. Anillos concéntricos relajados hasta la
+ *    superficie mínima que cierra el borde: la tapa se curva con el corte
+ *    en vez de quedar como un abanico plano (cuellos, brazos, cortes de
+ *    figura).
  *  - auto: plana si el borde se aparta de su plano menos de un 2 % de su
  *    tamaño, centroide si no.
  */
-export type Tapa = 'auto' | 'plana' | 'centroide'
+export type Tapa = 'auto' | 'plana' | 'centroide' | 'membrana'
 
 export type Pieza = {
   color: number
@@ -265,7 +269,7 @@ export type Pieza = {
 }
 
 /** Recorre las aristas de borde dirigidas (a→b) y las encadena en bucles cerrados. */
-function bucles(bordes: number[]): number[][] {
+export function bucles(bordes: number[]): number[][] {
   const salientes = new Map<number, number[]>()
   for (let i = 0; i < bordes.length; i += 2) {
     const l = salientes.get(bordes[i])
@@ -290,12 +294,14 @@ function bucles(bordes: number[]): number[][] {
 }
 
 /**
- * Triángulos que cierran un bucle de borde, como índices a `puntos` (el
- * índice `puntos.length / 3` es el centroide, si hace falta). Las tapas miran
- * al revés que el bucle: la superficie recorre su borde en sentido
- * antihorario visto desde fuera, así que el cierre apunta al lado contrario.
+ * Triángulos que cierran un bucle de borde, como índices a `puntos`; los
+ * índices desde `puntos.length / 3` en adelante son puntos nuevos, que vienen
+ * en `extras` (el centroide del abanico, o los anillos de la membrana). Las
+ * tapas miran al revés que el bucle: la superficie recorre su borde en
+ * sentido antihorario visto desde fuera, así que el cierre apunta al lado
+ * contrario.
  */
-export function cerrarBucle(puntos: number[], tapa: Tapa): { tris: number[]; centroide: boolean } {
+export function cerrarBucle(puntos: number[], tapa: Tapa): { tris: number[]; centroide: boolean; extras: number[] } {
   const n = puntos.length / 3
   let nx = 0, ny = 0, nz = 0, cx = 0, cy = 0, cz = 0
   for (let i = 0; i < n; i++) {
@@ -313,11 +319,11 @@ export function cerrarBucle(puntos: number[], tapa: Tapa): { tris: number[]; cen
   const abanico = () => {
     const tris: number[] = []
     for (let i = 0; i < n; i++) tris.push((i + 1) % n, i, n)
-    return { tris, centroide: true }
+    return { tris, centroide: true, extras: [cx, cy, cz] }
   }
-  if (largo < 1e-12 || tapa === 'centroide' || n === 3) {
-    return n === 3 ? { tris: [2, 1, 0], centroide: false } : abanico()
-  }
+  if (n === 3) return { tris: [2, 1, 0], centroide: false, extras: [] }
+  if (tapa === 'membrana') return membrana(puntos, [cx, cy, cz])
+  if (largo < 1e-12 || tapa === 'centroide') return abanico()
 
   nx /= largo; ny /= largo; nz /= largo
   let desvio = 0, rmin = Infinity, rmax = -Infinity
@@ -345,7 +351,53 @@ export function cerrarBucle(puntos: number[], tapa: Tapa): { tris: number[]; cen
     if (giro > 0) tris.push(a, c, b)
     else tris.push(a, b, c)
   }
-  return { tris, centroide: false }
+  return { tris, centroide: false, extras: [] }
+}
+
+/**
+ * Tapa de película de jabón: anillos que encogen del borde al centro y se
+ * relajan (cada punto interior va a la media de sus vecinos, con el borde
+ * fijo) hasta acercarse a la superficie mínima que cierra el bucle.
+ */
+function membrana(puntos: number[], c: [number, number, number]): { tris: number[]; centroide: boolean; extras: number[] } {
+  const n = puntos.length / 3
+  const R = Math.min(8, Math.max(2, Math.round(Math.sqrt(n) / 2)))
+  // Vértices: borde (0..n-1), anillos 1..R-1 (n cada uno), centro al final.
+  const total = n * R + 1
+  const P = new Float64Array(total * 3)
+  P.set(puntos)
+  for (let r = 1; r < R; r++) {
+    const k = 1 - r / R
+    for (let i = 0; i < n; i++)
+      for (let e = 0; e < 3; e++) P[(r * n + i) * 3 + e] = c[e] + k * (puntos[i * 3 + e] - c[e])
+  }
+  const centro = n * R
+  P.set(c, centro * 3)
+  const id = (r: number, i: number) => (r >= R ? centro : r * n + (((i % n) + n) % n))
+  const tris: number[] = []
+  for (let r = 0; r < R; r++)
+    for (let i = 0; i < n; i++) {
+      if (r === R - 1) tris.push(id(r, i + 1), id(r, i), centro)
+      else tris.push(id(r, i + 1), id(r, i), id(r + 1, i), id(r, i + 1), id(r + 1, i), id(r + 1, i + 1))
+    }
+  // Relajación de Jacobi: el borde no se mueve.
+  const sig = new Float64Array(P.length)
+  for (let it = 0; it < 60; it++) {
+    sig.set(P)
+    for (let r = 1; r < R; r++)
+      for (let i = 0; i < n; i++) {
+        const v = id(r, i)
+        const vecinos = [id(r, i - 1), id(r, i + 1), id(r - 1, i), id(r + 1, i)]
+        for (let e = 0; e < 3; e++) sig[v * 3 + e] = vecinos.reduce((s, u) => s + P[u * 3 + e], 0) / 4
+      }
+    for (let e = 0; e < 3; e++) {
+      let s = 0
+      for (let i = 0; i < n; i++) s += P[id(R - 1, i) * 3 + e]
+      sig[centro * 3 + e] = s / n
+    }
+    P.set(sig)
+  }
+  return { tris, centroide: true, extras: Array.from(P.subarray(n * 3)) }
 }
 
 const normalizar = (x: number, y: number, z: number): [number, number, number] => {
@@ -384,17 +436,11 @@ export function separar(m: Malla, topo: Topologia, tapa: Tapa = 'auto'): Pieza[]
     for (const lazo of lazos) {
       const puntos: number[] = []
       for (const v of lazo) puntos.push(topo.vpos[v * 3], topo.vpos[v * 3 + 1], topo.vpos[v * 3 + 2])
-      const { tris: caras, centroide } = cerrarBucle(puntos, tapa)
-      let idCentro = 0
-      if (centroide) {
-        let x = 0, y = 0, z = 0
-        for (let i = 0; i < lazo.length; i++) {
-          x += puntos[i * 3]; y += puntos[i * 3 + 1]; z += puntos[i * 3 + 2]
-        }
-        centroides.push(x / lazo.length, y / lazo.length, z / lazo.length)
-        idCentro = -centroides.length / 3
-      }
-      for (const k of caras) tapas.push(k === lazo.length ? idCentro : lazo[k])
+      const { tris: caras, extras } = cerrarBucle(puntos, tapa)
+      // Los puntos nuevos de la tapa llevan ids negativos, únicos en toda la pieza.
+      const primero = centroides.length / 3
+      centroides.push(...extras)
+      for (const k of caras) tapas.push(k < lazo.length ? lazo[k] : -(primero + k - lazo.length + 1))
     }
 
     const nTapas = tapas.length / 3
