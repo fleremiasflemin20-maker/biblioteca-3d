@@ -303,7 +303,7 @@ export default function Sala({ onCerrar, onEditor, onFicha, onSeparador }: { onC
           </button>
         )}
         <button type="button" onClick={() => onEditor()} className="pointer-events-auto inline-flex h-11 items-center gap-2 rounded-2xl bg-[#FF6A13] px-4 text-[13.5px] font-semibold text-[#0D0A14] shadow-lg transition hover:bg-[#FF8A3D]">
-          <Hammer size={17} /> <span className="hidden sm:inline">Modela en el estudio</span><span className="sm:hidden">Modelar</span>
+          <Hammer size={17} /> <span className="hidden sm:inline">Flemin Studio 3D</span><span className="sm:hidden">Studio</span>
         </button>
         <button type="button" onClick={onCerrar} aria-label="Salir de la sala" className="pointer-events-auto grid h-11 w-11 place-items-center rounded-2xl bg-[#120E1A]/80 text-white/70 ring-1 ring-white/10 backdrop-blur transition hover:text-white">
           <X size={19} />
@@ -412,7 +412,7 @@ export default function Sala({ onCerrar, onEditor, onFicha, onSeparador }: { onC
               </button>
               {!actual.personalizable && (
                 <button type="button" onClick={() => onEditor(actual)} className="inline-flex h-10 items-center gap-1.5 rounded-full bg-white/[0.08] px-4 text-[13px] ring-1 ring-white/10 transition hover:bg-white/[0.14]">
-                  <Hammer size={15} /> Abrir en el editor
+                  <Hammer size={15} /> Separar en el Studio
                 </button>
               )}
               <a href={enlaceCompra(actual)} target="_blank" rel="noreferrer" className="inline-flex h-10 items-center gap-1.5 rounded-full bg-[#FF6A13] px-4 text-[13px] font-semibold text-[#0D0A14] transition hover:bg-[#FF8A3D]">
