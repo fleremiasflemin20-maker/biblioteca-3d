@@ -1,12 +1,12 @@
 import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { ArrowRight, Box, ChevronLeft, ChevronRight, Hammer, Hand, MessageCircle, Moon, Plus, Scissors, Search, Sun } from 'lucide-react'
-import { Visor } from './components/Visor'
+import { Box, Hand, MessageCircle, Moon, Plus, Scissors, Search, Sun } from 'lucide-react'
 import { Tarjeta } from './components/Tarjeta'
 import { Ficha } from './components/Ficha'
+import { Seleccion } from './components/Seleccion'
 import { Subir } from './components/Subir'
 import { Portadas } from './components/Portadas'
 import { ModoManos } from './components/ModoManos'
-import { CATALOGO, CATEGORIAS, CORREO, WHATSAPP, precio, type Modelo3D } from './lib/catalogo'
+import { CATALOGO, CATEGORIAS, CORREO, WHATSAPP, type Modelo3D } from './lib/catalogo'
 import { ICONO_CATEGORIA } from './lib/iconos'
 import { enlaceStudio } from './lib/studio'
 import { useTema } from './lib/tema'
@@ -25,7 +25,6 @@ type Orden = 'recientes' | 'barato' | 'caro' | 'nombre'
 type Acabado = 'todos' | 'color' | 'sin-textura'
 type Manos = { lista: Modelo3D[]; indice: number; desdeFicha: boolean }
 
-const DESTACADOS = CATALOGO.filter((m) => m.destacado).length ? CATALOGO.filter((m) => m.destacado) : CATALOGO.slice(0, 3)
 const ENLACE_MEDIDA = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Hola, quiero un modelo 3D a medida.')}`
 
 export default function App() {
@@ -34,7 +33,6 @@ export default function App() {
   const [orden, setOrden] = useState<Orden>('recientes')
   const [acabado, setAcabado] = useState<Acabado>('todos')
   const [abierto, setAbierto] = useState<string | null>(null)
-  const [destacado, setDestacado] = useState(0)
   const [subiendo, setSubiendo] = useState(false)
   const [sinPortada, setSinPortada] = useState(0)
   const [manos, setManos] = useState<Manos | null>(null)
@@ -132,8 +130,6 @@ export default function App() {
     [manos, verFicha],
   )
 
-  const estrella = DESTACADOS[destacado % DESTACADOS.length]
-  const catEstrella = CATEGORIAS.find((x) => x.id === estrella.categoria) ?? c
   const pendientes = useMemo(() => (import.meta.env.DEV ? CATALOGO.filter((m) => !m.portada) : []), [])
 
   const irAlCatalogo = () => document.getElementById('catalogo')?.scrollIntoView({ behavior: 'smooth' })
@@ -208,102 +204,16 @@ export default function App() {
       </header>
 
       <main>
-        {/* ── Portada ─────────────────────────────────────────── */}
-        <section className="mx-auto grid max-w-[1400px] items-center gap-10 px-4 pb-12 pt-10 md:grid-cols-[1fr_1.15fr] md:px-8 md:pb-20 md:pt-16">
-          <div className="entra">
-            <button
-              type="button"
-              onClick={() => setEstudio({ vista: 'sala' })}
-              className="group inline-flex items-center gap-2 rounded-full border border-stone-200 bg-superficie py-1 pl-1 pr-3 text-[13px] text-stone-600 transition hover:border-stone-300"
-            >
-              <span className="rounded-full bg-[#FF6A13] px-2 py-0.5 text-[11px] font-medium text-white">Nuevo</span>
-              Nuevo: Flemin Studio 3D separa tus modelos por colores y cortes
-              <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
-            </button>
-            <h1 className="mt-6 text-[clamp(2.6rem,5.6vw,5rem)] font-semibold leading-[1.02] tracking-[-0.035em]">
-              Modelos 3D <span className="font-serif font-normal italic tracking-[-0.01em]">listos</span> para imprimir, renderizar y jugar.
-            </h1>
-            <p className="mt-5 max-w-md text-[17px] leading-relaxed text-stone-600">
-              Tecnología, mecánica, autos, Dragon Ball Z, anime, manga y los Seres Flemin. Gira cada pieza en 3D antes de comprarla, o tómala con la mano desde tu cámara.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <button type="button" onClick={() => setEstudio({ vista: 'sala' })} className="pildora-negra !px-6 !py-3">
-                <Box size={17} /> Entrar al estudio
-              </button>
-              <a href={enlaceStudio('separador')} className="pildora-clara !px-6 !py-3">
-                <Scissors size={17} /> Separar en piezas
-              </a>
-              <a href={enlaceStudio('editor')} className="pildora-clara !px-6 !py-3">
-                <Hammer size={17} /> Modelar en 3D
-              </a>
-              <button type="button" onClick={irAlCatalogo} className="pildora-clara !px-6 !py-3">
-                Explorar catálogo
-              </button>
-              <button type="button" onClick={() => abrirManos()} className="pildora-clara !px-6 !py-3">
-                <Hand size={17} /> Probar con tus manos
-              </button>
-            </div>
-            <dl className="mt-10 flex gap-10 text-sm">
-              {[
-                { etiqueta: 'Modelos', valor: String(CATALOGO.length) },
-                { etiqueta: 'Secciones', valor: String(CATEGORIAS.length - 1) },
-                { etiqueta: 'Desde', valor: precio(Math.min(...CATALOGO.map((m) => m.precio))) },
-              ].map((s) => (
-                <div key={s.etiqueta}>
-                  <dd className="text-2xl font-semibold tracking-tight">{s.valor}</dd>
-                  <dt className="mt-0.5 text-stone-500">{s.etiqueta}</dt>
-                </div>
-              ))}
-            </dl>
-          </div>
-
-          {/* El destacado, girando. */}
-          <div className="entra relative" style={{ animationDelay: '80ms' }}>
-            <div className="relative h-[420px] overflow-hidden rounded-[28px] border border-stone-200 bg-gradient-to-b from-superficie to-stone-100 md:h-[560px]">
-              <div
-                className="absolute inset-0 opacity-60"
-                style={{ background: `radial-gradient(60% 45% at 50% 85%, ${catEstrella.punto}22, transparent 70%)` }}
-                aria-hidden
-              />
-              <Visor modelo={estrella} tinta={catEstrella.tinta} />
-              <div className="pointer-events-none absolute inset-x-5 top-5 flex items-center justify-between text-[12px] text-stone-500">
-                <span className="rounded-full border border-stone-200 bg-superficie/80 px-2.5 py-1 backdrop-blur">Destacado</span>
-                <span className="tabular-nums">
-                  {String((destacado % DESTACADOS.length) + 1).padStart(2, '0')} / {String(DESTACADOS.length).padStart(2, '0')}
-                </span>
-              </div>
-              <div className="absolute inset-x-4 bottom-4 flex items-center gap-3 rounded-2xl border border-stone-200/80 bg-superficie/85 p-2 pl-4 shadow-sm backdrop-blur-md">
-                <button type="button" onClick={() => verFicha(estrella.id)} className="min-w-0 flex-1 text-left">
-                  <p className="truncate text-[15px] font-semibold tracking-tight">{estrella.nombre}</p>
-                  <p className="text-[13px] text-stone-500">
-                    {catEstrella.nombre} · {precio(estrella.precio)}
-                  </p>
-                </button>
-                {DESTACADOS.length > 1 && (
-                  <div className="flex gap-1.5">
-                    {[
-                      { paso: -1, Icono: ChevronLeft, nombre: 'Destacado anterior' },
-                      { paso: 1, Icono: ChevronRight, nombre: 'Destacado siguiente' },
-                    ].map(({ paso, Icono, nombre }) => (
-                      <button
-                        key={paso}
-                        type="button"
-                        aria-label={nombre}
-                        onClick={() => setDestacado((d) => (d + paso + DESTACADOS.length) % DESTACADOS.length)}
-                        className="grid h-10 w-10 place-items-center rounded-full border border-stone-200 bg-superficie text-stone-700 transition hover:bg-stone-50"
-                      >
-                        <Icono size={18} />
-                      </button>
-                    ))}
-                  </div>
-                )}
-                <button type="button" onClick={() => verFicha(estrella.id)} className="pildora-negra hidden !py-2.5 sm:inline-flex">
-                  Ver ficha
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* ── Selección de figuras ────────────────────────────── */}
+        <Seleccion
+          lista={lista}
+          cat={cat}
+          setCat={setCat}
+          activo={!abierto && !manos && !estudio && !subiendo}
+          onFicha={verFicha}
+          onManos={abrirManos}
+          onCatalogo={irAlCatalogo}
+        />
 
         {/* ── Catálogo ────────────────────────────────────────── */}
         <section id="catalogo" className="scroll-mt-20">

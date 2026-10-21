@@ -103,3 +103,42 @@
 .rango::-moz-range-track { height: 4px; border-radius: 9999px; background: rgb(255 255 255 / 0.1); }
 .rango::-webkit-slider-thumb { -webkit-appearance: none; margin-top: -6px; height: 16px; width: 16px; border-radius: 9999px; background: #FF6A13; box-shadow: 0 0 0 3px rgb(255 106 19 / 0.25); }
 .rango::-moz-range-thumb { height: 16px; width: 16px; border: 0; border-radius: 9999px; background: #FF6A13; }
+
+/* ── Selección de figuras (portada, ver Seleccion.tsx) ──────────────────── */
+
+/* Panel de cristal con las esquinas cortadas, como los menús de un juego de pelea. */
+.panel-sel { clip-path: polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 18px); }
+
+/* Retratos: bisel fino; el elegido lleva un marco de energía que late. */
+.retrato { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12); transition: transform 0.15s ease; }
+.retrato:hover { transform: translateY(-1px); }
+.retrato-sel { transform: scale(1.06); box-shadow: inset 0 0 0 2px #FFC23D, 0 0 0 2px #FF6A13, 0 0 22px 2px rgba(255, 140, 40, 0.65); animation: late 1.1s ease-in-out infinite; }
+.retrato-sel::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(255, 194, 61, 0.35)); pointer-events: none; }
+@keyframes late { 50% { box-shadow: inset 0 0 0 2px #FFF1C2, 0 0 0 2px #FFC23D, 0 0 30px 4px rgba(255, 170, 40, 0.85); } }
+
+/* El nombre: blanco con contorno grueso y sombra, inclinado como un título de combate. */
+.nombre-figura {
+  color: #fff;
+  -webkit-text-stroke: 7px #1a1033;
+  paint-order: stroke fill;
+  text-shadow: 0 4px 0 #1a1033, 0 8px 24px rgba(0, 0, 0, 0.6);
+  transform: skewX(-8deg);
+  transform-origin: right;
+}
+@keyframes entra-nombre { from { opacity: 0; transform: translateX(40px) skewX(-8deg); } to { opacity: 1; transform: skewX(-8deg); } }
+.entra-nombre { animation: entra-nombre 0.45s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* Filas de opciones con el borde izquierdo en diagonal. */
+.opcion { clip-path: polygon(14px 0, 100% 0, 100% 100%, 0 100%); }
+
+/* Teclas de la barra de controles. */
+.tecla { display: inline-grid; place-items: center; min-width: 1.6rem; height: 1.45rem; padding: 0 0.4rem; border-radius: 0.3rem; background: rgba(255, 255, 255, 0.12); box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.4); font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em; color: #fff; text-transform: none; }
+
+/* Rayos de energía girando detrás de la figura. */
+@keyframes rayos { to { transform: translate(-50%, -50%) rotate(360deg); } }
+.rayos { animation: rayos 90s linear infinite; }
+
+@keyframes brillo-pedido { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.18); } }
+.pedido-brillo { animation: brillo-pedido 1.6s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) { .retrato-sel, .rayos, .pedido-brillo, .entra-nombre { animation: none; } }
