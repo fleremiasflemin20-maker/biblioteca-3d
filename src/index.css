@@ -142,3 +142,23 @@
 .pedido-brillo { animation: brillo-pedido 1.6s ease-in-out infinite; }
 
 @media (prefers-reduced-motion: reduce) { .retrato-sel, .rayos, .pedido-brillo, .entra-nombre { animation: none; } }
+
+/* Rótulo de cada bloque de la rejilla (sección × acabado), con el filo del color de la sección. */
+.rotulo { box-shadow: inset 3px 0 0 var(--c); clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%); }
+
+/* Chapas de atributos bajo el nombre. */
+.chapa { padding: 0.2rem 0.55rem; clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%); }
+
+/* Mira del escenario: esquinas en L que respiran alrededor de la figura. */
+.mira i { position: absolute; width: 28px; height: 28px; border: 0 solid var(--c); opacity: 0.75; animation: mira 2.4s ease-in-out infinite; }
+.mira i:nth-child(1) { left: 0; top: 0; border-left-width: 2px; border-top-width: 2px; }
+.mira i:nth-child(2) { right: 0; top: 0; border-right-width: 2px; border-top-width: 2px; }
+.mira i:nth-child(3) { left: 0; bottom: 0; border-left-width: 2px; border-bottom-width: 2px; }
+.mira i:nth-child(4) { right: 0; bottom: 0; border-right-width: 2px; border-bottom-width: 2px; }
+@keyframes mira { 50% { opacity: 0.3; transform: scale(0.92); } }
+
+/* La sección en letras gigantes, solo contorno, detrás de la figura. */
+.marca-seccion { color: transparent; text-transform: uppercase; animation: marca 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes marca { from { opacity: 0; letter-spacing: 0.25em; } to { opacity: 1; letter-spacing: 0; } }
+
+@media (prefers-reduced-motion: reduce) { .mira i, .marca-seccion { animation: none; } }

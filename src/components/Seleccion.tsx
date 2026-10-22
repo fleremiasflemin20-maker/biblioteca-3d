@@ -1,4 +1,4 @@
-import { Suspense, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { ContactShadows, Sparkles } from '@react-three/drei'
 import * as THREE from 'three'
@@ -9,6 +9,7 @@ import { AmbienteFlemin } from '../estudio/luces'
 import { CATEGORIAS, WHATSAPP, enlaceCompra, precio, rutaPortada, triangulos, type Modelo3D } from '../lib/catalogo'
 import { ICONO_CATEGORIA } from '../lib/iconos'
 import { enlaceStudio } from '../lib/studio'
+import { variantes, type Acabado, type Grupo } from '../lib/orden'
 
 /**
  * La portada de la biblioteca como una pantalla de selección de personajes de
@@ -21,6 +22,15 @@ import { enlaceStudio } from '../lib/studio'
  */
 const COLUMNAS = 6
 const MAX_PEDIDO = 5
+
+const FILTROS: { id: Acabado; nombre: string }[] = [
+  { id: 'todos', nombre: 'Todo' },
+  { id: 'color', nombre: 'A color' },
+  { id: 'sin-textura', nombre: 'Sin color' },
+]
+
+/** Recién subida: los últimos diez días llevan la etiqueta de nueva. */
+const esNueva = (m: Modelo3D) => !!m.alta && Date.now() - Date.parse(m.alta) < 10 * 864e5
 
 const ACABADOS: { modo: Modo; nombre: string }[] = [
   { modo: 'textura', nombre: 'A color' },
@@ -163,6 +173,10 @@ const noop = () => {}
 
 export function Seleccion({
   lista,
+  grupos,
+  acabado,
+  setAcabado,
+  conteo,
   cat,
   setCat,
   activo,
@@ -170,7 +184,13 @@ export function Seleccion({
   onManos,
   onCatalogo,
 }: {
+  /** Ya ordenada: es `grupos` aplanado. */
   lista: Modelo3D[]
+  /** Los bloques sección × acabado que la rejilla enseña con su rótulo. */
+  grupos: Grupo[]
+  acabado: Acabado
+  setAcabado: (a: Acabado) => void
+  conteo: Record<Acabado, number>
   cat: number
   setCat: (i: number) => void
   /** Falso mientras hay una ficha, el modo manos u otra capa abierta: el teclado es suyo. */
@@ -212,6 +232,32 @@ export function Seleccion({
     },
     [lista.length, sonido],
   )
+  // Cada bloque empieza fila nueva bajo su rótulo, así que arriba/abajo no es
+  // ±6: se busca la pieza de la fila vecina más cercana a la misma columna.
+  const celdas = useMemo(() => {
+    const r: { fila: number; col: number }[] = []
+    let fila = 0
+    for (const g of grupos) {
+      g.modelos.forEach((_, k) => r.push({ fila: fila + Math.floor(k / COLUMNAS), col: k % COLUMNAS }))
+      fila += Math.ceil(g.modelos.length / COLUMNAS)
+    }
+    return r
+  }, [grupos])
+  const moverFila = useCallback(
+    (paso: number) => {
+      setCursor((c) => {
+        const a = celdas[Math.min(c, celdas.length - 1)]
+        if (!a) return c
+        let n = c
+        celdas.forEach((x, k) => {
+          if (x.fila === a.fila + paso && (n === c || Math.abs(x.col - a.col) < Math.abs(celdas[n].col - a.col))) n = k
+        })
+        if (n !== c && sonido) blip(false)
+        return n
+      })
+    },
+    [celdas, sonido],
+  )
   const alternarPedido = useCallback(
     (id: string) => {
       setPedido((p) => (p.includes(id) ? p.filter((x) => x !== id) : p.length >= MAX_PEDIDO ? p : [...p, id]))
@@ -251,8 +297,8 @@ export function Seleccion({
       const acciones: Record<string, () => void> = {
         arrowleft: () => mover(-1),
         arrowright: () => mover(1),
-        arrowup: () => mover(-COLUMNAS),
-        arrowdown: () => mover(COLUMNAS),
+        arrowup: () => moverFila(-1),
+        arrowdown: () => moverFila(1),
         enter: () => actual && onFicha(actual.id),
         ' ': () => actual && alternarPedido(actual.id),
         q: () => cambiarSeccion(-1),
@@ -269,7 +315,7 @@ export function Seleccion({
     }
     window.addEventListener('keydown', tecla)
     return () => window.removeEventListener('keydown', tecla)
-  }, [manda, mover, actual, onFicha, onManos, alternarPedido, cambiarSeccion])
+  }, [manda, mover, moverFila, actual, onFicha, onManos, alternarPedido, cambiarSeccion])
 
   // Mando: cruceta para moverse, A ficha, X pedido, Y manos, LB/RB sección.
   useEffect(() => {
@@ -288,7 +334,8 @@ export function Seleccion({
         const dx = (b(15) || eje(0) > 0.6 ? 1 : 0) - (b(14) || eje(0) < -0.6 ? 1 : 0)
         const dy = (b(13) || eje(1) > 0.6 ? 1 : 0) - (b(12) || eje(1) < -0.6 ? 1 : 0)
         if (dx || dy) {
-          mover(dx + dy * COLUMNAS)
+          if (dy) moverFila(dy)
+          else mover(dx)
           espera = t + 170
         }
       }
@@ -301,7 +348,7 @@ export function Seleccion({
     }
     raf = requestAnimationFrame(ciclo)
     return () => cancelAnimationFrame(raf)
-  }, [manda, mover, actual, onFicha, onManos, alternarPedido, cambiarSeccion])
+  }, [manda, mover, moverFila, actual, onFicha, onManos, alternarPedido, cambiarSeccion])
 
   const enPedido = useMemo(() => pedido.map((id) => lista.find((m) => m.id === id) ?? null).filter(Boolean) as Modelo3D[], [pedido, lista])
   const total = enPedido.reduce((s, m) => s + m.precio, 0)
@@ -312,6 +359,9 @@ export function Seleccion({
 
   const c = CATEGORIAS[cat]
   const tinta = catEscena.tinta
+  // Las otras versiones de la figura elegida, como los trajes alternativos de un personaje.
+  const versiones = useMemo(() => (actual ? variantes(actual, lista) : []), [actual, lista])
+  const grupoActual = grupos.find((g) => actual && g.modelos.includes(actual))
 
   return (
     <section
@@ -327,8 +377,23 @@ export function Seleccion({
         <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_40%,transparent_55%,rgba(0,0,0,0.65))]" />
       </div>
 
+      {/* La sección escrita en grande detrás de la figura, en contorno, como el escenario de un combate. */}
+      {(() => {
+        const marca = catEscena.id === 'todo' ? 'Flemin' : catEscena.nombre
+        // En una sola línea: el tamaño baja con lo largo del nombre para caber detrás de la figura.
+        return (
+          <p key={catEscena.id} aria-hidden className="marca-seccion pointer-events-none absolute left-[28%] right-[20%] top-[30%] -z-[5] hidden whitespace-nowrap text-center font-flemin leading-none lg:block" style={{ WebkitTextStroke: `1.5px ${tinta}80`, fontSize: `min(8rem, ${72 / marca.length}vw)` }}>
+            {marca}
+          </p>
+        )
+      })()}
+
       {/* ── Figura en 3D ─────────────────────────────────────────── */}
       <div className="relative h-[54svh] min-h-[340px] lg:absolute lg:inset-y-0 lg:left-[30%] lg:right-[22%] lg:h-auto">
+        {/* Mira del escenario: cuatro esquinas que encuadran a la figura elegida. */}
+        <div aria-hidden className="mira pointer-events-none absolute inset-x-[12%] bottom-[14%] top-[16%] hidden lg:block" style={{ '--c': tinta } as CSSProperties}>
+          <i /><i /><i /><i />
+        </div>
         {enEscena && <Escenario modelo={enEscena} modo={modo} tinta={tinta} onMostrado={setMostrado} />}
         {cargando && (
           <p className="pointer-events-none absolute bottom-6 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/50 px-3.5 py-1.5 font-chakra text-[12px] uppercase tracking-[0.18em] text-white/80 ring-1 ring-white/15 backdrop-blur">
@@ -355,11 +420,40 @@ export function Seleccion({
               ))}
             </span>
           </div>
+          {/* Ficha técnica en chapas, como los atributos de un luchador. */}
+          <div key={`${actual.id}-f`} className="entra-nombre mt-2.5 flex flex-wrap justify-end gap-1.5 font-chakra text-[10.5px] font-semibold uppercase tracking-[0.14em]" style={{ animationDelay: '120ms' }}>
+            {esNueva(actual) && <span className="chapa bg-[#FF2D8A] text-white">Nuevo</span>}
+            <span className={`chapa ${actual.sinTextura ? 'text-white/85 ring-1 ring-white/40' : 'bg-white/90 text-[#140f22]'}`}>{actual.sinTextura ? 'Sin color' : 'A color'}</span>
+            {actual.triangulos ? <span className="chapa bg-black/45 text-white/80 ring-1 ring-white/15">{triangulos(actual.triangulos)} tris</span> : null}
+            <span className="chapa bg-black/45 text-white/80 ring-1 ring-white/15">{actual.formatos.join(' · ')}</span>
+          </div>
         </div>
       )}
 
       {actual && (
         <div className="absolute bottom-24 right-4 z-10 hidden w-[340px] flex-col items-end gap-4 lg:right-8 lg:flex">
+          {versiones.length > 1 && (
+            <div className="w-full">
+              <p className="mb-2 flex justify-between border-b border-white/25 pb-1 font-chakra text-[11px] uppercase tracking-[0.22em] text-white/75">
+                <span className="tabular-nums text-white/45">{versiones.indexOf(actual) + 1} / {versiones.length}</span> Versiones
+              </p>
+              <div className="flex flex-wrap justify-end gap-1.5">
+                {versiones.map((v) => (
+                  <button
+                    key={v.id}
+                    type="button"
+                    onClick={() => setCursor(lista.indexOf(v))}
+                    title={v.nombre}
+                    aria-pressed={v === actual}
+                    className={`relative h-11 w-11 overflow-hidden transition [clip-path:polygon(7px_0,100%_0,100%_calc(100%-7px),calc(100%-7px)_100%,0_100%,0_7px)] ${v === actual ? 'bg-[#FFC23D]/90' : 'bg-white/10 hover:bg-white/25'}`}
+                  >
+                    {rutaPortada(v) && <img src={rutaPortada(v)} alt="" className="absolute inset-[2px] h-[calc(100%-4px)] w-[calc(100%-4px)] bg-[#1a1430] object-contain" />}
+                    {v.sinTextura && <span className="absolute bottom-0.5 right-0.5 h-2 w-2 rounded-full border border-white bg-[#1a1430]" />}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
           <div className="w-full">
             <p className="mb-2 border-b border-white/25 pb-1 text-right font-chakra text-[11px] uppercase tracking-[0.22em] text-white/75">Acabado</p>
             <div className="flex justify-end gap-2">
@@ -457,50 +551,103 @@ export function Seleccion({
             <kbd className="tecla hidden lg:inline-grid">E</kbd>
           </div>
 
-          {/* La rejilla de retratos. */}
-          <div ref={rejilla} className="sin-barra -mx-1 max-h-[46svh] min-h-0 flex-1 overflow-y-auto px-1 py-1 lg:max-h-none">
+          {/* Acabado: a color o sin color, como elegir el traje antes del combate. */}
+          <div className="flex gap-1" role="tablist" aria-label="Acabado">
+            {FILTROS.map((f) => (
+              <button
+                key={f.id}
+                type="button"
+                role="tab"
+                aria-selected={acabado === f.id}
+                onClick={() => (setAcabado(f.id), setCursor(0))}
+                className={`flex h-7 flex-1 items-center justify-center gap-1.5 font-chakra text-[11px] font-semibold uppercase tracking-wider transition [clip-path:polygon(6px_0,100%_0,calc(100%-6px)_100%,0_100%)] ${acabado === f.id ? 'bg-white text-[#140f22]' : 'bg-white/[0.06] text-white/60 hover:bg-white/15 hover:text-white'}`}
+              >
+                {f.id === 'color' && <span className="h-2 w-2 rounded-full bg-gradient-to-br from-amber-400 via-pink-500 to-sky-500" aria-hidden />}
+                {f.id === 'sin-textura' && <span className="h-2 w-2 rounded-full border border-current" aria-hidden />}
+                {f.nombre}
+                <span className="tabular-nums opacity-60">{conteo[f.id]}</span>
+              </button>
+            ))}
+          </div>
+
+          {/* La rejilla de retratos, en bloques por sección y acabado: cada figura en su sitio. */}
+          <div ref={rejilla} className="sin-barra -mx-1 max-h-[46svh] min-h-0 flex-1 overflow-y-auto px-1 pb-1 lg:max-h-none">
             {lista.length ? (
               <div className="grid grid-cols-6 gap-1.5">
-                {lista.map((m, k) => {
-                  const sel = k === i
-                  const port = rutaPortada(m)
-                  const mc = CATEGORIAS.find((x) => x.id === m.categoria) ?? CATEGORIAS[0]
-                  return (
-                    <button
-                      key={m.id}
-                      data-i={k}
-                      type="button"
-                      onMouseEnter={() => k !== i && (setCursor(k), sonido && blip(false))}
-                      onFocus={() => setCursor(k)}
-                      onClick={() => (k === i ? onFicha(m.id) : setCursor(k))}
-                      onDoubleClick={() => alternarPedido(m.id)}
-                      title={m.nombre}
-                      aria-label={m.nombre}
-                      aria-current={sel}
-                      className={`retrato relative aspect-square overflow-hidden ${sel ? 'retrato-sel z-10' : ''}`}
-                      style={{ background: `linear-gradient(160deg, ${mc.desde}55, #1a1430 70%)` }}
-                    >
-                      {port ? (
-                        <img src={port} alt="" loading="lazy" decoding="async" draggable={false} className={`h-full w-full object-contain p-0.5 transition duration-300 ${sel ? 'scale-110' : 'opacity-85 saturate-[0.85]'}`} />
-                      ) : (
-                        <Box size={18} className="m-auto text-white/30" />
-                      )}
-                      {pedido.includes(m.id) && (
-                        <span className="absolute right-0.5 top-0.5 grid h-4 w-4 place-items-center rounded-full bg-[#FFC23D] text-[#140f22]">
-                          <Check size={11} strokeWidth={3} />
-                        </span>
-                      )}
-                    </button>
+                {grupos.map((g, gi) => {
+                  const desde = grupos.slice(0, gi).reduce((n, x) => n + x.modelos.length, 0)
+                  const Icono = ICONO_CATEGORIA[g.categoria.id]
+                  // Un rótulo por sección; el bloque sin color de una sección que también tiene color va con una línea fina.
+                  const sigue = gi > 0 && grupos[gi - 1].categoria.id === g.categoria.id
+                  const enSeccion = grupos.filter((x) => x.categoria.id === g.categoria.id).reduce((n, x) => n + x.modelos.length, 0)
+                  const sello = (
+                    <span className={`shrink-0 px-1.5 py-px text-[9.5px] tracking-[0.12em] ${g.blanco ? 'text-white/70 ring-1 ring-white/30' : 'bg-white/90 text-[#140f22]'}`}>{g.blanco ? 'Sin color' : 'A color'}</span>
                   )
+                  return [
+                    sigue ? (
+                      <div key={`${g.categoria.id}-${g.blanco}`} className="col-span-full mt-1 flex items-center gap-2 font-chakra text-[10px] font-semibold uppercase tracking-[0.16em] text-white/55">
+                        {sello}
+                        <span className="h-px flex-1 border-t border-dashed border-white/20" />
+                        <span className="tabular-nums">{g.modelos.length}</span>
+                      </div>
+                    ) : (
+                      <div
+                        key={`${g.categoria.id}-${g.blanco}`}
+                        className={`rotulo sticky top-0 z-20 col-span-full flex items-center gap-2 bg-[#171127]/95 py-1.5 pl-2 pr-2.5 font-chakra text-[11px] font-semibold uppercase tracking-[0.16em] backdrop-blur ${gi ? 'mt-2' : ''}`}
+                        style={{ '--c': g.categoria.desde } as CSSProperties}
+                      >
+                        <Icono size={13} style={{ color: g.categoria.tinta }} />
+                        <span className="truncate text-white">{g.categoria.nombre}</span>
+                        {sello}
+                        <span className="h-px flex-1 bg-gradient-to-r from-white/25 to-transparent" />
+                        <span className="tabular-nums text-white/45">{enSeccion}</span>
+                      </div>
+                    ),
+                    ...g.modelos.map((m, j) => {
+                      const k = desde + j
+                      const sel = k === i
+                      const port = rutaPortada(m)
+                      return (
+                        <button
+                          key={m.id}
+                          data-i={k}
+                          type="button"
+                          onMouseEnter={() => k !== i && (setCursor(k), sonido && blip(false))}
+                          onFocus={() => setCursor(k)}
+                          onClick={() => (k === i ? onFicha(m.id) : setCursor(k))}
+                          onDoubleClick={() => alternarPedido(m.id)}
+                          title={m.nombre}
+                          aria-label={m.nombre}
+                          aria-current={sel}
+                          className={`retrato relative aspect-square overflow-hidden ${sel ? 'retrato-sel z-10' : ''}`}
+                          style={{ background: m.sinTextura ? 'linear-gradient(160deg, #3a3550, #1a1430 75%)' : `linear-gradient(160deg, ${g.categoria.desde}55, #1a1430 70%)` }}
+                        >
+                          {port ? (
+                            <img src={port} alt="" loading="lazy" decoding="async" draggable={false} className={`h-full w-full object-contain p-0.5 transition duration-300 ${sel ? 'scale-110' : 'opacity-85 saturate-[0.85]'}`} />
+                          ) : (
+                            <Box size={18} className="m-auto text-white/30" />
+                          )}
+                          {esNueva(m) && <span className="absolute left-0 top-0 bg-[#FF2D8A] px-1 font-chakra text-[8px] font-bold uppercase leading-[13px] tracking-wider">Nuevo</span>}
+                          {pedido.includes(m.id) && (
+                            <span className="absolute right-0.5 top-0.5 grid h-4 w-4 place-items-center rounded-full bg-[#FFC23D] text-[#140f22]">
+                              <Check size={11} strokeWidth={3} />
+                            </span>
+                          )}
+                        </button>
+                      )
+                    }),
+                  ]
                 })}
               </div>
             ) : (
               <p className="py-10 text-center text-[13px] text-white/50">Ninguna figura con esa búsqueda en {c.nombre}.</p>
             )}
           </div>
-          <p className="flex items-center justify-between font-chakra text-[11px] uppercase tracking-[0.18em] text-white/45">
-            <span>{c.nombre}</span>
-            <span className="tabular-nums">{lista.length ? `${i + 1} / ${lista.length}` : '0'}</span>
+          <p className="flex items-center justify-between gap-3 font-chakra text-[11px] uppercase tracking-[0.18em] text-white/45">
+            <span className="truncate">
+              {grupoActual ? `${grupoActual.categoria.nombre} · ${grupoActual.blanco ? 'Sin color' : 'A color'}` : c.nombre}
+            </span>
+            <span className="shrink-0 tabular-nums">{lista.length ? `${i + 1} / ${lista.length}` : '0'}</span>
           </p>
         </div>
       </div>

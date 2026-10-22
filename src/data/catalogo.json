@@ -1,5 +1,257 @@
 [
   {
+    "id": "saiyan-dorado-chibi-a",
+    "nombre": "Saiyan Dorado Chibi · A",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Guerrero saiyan chibi en fase dorada: melena rubia en punta, gi naranja con cinturón azul y muñequeras, sobre peana azul. Estilo juguete coleccionable.",
+    "archivo": "meshy/saiyan-dorado-chibi-a.glb",
+    "peso": 1729552,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-22",
+    "triangulos": 259930,
+    "portada": "saiyan-dorado-chibi-a.webp"
+  },
+  {
+    "id": "saiyan-dorado-chibi-b",
+    "nombre": "Saiyan Dorado Chibi · B",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Variante del saiyan dorado con ojos castaños y peana translúcida. Gi naranja, botas azules y pose tranquila.",
+    "archivo": "meshy/saiyan-dorado-chibi-b.glb",
+    "peso": 1412960,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-22",
+    "triangulos": 214968,
+    "portada": "saiyan-dorado-chibi-b.webp"
+  },
+  {
+    "id": "saiyan-dorado-chibi-escultura-a",
+    "nombre": "Saiyan Dorado Chibi · Escultura A",
+    "categoria": "dragon-ball-z",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar del saiyan dorado, pose A, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/saiyan-dorado-chibi-escultura-a.glb",
+    "peso": 824548,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-22",
+    "triangulos": 200058,
+    "portada": "saiyan-dorado-chibi-escultura-a.webp",
+    "sinTextura": true
+  },
+  {
+    "id": "saiyan-dorado-chibi-escultura-b",
+    "nombre": "Saiyan Dorado Chibi · Escultura B",
+    "categoria": "dragon-ball-z",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar del saiyan dorado, con la melena más salvaje, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/saiyan-dorado-chibi-escultura-b.glb",
+    "peso": 997896,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-22",
+    "triangulos": 241526,
+    "portada": "saiyan-dorado-chibi-escultura-b.webp",
+    "sinTextura": true
+  },
+  {
+    "id": "saiyan-dorado-batalla-chibi",
+    "nombre": "Saiyan Dorado Chibi · Tras la Batalla",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "El saiyan dorado con el gi hecho jirones tras el combate: torso al aire, ojos verdes y ceño fruncido. Peana oscura.",
+    "archivo": "meshy/saiyan-dorado-batalla-chibi.glb",
+    "peso": 1637452,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-22",
+    "triangulos": 244932,
+    "portada": "saiyan-dorado-batalla-chibi.webp"
+  },
+  {
+    "id": "saiyan-dorado-batalla-chibi-escultura",
+    "nombre": "Saiyan Dorado Chibi · Tras la Batalla · Escultura",
+    "categoria": "dragon-ball-z",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar del saiyan con el gi roto, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/saiyan-dorado-batalla-chibi-escultura.glb",
+    "peso": 936668,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-22",
+    "triangulos": 227868,
+    "portada": "saiyan-dorado-batalla-chibi-escultura.webp",
+    "sinTextura": true
+  },
+  {
+    "id": "principe-saiyan-chibi-a",
+    "nombre": "Príncipe Saiyan Chibi · A",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "El príncipe saiyan en versión chibi: pelo negro en llama, traje azul y armadura blanca con hombreras doradas, brazos cruzados de orgullo.",
+    "archivo": "meshy/principe-saiyan-chibi-a.glb",
+    "peso": 1377508,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-22",
+    "triangulos": 200328,
+    "portada": "principe-saiyan-chibi-a.webp"
+  },
+  {
+    "id": "principe-saiyan-chibi-b",
+    "nombre": "Príncipe Saiyan Chibi · Rastreador",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "El príncipe saiyan con la armadura de su primera llegada a la Tierra: hombreras amarillas, cinturón y rastreador en el ojo.",
+    "archivo": "meshy/principe-saiyan-chibi-b.glb",
+    "peso": 1683320,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-22",
+    "triangulos": 247098,
+    "portada": "principe-saiyan-chibi-b.webp"
+  },
+  {
+    "id": "principe-saiyan-chibi-escultura",
+    "nombre": "Príncipe Saiyan Chibi · Escultura",
+    "categoria": "dragon-ball-z",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar del príncipe saiyan, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/principe-saiyan-chibi-escultura.glb",
+    "peso": 763644,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-22",
+    "triangulos": 185160,
+    "portada": "principe-saiyan-chibi-escultura.webp",
+    "sinTextura": true
+  },
+  {
+    "id": "fusion-fase4-chibi-a",
+    "nombre": "Fusión Fase 4 Chibi · A",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "El guerrero fusionado en Fase 4, en chibi: melena roja, pelaje carmesí, chaleco de fusión y faja azul, con la cola al viento. Peana nacarada.",
+    "archivo": "meshy/fusion-fase4-chibi-a.glb",
+    "peso": 2361044,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-22",
+    "triangulos": 368756,
+    "portada": "fusion-fase4-chibi-a.webp"
+  },
+  {
+    "id": "fusion-fase4-chibi-b",
+    "nombre": "Fusión Fase 4 Chibi · B",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Variante de la fusión en Fase 4 con ojos grandes estilo figura vinilo y peana oscura.",
+    "archivo": "meshy/fusion-fase4-chibi-b.glb",
+    "peso": 1949876,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-22",
+    "triangulos": 299038,
+    "portada": "fusion-fase4-chibi-b.webp"
+  },
+  {
+    "id": "maton-de-traje-chibi",
+    "nombre": "Matón de Traje Chibi",
+    "categoria": "anime",
+    "precio": 15,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Chibi de anime con traje azul marino, pelo negro en cepillo y cicatrices en la frente y la mejilla. Cara de pocos amigos, corazón de oro.",
+    "archivo": "meshy/maton-de-traje-chibi.glb",
+    "peso": 1079876,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-22",
+    "triangulos": 160376,
+    "portada": "maton-de-traje-chibi.webp"
+  },
+  {
+    "id": "maton-de-traje-chibi-escultura",
+    "nombre": "Matón de Traje Chibi · Escultura",
+    "categoria": "anime",
+    "precio": 10,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar del matón de traje, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/maton-de-traje-chibi-escultura.glb",
+    "peso": 610256,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-22",
+    "triangulos": 150342,
+    "portada": "maton-de-traje-chibi-escultura.webp",
+    "sinTextura": true
+  },
+  {
     "nombre": "Seiya de Pegaso Chibi",
     "categoria": "caballeros-del-zodiaco",
     "precio": 15,

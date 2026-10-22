@@ -33,6 +33,8 @@ export type Modelo3D = {
   autor?: string
   /** Malla sin textura ni color (esculturas, piezas en blanco): va al final del catálogo y tiene su propio filtro. */
   sinTextura?: boolean
+  /** Figura base cuando el id no la deja deducir: las variantes de una familia se enseñan juntas (ver `orden.ts`). */
+  familia?: string
   /** Se construye en el navegador con el nombre del cliente (ver llavero.ts). */
   personalizable?: boolean
   /**

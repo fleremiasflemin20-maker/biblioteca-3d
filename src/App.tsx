@@ -8,6 +8,7 @@ import { Portadas } from './components/Portadas'
 import { ModoManos } from './components/ModoManos'
 import { CATALOGO, CATEGORIAS, CORREO, WHATSAPP, type Modelo3D } from './lib/catalogo'
 import { ICONO_CATEGORIA } from './lib/iconos'
+import { agrupar, type Acabado } from './lib/orden'
 import { enlaceStudio } from './lib/studio'
 import { useTema } from './lib/tema'
 
@@ -22,7 +23,6 @@ const estudioDesdeHash = (): Estudio | null => (location.hash === '#estudio' ? {
 if (location.hash === '#separador' || location.hash === '#editor') location.replace(enlaceStudio(location.hash.slice(1) as 'separador' | 'editor'))
 
 type Orden = 'recientes' | 'barato' | 'caro' | 'nombre'
-type Acabado = 'todos' | 'color' | 'sin-textura'
 type Manos = { lista: Modelo3D[]; indice: number; desdeFicha: boolean }
 
 const ENLACE_MEDIDA = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Hola, quiero un modelo 3D a medida.')}`
@@ -73,22 +73,21 @@ export default function App() {
         (c.id === 'todo' || m.categoria === c.id) &&
         (!q || `${m.nombre} ${m.descripcion} ${m.formatos.join(' ')} ${m.origen ?? ''}`.toLowerCase().includes(q)),
     )
-    if (orden === 'recientes') l.reverse()
+    // Por fecha de alta, lo último arriba; `sort` es estable y respeta el orden del JSON en el mismo día.
+    if (orden === 'recientes') l.sort((a, b) => (b.alta ?? '').localeCompare(a.alta ?? ''))
     if (orden === 'barato') l.sort((a, b) => a.precio - b.precio)
     if (orden === 'caro') l.sort((a, b) => b.precio - a.precio)
     if (orden === 'nombre') l.sort((a, b) => a.nombre.localeCompare(b.nombre))
-    // Las de color primero y las sin textura al final, sin romper el orden
-    // elegido dentro de cada grupo (`sort` es estable).
-    l.sort((a, b) => Number(!!a.sinTextura) - Number(!!b.sinTextura))
     return l
   }, [c, busqueda, orden])
   const nSinTextura = base.filter((m) => m.sinTextura).length
-  const lista = useMemo(
-    () => (acabado === 'todos' ? base : base.filter((m) => (acabado === 'sin-textura') === !!m.sinTextura)),
+  // Cada pieza en su sitio: sección, luego color / sin textura, y las variantes de una figura juntas.
+  const grupos = useMemo(
+    () => agrupar(acabado === 'todos' ? base : base.filter((m) => (acabado === 'sin-textura') === !!m.sinTextura)),
     [base, acabado],
   )
-  const conColor = lista.filter((m) => !m.sinTextura)
-  const sinTextura = lista.filter((m) => m.sinTextura)
+  const lista = useMemo(() => grupos.flatMap((g) => g.modelos), [grupos])
+  const conteo = { todos: base.length, color: base.length - nSinTextura, 'sin-textura': nSinTextura }
 
   const indiceAbierto = lista.findIndex((m) => m.id === abierto)
   const mover = useCallback(
@@ -207,6 +206,10 @@ export default function App() {
         {/* ── Selección de figuras ────────────────────────────── */}
         <Seleccion
           lista={lista}
+          grupos={grupos}
+          acabado={acabado}
+          setAcabado={setAcabado}
+          conteo={conteo}
           cat={cat}
           setCat={setCat}
           activo={!abierto && !manos && !estudio && !subiendo}
@@ -270,9 +273,9 @@ export default function App() {
                 <div className="flex rounded-full border border-stone-200 bg-superficie p-1" role="tablist" aria-label="Acabado">
                   {(
                     [
-                      { id: 'todos', nombre: 'Todos', n: base.length },
-                      { id: 'color', nombre: 'A color', n: base.length - nSinTextura },
-                      { id: 'sin-textura', nombre: 'Sin textura', n: nSinTextura },
+                      { id: 'todos', nombre: 'Todos', n: conteo.todos },
+                      { id: 'color', nombre: 'A color', n: conteo.color },
+                      { id: 'sin-textura', nombre: 'Sin textura', n: conteo['sin-textura'] },
                     ] as const
                   ).map((o) => (
                     <button
@@ -297,27 +300,35 @@ export default function App() {
 
             {lista.length ? (
               <div key={`${c.id}-${orden}-${acabado}`}>
-                {[conColor, sinTextura].map((grupo, g) =>
-                  grupo.length ? (
-                    <div key={g}>
-                      {/* Separador del bloque sin textura, solo cuando conviven los dos. */}
-                      {g === 1 && conColor.length > 0 && (
-                        <div className="mb-6 mt-14 flex items-center gap-4">
-                          <h3 className="shrink-0 text-lg font-semibold tracking-tight">Sin textura</h3>
-                          <p className="hidden shrink-0 text-sm text-stone-500 sm:block">Mallas en blanco, listas para pintar o imprimir · {grupo.length}</p>
+                {grupos.map((g, k) => {
+                  const Icono = ICONO_CATEGORIA[g.categoria.id]
+                  // Con una sola sección y un solo acabado el título de arriba ya lo dice todo.
+                  const conTitulo = grupos.length > 1
+                  return (
+                    <div key={`${g.categoria.id}-${g.blanco}`} className={k ? 'mt-14' : ''}>
+                      {conTitulo && (
+                        <div className="mb-6 flex items-center gap-3">
+                          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl text-white" style={{ background: `linear-gradient(135deg, ${g.categoria.desde}, ${g.categoria.hasta})` }}>
+                            <Icono size={17} />
+                          </span>
+                          <h3 className="shrink-0 text-lg font-semibold tracking-tight">{g.categoria.nombre}</h3>
+                          <span className={`shrink-0 rounded-full px-2.5 py-1 text-[12px] font-medium ${g.blanco ? 'border border-stone-300 text-stone-600' : 'bg-grafito text-hueso'}`}>
+                            {g.blanco ? 'Sin textura' : 'A color'}
+                          </span>
+                          <span className="shrink-0 text-sm tabular-nums text-stone-400">{g.modelos.length}</span>
                           <span className="h-px flex-1 bg-stone-200" />
                         </div>
                       )}
                       <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
-                        {grupo.map((m, i) => (
+                        {g.modelos.map((m, i) => (
                           <div key={m.id} className="entra" style={{ animationDelay: `${Math.min(i, 12) * 35}ms` }}>
                             <Tarjeta modelo={m} onAbrir={() => setAbierto(m.id)} />
                           </div>
                         ))}
                       </div>
                     </div>
-                  ) : null,
-                )}
+                  )
+                })}
               </div>
             ) : (
               <div className="rounded-3xl border border-dashed border-stone-300 px-6 py-20 text-center">
