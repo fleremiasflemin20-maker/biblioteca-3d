@@ -177,11 +177,12 @@ export default function App() {
                 <Plus size={16} /> <span className="hidden lg:inline">Subir</span>
               </button>
             )}
-            <button type="button" onClick={() => setEstudio({ vista: 'sala' })} className="pildora-negra !px-3.5">
-              <Box size={16} /> <span className="hidden sm:inline">Estudio 3D</span>
+            {/* Recorrido 3D: la sala con las figuras en pedestales. Flemin Studio: la web aparte, por su portada. */}
+            <button type="button" onClick={() => setEstudio({ vista: 'sala' })} className="pildora-negra !px-3.5" title="Recorre la sala de figuras en 3D">
+              <Box size={16} /> <span className="hidden sm:inline">Recorrido 3D</span>
             </button>
-            <a href={enlaceStudio('separador')} className="pildora-clara !px-3.5">
-              <Scissors size={16} /> <span className="hidden sm:inline">Studio 3D</span>
+            <a href={enlaceStudio()} className="pildora-clara !px-3.5" title="Abrir Flemin Studio 3D">
+              <Scissors size={16} /> <span className="hidden sm:inline">Flemin Studio</span>
             </a>
             <button type="button" onClick={() => abrirManos()} className="pildora-clara !px-3.5">
               <Hand size={16} /> <span className="hidden sm:inline">Modo manos</span>

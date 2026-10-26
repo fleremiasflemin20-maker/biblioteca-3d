@@ -53,9 +53,9 @@ El separador de piezas y el editor 3D son **Flemin Studio 3D**, una web
 aparte: https://flemin-studio-3d.analista-datos-pro.workers.dev/
 (su código está en el repo privado `flemin-studio-3d`).
 
-Los botones **Studio 3D**, **Separar en piezas** y **Modelar en 3D** abren
-esa web, y en la sala cada obra tiene **Separar en el Studio**, que la abre
-allí por la URL (`?modelo=…&nombre=…#separador`) en modo protegido: se
+El botón **Flemin Studio** de la barra abre esa web por su portada.
+**Separar en piezas** y **Modelar en 3D** también la abren, y en la sala
+cada obra tiene **Separar en el Studio**, que la abre allí por la URL (`?modelo=…&nombre=…#separador`) en modo protegido: se
 separa para verla, pero no se descarga. Los enlaces viejos `#separador` y
 `#editor` redirigen al Studio. La enlaza `src/lib/studio.ts`.
 
@@ -76,7 +76,7 @@ La portada se juega como un videojuego (`src/lib/consola.ts`):
 
 ## Sala del estudio
 
-Botón **Estudio 3D** (o `#estudio`): las obras en pedestales alrededor de un
+Botón **Recorrido 3D** (o `#estudio`): las obras en pedestales alrededor de un
 estudio circular, con luces de estudio, atardecer, neón o noche y modos
 color, arcilla y malla (`src/estudio/sala/`). Dragon Ball y Caballeros del
 Zodiaco no entran en la sala pública (`AJENAS` en `Sala.tsx`): siguen en la
@@ -84,7 +84,7 @@ tienda.
 
 ## Pintar y separar
 
-El botón **Pintar y separar** de cada ficha y **Studio 3D** de la barra abren
+El botón **Pintar y separar** de cada ficha y **Flemin Studio** de la barra abren
 [Flemin Studio 3D](https://flemin-studio-3d.analista-datos-pro.workers.dev/),
 la web aparte con el separador por colores, cortes y cama, el editor y "Foto
 a 3D". Recibe la obra por la URL (`src/lib/studio.ts`) y la abre en modo
