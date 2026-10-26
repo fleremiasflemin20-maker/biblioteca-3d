@@ -59,6 +59,21 @@ allí por la URL (`?modelo=…&nombre=…#separador`) en modo protegido: se
 separa para verla, pero no se descarga. Los enlaces viejos `#separador` y
 `#editor` redirigen al Studio. La enlaza `src/lib/studio.ts`.
 
+## Modo consola
+
+La portada se juega como un videojuego (`src/lib/consola.ts`):
+
+- **Pantalla de título** "Pulsa START" la primera vez de cada visita (`Inicio.tsx`).
+- **Logros y colección** (L / Start): cada figura que se ve en 3D cuenta para
+  la colección; hay trofeos por secciones completas, acabados, equipo,
+  ruleta, foto y mando, con nivel de jugador. Se guarda en el navegador.
+- **Selección aleatoria** (R / Select): ruleta que frena en una figura.
+- **Modo foto** (P / clic del stick derecho): descarga un PNG de la figura
+  con su nombre y la marca de la biblioteca.
+- **Mando**: al conectarlo la barra enseña sus botones (A, X, Y, LB/RB,
+  LT/RT) y vibra al moverse y al confirmar.
+- Efectos de sonido (WebAudio, sin archivos), apagados por defecto.
+
 ## Sala del estudio
 
 Botón **Estudio 3D** (o `#estudio`): las obras en pedestales alrededor de un

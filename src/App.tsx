@@ -6,6 +6,8 @@ import { Seleccion } from './components/Seleccion'
 import { Subir } from './components/Subir'
 import { Portadas } from './components/Portadas'
 import { ModoManos } from './components/ModoManos'
+import { Inicio, useInicio } from './components/Inicio'
+import { Avisos, PanelLogros } from './components/Trofeos'
 import { CATALOGO, CATEGORIAS, CORREO, WHATSAPP, type Modelo3D } from './lib/catalogo'
 import { ICONO_CATEGORIA } from './lib/iconos'
 import { agrupar, type Acabado } from './lib/orden'
@@ -38,6 +40,9 @@ export default function App() {
   const [manos, setManos] = useState<Manos | null>(null)
   const [estudio, setEstudioCrudo] = useState<Estudio | null>(estudioDesdeHash)
   const { tema, alternar } = useTema()
+  const inicio = useInicio()
+  const [logros, setLogros] = useState(false)
+  const abrirLogros = useCallback(() => setLogros(true), [])
 
   const setEstudio = useCallback((e: Estudio | null) => {
     setEstudioCrudo(e)
@@ -212,10 +217,11 @@ export default function App() {
           conteo={conteo}
           cat={cat}
           setCat={setCat}
-          activo={!abierto && !manos && !estudio && !subiendo}
+          activo={!abierto && !manos && !estudio && !subiendo && !logros && !inicio.ver}
           onFicha={verFicha}
           onManos={abrirManos}
           onCatalogo={irAlCatalogo}
+          onLogros={abrirLogros}
         />
 
         {/* ── Catálogo ────────────────────────────────────────── */}
@@ -411,6 +417,9 @@ export default function App() {
         />
       )}
       {subiendo && <Subir onCerrar={() => setSubiendo(false)} />}
+      {logros && <PanelLogros onCerrar={() => setLogros(false)} />}
+      {inicio.ver && <Inicio onEntrar={inicio.cerrar} />}
+      <Avisos />
 
       {estudio && (
         <Suspense

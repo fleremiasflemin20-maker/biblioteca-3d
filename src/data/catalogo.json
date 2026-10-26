@@ -1,5 +1,532 @@
 [
   {
+    "id": "chica-lazo-rojo-chibi-a",
+    "nombre": "Chica del Lazo Rojo Chibi · A",
+    "categoria": "anime",
+    "precio": 17,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Estudiante chibi con trenza y cordón rojo en el pelo, uniforme de lazo rojo, sobre una peana de césped con flores.",
+    "archivo": "meshy/chica-lazo-rojo-chibi-a.glb",
+    "peso": 1900832,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 290026,
+    "portada": "chica-lazo-rojo-chibi-a.webp"
+  },
+  {
+    "id": "guerrera-gigante-chibi-c",
+    "nombre": "Guerrera Gigante Chibi · C",
+    "categoria": "anime",
+    "precio": 17,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Misma pose que la B con otro horneado de color: piel más cálida y vestido más intenso.",
+    "archivo": "meshy/guerrera-gigante-chibi-c.glb",
+    "peso": 1831056,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 285430,
+    "portada": "guerrera-gigante-chibi-c.webp"
+  },
+  {
+    "id": "rey-hada-chibi-a",
+    "nombre": "Rey Hada Chibi · A",
+    "categoria": "anime",
+    "precio": 17,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Chibi pelirrojo con capa celeste y su almohada de hojas verde a la espalda, de pie sobre peana crema.",
+    "archivo": "meshy/rey-hada-chibi-a.glb",
+    "peso": 1393436,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 205078,
+    "portada": "rey-hada-chibi-a.webp"
+  },
+  {
+    "id": "cerdito-rosa-low-poly",
+    "nombre": "Cerdito Rosa Low-Poly",
+    "categoria": "anime",
+    "precio": 9,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Cerdito rosa de cuerpo entero en estilo low-poly facetado, con arete dorado en la oreja. Mascota simpática para escritorio o llavero grande.",
+    "archivo": "meshy/cerdito-rosa-low-poly.glb",
+    "peso": 522240,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 66792,
+    "portada": "cerdito-rosa-low-poly.webp"
+  },
+  {
+    "id": "chica-lazo-rojo-chibi-b",
+    "nombre": "Chica del Lazo Rojo Chibi · B",
+    "categoria": "anime",
+    "precio": 17,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Variante de pelo azul noche con coleta y cordón rojo, uniforme escolar y peana clara.",
+    "archivo": "meshy/chica-lazo-rojo-chibi-b.glb",
+    "peso": 1616884,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 236170,
+    "portada": "chica-lazo-rojo-chibi-b.webp"
+  },
+  {
+    "id": "guerrero-del-sol-chibi",
+    "nombre": "Guerrero del Sol Chibi",
+    "categoria": "anime",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Caballero chibi de armadura dorada, bigote rubio y un pequeño sol en la mano, con hacha a la espalda sobre peana negra. El orgullo hecho figura.",
+    "archivo": "meshy/guerrero-del-sol-chibi.glb",
+    "peso": 1618100,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 242292,
+    "portada": "guerrero-del-sol-chibi.webp"
+  },
+  {
+    "id": "hechicera-violeta-chibi-b",
+    "nombre": "Hechicera Violeta Chibi · B",
+    "categoria": "anime",
+    "precio": 17,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Variante de la hechicera con el pelo recogido a un lado y botas altas, en pose de ataque.",
+    "archivo": "meshy/hechicera-violeta-chibi-b.glb",
+    "peso": 1657368,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 249442,
+    "portada": "hechicera-violeta-chibi-b.webp"
+  },
+  {
+    "id": "rey-hada-chibi-b",
+    "nombre": "Rey Hada Chibi · B (Volador)",
+    "categoria": "anime",
+    "precio": 17,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Versión flotante del rey hada: sin peana, en pose de vuelo, abrazado a su almohada de hojas. Ideal para colgar o montar sobre varilla.",
+    "archivo": "meshy/rey-hada-chibi-b.glb",
+    "peso": 1763616,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 262832,
+    "portada": "rey-hada-chibi-b.webp"
+  },
+  {
+    "id": "hechicera-violeta-chibi-a",
+    "nombre": "Hechicera Violeta Chibi · A",
+    "categoria": "anime",
+    "precio": 17,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Hechicera chibi de melena violeta y ojos dorados, cuello de piel y traje morado sobre peana a juego.",
+    "archivo": "meshy/hechicera-violeta-chibi-a.glb",
+    "peso": 1478328,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 217024,
+    "portada": "hechicera-violeta-chibi-a.webp"
+  },
+  {
+    "id": "estudiante-tokio-chibi",
+    "nombre": "Estudiante de Tokio Chibi",
+    "categoria": "anime",
+    "precio": 15,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Chibi de estudiante de pelo castaño, camisa blanca, corbata a rayas y mochila al hombro. Para los fans de las historias que cruzan el cielo.",
+    "archivo": "meshy/estudiante-tokio-chibi.glb",
+    "peso": 1492672,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 222084,
+    "portada": "estudiante-tokio-chibi.webp"
+  },
+  {
+    "id": "guerrera-gigante-chibi-a",
+    "nombre": "Guerrera Gigante Chibi · A (Guiño)",
+    "categoria": "anime",
+    "precio": 17,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Chibi de coletas castañas, vestido naranja y guantelete, guiñando un ojo y sacando la lengua. Pura energía.",
+    "archivo": "meshy/guerrera-gigante-chibi-a.glb",
+    "peso": 1920100,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 297638,
+    "portada": "guerrera-gigante-chibi-a.webp"
+  },
+  {
+    "id": "guerrera-gigante-chibi-b",
+    "nombre": "Guerrera Gigante Chibi · B",
+    "categoria": "anime",
+    "precio": 17,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "La guerrera de coletas en pose tranquila, vestido naranja y botas, sobre peana marrón.",
+    "archivo": "meshy/guerrera-gigante-chibi-b.glb",
+    "peso": 1836568,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 285460,
+    "portada": "guerrera-gigante-chibi-b.webp"
+  },
+  {
+    "id": "bandido-inmortal-chibi",
+    "nombre": "Bandido Inmortal Chibi",
+    "categoria": "anime",
+    "precio": 17,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Chibi de pelo blanco en punta y ojos rojos, abrigo carmesí abierto sobre peana roja. Sonrisa de quien no le teme a nada.",
+    "archivo": "meshy/bandido-inmortal-chibi.glb",
+    "peso": 1252200,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 184694,
+    "portada": "bandido-inmortal-chibi.webp"
+  },
+  {
+    "id": "fusion-fase4-chibi-escultura-b",
+    "nombre": "Fusión Fase 4 Chibi · Escultura B",
+    "categoria": "dragon-ball-z",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la fusión fase 4, pose B, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/fusion-fase4-chibi-escultura-b.glb",
+    "peso": 1148904,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 278970,
+    "portada": "fusion-fase4-chibi-escultura-b.webp",
+    "sinTextura": true
+  },
+  {
+    "id": "rey-hada-chibi-escultura-b",
+    "nombre": "Rey Hada Chibi · Escultura B",
+    "categoria": "anime",
+    "precio": 11,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar del rey hada volador, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/rey-hada-chibi-escultura-b.glb",
+    "peso": 1007004,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 246506,
+    "portada": "rey-hada-chibi-escultura-b.webp",
+    "sinTextura": true
+  },
+  {
+    "id": "chica-lazo-rojo-chibi-escultura-b",
+    "nombre": "Chica del Lazo Rojo Chibi · Escultura B",
+    "categoria": "anime",
+    "precio": 11,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la chica del lazo rojo, variante B, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/chica-lazo-rojo-chibi-escultura-b.glb",
+    "peso": 894432,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 217210,
+    "portada": "chica-lazo-rojo-chibi-escultura-b.webp",
+    "sinTextura": true
+  },
+  {
+    "id": "guerrera-gigante-chibi-escultura-b",
+    "nombre": "Guerrera Gigante Chibi · Escultura B",
+    "categoria": "anime",
+    "precio": 11,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la guerrera gigante, poses B y C, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/guerrera-gigante-chibi-escultura-b.glb",
+    "peso": 1097244,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 267152,
+    "portada": "guerrera-gigante-chibi-escultura-b.webp",
+    "sinTextura": true
+  },
+  {
+    "id": "bandido-inmortal-chibi-escultura",
+    "nombre": "Bandido Inmortal Chibi · Escultura",
+    "categoria": "anime",
+    "precio": 11,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar del bandido inmortal, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/bandido-inmortal-chibi-escultura.glb",
+    "peso": 708368,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 171446,
+    "portada": "bandido-inmortal-chibi-escultura.webp",
+    "sinTextura": true
+  },
+  {
+    "id": "hechicera-violeta-chibi-escultura-b",
+    "nombre": "Hechicera Violeta Chibi · Escultura B",
+    "categoria": "anime",
+    "precio": 11,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la hechicera violeta, pose B, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/hechicera-violeta-chibi-escultura-b.glb",
+    "peso": 957756,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 233140,
+    "portada": "hechicera-violeta-chibi-escultura-b.webp",
+    "sinTextura": true
+  },
+  {
+    "id": "guerrera-gigante-chibi-escultura-a",
+    "nombre": "Guerrera Gigante Chibi · Escultura A",
+    "categoria": "anime",
+    "precio": 11,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la guerrera gigante con guiño, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/guerrera-gigante-chibi-escultura-a.glb",
+    "peso": 1143156,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 279076,
+    "portada": "guerrera-gigante-chibi-escultura-a.webp",
+    "sinTextura": true
+  },
+  {
+    "id": "hechicera-violeta-chibi-escultura-a",
+    "nombre": "Hechicera Violeta Chibi · Escultura A",
+    "categoria": "anime",
+    "precio": 11,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la hechicera violeta, pose A, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/hechicera-violeta-chibi-escultura-a.glb",
+    "peso": 826912,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 200566,
+    "portada": "hechicera-violeta-chibi-escultura-a.webp",
+    "sinTextura": true
+  },
+  {
+    "id": "cerdito-rosa-low-poly-escultura",
+    "nombre": "Cerdito Rosa Low-Poly · Escultura",
+    "categoria": "anime",
+    "precio": 6,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar del cerdito low-poly, ligera y lista para imprimir en 3D.",
+    "archivo": "meshy/cerdito-rosa-low-poly-escultura.glb",
+    "peso": 254196,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 60222,
+    "portada": "cerdito-rosa-low-poly-escultura.webp",
+    "sinTextura": true
+  },
+  {
+    "id": "rey-hada-chibi-escultura-a",
+    "nombre": "Rey Hada Chibi · Escultura A",
+    "categoria": "anime",
+    "precio": 11,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar del rey hada con peana, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/rey-hada-chibi-escultura-a.glb",
+    "peso": 796392,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 192984,
+    "portada": "rey-hada-chibi-escultura-a.webp",
+    "sinTextura": true
+  },
+  {
+    "id": "chica-lazo-rojo-chibi-escultura-a",
+    "nombre": "Chica del Lazo Rojo Chibi · Escultura A",
+    "categoria": "anime",
+    "precio": 11,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la chica del lazo rojo con peana de césped, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/chica-lazo-rojo-chibi-escultura-a.glb",
+    "peso": 1106532,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 268598,
+    "portada": "chica-lazo-rojo-chibi-escultura-a.webp",
+    "sinTextura": true
+  },
+  {
+    "id": "fusion-fase4-chibi-escultura-a",
+    "nombre": "Fusión Fase 4 Chibi · Escultura A",
+    "categoria": "dragon-ball-z",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la fusión fase 4, pose A, con melena salvaje y cola. Lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/fusion-fase4-chibi-escultura-a.glb",
+    "peso": 1415116,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 343286,
+    "portada": "fusion-fase4-chibi-escultura-a.webp",
+    "sinTextura": true
+  },
+  {
+    "id": "estudiante-tokio-chibi-escultura",
+    "nombre": "Estudiante de Tokio Chibi · Escultura",
+    "categoria": "anime",
+    "precio": 10,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar del estudiante de Tokio, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/estudiante-tokio-chibi-escultura.glb",
+    "peso": 848500,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 206140,
+    "portada": "estudiante-tokio-chibi-escultura.webp",
+    "sinTextura": true
+  },
+  {
+    "id": "guerrero-del-sol-chibi-escultura",
+    "nombre": "Guerrero del Sol Chibi · Escultura",
+    "categoria": "anime",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar del guerrero del sol, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/guerrero-del-sol-chibi-escultura.glb",
+    "peso": 924032,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-26",
+    "triangulos": 224872,
+    "portada": "guerrero-del-sol-chibi-escultura.webp",
+    "sinTextura": true
+  },
+  {
     "id": "saiyan-dorado-chibi-a",
     "nombre": "Saiyan Dorado Chibi · A",
     "categoria": "dragon-ball-z",

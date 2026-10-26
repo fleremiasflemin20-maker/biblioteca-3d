@@ -1,15 +1,16 @@
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, type RootState } from '@react-three/fiber'
 import { ContactShadows, Sparkles } from '@react-three/drei'
 import * as THREE from 'three'
-import { ArrowDown, Box, Check, Hand, MessageCircle, Plus, Scissors, ShoppingBag, Star, Volume2, VolumeX, X } from 'lucide-react'
+import { ArrowDown, Box, Camera, Check, Dices, Hand, MessageCircle, Plus, Scissors, ShoppingBag, Star, Trophy, Volume2, VolumeX, X } from 'lucide-react'
 import { AlCargar, Pieza, type Modo } from './Pieza'
 import { Normalizar } from './Visor'
 import { AmbienteFlemin } from '../estudio/luces'
-import { CATEGORIAS, WHATSAPP, enlaceCompra, precio, rutaPortada, triangulos, type Modelo3D } from '../lib/catalogo'
+import { CATALOGO, CATEGORIAS, WHATSAPP, enlaceCompra, precio, rutaPortada, triangulos, type Modelo3D } from '../lib/catalogo'
 import { ICONO_CATEGORIA } from '../lib/iconos'
 import { enlaceStudio } from '../lib/studio'
 import { variantes, type Acabado, type Grupo } from '../lib/orden'
+import { desbloquear, marcarVista, nivel, ponerSonido, sfx, useMando, useProgreso, vibrar } from '../lib/consola'
 
 /**
  * La portada de la biblioteca como una pantalla de selección de personajes de
@@ -18,7 +19,8 @@ import { variantes, type Acabado, type Grupo } from '../lib/orden'
  * acabados como "transformaciones" y las acciones como lista de técnicas. El
  * "equipo" de arriba es el pedido: hasta cinco figuras que se piden juntas.
  *
- * Se maneja con mouse, teclado (flechas, Enter, Espacio, Q/E, 1-3) o mando.
+ * Se maneja con mouse, teclado (flechas, Enter, Espacio, Q/E, 1-3, R, P, L) o
+ * mando. Con mando conectado, la barra de controles enseña sus botones.
  */
 const COLUMNAS = 6
 const MAX_PEDIDO = 5
@@ -42,26 +44,6 @@ const ACABADOS: { modo: Modo; nombre: string }[] = [
 function estrellas(m: Modelo3D) {
   if (!m.triangulos) return 3
   return Math.max(1, Math.min(7, Math.round(Math.log10(m.triangulos) * 2 - 6)))
-}
-
-/* ── Sonido de cursor (WebAudio, sin archivos) ─────────────────────────── */
-
-let audio: AudioContext | null = null
-function blip(agudo: boolean) {
-  try {
-    audio ??= new AudioContext()
-    const o = audio.createOscillator()
-    const g = audio.createGain()
-    o.type = 'triangle'
-    o.frequency.value = agudo ? 1320 : 660
-    g.gain.setValueAtTime(0.06, audio.currentTime)
-    g.gain.exponentialRampToValueAtTime(0.0001, audio.currentTime + (agudo ? 0.18 : 0.07))
-    o.connect(g).connect(audio.destination)
-    o.start()
-    o.stop(audio.currentTime + 0.2)
-  } catch {
-    /* sin audio: no pasa nada */
-  }
 }
 
 /* ── Escenario 3D ─────────────────────────────────────────────────────── */
@@ -138,7 +120,7 @@ function Pedestal({ tinta, pulso }: { tinta: string; pulso: number }) {
   )
 }
 
-function Escenario({ modelo, modo, tinta, onMostrado }: { modelo: Modelo3D; modo: Modo; tinta: string; onMostrado: (id: string) => void }) {
+function Escenario({ modelo, modo, tinta, onMostrado, onLienzo }: { modelo: Modelo3D; modo: Modo; tinta: string; onMostrado: (id: string) => void; onLienzo: (e: RootState) => void }) {
   // La figura anterior sigue en pantalla hasta que la nueva termina de cargar.
   const [mostrado, setMostrado] = useState<Modelo3D>(modelo)
   const [pulso, setPulso] = useState(0)
@@ -150,7 +132,7 @@ function Escenario({ modelo, modo, tinta, onMostrado }: { modelo: Modelo3D; modo
   const figuras = mostrado.id === modelo.id ? [modelo] : [mostrado, modelo]
 
   return (
-    <Canvas dpr={[1, 1.75]} camera={{ fov: 30, position: [0, 0.3, 6.6] }} gl={{ alpha: true, antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.1 }}>
+    <Canvas onCreated={onLienzo} dpr={[1, 1.75]} camera={{ fov: 30, position: [0, 0.3, 6.6] }} gl={{ alpha: true, antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.1 }}>
       <ambientLight intensity={0.45} />
       <directionalLight position={[3, 5, 3]} intensity={1.5} />
       <spotLight position={[-3.5, 3, -2.5]} intensity={45} angle={0.8} penumbra={1} color={tinta} />
@@ -183,6 +165,7 @@ export function Seleccion({
   onFicha,
   onManos,
   onCatalogo,
+  onLogros,
 }: {
   /** Ya ordenada: es `grupos` aplanado. */
   lista: Modelo3D[]
@@ -198,13 +181,27 @@ export function Seleccion({
   onFicha: (id: string) => void
   onManos: (id: string) => void
   onCatalogo: () => void
+  /** Abre la pantalla de logros (L o Start). */
+  onLogros: () => void
 }) {
   const [cursor, setCursor] = useState(() => Math.max(0, lista.findIndex((m) => m.destacado)))
   const [elegido, setElegido] = useState<string | null>(null)
   const [mostrado, setMostrado] = useState<string | null>(null)
   const [modo, setModo] = useState<Modo>('textura')
+  const modoRef = useRef(modo)
+  useEffect(() => {
+    modoRef.current = modo
+  }, [modo])
   const [pedido, setPedido] = useState<string[]>([])
-  const [sonido, setSonido] = useState(false)
+  const { sonido, puntos, nVistas } = useProgreso()
+  const mando = useMando()
+  const [ruleta, setRuleta] = useState(false)
+  const [flash, setFlash] = useState(0)
+  const lienzo = useRef<RootState | null>(null)
+  const usados = useRef(new Set<Modo>())
+  const guardarLienzo = useCallback((e: RootState) => {
+    lienzo.current = e
+  }, [])
   const [enVista, setEnVista] = useState(true)
   const raiz = useRef<HTMLElement>(null)
   const rejilla = useRef<HTMLDivElement>(null)
@@ -220,17 +217,24 @@ export function Seleccion({
   const enEscena = lista.find((m) => m.id === elegido) ?? actual
   const catEscena = CATEGORIAS.find((c) => c.id === enEscena?.categoria) ?? CATEGORIAS[0]
   const cargando = !!enEscena && mostrado !== enEscena.id
+  const mostrar = useCallback((id: string) => {
+    setMostrado(id)
+    marcarVista(id)
+  }, [])
 
   const mover = useCallback(
     (paso: number) => {
       if (!lista.length) return
       setCursor((c) => {
         const n = Math.min(lista.length - 1, Math.max(0, Math.min(c, lista.length - 1) + paso))
-        if (n !== c && sonido) blip(false)
+        if (n !== c) {
+          sfx.mover()
+          vibrar()
+        }
         return n
       })
     },
-    [lista.length, sonido],
+    [lista.length],
   )
   // Cada bloque empieza fila nueva bajo su rótulo, así que arriba/abajo no es
   // ±6: se busca la pieza de la fila vecina más cercana a la misma columna.
@@ -252,27 +256,122 @@ export function Seleccion({
         celdas.forEach((x, k) => {
           if (x.fila === a.fila + paso && (n === c || Math.abs(x.col - a.col) < Math.abs(celdas[n].col - a.col))) n = k
         })
-        if (n !== c && sonido) blip(false)
+        if (n !== c) {
+          sfx.mover()
+          vibrar()
+        }
         return n
       })
     },
-    [celdas, sonido],
+    [celdas],
   )
   const alternarPedido = useCallback(
     (id: string) => {
-      setPedido((p) => (p.includes(id) ? p.filter((x) => x !== id) : p.length >= MAX_PEDIDO ? p : [...p, id]))
-      if (sonido) blip(true)
+      setPedido((p) => {
+        const n = p.includes(id) ? p.filter((x) => x !== id) : p.length >= MAX_PEDIDO ? p : [...p, id]
+        if (n.length === MAX_PEDIDO) desbloquear('equipo')
+        return n
+      })
+      sfx.confirmar()
+      vibrar(true)
     },
-    [sonido],
+    [],
   )
   const cambiarSeccion = useCallback(
     (paso: number) => {
       const visibles = CATEGORIAS.map((_, k) => k)
       setCat(visibles[(cat + paso + visibles.length) % visibles.length])
       setCursor(0)
+      sfx.seccion()
     },
     [cat, setCat],
   )
+
+  // Los tres acabados probados = logro de transformación.
+  const cambiarModo = useCallback((m: Modo) => {
+    setModo(m)
+    sfx.seccion()
+    usados.current.add(m)
+    if (usados.current.size === 3) desbloquear('acabados')
+  }, [])
+
+  // Selección aleatoria, como el "?" de un juego de pelea: el cursor salta y frena hasta caer en una figura.
+  const aleatorio = useCallback(() => {
+    if (ruleta || lista.length < 2) return
+    setRuleta(true)
+    let paso = 0
+    const saltar = () => {
+      setCursor(Math.floor(Math.random() * lista.length))
+      sfx.ruleta()
+      vibrar()
+      if (++paso < 16) setTimeout(saltar, 30 + paso * paso * 1.4)
+      else {
+        setRuleta(false)
+        sfx.confirmar()
+        vibrar(true)
+        desbloquear('ruleta')
+      }
+    }
+    saltar()
+  }, [ruleta, lista.length])
+
+  // Modo foto: la figura en su escenario, con el nombre y la marca, a un PNG.
+  const foto = useCallback(() => {
+    const e = lienzo.current
+    const m = lista.find((x) => x.id === mostrado)
+    if (!e || !m) return
+    e.gl.render(e.scene, e.camera)
+    const fuente = e.gl.domElement
+    const W = 1600
+    const H = 1000
+    const cv = document.createElement('canvas')
+    cv.width = W
+    cv.height = H
+    const g = cv.getContext('2d')!
+    const cat = CATEGORIAS.find((c) => c.id === m.categoria) ?? CATEGORIAS[0]
+    const fondo = g.createLinearGradient(0, 0, 0, H)
+    fondo.addColorStop(0, '#120d24')
+    fondo.addColorStop(0.6, cat.desde + '55')
+    fondo.addColorStop(1, '#0B0912')
+    g.fillStyle = fondo
+    g.fillRect(0, 0, W, H)
+    const halo = g.createRadialGradient(W / 2, H * 0.58, 0, W / 2, H * 0.58, H * 0.6)
+    halo.addColorStop(0, cat.tinta + '66')
+    halo.addColorStop(1, 'transparent')
+    g.fillStyle = halo
+    g.fillRect(0, 0, W, H)
+    const k = Math.min((W * 0.9) / fuente.width, (H * 0.86) / fuente.height)
+    g.drawImage(fuente, (W - fuente.width * k) / 2, H - fuente.height * k - 40, fuente.width * k, fuente.height * k)
+    g.textAlign = 'left'
+    g.fillStyle = '#FFC23D'
+    g.font = '600 26px "Chakra Petch", sans-serif'
+    g.fillText('BIBLIOTECA 3D · FLEMIN', 56, 78)
+    g.fillStyle = '#fff'
+    g.font = '64px "Dela Gothic One", sans-serif'
+    g.lineWidth = 10
+    g.strokeStyle = '#1a1033'
+    g.strokeText(m.nombre, 56, 150, W - 112)
+    g.fillText(m.nombre, 56, 150, W - 112)
+    g.font = '600 28px "Chakra Petch", sans-serif'
+    g.fillStyle = 'rgba(255,255,255,0.75)'
+    g.fillText(`${cat.nombre} · ${precio(m.precio)}`, 56, 198)
+    g.textAlign = 'right'
+    g.fillStyle = 'rgba(255,255,255,0.5)'
+    g.font = '500 22px "Chakra Petch", sans-serif'
+    g.fillText('fleremiasflemin20-maker.github.io/biblioteca-3d', W - 48, H - 36)
+    cv.toBlob((b) => {
+      if (!b) return
+      const a = document.createElement('a')
+      a.href = URL.createObjectURL(b)
+      a.download = `${m.id}-foto.png`
+      a.click()
+      setTimeout(() => URL.revokeObjectURL(a.href), 2000)
+    }, 'image/png')
+    setFlash((f) => f + 1)
+    sfx.obturador()
+    vibrar(true)
+    desbloquear('foto')
+  }, [lista, mostrado])
 
   // El retrato con el cursor siempre a la vista dentro de la rejilla.
   useEffect(() => {
@@ -304,9 +403,12 @@ export function Seleccion({
         q: () => cambiarSeccion(-1),
         e: () => cambiarSeccion(1),
         m: () => actual && onManos(actual.id),
-        '1': () => setModo('textura'),
-        '2': () => setModo('arcilla'),
-        '3': () => setModo('malla'),
+        r: aleatorio,
+        p: foto,
+        l: onLogros,
+        '1': () => cambiarModo('textura'),
+        '2': () => cambiarModo('arcilla'),
+        '3': () => cambiarModo('malla'),
       }
       const f = acciones[k]
       if (!f) return
@@ -315,9 +417,10 @@ export function Seleccion({
     }
     window.addEventListener('keydown', tecla)
     return () => window.removeEventListener('keydown', tecla)
-  }, [manda, mover, moverFila, actual, onFicha, onManos, alternarPedido, cambiarSeccion])
+  }, [manda, mover, moverFila, actual, onFicha, onManos, alternarPedido, cambiarSeccion, aleatorio, foto, onLogros, cambiarModo])
 
-  // Mando: cruceta para moverse, A ficha, X pedido, Y manos, LB/RB sección.
+  // Mando: cruceta para moverse, A ficha, X pedido, Y manos, LB/RB sección,
+  // LT/RT acabado, Select aleatorio, Start logros, clic del stick derecho foto.
   useEffect(() => {
     if (!manda || !('getGamepads' in navigator)) return
     let raf = 0
@@ -344,11 +447,18 @@ export function Seleccion({
       if (pulsado(3) && actual) onManos(actual.id)
       if (pulsado(4)) cambiarSeccion(-1)
       if (pulsado(5)) cambiarSeccion(1)
+      if (pulsado(6) || pulsado(7)) {
+        const orden: Modo[] = ['textura', 'arcilla', 'malla']
+        cambiarModo(orden[(orden.indexOf(modoRef.current) + (pulsado(7) ? 1 : 2)) % 3])
+      }
+      if (pulsado(8)) aleatorio()
+      if (pulsado(9)) onLogros()
+      if (pulsado(11)) foto()
       p.buttons.forEach((x, n) => (antes[n] = x.pressed))
     }
     raf = requestAnimationFrame(ciclo)
     return () => cancelAnimationFrame(raf)
-  }, [manda, mover, moverFila, actual, onFicha, onManos, alternarPedido, cambiarSeccion])
+  }, [manda, mover, moverFila, actual, onFicha, onManos, alternarPedido, cambiarSeccion, cambiarModo, aleatorio, foto, onLogros])
 
   const enPedido = useMemo(() => pedido.map((id) => lista.find((m) => m.id === id) ?? null).filter(Boolean) as Modelo3D[], [pedido, lista])
   const total = enPedido.reduce((s, m) => s + m.precio, 0)
@@ -394,7 +504,11 @@ export function Seleccion({
         <div aria-hidden className="mira pointer-events-none absolute inset-x-[12%] bottom-[14%] top-[16%] hidden lg:block" style={{ '--c': tinta } as CSSProperties}>
           <i /><i /><i /><i />
         </div>
-        {enEscena && <Escenario modelo={enEscena} modo={modo} tinta={tinta} onMostrado={setMostrado} />}
+        {enEscena && <Escenario modelo={enEscena} modo={modo} tinta={tinta} onMostrado={mostrar} onLienzo={guardarLienzo} />}
+        {flash > 0 && <div key={flash} aria-hidden className="destello pointer-events-none absolute inset-0 bg-white" />}
+        {ruleta && (
+          <p className="parpadeo pointer-events-none absolute left-1/2 top-[12%] -translate-x-1/2 whitespace-nowrap font-flemin text-[clamp(1.4rem,3vw,2.4rem)] text-[#FFC23D] [text-shadow:0_3px_0_#1a1033]">¿Quién será?</p>
+        )}
         {cargando && (
           <p className="pointer-events-none absolute bottom-6 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/50 px-3.5 py-1.5 font-chakra text-[12px] uppercase tracking-[0.18em] text-white/80 ring-1 ring-white/15 backdrop-blur">
             <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-white/20 border-t-white" /> Cargando figura
@@ -461,7 +575,7 @@ export function Seleccion({
                 <button
                   key={a.modo}
                   type="button"
-                  onClick={() => setModo(a.modo)}
+                  onClick={() => cambiarModo(a.modo)}
                   title={`${a.nombre} (${k + 1})`}
                   aria-pressed={modo === a.modo}
                   className={`grid h-12 w-12 place-items-center overflow-hidden rounded-full ring-2 transition ${modo === a.modo ? 'scale-110 ring-[#FFC23D] shadow-[0_0_18px_rgba(255,194,61,0.6)]' : 'ring-white/25 hover:ring-white/60'}`}
@@ -479,12 +593,13 @@ export function Seleccion({
           <div className="w-full">
             <p className="mb-2 border-b border-white/25 pb-1 text-right font-chakra text-[11px] uppercase tracking-[0.22em] text-white/75">Opciones</p>
             <ul className="flex flex-col items-end gap-1.5">
-              <Opcion onClick={() => onFicha(actual.id)} tecla="Enter" Icono={Box}>Ver ficha completa</Opcion>
-              <Opcion onClick={() => onManos(actual.id)} tecla="M" Icono={Hand}>Tómala con tus manos</Opcion>
+              <Opcion onClick={() => onFicha(actual.id)} tecla={mando ? 'A' : 'Enter'} Icono={Box}>Ver ficha completa</Opcion>
+              <Opcion onClick={() => onManos(actual.id)} tecla={mando ? 'Y' : 'M'} Icono={Hand}>Tómala con tus manos</Opcion>
+              <Opcion onClick={foto} tecla={mando ? 'R3' : 'P'} Icono={Camera}>Modo foto</Opcion>
               {!actual.personalizable && (
                 <Opcion href={enlaceStudio('separador', actual)} Icono={Scissors}>Pintar y separar en piezas</Opcion>
               )}
-              <Opcion onClick={() => alternarPedido(actual.id)} tecla="Espacio" Icono={pedido.includes(actual.id) ? Check : Plus}>
+              <Opcion onClick={() => alternarPedido(actual.id)} tecla={mando ? 'X' : 'Espacio'} Icono={pedido.includes(actual.id) ? Check : Plus}>
                 {pedido.includes(actual.id) ? 'Quitar del pedido' : 'Agregar al pedido'}
               </Opcion>
               <Opcion href={enlaceCompra(actual)} externo Icono={ShoppingBag} especial>
@@ -529,7 +644,7 @@ export function Seleccion({
 
           {/* Secciones: Q / E, como los gatillos de un mando. */}
           <div className="flex items-center gap-1.5">
-            <kbd className="tecla hidden lg:inline-grid">Q</kbd>
+            <kbd className="tecla hidden lg:inline-grid">{mando ? 'LB' : 'Q'}</kbd>
             <div className="sin-barra flex flex-1 gap-1 overflow-x-auto" role="tablist" aria-label="Secciones">
               {CATEGORIAS.map((x, k) => {
                 const Icono = ICONO_CATEGORIA[x.id]
@@ -548,7 +663,7 @@ export function Seleccion({
                 )
               })}
             </div>
-            <kbd className="tecla hidden lg:inline-grid">E</kbd>
+            <kbd className="tecla hidden lg:inline-grid">{mando ? 'RB' : 'E'}</kbd>
           </div>
 
           {/* Acabado: a color o sin color, como elegir el traje antes del combate. */}
@@ -612,7 +727,7 @@ export function Seleccion({
                           key={m.id}
                           data-i={k}
                           type="button"
-                          onMouseEnter={() => k !== i && (setCursor(k), sonido && blip(false))}
+                          onMouseEnter={() => k !== i && (setCursor(k), sfx.mover())}
                           onFocus={() => setCursor(k)}
                           onClick={() => (k === i ? onFicha(m.id) : setCursor(k))}
                           onDoubleClick={() => alternarPedido(m.id)}
@@ -669,13 +784,25 @@ export function Seleccion({
 
       {/* ── Barra de controles (abajo) ───────────────────────────── */}
       <div className="absolute inset-x-0 bottom-0 z-20 hidden h-16 items-center gap-5 border-t border-white/10 bg-black/45 px-6 font-chakra text-[12px] uppercase tracking-[0.14em] text-white/70 backdrop-blur-md lg:flex">
-        <span className="flex items-center gap-1.5"><kbd className="tecla">←→↑↓</kbd> Mover</span>
-        <span className="flex items-center gap-1.5"><kbd className="tecla">Enter</kbd> Ficha</span>
-        <span className="flex items-center gap-1.5"><kbd className="tecla">Espacio</kbd> Pedido</span>
-        <span className="flex items-center gap-1.5"><kbd className="tecla">1 2 3</kbd> Acabado</span>
-        <span className="hidden items-center gap-1.5 xl:flex"><kbd className="tecla">M</kbd> Manos</span>
-        <button type="button" onClick={() => setSonido(!sonido)} className="flex items-center gap-1.5 transition hover:text-white" aria-pressed={sonido} title="Sonido de selección">
-          {sonido ? <Volume2 size={15} /> : <VolumeX size={15} />} Sonido
+        {(mando
+          ? [['✚', 'Mover'], ['A', 'Ficha'], ['X', 'Pedido'], ['LT RT', 'Acabado'], ['Y', 'Manos']]
+          : [['←→↑↓', 'Mover'], ['Enter', 'Ficha'], ['Espacio', 'Pedido'], ['1 2 3', 'Acabado'], ['M', 'Manos']]
+        ).map(([t, n], k) => (
+          <span key={n} className={`items-center gap-1.5 ${k === 4 ? 'hidden xl:flex' : 'flex'}`}>
+            <kbd className={`tecla ${mando ? 'tecla-mando' : ''}`}>{t}</kbd> {n}
+          </span>
+        ))}
+        <button type="button" onClick={aleatorio} className="flex items-center gap-1.5 transition hover:text-white" title="Selección aleatoria">
+          <kbd className={`tecla ${mando ? 'tecla-mando' : ''}`}>{mando ? 'Select' : 'R'}</kbd> <Dices size={15} /> <span className="hidden 2xl:inline">Aleatorio</span>
+        </button>
+        <button type="button" onClick={() => ponerSonido(!sonido)} className="flex items-center gap-1.5 transition hover:text-white" aria-pressed={sonido} title="Sonido de la interfaz">
+          {sonido ? <Volume2 size={15} /> : <VolumeX size={15} />} <span className="hidden 2xl:inline">Sonido</span>
+        </button>
+        <button type="button" onClick={onLogros} className="flex items-center gap-2 transition hover:text-white" title="Logros y colección">
+          <kbd className={`tecla ${mando ? 'tecla-mando' : ''}`}>{mando ? 'Start' : 'L'}</kbd>
+          <Trophy size={15} className="text-[#FFC23D]" />
+          <span className="tabular-nums">Nv {nivel(puntos).nivel}</span>
+          <span className="hidden tabular-nums text-white/45 xl:inline">· {nVistas}/{CATALOGO.length}</span>
         </button>
         <span className="flex-1" />
         <button type="button" onClick={onCatalogo} className="flex items-center gap-1.5 transition hover:text-white">
