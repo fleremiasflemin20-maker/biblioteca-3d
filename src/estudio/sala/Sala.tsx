@@ -19,7 +19,7 @@ import { AmbienteFlemin } from '../luces.tsx'
  * otra propiedad ajena; esas piezas siguen en la tienda.
  */
 /** Secciones con personajes de terceros: se venden en la tienda, pero no se exhiben en la sala. */
-const AJENAS = new Set<string>(['dragon-ball-z', 'caballeros-del-zodiaco'])
+const AJENAS = new Set<string>(['dragon-ball-z', 'caballeros-del-zodiaco', 'siete-pecados', 'your-name'])
 
 export const OBRAS_PUBLICAS: Modelo3D[] = (() => {
   const propias = CATALOGO.filter((m) => !AJENAS.has(m.categoria))

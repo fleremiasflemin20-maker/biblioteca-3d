@@ -9,7 +9,7 @@ import { sfx, vibrar } from '../lib/consola'
  */
 const LLAVE = 'inicio-visto'
 // En el desfile solo personajes: las piezas técnicas no lucen como retrato.
-const FIGURAS: string[] = ['dragon-ball-z', 'caballeros-del-zodiaco', 'anime', 'manga', 'seres-flemin']
+const FIGURAS: string[] = ['dragon-ball-z', 'caballeros-del-zodiaco', 'siete-pecados', 'your-name', 'anime', 'manga', 'seres-flemin']
 
 export function useInicio() {
   const [ver, setVer] = useState(() => {

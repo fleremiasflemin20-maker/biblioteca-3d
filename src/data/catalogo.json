@@ -2,7 +2,7 @@
   {
     "id": "chica-lazo-rojo-chibi-a",
     "nombre": "Chica del Lazo Rojo Chibi · A",
-    "categoria": "anime",
+    "categoria": "your-name",
     "precio": 17,
     "formatos": [
       "GLB",
@@ -21,7 +21,7 @@
   {
     "id": "guerrera-gigante-chibi-c",
     "nombre": "Guerrera Gigante Chibi · C",
-    "categoria": "anime",
+    "categoria": "siete-pecados",
     "precio": 17,
     "formatos": [
       "GLB",
@@ -40,7 +40,7 @@
   {
     "id": "rey-hada-chibi-a",
     "nombre": "Rey Hada Chibi · A",
-    "categoria": "anime",
+    "categoria": "siete-pecados",
     "precio": 17,
     "formatos": [
       "GLB",
@@ -59,7 +59,7 @@
   {
     "id": "cerdito-rosa-low-poly",
     "nombre": "Cerdito Rosa Low-Poly",
-    "categoria": "anime",
+    "categoria": "siete-pecados",
     "precio": 9,
     "formatos": [
       "GLB",
@@ -78,7 +78,7 @@
   {
     "id": "chica-lazo-rojo-chibi-b",
     "nombre": "Chica del Lazo Rojo Chibi · B",
-    "categoria": "anime",
+    "categoria": "your-name",
     "precio": 17,
     "formatos": [
       "GLB",
@@ -97,7 +97,7 @@
   {
     "id": "guerrero-del-sol-chibi",
     "nombre": "Guerrero del Sol Chibi",
-    "categoria": "anime",
+    "categoria": "siete-pecados",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -116,7 +116,7 @@
   {
     "id": "hechicera-violeta-chibi-b",
     "nombre": "Hechicera Violeta Chibi · B",
-    "categoria": "anime",
+    "categoria": "siete-pecados",
     "precio": 17,
     "formatos": [
       "GLB",
@@ -135,7 +135,7 @@
   {
     "id": "rey-hada-chibi-b",
     "nombre": "Rey Hada Chibi · B (Volador)",
-    "categoria": "anime",
+    "categoria": "siete-pecados",
     "precio": 17,
     "formatos": [
       "GLB",
@@ -154,7 +154,7 @@
   {
     "id": "hechicera-violeta-chibi-a",
     "nombre": "Hechicera Violeta Chibi · A",
-    "categoria": "anime",
+    "categoria": "siete-pecados",
     "precio": 17,
     "formatos": [
       "GLB",
@@ -173,7 +173,7 @@
   {
     "id": "estudiante-tokio-chibi",
     "nombre": "Estudiante de Tokio Chibi",
-    "categoria": "anime",
+    "categoria": "your-name",
     "precio": 15,
     "formatos": [
       "GLB",
@@ -192,7 +192,7 @@
   {
     "id": "guerrera-gigante-chibi-a",
     "nombre": "Guerrera Gigante Chibi · A (Guiño)",
-    "categoria": "anime",
+    "categoria": "siete-pecados",
     "precio": 17,
     "formatos": [
       "GLB",
@@ -211,7 +211,7 @@
   {
     "id": "guerrera-gigante-chibi-b",
     "nombre": "Guerrera Gigante Chibi · B",
-    "categoria": "anime",
+    "categoria": "siete-pecados",
     "precio": 17,
     "formatos": [
       "GLB",
@@ -230,7 +230,7 @@
   {
     "id": "bandido-inmortal-chibi",
     "nombre": "Bandido Inmortal Chibi",
-    "categoria": "anime",
+    "categoria": "siete-pecados",
     "precio": 17,
     "formatos": [
       "GLB",
@@ -269,7 +269,7 @@
   {
     "id": "rey-hada-chibi-escultura-b",
     "nombre": "Rey Hada Chibi · Escultura B",
-    "categoria": "anime",
+    "categoria": "siete-pecados",
     "precio": 11,
     "formatos": [
       "GLB",
@@ -289,7 +289,7 @@
   {
     "id": "chica-lazo-rojo-chibi-escultura-b",
     "nombre": "Chica del Lazo Rojo Chibi · Escultura B",
-    "categoria": "anime",
+    "categoria": "your-name",
     "precio": 11,
     "formatos": [
       "GLB",
@@ -309,7 +309,7 @@
   {
     "id": "guerrera-gigante-chibi-escultura-b",
     "nombre": "Guerrera Gigante Chibi · Escultura B",
-    "categoria": "anime",
+    "categoria": "siete-pecados",
     "precio": 11,
     "formatos": [
       "GLB",
@@ -329,7 +329,7 @@
   {
     "id": "bandido-inmortal-chibi-escultura",
     "nombre": "Bandido Inmortal Chibi · Escultura",
-    "categoria": "anime",
+    "categoria": "siete-pecados",
     "precio": 11,
     "formatos": [
       "GLB",
@@ -349,7 +349,7 @@
   {
     "id": "hechicera-violeta-chibi-escultura-b",
     "nombre": "Hechicera Violeta Chibi · Escultura B",
-    "categoria": "anime",
+    "categoria": "siete-pecados",
     "precio": 11,
     "formatos": [
       "GLB",
@@ -369,7 +369,7 @@
   {
     "id": "guerrera-gigante-chibi-escultura-a",
     "nombre": "Guerrera Gigante Chibi · Escultura A",
-    "categoria": "anime",
+    "categoria": "siete-pecados",
     "precio": 11,
     "formatos": [
       "GLB",
@@ -389,7 +389,7 @@
   {
     "id": "hechicera-violeta-chibi-escultura-a",
     "nombre": "Hechicera Violeta Chibi · Escultura A",
-    "categoria": "anime",
+    "categoria": "siete-pecados",
     "precio": 11,
     "formatos": [
       "GLB",
@@ -409,7 +409,7 @@
   {
     "id": "cerdito-rosa-low-poly-escultura",
     "nombre": "Cerdito Rosa Low-Poly · Escultura",
-    "categoria": "anime",
+    "categoria": "siete-pecados",
     "precio": 6,
     "formatos": [
       "GLB",
@@ -429,7 +429,7 @@
   {
     "id": "rey-hada-chibi-escultura-a",
     "nombre": "Rey Hada Chibi · Escultura A",
-    "categoria": "anime",
+    "categoria": "siete-pecados",
     "precio": 11,
     "formatos": [
       "GLB",
@@ -449,7 +449,7 @@
   {
     "id": "chica-lazo-rojo-chibi-escultura-a",
     "nombre": "Chica del Lazo Rojo Chibi · Escultura A",
-    "categoria": "anime",
+    "categoria": "your-name",
     "precio": 11,
     "formatos": [
       "GLB",
@@ -489,7 +489,7 @@
   {
     "id": "estudiante-tokio-chibi-escultura",
     "nombre": "Estudiante de Tokio Chibi · Escultura",
-    "categoria": "anime",
+    "categoria": "your-name",
     "precio": 10,
     "formatos": [
       "GLB",
@@ -509,7 +509,7 @@
   {
     "id": "guerrero-del-sol-chibi-escultura",
     "nombre": "Guerrero del Sol Chibi · Escultura",
-    "categoria": "anime",
+    "categoria": "siete-pecados",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -2187,7 +2187,7 @@
   {
     "id": "espadachin-rubio-anime",
     "nombre": "Espadachín Rubio",
-    "categoria": "anime",
+    "categoria": "siete-pecados",
     "precio": 19,
     "formatos": [
       "GLB",

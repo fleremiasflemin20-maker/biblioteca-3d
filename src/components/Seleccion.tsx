@@ -24,6 +24,8 @@ import { desbloquear, marcarVista, nivel, ponerSonido, sfx, useMando, useProgres
  */
 const COLUMNAS = 6
 const MAX_PEDIDO = 5
+/** La figura con la que se abre la biblioteca para todos: la primera que se ve. */
+const FIGURA_INICIAL = 'fusion-fase4-chibi-a'
 
 const FILTROS: { id: Acabado; nombre: string }[] = [
   { id: 'todos', nombre: 'Todo' },
@@ -184,7 +186,7 @@ export function Seleccion({
   /** Abre la pantalla de logros (L o Start). */
   onLogros: () => void
 }) {
-  const [cursor, setCursor] = useState(() => Math.max(0, lista.findIndex((m) => m.destacado)))
+  const [cursor, setCursor] = useState(() => Math.max(0, lista.findIndex((m) => m.id === FIGURA_INICIAL)))
   const [elegido, setElegido] = useState<string | null>(null)
   const [mostrado, setMostrado] = useState<string | null>(null)
   const [modo, setModo] = useState<Modo>('textura')
