@@ -281,7 +281,7 @@ export function Ficha({
               </p>
               <div className="flex gap-2">
                 {!modelo.personalizable && (
-                  <a href={enlaceStudio('separador', modelo)} className="pildora-clara" title="Píntalo y míralo separado en piezas en Flemin Studio 3D">
+                  <a href={enlaceStudio(modelo)} className="pildora-clara" title="Píntalo y míralo separado en piezas en Flemin Studio 3D">
                     <Wand2 size={16} /> <span className="hidden sm:inline">Pintar y separar</span>
                   </a>
                 )}

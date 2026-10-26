@@ -21,8 +21,8 @@ const Sala = lazy(() => import('./estudio/sala/Sala'))
 type Estudio = { vista: 'sala' }
 const estudioDesdeHash = (): Estudio | null => (location.hash === '#estudio' ? { vista: 'sala' } : null)
 
-// Enlaces viejos a las herramientas (#separador, #editor) siguen funcionando: van al Studio.
-if (location.hash === '#separador' || location.hash === '#editor') location.replace(enlaceStudio(location.hash.slice(1) as 'separador' | 'editor'))
+// Enlaces viejos a las herramientas (#separador, #editor) siguen funcionando: van a la portada del Studio.
+if (location.hash === '#separador' || location.hash === '#editor') location.replace(enlaceStudio())
 
 type Orden = 'recientes' | 'barato' | 'caro' | 'nombre'
 type Manos = { lista: Modelo3D[]; indice: number; desdeFicha: boolean }
@@ -432,8 +432,8 @@ export default function App() {
         >
           <Sala
             onCerrar={() => setEstudio(null)}
-            onEditor={(m) => location.assign(enlaceStudio(m ? 'separador' : 'editor', m))}
-            onSeparador={() => location.assign(enlaceStudio('separador'))}
+            onEditor={(m) => location.assign(enlaceStudio(m))}
+            onSeparador={() => location.assign(enlaceStudio())}
             onFicha={(id) => {
               setEstudio(null)
               verFicha(id)

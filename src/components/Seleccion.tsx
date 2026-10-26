@@ -599,7 +599,7 @@ export function Seleccion({
               <Opcion onClick={() => onManos(actual.id)} tecla={mando ? 'Y' : 'M'} Icono={Hand}>Tómala con tus manos</Opcion>
               <Opcion onClick={foto} tecla={mando ? 'R3' : 'P'} Icono={Camera}>Modo foto</Opcion>
               {!actual.personalizable && (
-                <Opcion href={enlaceStudio('separador', actual)} Icono={Scissors}>Pintar y separar en piezas</Opcion>
+                <Opcion href={enlaceStudio(actual)} Icono={Scissors}>Pintar y separar en piezas</Opcion>
               )}
               <Opcion onClick={() => alternarPedido(actual.id)} tecla={mando ? 'X' : 'Espacio'} Icono={pedido.includes(actual.id) ? Check : Plus}>
                 {pedido.includes(actual.id) ? 'Quitar del pedido' : 'Agregar al pedido'}

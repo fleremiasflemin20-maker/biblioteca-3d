@@ -53,11 +53,14 @@ El separador de piezas y el editor 3D son **Flemin Studio 3D**, una web
 aparte: https://flemin-studio-3d.analista-datos-pro.workers.dev/
 (su código está en el repo privado `flemin-studio-3d`).
 
-El botón **Flemin Studio** de la barra abre esa web por su portada.
-**Separar en piezas** y **Modelar en 3D** también la abren, y en la sala
-cada obra tiene **Separar en el Studio**, que la abre allí por la URL (`?modelo=…&nombre=…#separador`) en modo protegido: se
-separa para verla, pero no se descarga. Los enlaces viejos `#separador` y
-`#editor` redirigen al Studio. La enlaza `src/lib/studio.ts`.
+Todos los botones de la biblioteca que llevan al Studio (**Flemin Studio**,
+**Pintar y separar**, **Separar en el Studio** de la sala…) abren su
+**portada**, nunca una herramienta ya abierta: el cliente ve primero todo lo
+que hace el Studio. Si el botón es de una obra, la obra viaja por la URL
+(`?modelo=…&nombre=…`) y el Studio la carga en modo protegido al pulsar
+"Separar mi modelo" o "Abrir el Editor 3D": se separa para verla, pero no
+se descarga. Los enlaces viejos `#separador` y `#editor` también van a la
+portada. La enlaza `src/lib/studio.ts`.
 
 ## Modo consola
 
