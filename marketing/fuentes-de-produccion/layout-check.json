@@ -1,0 +1,38 @@
+[
+  {
+    "id": "perillas-ac-reemplazo",
+    "height": 250.671875,
+    "productTop": 350,
+    "images": true
+  },
+  {
+    "id": "perillas-ac-reemplazo",
+    "height": 488.78125,
+    "productTop": 585,
+    "images": true
+  },
+  {
+    "id": "muelle-carga-todo-en-uno",
+    "height": 248.59375,
+    "productTop": 350,
+    "images": true
+  },
+  {
+    "id": "muelle-carga-todo-en-uno",
+    "height": 501.625,
+    "productTop": 585,
+    "images": true
+  },
+  {
+    "id": "soporte-motor-antivibracion",
+    "height": 246.515625,
+    "productTop": 350,
+    "images": true
+  },
+  {
+    "id": "soporte-motor-antivibracion",
+    "height": 471.65625,
+    "productTop": 585,
+    "images": true
+  }
+]

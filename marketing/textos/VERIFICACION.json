@@ -1,0 +1,1483 @@
+{
+  "articulos": 150,
+  "imagenes_individuales": 300,
+  "portadas_coleccion": 11,
+  "videos": 184,
+  "errores_imagen": [],
+  "errores_video": [],
+  "biblioteca_sin_cambios": true,
+  "videos_detalle": [
+    {
+      "file": "videos-2d\\accesorios-lote-01.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 18.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\accesorios-lote-02.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 18.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\accesorios-lote-03.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 18.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\anime-lote-01.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 9.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\autos-lote-01.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 9.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\caballeros-del-zodiaco-lote-01.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 18.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\caballeros-del-zodiaco-lote-02.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 6.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\dragon-ball-z-lote-01.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 18.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\dragon-ball-z-lote-02.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 18.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\dragon-ball-z-lote-03.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 18.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\dragon-ball-z-lote-04.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 18.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\dragon-ball-z-lote-05.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 18.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\dragon-ball-z-lote-06.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 18.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\dragon-ball-z-lote-07.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 18.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\dragon-ball-z-lote-08.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 18.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\dragon-ball-z-lote-09.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 18.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\dragon-ball-z-lote-10.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 18.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\dragon-ball-z-lote-11.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 18.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\dragon-ball-z-lote-12.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 12.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\manga-lote-01.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\mecanica-lote-01.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 15.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\seres-flemin-lote-01.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 18.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\seres-flemin-lote-02.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 18.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\seres-flemin-lote-03.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\siete-pecados-lote-01.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 18.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\siete-pecados-lote-02.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 18.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\siete-pecados-lote-03.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 18.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\siete-pecados-lote-04.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 6.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\tecnologia-lote-01.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 9.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-2d\\your-name-lote-01.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 18.023031,
+      "audio": true
+    },
+    {
+      "file": "videos-3d\\chica-lazo-rojo-chibi-a-360.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 6.0,
+      "audio": true
+    },
+    {
+      "file": "videos-3d\\guerrero-del-sol-chibi-360.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 6.0,
+      "audio": true
+    },
+    {
+      "file": "videos-3d\\saiyan-dorado-chibi-a-360.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 6.0,
+      "audio": true
+    },
+    {
+      "file": "videos-3d\\seiya-pegaso-chibi-360.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 6.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\aioria-leo-chibi.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\aretes-colibri.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\aretes-crocs.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\aretes-helados.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\aretes-hongo.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\aretes-mazorca.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\aretes-palmera.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\aretes-sol-retro.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\athena-saori-chibi-escultura.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\bandeja-bateria-universal.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\bandido-inmortal-chibi-escultura.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\bandido-inmortal-chibi.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\black-ring-stands.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\bomba-tesla-hdd.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\cerdito-rosa-low-poly-escultura.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\cerdito-rosa-low-poly.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\chica-lazo-rojo-chibi-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\chica-lazo-rojo-chibi-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\chica-lazo-rojo-chibi-escultura-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\chica-lazo-rojo-chibi-escultura-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\cosmic-fusion-warrior-anime-intenso.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\cosmic-fusion-warrior-escultura.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\cosmic-fusion-warrior-original.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\cosmic-fusion-warrior-segmentado.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\cosmic-fusion-warrior-ultra-pop.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\cosmic-fusion-warrior-vibrante.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\cuadro-4-piezas.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\cyber-draconian-sentinel.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\dragon-ball-sparking.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\emerald-tyrant-throne.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\espadachin-rubio-anime.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\estudiante-tokio-chibi-escultura.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\estudiante-tokio-chibi.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\figura-01.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\figura-02.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\figura-03.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\figura-04.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\figura-05.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\figura-06.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\figura-07.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\figura-en-relieve-01.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\fusion-fase4-chibi-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\fusion-fase4-chibi-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\fusion-fase4-chibi-escultura-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\fusion-fase4-chibi-escultura-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\gato-sabio-chibi-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\gato-sabio-chibi-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\gato-sabio-chibi-escultura-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\gato-sabio-chibi-escultura-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\gogeta-ssj4.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\guerrera-gigante-chibi-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\guerrera-gigante-chibi-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\guerrera-gigante-chibi-c.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\guerrera-gigante-chibi-escultura-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\guerrera-gigante-chibi-escultura-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\guerrero-del-sol-chibi-escultura.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\guerrero-del-sol-chibi.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\guerrero-futuro-chibi-a-piezas.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\guerrero-futuro-chibi-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\guerrero-futuro-chibi-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\guerrero-futuro-chibi-escultura-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\guerrero-futuro-chibi-escultura-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\guerrero-reptiliano-escultura.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\guerrero-reptiliano.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\hechicera-violeta-chibi-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\hechicera-violeta-chibi-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\hechicera-violeta-chibi-escultura-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\hechicera-violeta-chibi-escultura-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\higgsfield-01.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\hyoga-cisne-chibi.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\ikki-fenix-chibi.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\limit-break-clash-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\limit-break-clash-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\llavero-atardecer.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\llavero-con-nombre.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\llavero-pata-oliver-meshy.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\llavero-pata-oliver.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\llavero-tortuga-galapagos.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\mano-robotica-colorida.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\maton-de-traje-chibi-escultura.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\maton-de-traje-chibi.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\medallon-cotopaxi.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\meshy-1004001138.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\monje-guerrero-chibi-escultura.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\monje-guerrero-chibi-piezas.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\monje-guerrero-chibi.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\muelle-carga-todo-en-uno.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\organizador-consola.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\panel-decorativo-en-relieve.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\perillas-ac-reemplazo.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\personaje-anime-en-relieve.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\piccolo-busto-en-relieve.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\piccolo-chibi.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\principe-saiyan-chibi-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\principe-saiyan-chibi-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\principe-saiyan-chibi-escultura.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\rey-hada-chibi-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\rey-hada-chibi-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\rey-hada-chibi-escultura-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\rey-hada-chibi-escultura-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\rueda-fecha.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saga-geminis-chibi.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-dorado-batalla-chibi-escultura.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-dorado-batalla-chibi.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-dorado-chibi-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-dorado-chibi-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-dorado-chibi-escultura-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-dorado-chibi-escultura-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-fase4-chibi-clasico-a-piezas.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-fase4-chibi-clasico-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-fase4-chibi-clasico-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-fase4-chibi-clasico-c.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-fase4-chibi-clasico-escultura-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-fase4-chibi-clasico-escultura-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-fase4-chibi-clasico-escultura-c.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-fase4-chibi-daima-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-fase4-chibi-daima-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-fase4-chibi-daima-c.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-fase4-chibi-daima-escultura-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-fase4-chibi-daima-escultura-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-fase4-chibi-daima-escultura-c.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-legendario-chibi-dorado-piezas.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-legendario-chibi-dorado.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-legendario-chibi-escultura-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-legendario-chibi-escultura-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-legendario-chibi-verde.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-legendario-ova-chibi-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-legendario-ova-chibi-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-legendario-ova-chibi-escultura-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\saiyan-legendario-ova-chibi-escultura-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\samurai-errante-chibi-a-piezas.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\samurai-errante-chibi-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\samurai-errante-chibi-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\samurai-errante-chibi-c.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\samurai-errante-chibi-escultura-a.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\samurai-errante-chibi-escultura-b.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\samurai-errante-chibi-escultura-c.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\seiya-pegaso-chibi.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\senor-guerra-acorazado.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\senor-guerra-escultura.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\shiryu-dragon-chibi.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\shun-andromeda-chibi.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\soporte-18650-lattice.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\soporte-motor-antivibracion.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\starlight-sentinel.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\tapa-fecha-v3.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\vegeta-chibi-en-relieve.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\vibrant-saiyan-escultura.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\vibrant-saiyan-segmentado.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    },
+    {
+      "file": "videos-individuales\\vibrant-saiyan-showdown.mp4",
+      "width": 720,
+      "height": 1280,
+      "fps": "24/1",
+      "duration": 3.0,
+      "audio": true
+    }
+  ]
+}
