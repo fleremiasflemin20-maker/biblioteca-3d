@@ -1,5 +1,286 @@
 [
   {
+    "id": "soporte-ps5-kurama-rasengan",
+    "nombre": "Soporte PS5 Kurama · Rasengan",
+    "categoria": "soportes-ps5",
+    "precio": 16,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-28",
+    "descripcion": "El zorro de nueve colas rodea la cuna del mando sobre roca volcánica, con un Rasengan azul brillando a sus pies. Acabado a color para exhibir el mando de PS5 como una figura.",
+    "archivo": "ps5/soporte-ps5-kurama-rasengan.glb",
+    "peso": 4742296,
+    "triangulos": 760730,
+    "familia": "soporte-ps5-kurama",
+    "portada": "soporte-ps5-kurama-rasengan.webp"
+  },
+  {
+    "id": "soporte-ps5-kurama",
+    "nombre": "Soporte PS5 Kurama · 4 colores",
+    "categoria": "soportes-ps5",
+    "precio": 15,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-28",
+    "descripcion": "El soporte del zorro pintado para impresión multicolor: naranja, negro, azul y blanco. Sale de la impresora listo, sin pintar a mano.",
+    "archivo": "ps5/soporte-ps5-kurama.glb",
+    "peso": 992568,
+    "triangulos": 282124,
+    "familia": "soporte-ps5-kurama",
+    "portada": "soporte-ps5-kurama.webp"
+  },
+  {
+    "id": "soporte-ps5-kurama-naranja",
+    "nombre": "Soporte PS5 Kurama · Naranja",
+    "categoria": "soportes-ps5",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-28",
+    "descripcion": "El mismo soporte del zorro de nueve colas en una sola pieza naranja: ningún cambio de filamento.",
+    "archivo": "ps5/soporte-ps5-kurama-naranja.glb",
+    "peso": 937164,
+    "triangulos": 282124,
+    "familia": "soporte-ps5-kurama",
+    "portada": "soporte-ps5-kurama-naranja.webp"
+  },
+  {
+    "id": "soporte-ps5-kurama-escultura-a",
+    "nombre": "Soporte PS5 Kurama · Escultura A",
+    "categoria": "soportes-ps5",
+    "precio": 10,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-28",
+    "descripcion": "Malla de alta definición del soporte del zorro, sin color, para imprimir en resina o pintar a mano.",
+    "archivo": "ps5/soporte-ps5-kurama-escultura-a.glb",
+    "peso": 849112,
+    "triangulos": 253560,
+    "sinTextura": true,
+    "familia": "soporte-ps5-kurama",
+    "portada": "soporte-ps5-kurama-escultura-a.webp"
+  },
+  {
+    "id": "soporte-ps5-kurama-escultura-b",
+    "nombre": "Soporte PS5 Kurama · Escultura B",
+    "categoria": "soportes-ps5",
+    "precio": 10,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-28",
+    "descripcion": "Variante compacta: el zorro abraza una esfera en el centro de la cuna. Sin color.",
+    "archivo": "ps5/soporte-ps5-kurama-escultura-b.glb",
+    "peso": 858356,
+    "triangulos": 262406,
+    "sinTextura": true,
+    "familia": "soporte-ps5-kurama",
+    "portada": "soporte-ps5-kurama-escultura-b.webp"
+  },
+  {
+    "id": "soporte-mando-ps5-base",
+    "nombre": "Soporte de Mando PS5 · Base",
+    "categoria": "soportes-ps5",
+    "precio": 7,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-28",
+    "descripcion": "La cuna vacía: el aro que sostiene el mando de PS5 por las empuñaduras, sin decoración. Para imprimir en el color de tu consola.",
+    "archivo": "ps5/soporte-mando-ps5-base.glb",
+    "peso": 798060,
+    "triangulos": 245036,
+    "sinTextura": true,
+    "portada": "soporte-mando-ps5-base.webp"
+  },
+  {
+    "id": "pequeno-viajero-chibi",
+    "nombre": "Pequeño Viajero Chibi",
+    "categoria": "munecos",
+    "precio": 15,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Muñeco chibi pelirrojo con bufanda amarilla, abrigo celeste y su almohada verde de hojas a la espalda, listo para salir de viaje.",
+    "archivo": "munecos/pequeno-viajero-chibi.glb",
+    "peso": 1819624,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-28",
+    "triangulos": 273344,
+    "portada": "pequeno-viajero-chibi.webp"
+  },
+  {
+    "id": "pequeno-viajero-chibi-escultura",
+    "nombre": "Pequeño Viajero Chibi · Escultura",
+    "categoria": "munecos",
+    "precio": 11,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "El viajero en malla limpia, sin color: para imprimir en resina y pintarlo a tu gusto.",
+    "archivo": "munecos/pequeno-viajero-chibi-escultura.glb",
+    "peso": 1112068,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-28",
+    "triangulos": 273338,
+    "sinTextura": true,
+    "portada": "pequeno-viajero-chibi-escultura.webp"
+  },
+  {
+    "id": "visor-ciclope",
+    "nombre": "Visor de Cíclope",
+    "categoria": "halloween",
+    "precio": 16,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "El visor de rubí del mutante de los rayos ópticos: una banda que abraza la cabeza con su lente corrida. Ponible, para cosplay o Halloween.",
+    "archivo": "halloween/visor-ciclope.glb",
+    "peso": 834928,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-28",
+    "triangulos": 266274,
+    "sinTextura": true,
+    "portada": "visor-ciclope.webp"
+  },
+  {
+    "id": "mascara-michael-b",
+    "nombre": "Máscara de Michael · B",
+    "categoria": "halloween",
+    "precio": 18,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Variante con más volumen de pelo y rasgos más marcados. Para pintar en blanco hueso y castaño.",
+    "archivo": "halloween/mascara-michael-b.glb",
+    "peso": 796980,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-28",
+    "triangulos": 240994,
+    "sinTextura": true,
+    "portada": "mascara-michael-b.webp"
+  },
+  {
+    "id": "mascara-michael-a",
+    "nombre": "Máscara de Michael · A",
+    "categoria": "halloween",
+    "precio": 18,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Rostro pálido e inexpresivo con el pelo peinado hacia atrás: la máscara del asesino de la noche de Halloween, a tamaño real.",
+    "archivo": "halloween/mascara-michael-a.glb",
+    "peso": 835824,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-28",
+    "triangulos": 252046,
+    "sinTextura": true,
+    "portada": "mascara-michael-a.webp"
+  },
+  {
+    "id": "mascara-hockey-jason-b",
+    "nombre": "Máscara de Hockey Jason · B",
+    "categoria": "halloween",
+    "precio": 14,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Otra versión de la máscara de hockey: perfil más fino y frente más plana, para pintar a mano el desgaste.",
+    "archivo": "halloween/mascara-hockey-jason-b.glb",
+    "peso": 604236,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-28",
+    "triangulos": 192072,
+    "sinTextura": true,
+    "portada": "mascara-hockey-jason-b.webp"
+  },
+  {
+    "id": "mascara-hockey-jason-a",
+    "nombre": "Máscara de Hockey Jason · A",
+    "categoria": "halloween",
+    "precio": 14,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Máscara de portero de hockey con sus agujeros de ventilación y las marcas en V. Tamaño real, ponible.",
+    "archivo": "halloween/mascara-hockey-jason-a.glb",
+    "peso": 715236,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-28",
+    "triangulos": 227440,
+    "sinTextura": true,
+    "portada": "mascara-hockey-jason-a.webp"
+  },
+  {
+    "id": "mascara-ghostface",
+    "nombre": "Máscara Ghostface",
+    "categoria": "halloween",
+    "precio": 14,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "La máscara del grito: ojos rasgados, boca alargada y mejillas caídas. Lista para imprimir en blanco y llevar puesta esta noche de brujas.",
+    "archivo": "halloween/mascara-ghostface.glb",
+    "peso": 675368,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-28",
+    "triangulos": 216166,
+    "sinTextura": true,
+    "portada": "mascara-ghostface.webp"
+  },
+  {
     "id": "chica-lazo-rojo-chibi-a",
     "nombre": "Chica del Lazo Rojo Chibi · A",
     "categoria": "your-name",
@@ -983,10 +1264,10 @@
     "origen": "Modelado propio",
     "id": "mano-robotica-colorida",
     "archivo": "subidos/mano-robotica-colorida.glb",
-    "peso": 67162952,
+    "peso": 4406440,
     "alta": "2026-10-16",
     "portada": "mano-robotica-colorida.webp",
-    "triangulos": 1969699
+    "triangulos": 689389
   },
   {
     "nombre": "Personaje Anime en Relieve",
@@ -1073,10 +1354,10 @@
     "origen": "Modelado propio",
     "id": "piccolo-busto-en-relieve",
     "archivo": "subidos/piccolo-busto-en-relieve.glb",
-    "peso": 45913280,
+    "peso": 2631848,
     "alta": "2026-10-16",
     "portada": "piccolo-busto-en-relieve.webp",
-    "triangulos": 1913000
+    "triangulos": 669538
   },
   {
     "nombre": "Piccolo Chibi",
@@ -1092,10 +1373,10 @@
     "origen": "Modelado propio",
     "id": "piccolo-chibi",
     "archivo": "subidos/piccolo-chibi.glb",
-    "peso": 63013804,
+    "peso": 4112800,
     "alta": "2026-10-16",
     "portada": "piccolo-chibi.webp",
-    "triangulos": 1975945
+    "triangulos": 691572
   },
   {
     "id": "muelle-carga-todo-en-uno",
@@ -2071,11 +2352,11 @@
     ],
     "descripcion": "Villa moderna completa con piscina, vegetación y textura horneada. Escenario listo para render arquitectónico o juego.",
     "archivo": "meshy/figura-07.glb",
-    "peso": 29036360,
+    "peso": 13462176,
     "origen": "Generado con Meshy AI",
     "destacado": false,
     "alta": "2026-09-05",
-    "triangulos": 2366895,
+    "triangulos": 828413,
     "portada": "figura-07.webp"
   },
   {

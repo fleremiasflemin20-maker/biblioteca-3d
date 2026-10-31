@@ -1,15 +1,17 @@
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { Canvas, useFrame, type RootState } from '@react-three/fiber'
-import { ContactShadows, Sparkles } from '@react-three/drei'
+import { ContactShadows, MeshReflectorMaterial, Sparkles } from '@react-three/drei'
 import * as THREE from 'three'
 import { ArrowDown, Box, Camera, Check, Dices, Hand, MessageCircle, Plus, Scissors, ShoppingBag, Star, Trophy, Volume2, VolumeX, X } from 'lucide-react'
 import { AlCargar, Pieza, type Modo } from './Pieza'
 import { Normalizar } from './Visor'
+import { Aura, Chispas } from './Energia'
 import { AmbienteFlemin } from '../estudio/luces'
 import { CATALOGO, CATEGORIAS, WHATSAPP, enlaceCompra, precio, rutaPortada, triangulos, type Modelo3D } from '../lib/catalogo'
 import { ICONO_CATEGORIA } from '../lib/iconos'
 import { enlaceStudio } from '../lib/studio'
 import { variantes, type Acabado, type Grupo } from '../lib/orden'
+import { coste, estrellas, rareza } from '../lib/rareza'
 import { desbloquear, marcarVista, nivel, ponerSonido, sfx, useMando, useProgreso, vibrar } from '../lib/consola'
 
 /**
@@ -41,12 +43,6 @@ const ACABADOS: { modo: Modo; nombre: string }[] = [
   { modo: 'arcilla', nombre: 'Arcilla' },
   { modo: 'malla', nombre: 'Malla' },
 ]
-
-/** De 1 a 7 estrellas según los triángulos: cuánto detalle trae la pieza. */
-function estrellas(m: Modelo3D) {
-  if (!m.triangulos) return 3
-  return Math.max(1, Math.min(7, Math.round(Math.log10(m.triangulos) * 2 - 6)))
-}
 
 /* ── Escenario 3D ─────────────────────────────────────────────────────── */
 
@@ -83,12 +79,14 @@ function Figura({ modelo, modo, visible, onListo }: { modelo: Modelo3D; modo: Mo
 /** Pedestal: disco oscuro, aro de energía que gira y una onda al cambiar de figura. */
 function Pedestal({ tinta, pulso }: { tinta: string; pulso: number }) {
   const aro = useRef<THREE.Mesh>(null)
+  const runas = useRef<THREE.Mesh>(null)
   const onda = useRef<THREE.Mesh>(null)
   const desde = useRef(0)
   const ultimo = useRef(pulso)
   useFrame(({ clock }) => {
     const t = clock.elapsedTime
     if (aro.current) aro.current.rotation.z = t * 0.6
+    if (runas.current) runas.current.rotation.z = -t * 0.25
     if (ultimo.current !== pulso) {
       ultimo.current = pulso
       desde.current = t
@@ -102,9 +100,19 @@ function Pedestal({ tinta, pulso }: { tinta: string; pulso: number }) {
   })
   return (
     <group position={[0, -1.005, 0]} rotation-x={-Math.PI / 2}>
+      {/* Obsidiana pulida: la figura se refleja en el pedestal. */}
       <mesh>
-        <circleGeometry args={[1.02, 64]} />
-        <meshStandardMaterial color="#0d0b16" roughness={0.6} metalness={0.4} transparent opacity={0.85} />
+        <circleGeometry args={[1.02, 96]} />
+        <MeshReflectorMaterial resolution={512} mirror={0.75} blur={[220, 80]} mixBlur={0.9} mixStrength={2.2} color="#0f0b1c" metalness={0.65} roughness={0.35} />
+      </mesh>
+      {/* Aro de runas: trazos cortos que giran al revés que el aro de energía. */}
+      <mesh ref={runas} position-z={0.0015}>
+        <ringGeometry args={[1.16, 1.2, 96, 1]} />
+        <meshBasicMaterial color={tinta} transparent opacity={0.55} toneMapped={false} alphaMap={RUNAS} />
+      </mesh>
+      <mesh position-z={0.001}>
+        <ringGeometry args={[1.3, 1.31, 96]} />
+        <meshBasicMaterial color="#ffffff" transparent opacity={0.12} toneMapped={false} />
       </mesh>
       <mesh ref={aro} position-z={0.002}>
         <ringGeometry args={[1.0, 1.06, 64, 1, 0, Math.PI * 1.6]} />
@@ -121,6 +129,22 @@ function Pedestal({ tinta, pulso }: { tinta: string; pulso: number }) {
     </group>
   )
 }
+
+/** Textura de trazos para el aro de runas: rayas cortas que se repiten alrededor del anillo. */
+const RUNAS = (() => {
+  const c = document.createElement('canvas')
+  c.width = 512
+  c.height = 4
+  const g = c.getContext('2d')!
+  for (let x = 0; x < 512; x += 16) {
+    g.fillStyle = '#fff'
+    g.fillRect(x, 0, (x / 16) % 5 === 0 ? 12 : 5, 4)
+  }
+  const t = new THREE.CanvasTexture(c)
+  t.wrapS = THREE.RepeatWrapping
+  t.repeat.set(4, 1)
+  return t
+})()
 
 function Escenario({ modelo, modo, tinta, onMostrado, onLienzo }: { modelo: Modelo3D; modo: Modo; tinta: string; onMostrado: (id: string) => void; onLienzo: (e: RootState) => void }) {
   // La figura anterior sigue en pantalla hasta que la nueva termina de cargar.
@@ -139,6 +163,8 @@ function Escenario({ modelo, modo, tinta, onMostrado, onLienzo }: { modelo: Mode
       <directionalLight position={[3, 5, 3]} intensity={1.5} />
       <spotLight position={[-3.5, 3, -2.5]} intensity={45} angle={0.8} penumbra={1} color={tinta} />
       <spotLight position={[3.5, 2, -3]} intensity={25} angle={0.8} penumbra={1} color="#8A3CFF" />
+      {/* Luz de abajo, del color del aura: el ki ilumina la figura desde el pedestal. */}
+      <pointLight position={[0, -0.7, 0.9]} intensity={3} distance={3} color={tinta} />
       <AmbienteFlemin ambiente="estudio" intensidad={0.8} />
       {figuras.map((m) => (
         <Suspense key={m.id} fallback={null}>
@@ -146,8 +172,11 @@ function Escenario({ modelo, modo, tinta, onMostrado, onLienzo }: { modelo: Mode
         </Suspense>
       ))}
       <Pedestal tinta={tinta} pulso={pulso} />
+      <Aura tinta={tinta} pulso={pulso} />
+      <Chispas tinta={tinta} />
       <ContactShadows position={[0, -0.995, 0]} opacity={0.6} scale={5} blur={2.4} far={3} />
-      <Sparkles count={60} scale={[4, 3, 2]} position={[0, 0.2, 0]} size={2.2} speed={0.35} color={tinta} opacity={0.8} />
+      <Sparkles count={70} scale={[4.5, 3.2, 2.5]} position={[0, 0.2, 0]} size={2.6} speed={0.4} color={tinta} opacity={0.85} />
+      <Sparkles count={30} scale={[5, 3.5, 3]} position={[0, 0.4, -0.5]} size={5} speed={0.2} color="#FFC23D" opacity={0.5} />
     </Canvas>
   )
 }
@@ -360,7 +389,7 @@ export function Seleccion({
     g.textAlign = 'right'
     g.fillStyle = 'rgba(255,255,255,0.5)'
     g.font = '500 22px "Chakra Petch", sans-serif'
-    g.fillText('fleremiasflemin20-maker.github.io/biblioteca-3d', W - 48, H - 36)
+    g.fillText('biblioteca-3d.analista-datos-pro.workers.dev', W - 48, H - 36)
     cv.toBlob((b) => {
       if (!b) return
       const a = document.createElement('a')
@@ -486,8 +515,14 @@ export function Seleccion({
         <div className="absolute inset-0 transition-[background] duration-700" style={{ background: `radial-gradient(70% 60% at 54% 62%, ${tinta}40, transparent 70%), linear-gradient(180deg, #120d24 0%, #1b1238 38%, ${catEscena.desde}2e 64%, #0B0912 100%)` }} />
         <div className="rayos absolute left-[54%] top-[58%] h-[160vmax] w-[160vmax] -translate-x-1/2 -translate-y-1/2 opacity-[0.16]" style={{ background: `repeating-conic-gradient(from 0deg, ${tinta} 0deg 2deg, transparent 2deg 14deg)`, maskImage: 'radial-gradient(circle, black 0%, transparent 45%)', WebkitMaskImage: 'radial-gradient(circle, black 0%, transparent 45%)' }} />
         <div className="absolute inset-x-0 bottom-0 h-[42%] opacity-40 [mask-image:linear-gradient(to_top,black,transparent)]" style={{ background: 'linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px) 0 0 / 100% 44px, linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px) 0 0 / 44px 100%', transform: 'perspective(500px) rotateX(55deg)', transformOrigin: 'bottom' }} />
+        <div className="haces absolute inset-x-[25%] bottom-0 top-[20%] opacity-70" />
         <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_40%,transparent_55%,rgba(0,0,0,0.65))]" />
       </div>
+      <div aria-hidden className="barrido pointer-events-none absolute inset-0 z-30 opacity-40" />
+      <div aria-hidden className="hud-esquinas pointer-events-none absolute inset-0 z-30 hidden lg:block">
+        <i /><i /><i /><i />
+      </div>
+      {actual && <div key={`v-${actual.id}`} aria-hidden className="velocidad pointer-events-none absolute inset-0 z-[5]" />}
 
       {/* La sección escrita en grande detrás de la figura, en contorno, como el escenario de un combate. */}
       {(() => {
@@ -506,6 +541,7 @@ export function Seleccion({
         <div aria-hidden className="mira pointer-events-none absolute inset-x-[12%] bottom-[14%] top-[16%] hidden lg:block" style={{ '--c': tinta } as CSSProperties}>
           <i /><i /><i /><i />
         </div>
+        <div aria-hidden className="destello-lente pointer-events-none hidden lg:block" style={{ '--c': tinta } as CSSProperties} />
         {enEscena && <Escenario modelo={enEscena} modo={modo} tinta={tinta} onMostrado={mostrar} onLienzo={guardarLienzo} />}
         {flash > 0 && <div key={flash} aria-hidden className="destello pointer-events-none absolute inset-0 bg-white" />}
         {ruleta && (
@@ -521,10 +557,25 @@ export function Seleccion({
       {/* ── Nombre, estrellas, acabados y acciones (derecha) ─────── */}
       {actual && (
         <div className="pointer-events-none absolute right-4 top-4 z-10 flex max-w-[min(92vw,560px)] flex-col items-end text-right lg:right-8 lg:top-7">
-          <p className="font-chakra text-[11px] font-semibold uppercase tracking-[0.32em] text-[#FFC23D]">Flemin · Jugador 1</p>
-          <h2 key={actual.id} className="nombre-figura entra-nombre mt-1 line-clamp-2 font-flemin text-[clamp(1.6rem,3.6vw,3.3rem)] leading-[1.02]">
-            {actual.nombre}
-          </h2>
+          <div className="flex items-center gap-3">
+            <p className="font-chakra text-[11px] font-semibold uppercase tracking-[0.32em] text-[#FFC23D]">
+              Flemin · Jugador 1 <span className="text-white/45">· No.{String(i + 1).padStart(3, '0')}</span>
+            </p>
+            <span key={`${actual.id}-r`} className="rareza entra-nombre px-2 py-0.5 font-chakra text-[10px] font-bold uppercase tracking-[0.16em] text-[#0b0716]" style={{ background: rareza(actual).sello }}>
+              {rareza(actual).nombre}
+            </span>
+          </div>
+          <div className="relative mt-1 flex items-center gap-3">
+            <span key={`${actual.id}-fr`} aria-hidden className="franjas-nombre absolute -inset-x-8 inset-y-1 -z-10" style={{ '--c': tinta } as CSSProperties} />
+            <h2 key={actual.id} className={`nombre-figura entra-nombre line-clamp-2 font-flemin leading-[1.02] ${actual.nombre.length > 24 ? 'text-[clamp(1.4rem,2.7vw,2.5rem)]' : 'text-[clamp(1.6rem,3.6vw,3.3rem)]'}`}>
+              {actual.nombre}
+            </h2>
+            {/* Coste DP: cuántos puntos de equipo vale la figura. */}
+            <span className="hexagono relative grid h-14 w-16 shrink-0 place-items-center bg-gradient-to-b from-[#FFE08A] via-[#FFC23D] to-[#E07A10] font-flemin text-[24px] leading-none text-[#1a1033] shadow-[0_0_24px_rgba(255,194,61,0.6)]" title="Coste en puntos de equipo">
+              {coste(actual)}
+              <span className="absolute bottom-1 font-chakra text-[8px] font-bold tracking-[0.2em]">DP</span>
+            </span>
+          </div>
           <p key={`${actual.id}-s`} className="entra-nombre mt-1.5 font-chakra text-[13px] font-semibold italic tracking-wide text-white/80 [text-shadow:0_1px_6px_rgba(0,0,0,0.8)] sm:text-[15px]" style={{ animationDelay: '60ms' }}>
             {(CATEGORIAS.find((x) => x.id === actual.categoria) ?? CATEGORIAS[0]).nombre} · {precio(actual.precio)}
           </p>
@@ -543,6 +594,20 @@ export function Seleccion({
             {actual.triangulos ? <span className="chapa bg-black/45 text-white/80 ring-1 ring-white/15">{triangulos(actual.triangulos)} tris</span> : null}
             <span className="chapa bg-black/45 text-white/80 ring-1 ring-white/15">{actual.formatos.join(' · ')}</span>
           </div>
+          <dl key={`${actual.id}-st`} className="mt-3 hidden w-[260px] gap-1.5 font-chakra text-[10px] font-semibold uppercase tracking-[0.18em] text-white/70 lg:[@media(min-height:1000px)]:grid" style={{ '--d': catEscena.desde, '--h': catEscena.hasta } as CSSProperties}>
+            {[
+              { n: 'Detalle', v: estrellas(actual) / 7 },
+              { n: 'Poder', v: Math.min(1, coste(actual) / 10) },
+              { n: 'Rareza', v: ['Común', 'Rara', 'Épica', 'Legendaria'].indexOf(rareza(actual).nombre) / 3 || 0.12 },
+            ].map((a, k) => (
+              <div key={a.n} className="grid grid-cols-[64px_1fr] items-center gap-2">
+                <dt className="text-right">{a.n}</dt>
+                <dd className="barra-stat">
+                  <i style={{ width: `${Math.round(a.v * 100)}%`, animationDelay: `${k * 90}ms` }} />
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       )}
 

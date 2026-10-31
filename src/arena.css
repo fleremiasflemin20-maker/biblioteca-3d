@@ -1,0 +1,115 @@
+/* ── La arena: capa maximalista de consola de nueva generación ──────────
+ *
+ * Toda la web vive en la arena de la pantalla de selección: fondo de
+ * energía que se mueve, paneles de cristal con esquinas cortadas, filos de
+ * luz, tarjetas de personaje con marco de rareza y reflejo holográfico.
+ * Colores fijos del juego: oro #FFC23D, fuego #FF6A13, magenta #FF2D8A,
+ * violeta #8A3CFF, turquesa #4DE8D6 y el negro azulado #07050d.
+ *
+ * Se importa al principio de `index.css`, antes de las utilidades de
+ * Tailwind: así `hidden`, `absolute` o `sticky` siguen mandando sobre estas clases.
+ */
+
+/* El mundo detrás de todo: nebulosa, auroras que derivan, rejilla hexagonal y estrellas. */
+.mundo { position: fixed; inset: 0; z-index: -50; overflow: hidden; background: radial-gradient(120% 80% at 50% -10%, #2a1257 0%, #120a26 38%, #07050d 75%); pointer-events: none; }
+.mundo .aurora { position: absolute; width: 70vmax; height: 70vmax; border-radius: 9999px; filter: blur(90px); opacity: 0.32; mix-blend-mode: screen; animation: deriva 28s ease-in-out infinite alternate; }
+.mundo .aurora:nth-child(1) { left: -20vmax; top: -10vmax; background: radial-gradient(circle, #8A3CFF, transparent 65%); }
+.mundo .aurora:nth-child(2) { right: -25vmax; top: 20vh; background: radial-gradient(circle, #FF2D8A, transparent 65%); animation-duration: 34s; animation-delay: -8s; }
+.mundo .aurora:nth-child(3) { left: 20vw; bottom: -40vmax; background: radial-gradient(circle, #FF6A13, transparent 65%); animation-duration: 40s; animation-delay: -16s; opacity: 0.22; }
+@keyframes deriva { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(6vw, 4vh) scale(1.12); } 100% { transform: translate(-4vw, -6vh) scale(0.94); } }
+.mundo .hex { position: absolute; inset: 0; opacity: 0.07; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='98' viewBox='0 0 56 98'%3E%3Cpath d='M28 0L56 16v33L28 65 0 49V16zM28 65v33' fill='none' stroke='%23fff' stroke-width='1'/%3E%3C/svg%3E"); mask-image: radial-gradient(90% 70% at 50% 40%, black, transparent); -webkit-mask-image: radial-gradient(90% 70% at 50% 40%, black, transparent); }
+.mundo .estrellas { position: absolute; inset: -50%; background-image: radial-gradient(1px 1px at 20% 30%, #fff, transparent), radial-gradient(1px 1px at 70% 60%, #ffe7b0, transparent), radial-gradient(1.5px 1.5px at 40% 80%, #fff, transparent), radial-gradient(1px 1px at 85% 15%, #c9b5ff, transparent), radial-gradient(1px 1px at 10% 90%, #fff, transparent); background-size: 380px 380px; opacity: 0.45; animation: estrellas 160s linear infinite; }
+@keyframes estrellas { to { transform: translate(380px, 380px); } }
+/* Grano de película fijo encima de todo, muy suave: le quita lo plano a los degradados. */
+.grano { position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: 0.06; mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* Líneas de barrido de monitor y el filo de luz que corre bajo las barras. */
+.barrido { background: repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 3px); }
+.filo-luz { position: relative; }
+.filo-luz::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: linear-gradient(90deg, transparent, #8A3CFF, #FF2D8A, #FF6A13, #FFC23D, transparent); background-size: 200% 100%; animation: filo 6s linear infinite; box-shadow: 0 0 14px rgba(255, 106, 19, 0.6); pointer-events: none; }
+@keyframes filo { to { background-position: -200% 0; } }
+
+/* Botones de menú: corte diagonal, metal oscuro y un brillo que cruza al pasar. */
+.btn-juego { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; height: 2.5rem; padding: 0 1rem; font-family: 'Chakra Petch', sans-serif; font-size: 12.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #fff; background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04)); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18), inset 0 -2px 0 rgba(0, 0, 0, 0.35); clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%); transition: transform 0.15s, background 0.25s, box-shadow 0.25s; overflow: hidden; white-space: nowrap; }
+.btn-juego::before { content: ''; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%); transform: translateX(-120%); transition: transform 0.6s; pointer-events: none; }
+.btn-juego:hover::before { transform: translateX(120%); }
+.btn-juego:hover { background: linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.08)); box-shadow: inset 0 0 0 1px rgba(255, 194, 61, 0.7), 0 0 24px rgba(255, 140, 40, 0.35); }
+.btn-juego:active { transform: scale(0.97); }
+.btn-fuego { background: linear-gradient(100deg, #FF6A13, #FFC23D); color: #140f22; box-shadow: 0 0 26px rgba(255, 140, 40, 0.45), inset 0 -2px 0 rgba(0, 0, 0, 0.25); }
+.btn-fuego:hover { background: linear-gradient(100deg, #ff7d2e, #ffd56a); box-shadow: 0 0 36px rgba(255, 170, 40, 0.7); }
+.btn-plasma { background: linear-gradient(100deg, #8A3CFF, #FF2D8A); box-shadow: 0 0 26px rgba(255, 45, 138, 0.45), inset 0 -2px 0 rgba(0, 0, 0, 0.25); }
+.btn-plasma:hover { background: linear-gradient(100deg, #9b55ff, #ff4d9e); box-shadow: 0 0 36px rgba(255, 45, 138, 0.7); }
+
+/* Panel de cristal del juego (catálogo, ficha, misiones). */
+.cristal { background: linear-gradient(160deg, rgba(40, 26, 74, 0.72), rgba(14, 10, 28, 0.86)); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 30px 60px -30px rgba(0, 0, 0, 0.9); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.corte { clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px); }
+.corte-sm { clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px); }
+
+/* Pestañas de sección: corte diagonal y brillo del color de la sección en la activa. */
+.pestana { clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%); }
+.pestana-activa { background: linear-gradient(100deg, var(--d), var(--h)); color: #0b0716; box-shadow: 0 0 22px color-mix(in srgb, var(--d) 60%, transparent); }
+
+/* ── Carta de personaje ───────────────────────────────────────────────── */
+.carta { position: relative; display: block; width: 100%; padding: 2px; text-align: left; background: linear-gradient(150deg, var(--r1), var(--r2) 45%, var(--r1) 55%, var(--r3)); clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s; }
+.carta:hover, .carta:focus-visible { transform: translateY(-6px) scale(1.015); filter: drop-shadow(0 0 18px color-mix(in srgb, var(--r1) 70%, transparent)) drop-shadow(0 22px 30px rgba(0, 0, 0, 0.7)); }
+.carta-dentro { position: relative; height: 100%; background: linear-gradient(170deg, #1d1336, #0c0818 70%); clip-path: polygon(13px 0, 100% 0, 100% calc(100% - 13px), calc(100% - 13px) 100%, 0 100%, 0 13px); overflow: hidden; }
+.carta-escena { position: relative; aspect-ratio: 1 / 1; overflow: hidden; }
+.carta-escena::before { content: ''; position: absolute; inset: 0; background: radial-gradient(70% 60% at 50% 72%, color-mix(in srgb, var(--d) 55%, transparent), transparent 70%), repeating-conic-gradient(from 0deg at 50% 70%, color-mix(in srgb, var(--d) 22%, transparent) 0deg 3deg, transparent 3deg 15deg); opacity: 0.9; }
+.carta-escena::after { content: ''; position: absolute; left: 15%; right: 15%; bottom: 7%; height: 12%; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--d) 70%, transparent), transparent); filter: blur(4px); }
+.carta-escena img { position: relative; z-index: 1; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.55)); }
+.carta:hover .carta-escena img { transform: scale(1.09) translateY(-3%); }
+/* Reflejo holográfico: un arcoíris que cruza la carta al pasar el ratón. */
+.holo { position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(115deg, transparent 20%, rgba(255, 45, 138, 0.25) 36%, rgba(255, 194, 61, 0.3) 44%, rgba(77, 232, 214, 0.25) 52%, rgba(138, 60, 255, 0.25) 60%, transparent 76%); background-size: 250% 250%; background-position: 120% 0; mix-blend-mode: color-dodge; opacity: 0; transition: opacity 0.4s, background-position 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+.carta:hover .holo { opacity: 1; background-position: -20% 0; }
+/* Las legendarias: el marco gira como un aro de luz y el holograma nunca se apaga. */
+@property --giro { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+.carta-leg { background: conic-gradient(from var(--giro), #FFC23D, #FF6A13, #FF2D8A, #8A3CFF, #4DE8D6, #FFC23D); animation: giro-marco 4s linear infinite; }
+.carta-leg .holo { opacity: 0.35; animation: holo-vivo 5s ease-in-out infinite alternate; }
+@keyframes giro-marco { to { --giro: 360deg; } }
+@keyframes holo-vivo { from { background-position: 120% 0; } to { background-position: -20% 0; } }
+
+/* Sello de rareza en diagonal. */
+.rareza { clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%); }
+
+/* Rótulo enorme de cada sección del catálogo, con su eco en contorno detrás. */
+.titulo-seccion { font-family: 'Dela Gothic One', sans-serif; line-height: 1; color: #fff; -webkit-text-stroke: 6px #1a1033; paint-order: stroke fill; text-shadow: 0 4px 0 #1a1033, 0 0 30px color-mix(in srgb, var(--d) 55%, transparent); transform: skewX(-6deg); transform-origin: left; }
+.eco-seccion { font-family: 'Dela Gothic One', sans-serif; color: transparent; -webkit-text-stroke: 1.2px color-mix(in srgb, var(--d) 40%, transparent); white-space: nowrap; line-height: 1; text-transform: uppercase; }
+
+/* Barras de atributos, como las estadísticas de un luchador. */
+.barra-stat { position: relative; height: 6px; background: rgba(255, 255, 255, 0.1); clip-path: polygon(3px 0, 100% 0, calc(100% - 3px) 100%, 0 100%); overflow: hidden; }
+.barra-stat > i { position: absolute; inset: 0 auto 0 0; background: linear-gradient(90deg, var(--d, #FF6A13), var(--h, #FFC23D)); box-shadow: 0 0 10px var(--d, #FF6A13); animation: carga-stat 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; transform-origin: left; }
+@keyframes carga-stat { from { transform: scaleX(0); } }
+
+/* Cinta que desfila con texto gigante. */
+.cinta { display: flex; width: max-content; animation: desfile 40s linear infinite; }
+
+/* Destello de lente detrás de la figura elegida. */
+.destello-lente { position: absolute; left: 50%; top: 44%; width: 120%; height: 3px; transform: translate(-50%, -50%) rotate(-8deg); background: linear-gradient(90deg, transparent, var(--c) 30%, #fff 50%, var(--c) 70%, transparent); filter: blur(1px); opacity: 0.5; box-shadow: 0 0 30px 6px var(--c); animation: lente 3.2s ease-in-out infinite; }
+@keyframes lente { 50% { opacity: 0.22; transform: translate(-50%, -50%) rotate(-8deg) scaleX(0.8); } }
+/* Líneas de velocidad que barren la arena al cambiar de figura. */
+.velocidad { background: repeating-linear-gradient(100deg, transparent 0 40px, rgba(255, 255, 255, 0.08) 40px 42px, transparent 42px 90px); animation: velocidad 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes velocidad { from { opacity: 1; transform: translateX(-12%); } to { opacity: 0; transform: translateX(6%); } }
+/* Franjas inclinadas detrás del nombre, como el rótulo de un personaje en un juego de pelea. */
+.franjas-nombre { background: linear-gradient(100deg, transparent 0 8%, color-mix(in srgb, var(--c) 55%, transparent) 8% 62%, transparent 62% 65%, color-mix(in srgb, var(--c) 30%, transparent) 65% 72%, transparent 72%); clip-path: polygon(6% 0, 100% 0, 94% 100%, 0 100%); animation: franjas 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes franjas { from { transform: translateX(30%); opacity: 0; } }
+/* Coste DP: el hexágono dorado. */
+.hexagono { clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%); }
+/* Esquinas de HUD alrededor de una pantalla completa. */
+.hud-esquinas > i { position: absolute; width: 46px; height: 46px; border: 0 solid rgba(255, 194, 61, 0.7); filter: drop-shadow(0 0 6px rgba(255, 194, 61, 0.6)); }
+.hud-esquinas > i:nth-child(1) { left: 10px; top: 10px; border-left-width: 2px; border-top-width: 2px; }
+.hud-esquinas > i:nth-child(2) { right: 10px; top: 10px; border-right-width: 2px; border-top-width: 2px; }
+.hud-esquinas > i:nth-child(3) { left: 10px; bottom: 10px; border-left-width: 2px; border-bottom-width: 2px; }
+.hud-esquinas > i:nth-child(4) { right: 10px; bottom: 10px; border-right-width: 2px; border-bottom-width: 2px; }
+/* El brillo que recorre el retrato elegido de la rejilla. */
+.retrato-sel::before { content: ''; position: absolute; inset: 0; z-index: 2; background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.55) 50%, transparent 65%); background-size: 300% 100%; animation: barrido-retrato 1.8s ease-in-out infinite; pointer-events: none; mix-blend-mode: overlay; }
+@keyframes barrido-retrato { from { background-position: 150% 0; } to { background-position: -50% 0; } }
+/* Logo de la pantalla de título: un brillo metálico lo cruza. */
+.logo-brillo { background: linear-gradient(110deg, #fff 35%, #FFE7A8 45%, #fff 55%); background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: logo-brillo 3.5s ease-in-out infinite; }
+@keyframes logo-brillo { from { background-position: 150% 0; } to { background-position: -50% 0; } }
+/* Haces de luz verticales que suben detrás del logo y de la figura. */
+.haces { background: repeating-linear-gradient(90deg, transparent 0 7%, rgba(255, 194, 61, 0.08) 7% 7.6%, transparent 7.6% 15%); mask-image: linear-gradient(to top, black, transparent 80%); -webkit-mask-image: linear-gradient(to top, black, transparent 80%); animation: haces 6s ease-in-out infinite alternate; }
+@keyframes haces { to { background-position: 60px 0; opacity: 0.6; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .mundo .aurora, .mundo .estrellas, .filo-luz::after, .carta-leg, .carta-leg .holo, .cinta, .destello-lente, .velocidad, .franjas-nombre, .retrato-sel::before, .logo-brillo, .barra-stat > i, .haces { animation: none; }
+}

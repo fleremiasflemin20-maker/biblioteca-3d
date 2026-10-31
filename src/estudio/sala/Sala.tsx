@@ -7,6 +7,7 @@ import { CATALOGO, CATEGORIAS, enlaceCompra, peso, precio, rutaPortada, triangul
 import { AlCargar, Pieza, type Modo } from '../../components/Pieza'
 import { ICONO_CATEGORIA } from '../../lib/iconos'
 import { AmbienteFlemin } from '../luces.tsx'
+import { familia } from '../../lib/orden'
 
 /**
  * Flemin Studio · la sala.
@@ -19,10 +20,12 @@ import { AmbienteFlemin } from '../luces.tsx'
  * otra propiedad ajena; esas piezas siguen en la tienda.
  */
 /** Secciones con personajes de terceros: se venden en la tienda, pero no se exhiben en la sala. */
-const AJENAS = new Set<string>(['dragon-ball-z', 'caballeros-del-zodiaco', 'siete-pecados', 'your-name'])
+const AJENAS = new Set<string>(['dragon-ball-z', 'caballeros-del-zodiaco', 'siete-pecados', 'your-name', 'halloween'])
+/** Piezas de secciones propias que llevan un personaje ajeno (el soporte de Kurama). */
+const ajena = (m: Modelo3D) => AJENAS.has(m.categoria) || familia(m) === 'soporte-ps5-kurama'
 
 export const OBRAS_PUBLICAS: Modelo3D[] = (() => {
-  const propias = CATALOGO.filter((m) => !AJENAS.has(m.categoria))
+  const propias = CATALOGO.filter((m) => !ajena(m))
   const orden = (m: Modelo3D) => (m.categoria === 'seres-flemin' ? 0 : m.destacado ? 1 : 2)
   return [...propias].sort((a, b) => orden(a) - orden(b))
 })()

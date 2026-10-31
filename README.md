@@ -7,6 +7,16 @@ atardecer, grano de película, HUD y rotulación Archivo Black.
 Cada categoría tiñe la página entera, como la rueda de facetas del portafolio.
 Cada pieza se abre en 3D (textura, arcilla o malla) antes de comprarla.
 
+**Producción:** https://biblioteca-3d.analista-datos-pro.workers.dev (Cloudflare
+Workers, solo assets, ver `wrangler.jsonc`). Se publica con:
+
+```bash
+npm run desplegar   # compila y sube dist/ a Cloudflare
+```
+
+Cloudflare rechaza archivos de más de 25 MB: comprime cada `.glb` por debajo
+de eso (comando de abajo). El push a `main` sigue publicando también en GitHub Pages.
+
 ## Arrancar
 
 ```bash
@@ -61,6 +71,14 @@ que hace el Studio. Si el botón es de una obra, la obra viaja por la URL
 "Separar mi modelo" o "Abrir el Editor 3D": se separa para verla, pero no
 se descarga. Los enlaces viejos `#separador` y `#editor` también van a la
 portada. La enlaza `src/lib/studio.ts`.
+
+## La arena (estilo)
+
+Toda la web es oscura y maximalista, como el menú de una consola: fondo de
+nebulosa animado, paneles de cristal con esquinas cortadas y cartas de
+personaje con marco de rareza (`src/arena.css`, `src/lib/rareza.ts`). La
+rareza y el coste DP salen del precio. En la selección, el aura de energía y
+las chispas son `src/components/Energia.tsx`.
 
 ## Modo consola
 

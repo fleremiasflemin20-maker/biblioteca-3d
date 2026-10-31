@@ -54,8 +54,8 @@ export function Visor({
   return (
     <>
     {cargado !== modelo.id && (
-      <p className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center gap-2 text-sm text-stone-400">
-        <span className="h-4 w-4 animate-spin rounded-full border-2 border-stone-200 border-t-stone-500" /> Cargando modelo…
+      <p className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center gap-2 font-chakra text-[12px] uppercase tracking-[0.2em] text-white/70">
+        <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/20 border-t-[#FFC23D]" /> Cargando modelo…
       </p>
     )}
     <Canvas

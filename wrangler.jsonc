@@ -1,0 +1,12 @@
+// Producción en Cloudflare: la web es estática, así que es un Worker solo de
+// assets (sin código). `npm run desplegar` compila y la sube.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "biblioteca-3d",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    // Una sola página: cualquier ruta sirve index.html.
+    "not_found_handling": "single-page-application"
+  }
+}

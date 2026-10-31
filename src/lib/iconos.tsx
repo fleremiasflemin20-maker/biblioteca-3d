@@ -1,4 +1,4 @@
-import { BookOpen, Car, Cog, Cpu, Flame, Gem, LayoutGrid, Orbit, Sparkles, Star, Sword, Sunset, type LucideIcon } from 'lucide-react'
+import { BookOpen, Car, Cog, Cpu, Flame, Gamepad2, Gem, Ghost, LayoutGrid, Orbit, Sparkles, Star, Sword, Sunset, ToyBrick, type LucideIcon } from 'lucide-react'
 import type { CategoriaId } from './catalogo'
 
 /** Un icono por sección, para las píldoras del filtro y las tarjetas. */
@@ -14,5 +14,8 @@ export const ICONO_CATEGORIA: Record<CategoriaId | 'todo', LucideIcon> = {
   anime: Sparkles,
   manga: BookOpen,
   'seres-flemin': Orbit,
+  munecos: ToyBrick,
+  halloween: Ghost,
+  'soportes-ps5': Gamepad2,
   accesorios: Gem,
 }

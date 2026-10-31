@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
-import { ChevronLeft, ChevronRight, FileText, Hand, Layers, Wand2, X } from 'lucide-react'
+import { useEffect, useState, type CSSProperties } from 'react'
+import { ChevronLeft, ChevronRight, FileText, Hand, Layers, ShoppingBag, Star, Wand2, X } from 'lucide-react'
 import { Visor } from './Visor'
 import type { Modo } from './Pieza'
 import { CATEGORIAS, CORREO, enlaceCompra, peso, precio, rutaDescarga, triangulos, type Modelo3D } from '../lib/catalogo'
 import { ICONO_CATEGORIA } from '../lib/iconos'
+import { coste, estrellas, rareza } from '../lib/rareza'
 import { enlaceStudio } from '../lib/studio'
 import { ICONOS, MEDIDAS, OPCIONES_INICIALES, PALETAS, describirPedido, type IconoId, type OpcionesLlavero, type PaletaId } from '../lib/llavero'
 
@@ -70,28 +71,34 @@ export function Ficha({
     ...(modelo.autor ? [{ etiqueta: 'Diseño original', valor: modelo.autor }] : []),
   ]
 
-  const etiqueta = 'mb-2 block text-[12px] font-medium text-stone-500'
-  const chip = 'rounded-full border px-3 py-1.5 text-[13px] transition-colors'
+  const r = rareza(modelo)
+  const etiqueta = 'mb-2 block font-chakra text-[11px] font-semibold uppercase tracking-[0.22em] text-[#FFC23D]'
+  const chip = 'pestana px-3 py-1.5 font-chakra text-[12.5px] font-semibold transition-colors'
 
   return (
     <div
       role="dialog"
       aria-modal="true"
       aria-label={modelo.nombre}
-      className="fixed inset-0 z-50 flex items-stretch justify-center bg-black/50 backdrop-blur-sm md:items-center md:p-6"
+      className="fixed inset-0 z-50 flex items-stretch justify-center bg-[#07050d]/75 text-white backdrop-blur-md md:items-center md:p-6"
       onClick={onCerrar}
     >
       <div
-        className="entra relative grid w-full max-w-6xl overflow-y-auto bg-superficie shadow-2xl ring-1 ring-stone-200/60 md:h-[min(92vh,780px)] md:grid-cols-[1.3fr_1fr] md:overflow-hidden md:rounded-[28px]"
+        className="entra cristal relative grid w-full max-w-6xl overflow-y-auto md:corte md:h-[min(92vh,800px)] md:grid-cols-[1.3fr_1fr] md:overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* El visor. En el móvil, el del llavero se queda arriba mientras se escribe el nombre. */}
         <div
-          className={`relative bg-gradient-to-b from-stone-50 to-stone-100 md:h-auto md:min-h-0 ${
+          className={`relative overflow-hidden bg-[#0B0912] md:h-auto md:min-h-0 ${
             modelo.personalizable ? 'sticky top-0 z-10 h-[34vh] min-h-[220px] md:static' : 'h-[50vh] min-h-[320px]'
           }`}
         >
-          <div className="absolute inset-0" style={{ background: `radial-gradient(55% 45% at 50% 88%, ${cat.punto}1f, transparent 70%)` }} aria-hidden />
+          <div aria-hidden className="absolute inset-0" style={{ background: `radial-gradient(60% 55% at 50% 62%, ${cat.tinta}45, transparent 70%), linear-gradient(180deg, #120d24, #1b1238 45%, ${cat.desde}30 75%, #0B0912)` }} />
+          <div aria-hidden className="rayos absolute left-1/2 top-[60%] h-[160vmax] w-[160vmax] -translate-x-1/2 -translate-y-1/2 opacity-[0.14]" style={{ background: `repeating-conic-gradient(from 0deg, ${cat.tinta} 0deg 2deg, transparent 2deg 14deg)`, maskImage: 'radial-gradient(circle, black 0%, transparent 40%)', WebkitMaskImage: 'radial-gradient(circle, black 0%, transparent 40%)' }} />
+          <div aria-hidden className="absolute inset-x-0 bottom-0 h-[38%] opacity-40 [mask-image:linear-gradient(to_top,black,transparent)]" style={{ background: 'linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px) 0 0 / 100% 40px, linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px) 0 0 / 40px 100%', transform: 'perspective(500px) rotateX(55deg)', transformOrigin: 'bottom' }} />
+          <div aria-hidden className="hud-esquinas pointer-events-none absolute inset-0 z-[1]">
+            <i /><i /><i /><i />
+          </div>
           <Visor modelo={modelo} modo={modo} tinta={cat.tinta} zoom margen={1.25} opciones={modelo.personalizable ? vista : undefined} separado={separado} />
 
           {modelo.piezas && (
@@ -99,24 +106,25 @@ export function Ficha({
               type="button"
               onClick={() => setSeparado((v) => !v)}
               aria-pressed={separado}
-              className="absolute right-4 top-4 flex items-center gap-1.5 rounded-full border border-stone-200 bg-superficie/90 px-3 py-1.5 text-[13px] font-medium text-grafito shadow-sm backdrop-blur transition hover:bg-superficie"
+              className="btn-juego absolute right-5 top-5 z-10 !h-9"
             >
               <Layers size={15} /> {separado ? 'Ver armado' : 'Ver por partes'}
             </button>
           )}
 
-          <p className="absolute left-4 top-4 rounded-full border border-stone-200 bg-superficie/80 px-2.5 py-1 text-[12px] tabular-nums text-stone-500 backdrop-blur">
-            {String(numero).padStart(2, '0')} / {String(total).padStart(2, '0')}
+          <p className="absolute left-5 top-5 z-10 flex items-center gap-2 font-chakra text-[12px] font-semibold uppercase tracking-[0.2em] text-white/70">
+            <span className="rareza px-2 py-0.5 text-[#0b0716]" style={{ background: r.sello }}>{r.nombre}</span>
+            <span className="tabular-nums">No.{String(numero).padStart(3, '0')} / {String(total).padStart(3, '0')}</span>
           </p>
 
-          <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 rounded-full border border-stone-200 bg-superficie/90 p-1 shadow-sm backdrop-blur">
+          <div className="corte-sm absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 bg-black/55 p-1 ring-1 ring-inset ring-white/15 backdrop-blur">
             {MODOS.map((m) => (
               <button
                 key={m.id}
                 type="button"
                 onClick={() => setModo(m.id)}
                 aria-pressed={modo === m.id}
-                className={`rounded-full px-3.5 py-1.5 text-[13px] font-medium transition-colors ${modo === m.id ? 'bg-grafito text-hueso' : 'text-stone-600 hover:text-grafito'}`}
+                className={`pestana px-4 py-1.5 font-chakra text-[12px] font-bold uppercase tracking-wider transition-colors ${modo === m.id ? 'bg-[#FFC23D] text-[#140f22]' : 'text-white/65 hover:text-white'}`}
               >
                 {m.nombre}
               </button>
@@ -132,7 +140,7 @@ export function Ficha({
               type="button"
               aria-label={nombre}
               onClick={() => onMover(paso)}
-              className={`absolute ${lado} top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-stone-200 bg-superficie/90 text-stone-700 shadow-sm backdrop-blur transition hover:bg-superficie`}
+              className={`hexagono absolute ${lado} top-1/2 z-10 grid h-11 w-12 -translate-y-1/2 place-items-center bg-white/15 text-white backdrop-blur transition hover:bg-[#FFC23D] hover:text-[#140f22]`}
             >
               <Flecha size={18} />
             </button>
@@ -140,19 +148,33 @@ export function Ficha({
         </div>
 
         {/* Los datos */}
-        <div className="flex flex-col gap-6 p-6 md:overflow-y-auto md:p-9">
+        <div className="flex min-w-0 flex-col gap-6 overflow-x-hidden p-6 md:overflow-y-auto md:p-9">
           <div className="flex items-start justify-between gap-4">
-            <p className="flex items-center gap-1.5 text-[13px] font-medium text-stone-500">
-              <Icono size={15} style={{ color: cat.punto }} /> {cat.nombre}
+            <p className="flex items-center gap-1.5 font-chakra text-[12px] font-semibold uppercase tracking-[0.2em] text-white/70">
+              <Icono size={15} style={{ color: cat.tinta }} /> {cat.nombre}
             </p>
-            <button type="button" onClick={onCerrar} aria-label="Cerrar" className="-m-2 rounded-full p-2 text-stone-400 transition hover:bg-stone-100 hover:text-grafito">
+            <button type="button" onClick={onCerrar} aria-label="Cerrar" className="-m-2 p-2 text-white/50 transition hover:rotate-90 hover:text-[#FFC23D]">
               <X size={20} />
             </button>
           </div>
 
           <div>
-            <h2 className="text-[clamp(1.75rem,3vw,2.4rem)] font-semibold leading-[1.08] tracking-[-0.03em]">{modelo.nombre}</h2>
-            <p className="mt-3 leading-relaxed text-stone-600">{modelo.descripcion}</p>
+            <div className="flex items-start gap-3">
+              <h2 className="nombre-figura flex-1 font-flemin text-[clamp(1.6rem,2.8vw,2.3rem)] leading-[1.05]">{modelo.nombre}</h2>
+              <span className="hexagono relative grid h-14 w-16 shrink-0 place-items-center bg-gradient-to-b from-[#FFE08A] via-[#FFC23D] to-[#E07A10] font-flemin text-[24px] leading-none text-[#1a1033]" title="Coste en puntos de equipo">
+                {coste(modelo)}
+                <span className="absolute bottom-1 font-chakra text-[8px] font-bold tracking-[0.2em]">DP</span>
+              </span>
+            </div>
+            <div className="mt-3 flex items-center gap-2">
+              <span className="font-chakra text-[10.5px] uppercase tracking-[0.2em] text-white/55">Detalle</span>
+              <span className="flex gap-0.5">
+                {Array.from({ length: 7 }, (_, k) => (
+                  <Star key={k} size={13} className={k < estrellas(modelo) ? 'fill-[#FFC23D] text-[#FFC23D] drop-shadow-[0_0_4px_rgba(255,194,61,0.8)]' : 'text-white/25'} />
+                ))}
+              </span>
+            </div>
+            <p className="mt-4 leading-relaxed text-white/70">{modelo.descripcion}</p>
           </div>
 
           {modelo.piezas && (
@@ -160,12 +182,12 @@ export function Ficha({
               <p className={etiqueta}>Cómo se arma · {modelo.piezas.length} piezas</p>
               <ol className="flex flex-col gap-2">
                 {modelo.piezas.map((p, i) => (
-                  <li key={p.nombre} className="flex gap-3 rounded-xl border border-stone-200 px-3.5 py-2.5">
+                  <li key={p.nombre} className="corte-sm flex gap-3 bg-white/[0.05] px-3.5 py-2.5 ring-1 ring-inset ring-white/10">
                     <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full text-[12px] font-semibold text-white ring-1 ring-black/10" style={{ background: p.color }}>
                       {i + 1}
                     </span>
-                    <span className="text-[14px] leading-snug text-stone-600">
-                      <span className="font-medium text-grafito">{p.nombre}.</span> {p.detalle}
+                    <span className="text-[14px] leading-snug text-white/65">
+                      <span className="font-semibold text-white">{p.nombre}.</span> {p.detalle}
                     </span>
                   </li>
                 ))}
@@ -174,7 +196,7 @@ export function Ficha({
           )}
 
           {modelo.personalizable && (
-            <div className="flex flex-col gap-5 rounded-2xl border border-stone-200 p-4">
+            <div className="corte flex flex-col gap-5 bg-white/[0.04] p-4 ring-1 ring-inset ring-white/10">
               <label className="block">
                 <span className={etiqueta}>
                   Tu nombre · {opciones.nombre.length}/{MEDIDAS.maxLetras}
@@ -184,7 +206,7 @@ export function Ficha({
                   maxLength={MEDIDAS.maxLetras}
                   placeholder={OPCIONES_INICIALES.nombre}
                   onChange={(e) => setOpciones((o) => ({ ...o, nombre: e.target.value }))}
-                  className="w-full rounded-xl border border-stone-200 bg-superficie px-3.5 py-2.5 text-base outline-none transition placeholder:text-stone-300 focus:border-stone-400"
+                  className="corte-sm w-full bg-white/[0.07] px-3.5 py-2.5 text-base text-white outline-none ring-1 ring-inset ring-white/15 transition placeholder:text-white/30 focus:ring-[#FFC23D]/70"
                 />
               </label>
               <div>
@@ -196,7 +218,7 @@ export function Ficha({
                       type="button"
                       aria-pressed={opciones.icono === id}
                       onClick={() => setOpciones((o) => ({ ...o, icono: id }))}
-                      className={`${chip} ${opciones.icono === id ? 'border-grafito bg-grafito text-hueso' : 'border-stone-200 text-stone-700 hover:border-stone-300'}`}
+                      className={`${chip} ${opciones.icono === id ? 'bg-[#FFC23D] text-[#140f22]' : 'bg-white/[0.07] text-white/75 hover:bg-white/15'}`}
                     >
                       {ICONOS[id]}
                     </button>
@@ -215,11 +237,11 @@ export function Ficha({
                         type="button"
                         aria-pressed={activa}
                         onClick={() => setOpciones((o) => ({ ...o, paleta: id }))}
-                        className={`${chip} flex items-center gap-2 ${activa ? 'border-grafito text-grafito' : 'border-stone-200 text-stone-600 hover:border-stone-300'}`}
+                        className={`${chip} flex items-center gap-2 ${activa ? 'bg-white text-[#140f22]' : 'bg-white/[0.07] text-white/75 hover:bg-white/15'}`}
                       >
                         <span className="flex" aria-hidden>
                           {[p.placa, p.texto, p.icono].map((c) => (
-                            <span key={c} className="-mr-1 h-3.5 w-3.5 rounded-full border-2 border-superficie" style={{ background: c }} />
+                            <span key={c} className="-mr-1 h-3.5 w-3.5 rounded-full border-2 border-[#1a1033]" style={{ background: c }} />
                           ))}
                         </span>
                         <span className="ml-1">{p.nombre}</span>
@@ -235,7 +257,7 @@ export function Ficha({
             <p className={etiqueta}>Formatos incluidos</p>
             <div className="flex flex-wrap gap-1.5">
               {modelo.formatos.map((f) => (
-                <span key={f} className="rounded-md bg-stone-100 px-2.5 py-1 font-mono text-[12px] text-stone-700">
+                <span key={f} className="chapa bg-white/10 font-chakra text-[12px] font-bold tracking-wider text-white ring-1 ring-inset ring-white/15">
                   {f}
                 </span>
               ))}
@@ -252,11 +274,11 @@ export function Ficha({
                       href={rutaDescarga(d.archivo)}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex items-center gap-2 rounded-xl border border-stone-200 px-3.5 py-2.5 text-[14px] text-grafito transition hover:border-stone-300 hover:bg-stone-50"
+                      className="corte-sm flex items-center gap-2 bg-white/[0.05] px-3.5 py-2.5 text-[14px] text-white ring-1 ring-inset ring-white/10 transition hover:bg-white/10"
                     >
-                      <FileText size={16} className="shrink-0 text-stone-500" />
+                      <FileText size={16} className="shrink-0 text-[#FFC23D]" />
                       <span className="flex-1">{d.nombre}</span>
-                      <span className="font-mono text-[11px] uppercase text-stone-400">{d.archivo.split('.').pop()}</span>
+                      <span className="font-mono text-[11px] uppercase text-white/40">{d.archivo.split('.').pop()}</span>
                     </a>
                   </li>
                 ))}
@@ -264,28 +286,28 @@ export function Ficha({
             </div>
           )}
 
-          <dl className="grid grid-cols-2 gap-x-6 gap-y-4 border-y border-stone-200 py-5">
+          <dl className="grid grid-cols-2 gap-x-6 gap-y-4 border-y border-white/10 py-5" style={{ '--d': cat.desde, '--h': cat.hasta } as CSSProperties}>
             {datos.map((d) => (
               <div key={d.etiqueta}>
-                <dt className="text-[12px] text-stone-500">{d.etiqueta}</dt>
-                <dd className="mt-0.5 text-[14px] font-medium text-grafito">{d.valor}</dd>
+                <dt className="font-chakra text-[10.5px] font-semibold uppercase tracking-[0.2em] text-white/45">{d.etiqueta}</dt>
+                <dd className="mt-0.5 text-[14px] font-medium text-white">{d.valor}</dd>
               </div>
             ))}
           </dl>
 
           <div className="mt-auto flex flex-col gap-3">
-            <div className="flex items-end justify-between gap-4">
-              <p className="text-4xl font-semibold tracking-tight">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <p className="bg-gradient-to-b from-[#FFE08A] to-[#FF8A2F] bg-clip-text font-flemin text-5xl leading-none text-transparent [filter:drop-shadow(0_3px_0_#1a1033)]">
                 {precio(modelo.precio)}
-                {modelo.precio > 0 && <span className="ml-1.5 text-sm font-normal text-stone-400">USD</span>}
+                {modelo.precio > 0 && <span className="ml-1.5 font-chakra text-sm font-semibold tracking-widest text-white/45">USD</span>}
               </p>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 {!modelo.personalizable && (
-                  <a href={enlaceStudio(modelo)} className="pildora-clara" title="Píntalo y míralo separado en piezas en Flemin Studio 3D">
+                  <a href={enlaceStudio(modelo)} className="btn-juego" title="Píntalo y míralo separado en piezas en Flemin Studio 3D">
                     <Wand2 size={16} /> <span className="hidden sm:inline">Pintar y separar</span>
                   </a>
                 )}
-                <button type="button" onClick={onManos} className="pildora-clara">
+                <button type="button" onClick={onManos} className="btn-juego">
                   <Hand size={16} /> <span className="hidden sm:inline">Ver con tus manos</span>
                 </button>
               </div>
@@ -295,13 +317,14 @@ export function Ficha({
               target="_blank"
               rel="noreferrer"
               download={modelo.precio === 0 || undefined}
-              className="pildora-negra w-full !py-3.5 text-[15px]"
+              className="btn-juego btn-fuego pedido-brillo !h-14 w-full !text-[15px]"
             >
+              <ShoppingBag size={18} />
               {modelo.precio === 0 ? 'Descargar gratis' : modelo.personalizable ? 'Pedir por WhatsApp' : modelo.compra ? 'Comprar' : 'Comprar por WhatsApp'}
             </a>
-            <p className="text-[12.5px] leading-relaxed text-stone-500">
+            <p className="text-[12.5px] leading-relaxed text-white/50">
               Entrega digital tras el pago. ¿Otro formato o una versión para impresión 3D? Escribe a{' '}
-              <a href={`mailto:${CORREO}?subject=${encodeURIComponent(`Modelo 3D · ${modelo.nombre}`)}`} className="underline underline-offset-4 hover:text-grafito">
+              <a href={`mailto:${CORREO}?subject=${encodeURIComponent(`Modelo 3D · ${modelo.nombre}`)}`} className="underline underline-offset-4 hover:text-[#FFC23D]">
                 {CORREO}
               </a>
               .
