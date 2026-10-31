@@ -1,5 +1,24 @@
 [
   {
+    "id": "espadachin-rubio-chibi",
+    "nombre": "Espadachín Rubio Chibi",
+    "categoria": "siete-pecados",
+    "precio": 17,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "El capitán rubio en versión chibi: mechón rebelde, ojos verdes, camisa blanca con lazo rojo, pantalón verde y su espada rota a la espalda, sobre peana de piedra.",
+    "archivo": "meshy/espadachin-rubio-chibi.glb",
+    "peso": 1963748,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-10-31",
+    "triangulos": 300922,
+    "portada": "espadachin-rubio-chibi.webp"
+  },
+  {
     "id": "soporte-ps5-kurama-rasengan",
     "nombre": "Soporte PS5 Kurama · Rasengan",
     "categoria": "soportes-ps5",
