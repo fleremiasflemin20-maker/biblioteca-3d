@@ -7,8 +7,10 @@ import { Subir } from './components/Subir'
 import { Portadas } from './components/Portadas'
 import { ModoManos } from './components/ModoManos'
 import { Inicio, useInicio } from './components/Inicio'
+import { Musica } from './components/Musica'
 import { Avisos, PanelLogros } from './components/Trofeos'
 import { CATALOGO, CATEGORIAS, CORREO, WHATSAPP, type Modelo3D } from './lib/catalogo'
+import { PISTAS } from './lib/musica'
 import { ICONO_CATEGORIA } from './lib/iconos'
 import { agrupar, type Acabado } from './lib/orden'
 import { enlaceStudio } from './lib/studio'
@@ -199,6 +201,7 @@ export default function App() {
             <a href={enlaceStudio()} className="btn-juego !px-3.5" title="Abrir Flemin Studio 3D">
               <Scissors size={16} /> <span className="hidden xl:inline">Flemin Studio</span>
             </a>
+            <Musica />
             <button type="button" onClick={() => abrirManos()} className="btn-juego !px-3.5" title="Modo manos">
               <Hand size={16} /> <span className="hidden xl:inline">Modo manos</span>
             </button>
@@ -460,6 +463,18 @@ export default function App() {
                   LinkedIn
                 </a>
               </div>
+            </div>
+            {/* Términos */}
+            <div className="mt-6 max-w-3xl space-y-2 text-[12px] leading-relaxed text-white/40">
+              <p className="font-chakra text-[11px] font-semibold uppercase tracking-[0.2em] text-white/55">Términos</p>
+              <p>
+                <span className="text-white/60">Música.</span> La música de fondo de esta página es propiedad de sus respectivos autores y titulares de derechos
+                {PISTAS.length > 0 && <> ({PISTAS.map((p) => `"${p.titulo}", ${p.obra}, de ${p.autor}`).join('; ')})</>}. La usamos solo como ambientación: no es de nuestra propiedad ni se vende ni se distribuye aquí. Si eres titular de los derechos y quieres que la retiremos, escríbenos a{' '}
+                <a href={`mailto:${CORREO}`} className="underline hover:text-[#FFC23D]">
+                  {CORREO}
+                </a>{' '}
+                y la quitamos.
+              </p>
             </div>
           </div>
         </footer>
