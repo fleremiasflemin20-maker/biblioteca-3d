@@ -1041,15 +1041,15 @@
   },
   {
     "id": "maton-de-traje-chibi",
-    "nombre": "Matón de Traje Chibi",
-    "categoria": "anime",
+    "nombre": "Octavio Chibi",
+    "categoria": "dragon-ball-z",
     "precio": 15,
     "formatos": [
       "GLB",
       "FBX",
       "OBJ"
     ],
-    "descripcion": "Chibi de anime con traje azul marino, pelo negro en cepillo y cicatrices en la frente y la mejilla. Cara de pocos amigos, corazón de oro.",
+    "descripcion": "Octavio (Androide 8) en versión chibi: traje azul marino, pelo negro en cepillo y cicatrices en la frente y la mejilla. Cara de pocos amigos, corazón de oro.",
     "archivo": "meshy/maton-de-traje-chibi.glb",
     "peso": 1079876,
     "origen": "Diseño propio · generado con Meshy AI",
@@ -1304,7 +1304,8 @@
     "peso": 23701856,
     "alta": "2026-10-16",
     "portada": "personaje-anime-en-relieve.webp",
-    "triangulos": 987313
+    "triangulos": 987313,
+    "oculto": true
   },
   {
     "nombre": "Panel Decorativo en Relieve",
@@ -1326,7 +1327,7 @@
   },
   {
     "nombre": "Figura en Relieve 01",
-    "categoria": "seres-flemin",
+    "categoria": "dc",
     "precio": 8,
     "formatos": [
       "GLB",
@@ -2101,7 +2102,8 @@
     "destacado": false,
     "alta": "2026-10-03",
     "portada": "vibrant-saiyan-segmentado.webp",
-    "triangulos": 656914
+    "triangulos": 656914,
+    "oculto": true
   },
   {
     "id": "rueda-fecha",
@@ -2206,7 +2208,7 @@
   {
     "id": "emerald-tyrant-throne",
     "nombre": "Emerald Tyrant Throne",
-    "categoria": "manga",
+    "categoria": "marvel",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -2319,7 +2321,8 @@
     "destacado": false,
     "alta": "2026-09-05",
     "triangulos": 474668,
-    "portada": "figura-04.webp"
+    "portada": "figura-04.webp",
+    "oculto": true
   },
   {
     "id": "figura-05",
@@ -2338,7 +2341,8 @@
     "destacado": false,
     "alta": "2026-09-05",
     "triangulos": 437090,
-    "portada": "figura-05.webp"
+    "portada": "figura-05.webp",
+    "oculto": true
   },
   {
     "id": "figura-06",
@@ -2357,7 +2361,8 @@
     "destacado": false,
     "alta": "2026-09-05",
     "triangulos": 609050,
-    "portada": "figura-06.webp"
+    "portada": "figura-06.webp",
+    "oculto": true
   },
   {
     "id": "figura-07",
