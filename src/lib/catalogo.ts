@@ -50,11 +50,17 @@ export type Modelo3D = {
   /** Planos y documentación descargables (rutas dentro de `public/descargas/`). */
   documentos?: { nombre: string; archivo: string }[]
   draco?: boolean
+  /**
+   * Fuera de la web: la ficha sigue en este JSON (y sus archivos en el repo),
+   * pero no sale en el catálogo y la compilación no copia su `.glb` ni su
+   * portada a `dist/`, así que tampoco se puede abrir por URL directa.
+   */
+  oculto?: boolean
   /** Mapas PBR sueltos, para mallas que no traen el material horneado. */
   texturas?: { carpeta: string; map: string; normalMap: string; roughnessMap: string; metalnessMap: string }
 }
 
-export type CategoriaId = 'tecnologia' | 'mecanica' | 'autos' | 'dragon-ball-z' | 'caballeros-del-zodiaco' | 'siete-pecados' | 'your-name' | 'anime' | 'manga' | 'seres-flemin' | 'munecos' | 'halloween' | 'soportes-ps5' | 'accesorios'
+export type CategoriaId = 'tecnologia' | 'mecanica' | 'autos' | 'dragon-ball-z' | 'caballeros-del-zodiaco' | 'siete-pecados' | 'your-name' | 'anime' | 'marvel' | 'dc' | 'seres-flemin' | 'munecos' | 'halloween' | 'soportes-ps5' | 'accesorios'
 
 export type Categoria = {
   id: CategoriaId | 'todo'
@@ -82,7 +88,8 @@ export const CATEGORIAS: Categoria[] = [
   { id: 'siete-pecados', nombre: 'Los 7 Pecados Capitales', clave: '7PC', desde: '#B4FF3A', hasta: '#1F9E5A', tinta: '#C8FF6B', punto: '#16A34A' },
   { id: 'your-name', nombre: 'Your Name', clave: 'YN', desde: '#FF6A9E', hasta: '#3A5BFF', tinta: '#FFA3C4', punto: '#E11D48' },
   { id: 'anime', nombre: 'Anime', clave: 'ANI', desde: '#FF2D8A', hasta: '#FF7A2F', tinta: '#FF9A4D', punto: '#DB2777' },
-  { id: 'manga', nombre: 'Manga', clave: 'MNG', desde: '#F5F4F1', hasta: '#FF2D8A', tinta: '#FF8FC0', punto: '#4F46E5' },
+  { id: 'marvel', nombre: 'Marvel y Superhéroes', clave: 'MRV', desde: '#FF2D2D', hasta: '#B8001F', tinta: '#FF6B6B', punto: '#DC2626' },
+  { id: 'dc', nombre: 'DC', clave: 'DC', desde: '#2A7BFF', hasta: '#0A1F8F', tinta: '#5AA9FF', punto: '#1D4ED8' },
   { id: 'seres-flemin', nombre: 'Seres Flemin', clave: 'FLM', desde: '#7B2CFF', hasta: '#FF2D8A', tinta: '#C77DFF', punto: '#7C3AED' },
   { id: 'munecos', nombre: 'Muñecos 3D', clave: 'MUÑ', desde: '#FFD23F', hasta: '#FF5FA2', tinta: '#FFE07A', punto: '#F59E0B' },
   { id: 'halloween', nombre: 'Máscaras de Halloween', clave: 'HLW', desde: '#FF7A00', hasta: '#5B0FB8', tinta: '#FF9A3D', punto: '#EA580C' },
@@ -90,7 +97,7 @@ export const CATEGORIAS: Categoria[] = [
   { id: 'accesorios', nombre: 'Hogar y accesorios', clave: 'ACC', desde: '#2AC3FF', hasta: '#7B2CFF', tinta: '#7CC8FF', punto: '#0D9488' },
 ]
 
-export const CATALOGO = datos as Modelo3D[]
+export const CATALOGO = (datos as Modelo3D[]).filter((m) => !m.oculto)
 
 const BASE = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '')
 export const DRACO = `${BASE}/draco/`
