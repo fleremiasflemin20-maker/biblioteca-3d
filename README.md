@@ -110,3 +110,11 @@ El botón **Pintar y separar** de cada ficha y **Flemin Studio** de la barra abr
 la web aparte con el separador por colores, cortes y cama, el editor y "Foto
 a 3D". Recibe la obra por la URL (`src/lib/studio.ts`) y la abre en modo
 protegido: se separa y se mide, pero no se descarga.
+
+## Historias de Dragon Ball
+
+Cada figura a color de Dragon Ball abre, en otra pestaña, su página de historia: la misma web scrollytelling del [Gogeta SSJ4](https://github.com/fleremiasflemin20-maker/gogeta-ssj4-scrollytelling) (cámara con scroll, aura, contorno, onomatopeyas, modo anime/realista, "cómo se hizo") con el modelo, el nombre y los textos del personaje.
+
+- Página: `personaje/` → `personaje/?id=<id de la ficha>`. Se compila junto con la tienda (`npm run build`).
+- Qué personaje cuenta cada figura: `src/lib/historias.ts`.
+- Textos de cada personaje (historia, pelea, batalla, técnicas, color del aura): `personaje/src/lib/personajes.ts`.

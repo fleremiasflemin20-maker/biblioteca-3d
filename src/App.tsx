@@ -2,6 +2,7 @@ import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState, type
 import { Box, Gamepad2, Hand, MessageCircle, Plus, Scissors, Search, Sparkles, Trophy, Zap } from 'lucide-react'
 import { Tarjeta } from './components/Tarjeta'
 import { Ficha } from './components/Ficha'
+import { enlaceHistoria } from './lib/historias'
 import { Seleccion } from './components/Seleccion'
 import { Subir } from './components/Subir'
 import { Portadas } from './components/Portadas'
@@ -378,7 +379,16 @@ export default function App() {
                       <div className="grid grid-cols-2 gap-x-3 gap-y-5 sm:gap-x-5 sm:gap-y-7 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
                         {g.modelos.map((m, i) => (
                           <div key={m.id} className="entra" style={{ animationDelay: `${Math.min(i, 12) * 35}ms` }}>
-                            <Tarjeta modelo={m} numero={desde + i + 1} onAbrir={() => setAbierto(m.id)} />
+                            <Tarjeta
+                              modelo={m}
+                              numero={desde + i + 1}
+                              onAbrir={() => {
+                                // Las figuras de Dragon Ball abren además su historia en otra pestaña.
+                                const historia = enlaceHistoria(m)
+                                if (historia) window.open(historia, '_blank', 'noopener')
+                                setAbierto(m.id)
+                              }}
+                            />
                           </div>
                         ))}
                       </div>
