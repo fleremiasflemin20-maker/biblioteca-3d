@@ -10,6 +10,7 @@ import { AmbienteFlemin } from '../estudio/luces'
 import { CATALOGO, CATEGORIAS, WHATSAPP, enlaceCompra, precio, rutaPortada, triangulos, type Modelo3D } from '../lib/catalogo'
 import { ICONO_CATEGORIA } from '../lib/iconos'
 import { enlaceStudio } from '../lib/studio'
+import { enlaceHistoria } from '../lib/historias'
 import { variantes, type Acabado, type Grupo } from '../lib/orden'
 import { coste, estrellas, rareza } from '../lib/rareza'
 import { desbloquear, marcarVista, nivel, ponerSonido, sfx, useMando, useProgreso, vibrar } from '../lib/consola'
@@ -546,6 +547,23 @@ export function Seleccion({
         {flash > 0 && <div key={flash} aria-hidden className="destello pointer-events-none absolute inset-0 bg-white" />}
         {ruleta && (
           <p className="parpadeo pointer-events-none absolute left-1/2 top-[12%] -translate-x-1/2 whitespace-nowrap font-flemin text-[clamp(1.4rem,3vw,2.4rem)] text-[#FFC23D] [text-shadow:0_3px_0_#1a1033]">¿Quién será?</p>
+        )}
+        {/* La figura habla: globo de manga que abre su historia en otra pestaña. */}
+        {actual && !ruleta && !cargando && enlaceHistoria(actual) && (
+          <a
+            key={`${actual.id}-globo`}
+            href={enlaceHistoria(actual)}
+            target="_blank"
+            rel="noopener"
+            className="globo-historia"
+            title="Su historia, su estilo de pelea y sus técnicas especiales"
+          >
+            <span className="globo-historia-cuerpo">
+              <span aria-hidden className="globo-historia-kanji">物語</span>
+              <span className="globo-historia-texto">¡Mi historia!</span>
+              <span className="globo-historia-sub">Toca y te la cuento ↗</span>
+            </span>
+          </a>
         )}
         {cargando && (
           <p className="pointer-events-none absolute bottom-6 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/50 px-3.5 py-1.5 font-chakra text-[12px] uppercase tracking-[0.18em] text-white/80 ring-1 ring-white/15 backdrop-blur">
