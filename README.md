@@ -7,7 +7,7 @@ atardecer, grano de película, HUD y rotulación Archivo Black.
 Cada categoría tiñe la página entera, como la rueda de facetas del portafolio.
 Cada pieza se abre en 3D (textura, arcilla o malla) antes de comprarla.
 
-**Producción:** https://biblioteca-3d.analista-datos-pro.workers.dev (Cloudflare
+**Producción:** https://biblioteca-3d.fleremiasflemin.workers.dev (Cloudflare
 Workers, solo assets, ver `wrangler.jsonc`). Se publica con:
 
 ```bash
@@ -60,7 +60,7 @@ medidas: si se cambia una, hay que cambiar la otra.
 ## Flemin Studio 3D (separador y editor)
 
 El separador de piezas y el editor 3D son **Flemin Studio 3D**, una web
-aparte: https://flemin-studio-3d.analista-datos-pro.workers.dev/
+aparte: https://flemin-studio-3d.fleremiasflemin.workers.dev/
 (su código está en el repo privado `flemin-studio-3d`).
 
 Todos los botones de la biblioteca que llevan al Studio (**Flemin Studio**,
@@ -106,7 +106,7 @@ tienda.
 ## Pintar y separar
 
 El botón **Pintar y separar** de cada ficha y **Flemin Studio** de la barra abren
-[Flemin Studio 3D](https://flemin-studio-3d.analista-datos-pro.workers.dev/),
+[Flemin Studio 3D](https://flemin-studio-3d.fleremiasflemin.workers.dev/),
 la web aparte con el separador por colores, cortes y cama, el editor y "Foto
 a 3D". Recibe la obra por la URL (`src/lib/studio.ts`) y la abre en modo
 protegido: se separa y se mide, pero no se descarga.

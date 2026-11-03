@@ -8,7 +8,7 @@ import type { Modelo3D } from './catalogo'
  * Studio la carga al pulsar "Separar mi modelo" o "Abrir el Editor 3D", en
  * modo protegido.
  */
-export const STUDIO = 'https://flemin-studio-3d.analista-datos-pro.workers.dev/'
+export const STUDIO = 'https://flemin-studio-3d.fleremiasflemin.workers.dev/'
 
 export function enlaceStudio(obra?: Modelo3D) {
   const q = obra?.archivo ? `?${new URLSearchParams({ modelo: obra.archivo, nombre: obra.nombre })}` : ''
