@@ -10,7 +10,7 @@ import { ModoManos } from './components/ModoManos'
 import { Inicio, useInicio } from './components/Inicio'
 import { Musica } from './components/Musica'
 import { Avisos, PanelLogros } from './components/Trofeos'
-import { CATALOGO, CATEGORIAS, CORREO, WHATSAPP, type Modelo3D } from './lib/catalogo'
+import { CATALOGO, CATEGORIAS, CORREO, REDES, WHATSAPP, type Modelo3D } from './lib/catalogo'
 import { PISTAS } from './lib/musica'
 import { ICONO_CATEGORIA } from './lib/iconos'
 import { agrupar, type Acabado } from './lib/orden'
@@ -297,8 +297,6 @@ export default function App() {
                 className="corte-sm hidden shrink-0 bg-white/[0.07] px-3.5 py-2 font-chakra text-[12px] font-semibold uppercase tracking-wider text-white outline-none ring-1 ring-inset ring-white/15 transition hover:bg-white/[0.12] sm:block [&>option]:bg-[#140f22]"
               >
                 <option value="recientes">Más recientes</option>
-                <option value="barato">Precio: menor a mayor</option>
-                <option value="caro">Precio: mayor a menor</option>
                 <option value="nombre">Nombre A–Z</option>
               </select>
             </div>
@@ -419,7 +417,7 @@ export default function App() {
             <div className="mt-12 grid gap-5 md:grid-cols-3">
               {[
                 { n: '01', titulo: 'Gíralo', texto: 'Cada pieza se carga en 3D: textura, arcilla o malla. O sostenla en tu mano con el modo manos.', Icono: Box, d: '#8A3CFF' },
-                { n: '02', titulo: 'Pídelo', texto: 'Arma tu equipo de hasta cinco figuras. El botón de compra abre WhatsApp con el pedido ya escrito.', Icono: Gamepad2, d: '#FF2D8A' },
+                { n: '02', titulo: 'Pídelo', texto: 'Arma tu equipo de hasta cinco figuras. El botón abre WhatsApp con el pedido escrito y te cotizamos.', Icono: Gamepad2, d: '#FF2D8A' },
                 { n: '03', titulo: 'Úsalo', texto: 'Entrega digital en los formatos de la ficha, lista para imprimir o renderizar, con uso personal y comercial.', Icono: Trophy, d: '#FF6A13' },
               ].map((p) => (
                 <div key={p.n} className="cristal corte group relative overflow-hidden p-7 transition hover:-translate-y-1">
@@ -466,6 +464,11 @@ export default function App() {
             <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6 font-chakra text-[12px] uppercase tracking-[0.2em] text-white/45">
               <p>© 2026 Lenin Bonilla · Quito, EC</p>
               <div className="flex gap-5">
+                {REDES.filter((r) => r.nombre !== 'WhatsApp').map((r) => (
+                  <a key={r.nombre} href={r.url} target="_blank" rel="noreferrer" className="hover:text-[#FFC23D]">
+                    {r.nombre}
+                  </a>
+                ))}
                 <a href="https://fleremiasflemin20-maker.github.io/Portafolio-fleremiasflemin/" target="_blank" rel="noreferrer" className="hover:text-[#FFC23D]">
                   Portafolio
                 </a>

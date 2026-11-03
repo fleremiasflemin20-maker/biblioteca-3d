@@ -1,8 +1,8 @@
 import { useEffect, useState, type CSSProperties } from 'react'
-import { BookOpen, ChevronLeft, ChevronRight, FileText, Hand, Layers, ShoppingBag, Star, Wand2, X } from 'lucide-react'
+import { BookOpen, Camera, ChevronLeft, ChevronRight, FileText, Hand, Layers, MessageCircle, Send, ShoppingBag, Star, Wand2, X } from 'lucide-react'
 import { Visor } from './Visor'
 import type { Modo } from './Pieza'
-import { CATEGORIAS, CORREO, enlaceCompra, peso, precio, rutaDescarga, triangulos, type Modelo3D } from '../lib/catalogo'
+import { CATEGORIAS, CORREO, canalesPedido, enlaceCompra, peso, precio, rutaDescarga, triangulos, type Modelo3D } from '../lib/catalogo'
 import { ICONO_CATEGORIA } from '../lib/iconos'
 import { coste, estrellas, rareza } from '../lib/rareza'
 import { enlaceStudio } from '../lib/studio'
@@ -300,7 +300,6 @@ export function Ficha({
             <div className="flex flex-wrap items-end justify-between gap-4">
               <p className="bg-gradient-to-b from-[#FFE08A] to-[#FF8A2F] bg-clip-text font-flemin text-5xl leading-none text-transparent [filter:drop-shadow(0_3px_0_#1a1033)]">
                 {precio(modelo.precio)}
-                {modelo.precio > 0 && <span className="ml-1.5 font-chakra text-sm font-semibold tracking-widest text-white/45">USD</span>}
               </p>
               <div className="flex flex-wrap gap-2">
                 {!modelo.personalizable && (
@@ -334,18 +333,40 @@ export function Ficha({
                 <span className="relative ml-auto font-chakra text-lg font-bold">↗</span>
               </a>
             )}
-            <a
-              href={enlaceCompra(modelo, modelo.personalizable ? describirPedido(vista) : undefined)}
-              target="_blank"
-              rel="noreferrer"
-              download={modelo.precio === 0 || undefined}
-              className="btn-juego btn-fuego pedido-brillo !h-14 w-full !text-[15px]"
-            >
-              <ShoppingBag size={18} />
-              {modelo.precio === 0 ? 'Descargar gratis' : modelo.personalizable ? 'Pedir por WhatsApp' : modelo.compra ? 'Comprar' : 'Comprar por WhatsApp'}
-            </a>
+            {modelo.precio === 0 || modelo.compra ? (
+              <a
+                href={enlaceCompra(modelo)}
+                target="_blank"
+                rel="noreferrer"
+                download={modelo.precio === 0 || undefined}
+                className="btn-juego btn-fuego pedido-brillo !h-14 w-full !text-[15px]"
+              >
+                <ShoppingBag size={18} />
+                {modelo.precio === 0 ? 'Descargar gratis' : 'Comprar'}
+              </a>
+            ) : (
+              <div className="flex flex-col gap-2">
+                <p className="font-chakra text-[12px] font-semibold uppercase tracking-[0.2em] text-white/60">Pídelo por</p>
+                <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+                  {canalesPedido(modelo, modelo.personalizable ? describirPedido(vista) : undefined).map((c) => {
+                    const Icono = c.id === 'instagram' ? Camera : c.id === 'telegram' ? Send : MessageCircle
+                    return (
+                      <a
+                        key={c.id}
+                        href={c.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={`btn-juego !h-14 w-full !text-[15px] ${c.id === 'whatsapp' ? 'btn-fuego pedido-brillo' : ''}`}
+                      >
+                        <Icono size={18} /> {c.nombre}
+                      </a>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
             <p className="text-[12.5px] leading-relaxed text-white/50">
-              Entrega digital tras el pago. ¿Otro formato o una versión para impresión 3D? Escribe a{' '}
+              Escríbenos y te enviamos la cotización. ¿Otro formato o una versión para impresión 3D? Escribe a{' '}
               <a href={`mailto:${CORREO}?subject=${encodeURIComponent(`Modelo 3D · ${modelo.nombre}`)}`} className="underline underline-offset-4 hover:text-[#FFC23D]">
                 {CORREO}
               </a>
