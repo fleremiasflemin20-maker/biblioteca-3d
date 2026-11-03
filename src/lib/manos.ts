@@ -1,45 +1,58 @@
 /*
- * Núcleo del modo manos: filtrado de señal, clasificación de gestos y
- * seguimiento de identidad de las manos.
+ * Núcleo del modo manos: filtrado de señal, lectura de la mano (cuánto está
+ * cerrada, hacia dónde mira, a qué distancia está) y seguimiento de cada mano
+ * entre fotogramas.
  *
- * Todo aquí es aritmética pura, sin React ni three.js ni MediaPipe, por dos
- * razones: el bucle de detección lo llama ~30 veces por segundo y no puede
- * generar basura ni repintar nada, y así se prueba con manos sintéticas en
- * `pruebas/manos.test.ts` sin encender una cámara.
+ * Todo aquí es aritmética pura, sin React ni three.js ni MediaPipe: el bucle
+ * de detección lo llama ~30–60 veces por segundo y no puede generar basura ni
+ * repintar nada, y así se prueba con manos sintéticas en `pruebas/manos.test.ts`
+ * sin encender una cámara.
  *
- * Parte de `src/lib/manos.ts` del portafolio (pinza, zoom por referencia,
- * conteo de dedos) y añade lo que hace falta para que se sienta como un
- * sistema profesional y no como una demo:
+ * Lo que hace que se sienta como tener la pieza en la mano:
  *
  * - Filtro One Euro en cada señal: sin temblor con la mano quieta, sin
  *   retraso con la mano en movimiento.
- * - Gestos con histéresis: entrar en un gesto exige más que mantenerlo, así
- *   que nada parpadea en la frontera.
- * - Identidad de las manos por continuidad: la etiqueta izquierda/derecha de
- *   MediaPipe salta a veces de un fotograma a otro, y eso hacía saltar la
- *   figura de mano.
+ * - Cierre de la mano medido en 3D (landmarks de mundo de MediaPipe, en
+ *   metros): girar la mano no la "abre" ni la "cierra" como pasa midiendo en
+ *   la imagen plana.
+ * - Agarre con histéresis: cerrar para coger exige más que mantenerla cerrada,
+ *   así que la pieza no se cae por un fotograma dudoso.
+ * - Orientación de la palma como un marco 3D: la pieza gira con la muñeca.
+ * - Cada mano conserva su identidad por continuidad: MediaPipe a veces cambia
+ *   el orden de las manos entre fotogramas y eso hacía saltar la pieza.
  */
 
-/* ── Rutas de MediaPipe (las mismas que el portafolio) ─────────────────── */
+/* ── Rutas de MediaPipe ────────────────────────────────────────────────── */
 
 export const RUTA_WASM = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22-rc.20250304/wasm'
 export const RUTA_MODELO_MANO =
   'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task'
 
-/** Un punto del esqueleto de la mano, en coordenadas de imagen (0..1). */
+/** Un punto del esqueleto de la mano: en la imagen (0..1) o en el mundo (metros). */
 export type Punto = { x: number; y: number; z: number }
 
 const MUNECA = 0
 const PULGAR = 4
-const PULGAR_IP = 3
 const INDICE = 8
+const NUDILLO_INDICE = 5
 const NUDILLO_MEDIO = 9
-/** Punta y articulación media de índice, corazón, anular y meñique. */
+const NUDILLO_MENIQUE = 17
+/** Punta y nudillo de índice, corazón, anular y meñique. */
 const DEDOS: [number, number][] = [
-  [8, 6],
-  [12, 10],
-  [16, 14],
-  [20, 18],
+  [8, 5],
+  [12, 9],
+  [16, 13],
+  [20, 17],
+]
+/** Huesos de la palma que casi no se deforman: sirven para medir la distancia a la cámara. */
+const HUESOS_PALMA: [number, number][] = [
+  [0, 5],
+  [0, 9],
+  [0, 17],
+  [5, 17],
+  [5, 9],
+  [9, 13],
+  [13, 17],
 ]
 
 /** Las 21 articulaciones unidas como las dibuja MediaPipe: para pintar el esqueleto. */
@@ -52,45 +65,124 @@ export const CONEXIONES: [number, number][] = [
   [0, 17],
 ]
 
-const dist = (a: Punto, b: Punto) => Math.hypot(a.x - b.x, a.y - b.y)
-const escala = (p: Punto[]) => Math.max(1e-3, dist(p[MUNECA], p[NUDILLO_MEDIO]))
+const dist3 = (a: Punto, b: Punto) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z)
+const dist2 = (a: Punto, b: Punto) => Math.hypot(a.x - b.x, a.y - b.y)
 
 export const recorta = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v))
 
-/* ── Geometría de la mano ──────────────────────────────────────────────── */
+/* ── Lectura de la mano ────────────────────────────────────────────────── */
 
-/** Centro de la mano. El nudillo del corazón tiembla mucho menos que la muñeca. */
-export function centro(p: Punto[]): { x: number; y: number } {
-  return { x: p[NUDILLO_MEDIO].x, y: p[NUDILLO_MEDIO].y }
+/** Centro de la palma en la imagen: media de muñeca y nudillos, mucho más estable que un solo punto. */
+export function centroPalma(p: Punto[]): { x: number; y: number } {
+  const ids = [MUNECA, NUDILLO_INDICE, NUDILLO_MEDIO, 13, NUDILLO_MENIQUE]
+  let x = 0
+  let y = 0
+  for (const i of ids) {
+    x += p[i].x
+    y += p[i].y
+  }
+  return { x: x / ids.length, y: y / ids.length }
 }
 
-/** ¿Cada dedo largo estirado? Índice, corazón, anular, meñique. */
-export function dedosLargos(p: Punto[]): boolean[] {
-  return DEDOS.map(([punta, media]) => dist(p[punta], p[MUNECA]) > dist(p[media], p[MUNECA]))
+/**
+ * Cuánto está cerrada la mano, de 0 (abierta del todo) a 1 (puño).
+ *
+ * Por dedo: distancia de la punta a la muñeca contra la del nudillo a la
+ * muñeca. Estirado da ≈1.9, recogido ≈1.0. Medido en 3D no depende de cómo
+ * esté girada la mano.
+ */
+export function cierre(p: Punto[]): number {
+  let abierto = 0
+  for (const [punta, nudillo] of DEDOS) {
+    const r = dist3(p[punta], p[MUNECA]) / Math.max(1e-6, dist3(p[nudillo], p[MUNECA]))
+    abierto += recorta((r - 1.12) / (1.7 - 1.12), 0, 1)
+  }
+  return 1 - abierto / DEDOS.length
 }
 
-/** Cuántos dedos están estirados, de 0 a 5. */
-export function contarDedos(p: Punto[]): number {
-  const pulgar = dist(p[PULGAR], p[MUNECA]) > dist(p[PULGAR_IP], p[MUNECA]) ? 1 : 0
-  return pulgar + dedosLargos(p).filter(Boolean).length
-}
-
-/** Apertura de la pinza pulgar–índice, normalizada por el tamaño de la mano (≈0.25 junta, ≈1.2 abierta). */
+/** Apertura de la pinza pulgar–índice, normalizada por el tamaño de la palma (≈0.2 junta, ≈1.2 abierta). */
 export function pinza(p: Punto[]): number {
-  return dist(p[PULGAR], p[INDICE]) / escala(p)
+  return dist3(p[PULGAR], p[INDICE]) / Math.max(1e-6, dist3(p[MUNECA], p[NUDILLO_MEDIO]))
 }
 
-/* ── Zoom (igual que el portafolio) ────────────────────────────────────── */
-
-const SENSIBILIDAD_ZOOM = 0.9
-
-/** Zoom a partir de la pinza, medido contra la pose con la que apareció la mano. */
-export function zoomDesdePinza(actual: number, referencia: number) {
-  return recorta(1 + (referencia - actual) * SENSIBILIDAD_ZOOM, 0.55, 1.6)
+/**
+ * Tamaño aparente de la mano: cuánto mide en la imagen cada hueso de la
+ * palma comparado con su largo real. Se queda con el mayor, el del hueso
+ * menos escorzado, así que inclinar la mano apenas lo cambia y acercarla a
+ * la cámara sí. Sirve para llevar la pieza hacia ti o alejarla.
+ */
+export function escalaAparente(imagen: Punto[], mundo: Punto[]): number {
+  let mejor = 0
+  for (const [a, b] of HUESOS_PALMA) {
+    const real = dist3(mundo[a], mundo[b])
+    if (real < 1e-4) continue
+    mejor = Math.max(mejor, dist2(imagen[a], imagen[b]) / real)
+  }
+  return mejor
 }
 
-/** El cero del zoom sale de un solo fotograma: se recorta a lo que una mano puede dar de sí. */
-export const referenciaValida = (v: number) => recorta(v, 0.35, 1.45)
+export type Vec3 = [number, number, number]
+
+const normaliza = (v: Vec3): Vec3 => {
+  const l = Math.hypot(v[0], v[1], v[2]) || 1
+  return [v[0] / l, v[1] / l, v[2] / l]
+}
+const cruz = (a: Vec3, b: Vec3): Vec3 => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]
+
+/**
+ * Pasa un punto de mundo de MediaPipe (x a la derecha de la imagen, y hacia
+ * abajo, z hacia dentro) a la escena tal como se ve en pantalla: espejada,
+ * con y hacia arriba y z hacia quien mira.
+ */
+export const aEscena = (q: Punto): Vec3 => [-q.x, -q.y, -q.z]
+
+/**
+ * Orientación de la palma en la escena: `arriba` va de la muñeca al nudillo
+ * del corazón y `lado` de meñique a índice, ortogonalizados. Como la base se
+ * construye con productos vectoriales es una rotación propia aunque la imagen
+ * vaya espejada, y el giro relativo entre dos instantes es exactamente el que
+ * se ve en el espejo.
+ */
+export function ejesPalma(mundo: Punto[]): { arriba: Vec3; lado: Vec3 } {
+  const m = aEscena(mundo[MUNECA])
+  const c = aEscena(mundo[NUDILLO_MEDIO])
+  const i = aEscena(mundo[NUDILLO_INDICE])
+  const k = aEscena(mundo[NUDILLO_MENIQUE])
+  const arriba = normaliza([c[0] - m[0], c[1] - m[1], c[2] - m[2]])
+  let lado: Vec3 = [i[0] - k[0], i[1] - k[1], i[2] - k[2]]
+  const normal = normaliza(cruz(arriba, lado))
+  lado = normaliza(cruz(normal, arriba))
+  return { arriba, lado }
+}
+
+/**
+ * Cuaternión (x, y, z, w) de la base ortonormal (lado, arriba, lado × arriba).
+ * `arriba` y `lado` pueden venir filtrados y algo torcidos: se reortogonalizan.
+ */
+export function cuaternionPalma(arriba: Vec3, ladoBruto: Vec3): [number, number, number, number] {
+  const y = normaliza(arriba)
+  const z = normaliza(cruz(ladoBruto, y))
+  const x = cruz(y, z)
+  // Matriz de columnas x, y, z → cuaternión (Shepperd).
+  const m00 = x[0], m01 = y[0], m02 = z[0]
+  const m10 = x[1], m11 = y[1], m12 = z[1]
+  const m20 = x[2], m21 = y[2], m22 = z[2]
+  const traza = m00 + m11 + m22
+  if (traza > 0) {
+    const s = 0.5 / Math.sqrt(traza + 1)
+    return [(m21 - m12) * s, (m02 - m20) * s, (m10 - m01) * s, 0.25 / s]
+  }
+  if (m00 > m11 && m00 > m22) {
+    const s = 2 * Math.sqrt(1 + m00 - m11 - m22)
+    return [0.25 * s, (m01 + m10) / s, (m02 + m20) / s, (m21 - m12) / s]
+  }
+  if (m11 > m22) {
+    const s = 2 * Math.sqrt(1 + m11 - m00 - m22)
+    return [(m01 + m10) / s, 0.25 * s, (m12 + m21) / s, (m02 - m20) / s]
+  }
+  const s = 2 * Math.sqrt(1 + m22 - m00 - m11)
+  return [(m02 + m20) / s, (m12 + m21) / s, 0.25 * s, (m10 - m01) / s]
+}
 
 /* ── Filtro One Euro ───────────────────────────────────────────────────── */
 
@@ -99,10 +191,7 @@ export const referenciaValida = (v: number) => recorta(v, 0.35, 1.45)
  *
  * Un paso bajo cuyo corte se adapta a la velocidad de la señal: con la mano
  * quieta el corte es bajo y se come el temblor de la detección; en cuanto la
- * mano se mueve, el corte sube y la señal pasa casi sin retraso. Es lo que
- * usan los sistemas de seguimiento serios, y la diferencia frente a un
- * suavizado fijo se nota justo donde importa: una figura que no tiembla en
- * reposo pero que tampoco va "arrastrada" detrás de la mano.
+ * mano se mueve, el corte sube y la señal pasa casi sin retraso.
  *
  * - `minCorte` (Hz): suavizado en reposo. Más bajo, más estable.
  * - `beta`: cuánto sube el corte con la velocidad. Más alto, menos retraso.
@@ -158,76 +247,52 @@ export class FiltroEuro {
   }
 }
 
-/* ── Gestos de la mano principal ───────────────────────────────────────── */
+/* ── Agarre ────────────────────────────────────────────────────────────── */
 
-/**
- * - `abierta`: cuatro o cinco dedos. La figura sigue a la mano y se puede
- *   deslizar para cambiar de figura.
- * - `agarre`: pinza pulgar–índice con los otros dedos abiertos (el gesto de
- *   "OK"). La figura queda quieta y se gira arrastrando, como si se cogiera.
- * - `puno`: la figura se lleva de un lado a otro sin disparar nada.
- * - `neutra`: cualquier otra cosa; sigue a la mano y nada más.
- */
-export type Gesto = 'abierta' | 'agarre' | 'puno' | 'neutra'
-
-/** Histéresis de la pinza: cerrarla para agarrar exige más que mantenerla cerrada. */
-const PINZA_ENTRA = 0.38
+/** Histéresis del puño: cerrar para coger exige más que mantenerla cerrada. */
+const CIERRE_ENTRA = 0.6
+const CIERRE_SALE = 0.38
+/** Histéresis de la pinza pulgar–índice. */
+const PINZA_ENTRA = 0.36
 const PINZA_SALE = 0.55
-/** Fotogramas seguidos que tiene que durar un gesto nuevo para que cuente (salvo soltar el agarre). */
-const CONFIRMACION = 2
-
-/** Lo que dice la mano en un solo fotograma, sin memoria. */
-export function gestoInstantaneo(p: Punto[], enAgarre: boolean): Gesto {
-  const largos = dedosLargos(p)
-  // Corazón, anular y meñique: abiertos en el "OK", recogidos en el puño.
-  const restoAbiertos = largos.slice(1).filter(Boolean).length
-  const pz = pinza(p)
-  if (restoAbiertos >= 2 && pz < (enAgarre ? PINZA_SALE : PINZA_ENTRA)) return 'agarre'
-  const n = contarDedos(p)
-  if (n >= 4) return 'abierta'
-  if (n <= 1) return 'puno'
-  return 'neutra'
-}
 
 /**
- * Gesto con memoria: uno nuevo tiene que verse `CONFIRMACION` fotogramas
- * seguidos antes de sustituir al actual. Una detección mala suelta no cambia
- * nada. Soltar el agarre es la excepción: se aplica al instante, porque
- * quedarse "pegado" a la figura un fotograma de más se siente peor que
- * soltarla uno antes.
+ * ¿La mano está agarrando? Vale cerrar la mano (como al coger una figura) o
+ * hacer pinza con pulgar e índice (como al coger una pieza pequeña).
+ *
+ * Coger necesita dos fotogramas seguidos: una detección mala suelta no coge
+ * nada. Soltar es al instante en cuanto se pasa el umbral de salida, porque
+ * quedarse pegado a la pieza se siente peor que soltarla un fotograma antes;
+ * la histéresis ya evita que se caiga sola.
  */
-export class MaquinaGestos {
-  gesto: Gesto = 'neutra'
-  private candidato: Gesto = 'neutra'
-  private cuenta = 0
+export class Agarre {
+  cerrada = false
+  /** `true` si el agarre empezó como pinza y no como puño. */
+  porPinza = false
+  private candidato = 0
 
-  actualizar(p: Punto[]): Gesto {
-    const g = gestoInstantaneo(p, this.gesto === 'agarre')
-    if (g === this.gesto) {
-      this.cuenta = 0
-      return this.gesto
+  actualizar(mundo: Punto[]): boolean {
+    const c = cierre(mundo)
+    const pz = pinza(mundo)
+    if (this.cerrada) {
+      if (c < CIERRE_SALE && pz > PINZA_SALE) this.cerrada = false
+      this.candidato = 0
+      return this.cerrada
     }
-    if (this.gesto === 'agarre') {
-      this.gesto = g
-      this.cuenta = 0
-      return g
+    const quiere = c > CIERRE_ENTRA || pz < PINZA_ENTRA
+    this.candidato = quiere ? this.candidato + 1 : 0
+    if (this.candidato >= 2) {
+      this.cerrada = true
+      this.porPinza = c <= CIERRE_ENTRA
+      this.candidato = 0
     }
-    if (g === this.candidato) this.cuenta++
-    else {
-      this.candidato = g
-      this.cuenta = 1
-    }
-    if (this.cuenta >= CONFIRMACION) {
-      this.gesto = g
-      this.cuenta = 0
-    }
-    return this.gesto
+    return this.cerrada
   }
 
   reiniciar() {
-    this.gesto = 'neutra'
-    this.candidato = 'neutra'
-    this.cuenta = 0
+    this.cerrada = false
+    this.porPinza = false
+    this.candidato = 0
   }
 }
 
@@ -236,12 +301,8 @@ export class MaquinaGestos {
 /**
  * Un deslizamiento es rápido Y largo: velocidad filtrada por encima de
  * `velocidadMin` (anchos de imagen por segundo) y un recorrido de al menos
- * `recorridoMin` dentro de la ventana. Con solo una de las dos condiciones,
- * o un tirón corto disparaba cambios o mover la figura con calma los
- * disparaba también.
- *
- * Tras disparar, una espera y el historial vacío: la vuelta de la mano a su
- * sitio no cuenta como deslizar hacia el otro lado.
+ * `recorridoMin` dentro de la ventana. Tras disparar, una espera y el
+ * historial vacío: la vuelta de la mano a su sitio no cuenta.
  */
 export class Deslizamiento {
   private historial: { t: number; x: number }[] = []
@@ -251,7 +312,7 @@ export class Deslizamiento {
   private ventana: number
   private espera: number
 
-  constructor(velocidadMin = 1.1, recorridoMin = 0.14, ventana = 0.32, espera = 0.7) {
+  constructor(velocidadMin = 1.3, recorridoMin = 0.2, ventana = 0.32, espera = 0.8) {
     this.velocidadMin = velocidadMin
     this.recorridoMin = recorridoMin
     this.ventana = ventana
@@ -285,62 +346,52 @@ export class Deslizamiento {
 
 /* ── Identidad de las manos ────────────────────────────────────────────── */
 
-export type Deteccion = { puntos: Punto[]; etiqueta: 'Left' | 'Right'; confianza: number }
-
 /**
- * Decide cuál de las manos detectadas es la principal (la que lleva la
- * figura) y cuál la secundaria (la del zoom).
- *
- * La etiqueta de MediaPipe es la primera opinión, pero no la última: si en el
- * fotograma anterior había una principal y ahora alguna mano está justo donde
- * estaba, esa sigue siendo la principal aunque la etiqueta diga otra cosa.
- * Sin esto, una mano que gira un poco cambia de etiqueta un fotograma y la
- * figura salta a la otra mano.
- *
- * `invertida` cambia el criterio de etiqueta (imagen sin reflejar: MediaPipe
- * llama "Right" a la mano izquierda del usuario, ver el portafolio).
+ * Reparte las manos detectadas en dos pistas estables. MediaPipe devuelve las
+ * manos en cualquier orden; si la pista 0 era la mano que sujeta la pieza,
+ * tiene que seguir siéndolo aunque la lista venga al revés. Cada detección va
+ * a la pista libre más cercana a donde estaba; una pista que lleva
+ * `memoria` segundos sin mano se olvida.
  */
-export class IdentidadManos {
-  private ultimaPrincipal: { x: number; y: number; t: number } | null = null
-  /** Cuánto puede moverse una mano entre fotogramas y seguir siendo "la misma" (fracción de imagen). */
-  private radio = 0.12
-  /** Segundos que se recuerda dónde estaba la principal tras perderla. */
-  private memoria = 0.4
+export class PistasManos {
+  private ultimas: ({ x: number; y: number; t: number } | null)[] = [null, null]
+  private memoria = 0.5
+  private radio = 0.25
 
-  asignar(detecciones: Deteccion[], t: number, invertida: boolean): { principal?: Punto[]; secundaria?: Punto[] } {
-    const esPrincipalPorEtiqueta = (d: Deteccion) => (invertida ? d.etiqueta === 'Left' : d.etiqueta === 'Right')
-    let principal: Deteccion | undefined
-    let secundaria: Deteccion | undefined
-
-    const previa = this.ultimaPrincipal && t - this.ultimaPrincipal.t < this.memoria ? this.ultimaPrincipal : null
-    if (previa && detecciones.length) {
-      let mejor: Deteccion | undefined
-      let mejorD = Infinity
-      for (const d of detecciones) {
-        const c = centro(d.puntos)
-        const dd = Math.hypot(c.x - previa.x, c.y - previa.y)
-        if (dd < mejorD) {
-          mejorD = dd
-          mejor = d
-        }
-      }
-      if (mejor && mejorD < this.radio) {
-        principal = mejor
-        secundaria = detecciones.find((d) => d !== mejor)
-      }
+  /** Devuelve, para cada pista, el índice de la detección que le toca (o -1). */
+  asignar(centros: { x: number; y: number }[], t: number): [number, number] {
+    const res: [number, number] = [-1, -1]
+    for (let k = 0; k < 2; k++) {
+      const u = this.ultimas[k]
+      if (u && t - u.t > this.memoria) this.ultimas[k] = null
     }
-
-    if (!principal) {
-      for (const d of detecciones) {
-        if (esPrincipalPorEtiqueta(d) && (!principal || d.confianza > principal.confianza)) principal = d
+    // Primero, las parejas pista–detección más cercanas.
+    const pares: { k: number; i: number; d: number }[] = []
+    centros.forEach((c, i) => {
+      for (let k = 0; k < 2; k++) {
+        const u = this.ultimas[k]
+        if (u) pares.push({ k, i, d: Math.hypot(c.x - u.x, c.y - u.y) })
       }
-      secundaria = detecciones.find((d) => d !== principal)
+    })
+    pares.sort((a, b) => a.d - b.d)
+    const usada = new Set<number>()
+    for (const { k, i, d } of pares) {
+      if (res[k] !== -1 || usada.has(i) || d > this.radio) continue
+      res[k] = i
+      usada.add(i)
     }
-
-    if (principal) {
-      const c = centro(principal.puntos)
-      this.ultimaPrincipal = { x: c.x, y: c.y, t }
+    // Las detecciones nuevas, a una pista vacía.
+    centros.forEach((_, i) => {
+      if (usada.has(i)) return
+      const k = res[0] === -1 && !this.ultimas[0] ? 0 : res[1] === -1 && !this.ultimas[1] ? 1 : res[0] === -1 ? 0 : res[1] === -1 ? 1 : -1
+      if (k === -1) return
+      res[k] = i
+      usada.add(i)
+    })
+    for (let k = 0; k < 2; k++) {
+      const i = res[k]
+      if (i !== -1) this.ultimas[k] = { x: centros[i].x, y: centros[i].y, t }
     }
-    return { principal: principal?.puntos, secundaria: secundaria?.puntos }
+    return res
   }
 }
