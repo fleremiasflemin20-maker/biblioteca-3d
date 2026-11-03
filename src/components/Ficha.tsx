@@ -1,11 +1,12 @@
 import { useEffect, useState, type CSSProperties } from 'react'
-import { ChevronLeft, ChevronRight, FileText, Hand, Layers, ShoppingBag, Star, Wand2, X } from 'lucide-react'
+import { BookOpen, ChevronLeft, ChevronRight, FileText, Hand, Layers, ShoppingBag, Star, Wand2, X } from 'lucide-react'
 import { Visor } from './Visor'
 import type { Modo } from './Pieza'
 import { CATEGORIAS, CORREO, enlaceCompra, peso, precio, rutaDescarga, triangulos, type Modelo3D } from '../lib/catalogo'
 import { ICONO_CATEGORIA } from '../lib/iconos'
 import { coste, estrellas, rareza } from '../lib/rareza'
 import { enlaceStudio } from '../lib/studio'
+import { enlaceHistoria } from '../lib/historias'
 import { ICONOS, MEDIDAS, OPCIONES_INICIALES, PALETAS, describirPedido, type IconoId, type OpcionesLlavero, type PaletaId } from '../lib/llavero'
 
 const MODOS: { id: Modo; nombre: string }[] = [
@@ -302,6 +303,11 @@ export function Ficha({
                 {modelo.precio > 0 && <span className="ml-1.5 font-chakra text-sm font-semibold tracking-widest text-white/45">USD</span>}
               </p>
               <div className="flex flex-wrap gap-2">
+                {enlaceHistoria(modelo) && (
+                  <a href={enlaceHistoria(modelo)} target="_blank" rel="noopener" className="btn-juego" title="Su historia, su estilo de pelea y sus técnicas, en 3D">
+                    <BookOpen size={16} /> <span className="hidden sm:inline">Su historia</span>
+                  </a>
+                )}
                 {!modelo.personalizable && (
                   <a href={enlaceStudio(modelo)} className="btn-juego" title="Píntalo y míralo separado en piezas en Flemin Studio 3D">
                     <Wand2 size={16} /> <span className="hidden sm:inline">Pintar y separar</span>

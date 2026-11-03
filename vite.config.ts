@@ -1,4 +1,5 @@
 import react from '@vitejs/plugin-react'
+import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 import { admin } from './admin.ts'
 import { ocultos } from './ocultos.ts'
@@ -12,4 +13,14 @@ export default defineConfig(() => ({
   plugins: [react(), admin(), ocultos()],
   // 5173 lo usa Gogeta y 5174 el portafolio.
   server: { port: 5175, strictPort: true },
+  // Dos páginas: la tienda y las historias de Dragon Ball (personaje/?id=…),
+  // que es la plantilla scrollytelling del Gogeta SSJ4 con otro personaje.
+  build: {
+    rollupOptions: {
+      input: {
+        main: resolve(import.meta.dirname, 'index.html'),
+        personaje: resolve(import.meta.dirname, 'personaje/index.html'),
+      },
+    },
+  },
 }))

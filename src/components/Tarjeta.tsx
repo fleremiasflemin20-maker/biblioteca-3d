@@ -2,6 +2,7 @@ import type { CSSProperties } from 'react'
 import { Box, Star } from 'lucide-react'
 import { CATEGORIAS, precio, rutaPortada, triangulos, type Modelo3D } from '../lib/catalogo'
 import { ICONO_CATEGORIA } from '../lib/iconos'
+import { enlaceHistoria } from '../lib/historias'
 import { coste, estrellas, rareza } from '../lib/rareza'
 
 /**
@@ -51,7 +52,7 @@ export function Tarjeta({ modelo, numero, onAbrir }: { modelo: Modelo3D; numero?
             <span className="absolute bottom-2 left-2 z-[3] bg-black/60 px-2 py-0.5 font-chakra text-[9.5px] font-semibold uppercase tracking-[0.14em] text-white/80 ring-1 ring-white/25">Sin color</span>
           )}
           <span className="btn-fuego absolute bottom-2 right-2 z-[3] translate-y-2 px-2.5 py-1 font-chakra text-[10.5px] font-bold uppercase tracking-[0.12em] opacity-0 transition-all duration-300 [clip-path:polygon(6px_0,100%_0,calc(100%-6px)_100%,0_100%)] group-hover:translate-y-0 group-hover:opacity-100">
-            Ver en 3D
+            {enlaceHistoria(modelo) ? 'Ver su historia ↗' : 'Ver en 3D'}
           </span>
         </div>
 

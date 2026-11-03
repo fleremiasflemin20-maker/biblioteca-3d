@@ -1,0 +1,273 @@
+/* El Tailwind de la plantilla del Gogeta, no el de la biblioteca. */
+@config "../tailwind.config.js";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+
+    /*
+     * El fondo también en el <html>, no solo en el <body>.
+     *
+     * Al llegar al final en un móvil, el navegador deja rebotar la página y
+     * enseña lo que hay **detrás** del body: por defecto, blanco. Sobre una
+     * página casi negra eso es un fogonazo blanco al final de cada scroll.
+     */
+    background-color: #0a0a0b;
+
+    /*
+     * Y sin rebote. Además de la franja, el rebote hace que el scroll siga
+     * moviéndose después de soltar y luego vuelva, que es parte de la sensación
+     * de "se regresa solo".
+     */
+    overscroll-behavior-y: none;
+  }
+
+  body {
+    @apply bg-ink text-paper antialiased;
+    overflow-x: hidden;
+    font-family:
+      ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  /* Mientras carga no se puede hacer scroll: si el usuario avanza a ciegas,
+     al terminar la carga la cámara aparece en mitad de la película. */
+  html.is-loading,
+  html.is-loading body {
+    overflow: hidden;
+  }
+
+  /*
+   * Solo se oculta el cursor del sistema cuando el nuestro ha llegado a
+   * montarse, y esa clase la pone el propio componente. Ponerlo desde CSS a
+   * secas dejaría sin puntero a quien tenga movimiento reducido o a quien vea la
+   * página con el JavaScript caído.
+   */
+  html.cursor-propio,
+  html.cursor-propio * {
+    cursor: none;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-ink;
+  }
+}
+
+@layer components {
+  /*
+   * Altura de escena. `svh` y no `dvh`, y la diferencia importa mucho en móvil.
+   *
+   * `dvh` es la altura del viewport *dinámica*: cambia en cuanto la barra del
+   * navegador se oculta al bajar o reaparece al subir. Con seis secciones a
+   * `100dvh`, cada uno de esos cambios altera la altura del documento entero, y
+   * el scroll da un salto hacia atrás — exactamente el "se regresa solo a la
+   * página anterior" que se nota en el teléfono.
+   *
+   * `svh` es la altura con las barras visibles y **no cambia nunca**. Se pierde
+   * un poco de alto cuando la barra se oculta; a cambio, el scroll no salta.
+   */
+  .scene {
+    @apply relative w-full;
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+
+  /*
+   * Tratamiento tipográfico del logo de Dragon Ball Z: condensada muy bold,
+   * inclinada, con contorno negro grueso y una sombra dura desplazada.
+   *
+   * El contorno se hace con ocho `text-shadow` en anillo y no con
+   * `-webkit-text-stroke`, porque el stroke se pinta centrado sobre el relleno
+   * y adelgaza la letra; el anillo crece hacia fuera y engorda la silueta, que
+   * es justo lo que hace el logo. La última sombra, más desplazada, es la
+   * proyectada.
+   *
+   * Con el fondo de manga detrás, ese contorno además es lo que mantiene el
+   * texto legible sobre la tinta.
+   */
+  .dbz {
+    --outline: 0.045em;
+    --outline-ink: #0a0a0b;
+    transform: skewX(-7deg);
+    text-shadow:
+      calc(var(--outline) * -1) calc(var(--outline) * -1) 0 var(--outline-ink),
+      var(--outline) calc(var(--outline) * -1) 0 var(--outline-ink),
+      calc(var(--outline) * -1) var(--outline) 0 var(--outline-ink),
+      var(--outline) var(--outline) 0 var(--outline-ink),
+      0 calc(var(--outline) * -1.3) 0 var(--outline-ink),
+      0 calc(var(--outline) * 1.3) 0 var(--outline-ink),
+      calc(var(--outline) * -1.3) 0 0 var(--outline-ink),
+      calc(var(--outline) * 1.3) 0 0 var(--outline-ink),
+      0.085em 0.095em 0 var(--outline-ink);
+  }
+
+  /*
+   * Onomatopeyas. Relleno blanco y contorno negro grueso — al revés que el
+   * titular, que va en color: en una plancha de manga el efecto de sonido es
+   * tinta sobre la viñeta, no un rótulo de portada.
+   */
+  .sfx {
+    font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', Meiryo, sans-serif;
+    font-weight: 900;
+    color: #f5f4f1;
+    letter-spacing: 0.02em;
+    text-shadow:
+      -0.05em -0.05em 0 #0a0a0b,
+      0.05em -0.05em 0 #0a0a0b,
+      -0.05em 0.05em 0 #0a0a0b,
+      0.05em 0.05em 0 #0a0a0b,
+      0 -0.065em 0 #0a0a0b,
+      0 0.065em 0 #0a0a0b,
+      -0.065em 0 0 #0a0a0b,
+      0.065em 0 0 #0a0a0b,
+      0.11em 0.12em 0 rgba(10, 10, 11, 0.85);
+  }
+
+  /* Japonés sin contorno: para el nombre en katakana, que acompaña al titular
+     en vez de competir con él. */
+  .jp {
+    font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', Meiryo, sans-serif;
+    font-weight: 900;
+  }
+
+  /*
+   * Los emblemas de las escuelas de Dragon Ball: un anillo grueso con el kanji
+   * dentro. 亀 de la Escuela de la Tortuga, 鶴 de la Grulla, 魔 de Piccolo, 神
+   * de Kami…
+   *
+   * En la lámina original los hay de trazo negro; aquí el fondo es casi negro,
+   * así que ese negro pasa a hueso. Es la única libertad que se toma respecto al
+   * original — la alternativa era no poder usar la mitad de los emblemas.
+   *
+   * El anillo es `border` y no `box-shadow`: el borde participa en el tamaño de
+   * la caja, y con `aspect-ratio: 1` eso mantiene el círculo perfecto pase lo
+   * que pase con el escalado.
+   */
+  .emblem {
+    font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', Meiryo, sans-serif;
+    font-weight: 900;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 0.1em solid currentColor;
+    line-height: 1;
+    /* El kanji ocupa casi todo el disco, como en los originales. */
+    letter-spacing: 0;
+  }
+
+  /*
+   * Kanji gigante de fondo. Va hueco —solo contorno— porque relleno competiría
+   * con el titular y con la figura: aquí es textura, no mensaje.
+   */
+  .kanji-mark {
+    font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', Meiryo, sans-serif;
+    font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 3px rgba(245, 244, 241, 0.15);
+    line-height: 1;
+  }
+
+  /*
+   * Líneas de concentración, las que salen del centro en los planos de golpe.
+   *
+   * Un `repeating-conic-gradient` y nada más: cero imágenes, cero canvas. Los
+   * sectores son finísimos y desiguales —0.35° de tinta contra 1.25° de hueco—
+   * porque en la trama impresa las líneas son finas y el papel manda.
+   *
+   * La máscara radial es lo que las convierte en efecto y no en estampado:
+   * vacía el centro, así que las líneas nacen fuera y convergen hacia dentro
+   * dejando limpio lo que importa, que es la figura.
+   */
+  .speed-lines {
+    background: repeating-conic-gradient(
+      from 0deg at 50% 50%,
+      rgba(245, 244, 241, 0.5) 0deg 0.35deg,
+      transparent 0.35deg 1.6deg
+    );
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, transparent 20%, #000 60%);
+    mask-image: radial-gradient(circle at 50% 50%, transparent 20%, #000 60%);
+  }
+
+  /*
+   * El destello de las siete bolas reunidas.
+   *
+   * Nace de donde están las bolas, y ese sitio cambia: en vertical van en fila
+   * bajo la marquesina, en horizontal en columna al borde derecho. Un destello
+   * que sale del lado equivocado no se entiende — parece un fallo de render en
+   * vez de "algo se ha encendido ahí".
+   */
+  .destello-bolas {
+    background: radial-gradient(
+      circle at 50% 8%,
+      rgba(255, 222, 0, 0.95),
+      rgba(255, 222, 0, 0.3) 26%,
+      transparent 58%
+    );
+  }
+
+  @media (min-width: 768px) {
+    .destello-bolas {
+      background: radial-gradient(
+        circle at 92% 50%,
+        rgba(255, 222, 0, 0.95),
+        rgba(255, 222, 0, 0.3) 26%,
+        transparent 58%
+      );
+    }
+  }
+
+  /*
+   * La onda del punto caliente: un anillo que crece desde el disco y se apaga.
+   *
+   * Va en CSS y no en GSAP porque no depende de nada — ni del scroll, ni del
+   * puntero, ni de la escena. Lo que no necesita coordinarse con el resto no
+   * tiene por qué gastar un hueco en el ticker.
+   */
+  .pulso {
+    animation: pulso 2.6s cubic-bezier(0.2, 0.7, 0.3, 1) infinite;
+  }
+
+  @keyframes pulso {
+    0% {
+      transform: scale(1) rotate(0deg);
+      opacity: 0.8;
+    }
+    70%,
+    100% {
+      /* Gira mientras crece: sin el giro, las púas de la copia de detrás salen
+         justo debajo de las de delante y la onda no se ve — parece que la mancha
+         solo cambia de tamaño. */
+      transform: scale(2) rotate(28deg);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pulso {
+      animation: none;
+      opacity: 0.5;
+    }
+  }
+
+  /* Los titulares de sección llevan la misma silueta con menos peso: el
+     tratamiento completo en cinco sitios cansa y deja de significar nada. */
+  .dbz-sub {
+    --outline: 0.03em;
+    --outline-ink: #0a0a0b;
+    transform: skewX(-7deg);
+    text-shadow:
+      calc(var(--outline) * -1) calc(var(--outline) * -1) 0 var(--outline-ink),
+      var(--outline) calc(var(--outline) * -1) 0 var(--outline-ink),
+      calc(var(--outline) * -1) var(--outline) 0 var(--outline-ink),
+      var(--outline) var(--outline) 0 var(--outline-ink),
+      0 calc(var(--outline) * -1.3) 0 var(--outline-ink),
+      0 calc(var(--outline) * 1.3) 0 var(--outline-ink),
+      calc(var(--outline) * -1.3) 0 0 var(--outline-ink),
+      calc(var(--outline) * 1.3) 0 0 var(--outline-ink),
+      0.05em 0.06em 0 var(--outline-ink);
+  }
+}
