@@ -113,3 +113,22 @@
 @media (prefers-reduced-motion: reduce) {
   .mundo .aurora, .mundo .estrellas, .filo-luz::after, .carta-leg, .carta-leg .holo, .cinta, .destello-lente, .velocidad, .franjas-nombre, .retrato-sel::before, .logo-brillo, .barra-stat > i, .haces { animation: none; }
 }
+
+/*
+ * El botón "Su historia" de la ficha (figuras de Dragon Ball). Late como un
+ * corazón —dos golpes y pausa— y lleva un anillo de ki que se expande en cada
+ * latido. Las letras son de pincel (Ma Shan Zheng) y detrás asoma 物語,
+ * "historia" en japonés.
+ */
+.btn-historia { position: relative; display: flex; align-items: center; gap: 0.85rem; width: 100%; min-height: 4.6rem; padding: 0.7rem 1.4rem; color: #fff; isolation: isolate; background: linear-gradient(100deg, #8E0B1A 0%, #D11F2A 45%, #FF6A13 100%); box-shadow: 0 0 0 2px #FFC23D, 0 0 28px rgba(255, 70, 40, 0.55), inset 0 -3px 0 rgba(0, 0, 0, 0.3); border-radius: 12px; animation: latido 1.6s ease-in-out infinite, anillo-ki 1.6s ease-out infinite; transition: filter 0.2s; overflow: hidden; }
+.btn-historia::before { content: ''; position: absolute; inset: 0; z-index: -1; background: radial-gradient(120% 140% at 15% 50%, rgba(255, 214, 90, 0.45), transparent 55%); animation: latido-luz 1.6s ease-in-out infinite; }
+.btn-historia::after { content: ''; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.5) 50%, transparent 65%); transform: translateX(-130%); animation: filo-historia 3.2s ease-in-out infinite; pointer-events: none; }
+.btn-historia:hover { filter: brightness(1.12) saturate(1.1); }
+.btn-historia:active { transform: scale(0.97); }
+.btn-historia-texto { font-family: 'Ma Shan Zheng', 'Dela Gothic One', cursive; font-size: clamp(2.1rem, 4.6vw, 2.7rem); line-height: 0.95; color: #FFE08A; text-shadow: 2px 2px 0 #3a0610, -1px -1px 0 #3a0610, 0 0 14px rgba(255, 200, 60, 0.6); }
+.btn-historia-kanji { position: absolute; right: 2.6rem; top: 50%; transform: translateY(-50%) rotate(-6deg); font-family: 'Ma Shan Zheng', serif; font-size: 4.4rem; line-height: 1; color: rgba(255, 230, 160, 0.22); pointer-events: none; }
+@keyframes latido { 0%, 100% { transform: scale(1); } 12% { transform: scale(1.045); } 22% { transform: scale(0.99); } 32% { transform: scale(1.03); } 46% { transform: scale(1); } }
+@keyframes anillo-ki { 0% { box-shadow: 0 0 0 2px #FFC23D, 0 0 0 0 rgba(255, 90, 40, 0.75), 0 0 28px rgba(255, 70, 40, 0.55); } 60%, 100% { box-shadow: 0 0 0 2px #FFC23D, 0 0 0 14px rgba(255, 90, 40, 0), 0 0 28px rgba(255, 70, 40, 0.55); } }
+@keyframes latido-luz { 0%, 46%, 100% { opacity: 0.55; } 12%, 32% { opacity: 1; } }
+@keyframes filo-historia { 0%, 55% { transform: translateX(-130%); } 85%, 100% { transform: translateX(130%); } }
+@media (prefers-reduced-motion: reduce) { .btn-historia, .btn-historia::before, .btn-historia::after { animation: none; } }
