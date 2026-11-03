@@ -106,7 +106,9 @@ export const rutaTextura = (m: Modelo3D, archivo: string) => `${BASE}/textures/$
 export const rutaDescarga = (archivo: string) => `${BASE}/descargas/${archivo}`
 export const rutaPortada =(m: Modelo3D) => (m.portada ? `${BASE}/portadas/${m.portada}` : undefined)
 
-export const precio = (n: number) => (n === 0 ? 'Gratis' : `$${n.toFixed(n % 1 ? 2 : 0)}`)
+/* Los precios no se muestran: todo lo pagado se cotiza por WhatsApp.
+   El campo `precio` del catálogo se conserva solo para uso interno (rareza). */
+export const precio = (n: number) => (n === 0 ? 'Gratis' : '')
 
 export const peso = (b?: number) => (!b ? '—' : b < 1048576 ? `${Math.max(1, Math.round(b / 1024))} KB` : `${(b / 1048576).toFixed(1)} MB`)
 
@@ -118,10 +120,32 @@ export const triangulos = (n?: number) =>
 export const WHATSAPP = '593979523040'
 export const CORREO = 'fleremias@outlook.com'
 
+/* Usuario de Instagram (sin @) y Telegram (usuario o número con +).
+   Sin usuario de Instagram, el botón abre Instagram en general. */
+export const INSTAGRAM = ''
+export const TELEGRAM = '+593979523040'
+
+/* Redes sociales del pie de página. Se muestran solo las que tengan usuario. */
+export const REDES: { nombre: string; url: string }[] = [
+  { nombre: 'WhatsApp', url: `https://wa.me/${WHATSAPP}` },
+  { nombre: 'Instagram', url: INSTAGRAM ? `https://instagram.com/${INSTAGRAM}` : 'https://www.instagram.com/' },
+  { nombre: 'Telegram', url: `https://t.me/${TELEGRAM}` },
+]
+
+/* Los tres canales para pedir un modelo bajo cotización. Instagram y Telegram
+   no permiten dejar el mensaje escrito, así que abren el chat directo. */
+export function canalesPedido(m: Modelo3D, detalle?: string) {
+  return [
+    { id: 'whatsapp', nombre: 'WhatsApp', url: enlaceCompra({ ...m, compra: undefined }, detalle) },
+    { id: 'instagram', nombre: 'Instagram', url: INSTAGRAM ? `https://ig.me/m/${INSTAGRAM}` : 'https://www.instagram.com/' },
+    { id: 'telegram', nombre: 'Telegram', url: `https://t.me/${TELEGRAM}` },
+  ]
+}
+
 export function enlaceCompra(m: Modelo3D, detalle?: string) {
   if (m.compra) return m.compra
   const texto = detalle
-    ? `Hola, quiero pedir el "${m.nombre}" (${precio(m.precio)}). ${detalle}.`
-    : `Hola, quiero comprar el modelo 3D "${m.nombre}" (${precio(m.precio)}). Formatos: ${m.formatos.join(', ')}.`
+    ? `Hola, quiero cotizar el "${m.nombre}". ${detalle}.`
+    : `Hola, quiero cotizar el modelo "${m.nombre}" de la Biblioteca 3D.`
   return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`
 }

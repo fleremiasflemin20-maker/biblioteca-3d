@@ -386,7 +386,7 @@ export function Seleccion({
     g.fillText(m.nombre, 56, 150, W - 112)
     g.font = '600 28px "Chakra Petch", sans-serif'
     g.fillStyle = 'rgba(255,255,255,0.75)'
-    g.fillText(`${cat.nombre} · ${precio(m.precio)}`, 56, 198)
+    g.fillText([cat.nombre, precio(m.precio)].filter(Boolean).join(' · '), 56, 198)
     g.textAlign = 'right'
     g.fillStyle = 'rgba(255,255,255,0.5)'
     g.font = '500 22px "Chakra Petch", sans-serif'
@@ -493,11 +493,10 @@ export function Seleccion({
   }, [manda, mover, moverFila, actual, onFicha, onManos, alternarPedido, cambiarSeccion, cambiarModo, aleatorio, foto, onLogros])
 
   const enPedido = useMemo(() => pedido.map((id) => lista.find((m) => m.id === id) ?? null).filter(Boolean) as Modelo3D[], [pedido, lista])
-  const total = enPedido.reduce((s, m) => s + m.precio, 0)
   const enlacePedido = useMemo(() => {
-    const lineas = enPedido.map((m) => `• ${m.nombre} (${precio(m.precio)})`).join('\n')
-    return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Hola, armé mi equipo en la Biblioteca 3D y quiero pedir estas figuras:\n${lineas}\nTotal: ${precio(total)}`)}`
-  }, [enPedido, total])
+    const lineas = enPedido.map((m) => `• ${m.nombre}`).join('\n')
+    return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Hola, armé mi equipo en la Biblioteca 3D y quiero cotizar estas figuras:\n${lineas}`)}`
+  }, [enPedido])
 
   const c = CATEGORIAS[cat]
   const tinta = catEscena.tinta
@@ -595,7 +594,7 @@ export function Seleccion({
             </span>
           </div>
           <p key={`${actual.id}-s`} className="entra-nombre mt-1.5 font-chakra text-[13px] font-semibold italic tracking-wide text-white/80 [text-shadow:0_1px_6px_rgba(0,0,0,0.8)] sm:text-[15px]" style={{ animationDelay: '60ms' }}>
-            {(CATEGORIAS.find((x) => x.id === actual.categoria) ?? CATEGORIAS[0]).nombre} · {precio(actual.precio)}
+            {[(CATEGORIAS.find((x) => x.id === actual.categoria) ?? CATEGORIAS[0]).nombre, precio(actual.precio)].filter(Boolean).join(' · ')}
           </p>
           <div className="mt-2 flex items-center gap-2" title={actual.triangulos ? `${triangulos(actual.triangulos)} triángulos` : undefined}>
             <span className="font-chakra text-[10.5px] uppercase tracking-[0.2em] text-white/60">Detalle</span>
@@ -688,7 +687,7 @@ export function Seleccion({
                 {pedido.includes(actual.id) ? 'Quitar del pedido' : 'Agregar al pedido'}
               </Opcion>
               <Opcion href={enlaceCompra(actual)} externo Icono={ShoppingBag} especial>
-                {actual.precio === 0 ? 'Obtener gratis' : `Comprar · ${precio(actual.precio)}`}
+                {actual.precio === 0 ? 'Obtener gratis' : 'Cotizar por WhatsApp'}
               </Opcion>
             </ul>
           </div>
@@ -723,7 +722,7 @@ export function Seleccion({
             })}
             <div className="ml-auto text-right leading-tight">
               <p className="font-chakra text-[10px] uppercase tracking-[0.2em] text-white/50">Mi pedido</p>
-              <p className="font-chakra text-[15px] font-semibold tabular-nums">{enPedido.length ? precio(total) : '—'}</p>
+              <p className="font-chakra text-[15px] font-semibold tabular-nums">{enPedido.length ? `${enPedido.length} de ${MAX_PEDIDO}` : '—'}</p>
             </div>
           </div>
 
@@ -862,7 +861,7 @@ export function Seleccion({
             {pedido.includes(actual.id) ? <Check size={16} /> : <Plus size={16} />} Pedido
           </button>
           <a href={enlaceCompra(actual)} target="_blank" rel="noreferrer" className="col-span-2 flex h-11 items-center justify-center gap-2 bg-gradient-to-r from-[#8A3CFF] to-[#FF2D8A] text-[14px] font-semibold">
-            <ShoppingBag size={16} /> {actual.precio === 0 ? 'Obtener gratis' : `Comprar · ${precio(actual.precio)}`}
+            <ShoppingBag size={16} /> {actual.precio === 0 ? 'Obtener gratis' : 'Cotizar por WhatsApp'}
           </a>
         </div>
       )}
@@ -895,7 +894,7 @@ export function Seleccion({
         </button>
         {enPedido.length > 0 && (
           <a href={enlacePedido} target="_blank" rel="noreferrer" className="pedido-brillo flex h-10 items-center gap-2 bg-gradient-to-r from-[#FF6A13] to-[#FFC23D] px-5 font-semibold normal-case tracking-normal text-[#140f22] [clip-path:polygon(10px_0,100%_0,calc(100%-10px)_100%,0_100%)]">
-            <MessageCircle size={16} /> Pedir mi equipo ({enPedido.length}) · {precio(total)}
+            <MessageCircle size={16} /> Cotizar mi equipo ({enPedido.length})
           </a>
         )}
       </div>
