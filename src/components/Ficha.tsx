@@ -303,11 +303,6 @@ export function Ficha({
                 {modelo.precio > 0 && <span className="ml-1.5 font-chakra text-sm font-semibold tracking-widest text-white/45">USD</span>}
               </p>
               <div className="flex flex-wrap gap-2">
-                {enlaceHistoria(modelo) && (
-                  <a href={enlaceHistoria(modelo)} target="_blank" rel="noopener" className="btn-juego" title="Su historia, su estilo de pelea y sus técnicas, en 3D">
-                    <BookOpen size={16} /> <span className="hidden sm:inline">Su historia</span>
-                  </a>
-                )}
                 {!modelo.personalizable && (
                   <a href={enlaceStudio(modelo)} className="btn-juego" title="Píntalo y míralo separado en piezas en Flemin Studio 3D">
                     <Wand2 size={16} /> <span className="hidden sm:inline">Pintar y separar</span>
@@ -318,6 +313,27 @@ export function Ficha({
                 </button>
               </div>
             </div>
+            {/* La puerta a la página de historia: grande y latiendo, porque es
+                lo que más se quiere que abra quien mira una figura de Dragon Ball. */}
+            {enlaceHistoria(modelo) && (
+              <a
+                href={enlaceHistoria(modelo)}
+                target="_blank"
+                rel="noopener"
+                className="btn-historia"
+                title="Su historia, su estilo de pelea y sus técnicas especiales, en 3D"
+              >
+                <span className="btn-historia-kanji" aria-hidden>物語</span>
+                <BookOpen size={22} className="relative shrink-0" />
+                <span className="relative flex flex-col items-start leading-none">
+                  <span className="btn-historia-texto">Su historia</span>
+                  <span className="mt-1 font-chakra text-[10.5px] font-bold uppercase tracking-[0.22em] text-[#FFE6A8]/80">
+                    Pelea · Batalla · Técnicas
+                  </span>
+                </span>
+                <span className="relative ml-auto font-chakra text-lg font-bold">↗</span>
+              </a>
+            )}
             <a
               href={enlaceCompra(modelo, modelo.personalizable ? describirPedido(vista) : undefined)}
               target="_blank"
