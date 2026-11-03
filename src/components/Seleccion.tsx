@@ -390,7 +390,7 @@ export function Seleccion({
     g.textAlign = 'right'
     g.fillStyle = 'rgba(255,255,255,0.5)'
     g.font = '500 22px "Chakra Petch", sans-serif'
-    g.fillText('biblioteca-3d.analista-datos-pro.workers.dev', W - 48, H - 36)
+    g.fillText('biblioteca-3d.fleremiasflemin.workers.dev', W - 48, H - 36)
     cv.toBlob((b) => {
       if (!b) return
       const a = document.createElement('a')
