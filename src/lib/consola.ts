@@ -61,6 +61,97 @@ function tocar(notas: Nota[], forzar = false) {
   }
 }
 
+/**
+ * El navegador no deja sonar nada hasta que la persona toca la página. Esto
+ * crea el audio (si hace falta) y dice si ya puede sonar sin esperar un toque.
+ */
+export function audioListo() {
+  try {
+    audio ??= new AudioContext()
+    return audio.state === 'running'
+  } catch {
+    return false
+  }
+}
+/** Llamar desde un clic o una tecla: despierta el audio bloqueado. */
+export function despertarAudio() {
+  try {
+    audio ??= new AudioContext()
+    void audio.resume()
+  } catch {
+    /* sin audio */
+  }
+}
+
+/** Un soplido de ruido filtrado que barre de grave a agudo: la letra cortando el aire. */
+function soplido(t: number, d: number, v: number, desde: number, hasta: number) {
+  if (!audio) return
+  const n = Math.ceil(audio.sampleRate * d)
+  const buf = audio.createBuffer(1, n, audio.sampleRate)
+  const datos = buf.getChannelData(0)
+  for (let k = 0; k < n; k++) datos[k] = Math.random() * 2 - 1
+  const src = audio.createBufferSource()
+  src.buffer = buf
+  const filtro = audio.createBiquadFilter()
+  filtro.type = 'bandpass'
+  filtro.Q.value = 1.2
+  const ahora = audio.currentTime + t
+  filtro.frequency.setValueAtTime(desde, ahora)
+  filtro.frequency.exponentialRampToValueAtTime(hasta, ahora + d)
+  const g = audio.createGain()
+  g.gain.setValueAtTime(0.0001, ahora)
+  g.gain.exponentialRampToValueAtTime(v, ahora + d * 0.7)
+  g.gain.exponentialRampToValueAtTime(0.0001, ahora + d)
+  src.connect(filtro).connect(g).connect(audio.destination)
+  src.start(ahora)
+  src.stop(ahora + d + 0.02)
+}
+
+// Escala pentatónica: cada letra suena un poco más aguda que la anterior.
+const ESCALA = [0, 2, 4, 7, 9]
+const nota = (paso: number, base = 220) => base * Math.pow(2, (ESCALA[paso % 5] + 12 * Math.floor(paso / 5)) / 12)
+
+/** Los sonidos del título 3D: suenan siempre que el navegador deje, aunque los de la interfaz estén apagados. */
+export const sfxTitulo = {
+  /** Una letra llega volando y golpea su sitio. `i` es su orden en el título. */
+  letra(i: number) {
+    try {
+      audio ??= new AudioContext()
+      soplido(0, 0.22, 0.05, 400, 3200)
+      tocar(
+        [
+          { f: 70, t: 0.18, d: 0.18, tipo: 'sine', v: 0.16 },
+          { f: nota(i), t: 0.18, d: 0.28, tipo: 'triangle', v: 0.06 },
+          { f: nota(i) * 2, t: 0.19, d: 0.12, tipo: 'square', v: 0.015 },
+        ],
+        true,
+      )
+    } catch {
+      /* sin audio */
+    }
+  },
+  /** Todas las letras se funden: un golpe grave, un barrido y un acorde brillante. */
+  fusion() {
+    try {
+      audio ??= new AudioContext()
+      soplido(0, 0.6, 0.08, 200, 6000)
+      tocar(
+        [
+          { f: 55, t: 0, d: 0.9, tipo: 'sine', v: 0.22 },
+          { f: 392, t: 0.02, d: 1.2, tipo: 'sawtooth', v: 0.02 },
+          { f: 523, t: 0.04, d: 1.3, tipo: 'triangle', v: 0.06 },
+          { f: 659, t: 0.06, d: 1.4, tipo: 'triangle', v: 0.05 },
+          { f: 1047, t: 0.12, d: 1.6, tipo: 'sine', v: 0.05 },
+          { f: 1568, t: 0.2, d: 1.4, tipo: 'sine', v: 0.03 },
+        ],
+        true,
+      )
+    } catch {
+      /* sin audio */
+    }
+  },
+}
+
 /** Los efectos de la interfaz, como los de un menú de consola. */
 export const sfx = {
   mover: () => tocar([{ f: 660, t: 0, d: 0.07 }]),
