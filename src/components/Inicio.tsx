@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { CATALOGO, CATEGORIAS, rutaPortada } from '../lib/catalogo'
-import { sfx, vibrar } from '../lib/consola'
+import { audioListo, despertarAudio, sfx, vibrar } from '../lib/consola'
 import { TituloFlemin } from './TituloFlemin'
 
 /**
@@ -33,6 +33,10 @@ export function useInicio() {
 
 export function Inicio({ onEntrar }: { onEntrar: () => void }) {
   const [saliendo, setSaliendo] = useState(false)
+  // Si el navegador tenía el audio bloqueado, el primer START despierta el
+  // sonido y repite la entrada del título con sus efectos; el segundo entra.
+  const [bloqueado] = useState(() => !audioListo())
+  const [repeticion, setRepeticion] = useState(0)
   // Dos filas de retratos que desfilan en sentidos opuestos detrás del logo.
   const [filas] = useState(() => {
     const con = CATALOGO.filter((m) => m.portada && !m.sinTextura && FIGURAS.includes(m.categoria))
@@ -43,11 +47,16 @@ export function Inicio({ onEntrar }: { onEntrar: () => void }) {
 
   const entrar = useCallback(() => {
     if (saliendo) return
+    if (bloqueado && repeticion === 0) {
+      despertarAudio()
+      setRepeticion(1)
+      return
+    }
     setSaliendo(true)
     sfx.inicio()
     vibrar(true)
     setTimeout(onEntrar, 650)
-  }, [saliendo, onEntrar])
+  }, [saliendo, onEntrar, bloqueado, repeticion])
 
   useEffect(() => {
     const tecla = (e: KeyboardEvent) => {
@@ -102,6 +111,7 @@ export function Inicio({ onEntrar }: { onEntrar: () => void }) {
         <p className="inicio-entra font-chakra text-[12px] font-semibold uppercase tracking-[0.5em] text-[#FFC23D] sm:text-[13px]">Fleremiasflemin presenta</p>
         <h1 className="sr-only">Biblioteca Flemin 3D</h1>
         <TituloFlemin
+          key={repeticion}
           respaldo={
             <p aria-hidden className="inicio-logo mt-3 font-flemin text-[clamp(3rem,11vw,8.5rem)] leading-[0.9]">
               <span className="logo-brillo">Biblioteca Flemin</span>
@@ -116,7 +126,7 @@ export function Inicio({ onEntrar }: { onEntrar: () => void }) {
           Edición coleccionista
         </p>
         <p className="parpadeo mt-14 font-chakra text-[clamp(1rem,2.4vw,1.4rem)] font-bold uppercase tracking-[0.4em] text-white">Pulsa start</p>
-        <p className="mt-2 font-chakra text-[11px] uppercase tracking-[0.25em] text-white/40">Cualquier tecla · clic · botón del mando</p>
+        <p className="mt-2 font-chakra text-[11px] uppercase tracking-[0.25em] text-white/40">{bloqueado && repeticion === 0 ? 'Pulsa para ver el título con sonido' : 'Cualquier tecla · clic · botón del mando'}</p>
       </div>
 
       <p className="absolute bottom-4 font-chakra text-[10.5px] uppercase tracking-[0.25em] text-white/35">© 2026 Flemin Studio · Quito, EC</p>

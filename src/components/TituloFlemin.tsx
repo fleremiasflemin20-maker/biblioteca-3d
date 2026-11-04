@@ -3,6 +3,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 import { DRACO } from '../lib/catalogo'
+import { sfxTitulo } from '../lib/consola'
 
 /**
  * El título de la pantalla de inicio en 3D: las letras de Meshy "Biblioteca
@@ -40,6 +41,7 @@ type Letra = {
   desde: THREE.Vector3
   giro: THREE.Euler
   llegada: number
+  sono: boolean
 }
 
 function Letras({ onFusion }: { onFusion: () => void }) {
@@ -98,7 +100,7 @@ function Letras({ onFusion }: { onFusion: () => void }) {
       const a = (i / n) * Math.PI * 2
       const desde = new THREE.Vector3(lado * (0.9 + azar(i, 1) * 0.7), Math.sin(a) * 0.7, -(2.5 + azar(i, 2) * 2.5))
       const giro = new THREE.Euler((azar(i, 3) - 0.5) * 3, lado * (1.5 + azar(i, 4) * 1.5), (azar(i, 5) - 0.5) * 2)
-      return { malla, mat, sitio, desde, giro, llegada: INICIO + i * PASO + VUELO }
+      return { malla, mat, sitio, desde, giro, llegada: INICIO + i * PASO + VUELO, sono: false }
     })
     return { raiz, letras, caja }
   }, [scene])
@@ -134,11 +136,17 @@ function Letras({ onFusion }: { onFusion: () => void }) {
       l.malla.scale.setScalar(0.25 + 0.75 * suave(p))
       // Destello al tocar su sitio y el gran encendido de la fusión.
       const toque = Math.max(0, 1 - Math.abs(t - l.llegada) / 0.25)
+      // El golpe suena justo cuando la letra toca su sitio (el soplido empieza un poco antes).
+      if (!l.sono && t >= l.llegada - 0.18 && !quieto) {
+        l.sono = true
+        if (t - l.llegada < 0.3) sfxTitulo.letra(i)
+      }
       l.mat.emissiveIntensity = (p < 1 ? 0.55 * (1 - p) : 0) + toque * 0.9 + pulso * 1.4
     })
 
     if (f > 0 && !fundido.current) {
       fundido.current = true
+      if (!quieto && f < 0.3) sfxTitulo.fusion()
       onFusion()
     }
     const g = grupo.current
