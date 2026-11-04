@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { CATALOGO, CATEGORIAS, rutaPortada } from '../lib/catalogo'
 import { sfx, vibrar } from '../lib/consola'
+import { TituloFlemin } from './TituloFlemin'
 
 /**
  * Pantalla de título, como al encender una consola: el logo, un desfile de
@@ -99,10 +100,15 @@ export function Inicio({ onEntrar }: { onEntrar: () => void }) {
 
       <div className="relative flex flex-col items-center px-4 text-center">
         <p className="inicio-entra font-chakra text-[12px] font-semibold uppercase tracking-[0.5em] text-[#FFC23D] sm:text-[13px]">Fleremiasflemin presenta</p>
-        <h1 className="inicio-logo mt-3 font-flemin text-[clamp(3rem,11vw,8.5rem)] leading-[0.9]">
-          <span className="logo-brillo">Biblioteca</span>
-          <span className="block bg-gradient-to-r from-[#FFC23D] via-[#FF6A13] to-[#FF2D8A] bg-clip-text text-transparent [filter:drop-shadow(0_6px_0_#1a1033)] [text-shadow:none]">3D</span>
-        </h1>
+        <h1 className="sr-only">Biblioteca Flemin 3D</h1>
+        <TituloFlemin
+          respaldo={
+            <p aria-hidden className="inicio-logo mt-3 font-flemin text-[clamp(3rem,11vw,8.5rem)] leading-[0.9]">
+              <span className="logo-brillo">Biblioteca Flemin</span>
+              <span className="block bg-gradient-to-r from-[#FFC23D] via-[#FF6A13] to-[#FF2D8A] bg-clip-text text-transparent [filter:drop-shadow(0_6px_0_#1a1033)] [text-shadow:none]">3D</span>
+            </p>
+          }
+        />
         <p className="inicio-entra mt-4 font-chakra text-[13px] uppercase tracking-[0.3em] text-white/60" style={{ animationDelay: '0.5s' }}>
           {CATALOGO.length} figuras · {secciones} secciones
         </p>
