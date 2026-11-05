@@ -17,6 +17,11 @@ npm run desplegar   # compila y sube dist/ a Cloudflare
 Cloudflare rechaza archivos de más de 25 MB: comprime cada `.glb` por debajo
 de eso (comando de abajo). El push a `main` sigue publicando también en GitHub Pages.
 
+## Club Flemin (suscripción de descargas)
+
+Cuentas, suscripción mensual con PayPal o activación manual, y descargas de
+STL/3MF desde R2. Cómo ponerlo en marcha y subir archivos: [CLUB.md](CLUB.md).
+
 ## Arrancar
 
 ```bash

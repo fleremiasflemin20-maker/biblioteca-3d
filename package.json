@@ -9,7 +9,11 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "test": "node --test 'pruebas/*.test.ts'",
-    "desplegar": "npm run build && wrangler deploy"
+    "desplegar": "npm run build && wrangler deploy",
+    "club:preparar": "node scripts/preparar-club.mjs",
+    "club:subir": "node scripts/subir-club.mjs",
+    "club:local": "npm run build && wrangler d1 migrations apply biblioteca-3d-club --local && wrangler dev",
+    "club:plan": "node scripts/crear-plan-paypal.mjs"
   },
   "dependencies": {
     "@mediapipe/tasks-vision": "^1.0.1",
@@ -36,6 +40,7 @@
     "postcss": "^8.5.26",
     "tailwindcss": "^3.4.19",
     "typescript": "~6.0.2",
-    "vite": "^8.2.2"
+    "vite": "^8.2.2",
+    "wrangler": "^4.158.0"
   }
 }
