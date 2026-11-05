@@ -9,6 +9,8 @@ import { Portadas } from './components/Portadas'
 import { ModoManos } from './components/ModoManos'
 import { Inicio, useInicio } from './components/Inicio'
 import { Musica } from './components/Musica'
+import { BotonClub, PanelClub } from './components/Club'
+import { iniciarClub } from './lib/club'
 import { Avisos, PanelLogros } from './components/Trofeos'
 import { CATALOGO, CATEGORIAS, CORREO, REDES, WHATSAPP, type Modelo3D } from './lib/catalogo'
 import { PISTAS } from './lib/musica'
@@ -51,6 +53,10 @@ export default function App() {
     setEstudioCrudo(e)
     const hash = e ? '#estudio' : ''
     if (location.hash !== hash) history.replaceState(null, '', hash || location.pathname + location.search)
+  }, [])
+  // El Club Flemin solo existe donde corre el Worker (Cloudflare); en GitHub Pages se esconde solo.
+  useEffect(() => {
+    iniciarClub()
   }, [])
   useEffect(() => {
     const cambio = () => setEstudioCrudo(estudioDesdeHash())
@@ -202,6 +208,7 @@ export default function App() {
             <a href={enlaceStudio()} className="btn-juego !px-3.5" title="Abrir Flemin Studio 3D">
               <Scissors size={16} /> <span className="hidden xl:inline">Flemin Studio</span>
             </a>
+            <BotonClub />
             <Musica />
             <button type="button" onClick={() => abrirManos()} className="btn-juego !px-3.5" title="Modo manos">
               <Hand size={16} /> <span className="hidden xl:inline">Modo manos</span>
@@ -515,6 +522,7 @@ export default function App() {
         />
       )}
       {subiendo && <Subir onCerrar={() => setSubiendo(false)} />}
+      <PanelClub />
       {logros && <PanelLogros onCerrar={() => setLogros(false)} />}
       {inicio.ver && <Inicio onEntrar={inicio.cerrar} />}
       <Avisos />

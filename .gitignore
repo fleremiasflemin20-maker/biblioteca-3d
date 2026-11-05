@@ -23,3 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 .pruebas/
+
+# Archivos de impresión del Club: solo viven en R2 (npm run club:subir)
+archivos-club/
+.wrangler/
+.dev.vars
