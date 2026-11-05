@@ -39,6 +39,7 @@ export function Visor({
   margen = 1.3,
   opciones,
   separado,
+  kit,
 }: {
   modelo: Modelo3D
   modo?: Modo
@@ -47,6 +48,7 @@ export function Visor({
   margen?: number
   opciones?: OpcionesLlavero
   separado?: boolean
+  kit?: boolean
 }) {
   const [cargado, setCargado] = useState<string | null>(null)
   const listo = useCallback(() => setCargado(modelo.id), [modelo.id])
@@ -71,7 +73,7 @@ export function Visor({
         <Environment preset="city" />
         <Bounds key={modelo.id} fit clip observe margin={margen}>
           <Normalizar>
-            <Pieza modelo={modelo} modo={modo} opciones={opciones} separado={separado} />
+            <Pieza modelo={modelo} modo={modo} opciones={opciones} separado={separado} kit={kit} />
           </Normalizar>
         </Bounds>
         <AlCargar onListo={listo} />

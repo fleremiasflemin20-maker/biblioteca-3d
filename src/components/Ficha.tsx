@@ -37,7 +37,9 @@ export function Ficha({
   onManos: () => void
 }) {
   const [modo, setModo] = useState<Modo>('textura')
-  const [separado, setSeparado] = useState(false)
+  /** Cómo se enseñan las piezas de un modelo por partes: armado, separado por donde se saca, o el kit en el suelo. */
+  const [partes, setPartes] = useState<'armado' | 'partes' | 'kit'>('armado')
+  const separado = partes === 'partes'
   const [opciones, setOpciones] = useState<OpcionesLlavero>({ ...OPCIONES_INICIALES, nombre: '' })
   // Lo que se dibuja: con el campo vacío se enseña el ejemplo, no una placa en blanco.
   const vista = { ...opciones, nombre: opciones.nombre.trim() || OPCIONES_INICIALES.nombre }
@@ -100,17 +102,23 @@ export function Ficha({
           <div aria-hidden className="hud-esquinas pointer-events-none absolute inset-0 z-[1]">
             <i /><i /><i /><i />
           </div>
-          <Visor modelo={modelo} modo={modo} tinta={cat.tinta} zoom margen={1.25} opciones={modelo.personalizable ? vista : undefined} separado={separado} />
+          <Visor modelo={modelo} modo={modo} tinta={cat.tinta} zoom margen={1.25} opciones={modelo.personalizable ? vista : undefined} separado={separado} kit={partes === 'kit'} />
 
           {modelo.piezas && (
-            <button
-              type="button"
-              onClick={() => setSeparado((v) => !v)}
-              aria-pressed={separado}
-              className="btn-juego absolute right-5 top-5 z-10 !h-9"
-            >
-              <Layers size={15} /> {separado ? 'Ver armado' : 'Ver por partes'}
-            </button>
+            <div className="corte-sm absolute right-5 top-5 z-10 flex bg-black/55 p-1 ring-1 ring-inset ring-white/15 backdrop-blur" role="group" aria-label="Ver las piezas">
+              {([['armado', 'Armado'], ['partes', 'Por partes'], ['kit', 'Kit']] as const).map(([v, n]) => (
+                <button
+                  key={v}
+                  type="button"
+                  onClick={() => setPartes(v)}
+                  aria-pressed={partes === v}
+                  title={v === 'kit' ? 'Las piezas en el suelo, numeradas como en «Cómo se arma»' : undefined}
+                  className={`pestana flex items-center gap-1.5 px-3 py-1.5 font-chakra text-[12px] font-bold uppercase tracking-wider transition-colors ${partes === v ? 'bg-[#FFC23D] text-[#140f22]' : 'text-white/65 hover:text-white'}`}
+                >
+                  {v === 'kit' && <Layers size={13} />} {n}
+                </button>
+              ))}
+            </div>
           )}
 
           <p className="absolute left-5 top-5 z-10 flex items-center gap-2 font-chakra text-[12px] font-semibold uppercase tracking-[0.2em] text-white/70">
