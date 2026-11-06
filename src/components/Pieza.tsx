@@ -4,6 +4,7 @@ import { Html, useBounds, useGLTF, useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import { DRACO, rutaModelo, rutaTextura, type Modelo3D } from '../lib/catalogo'
 import { mesaDePiezas, type CajaPieza } from '../lib/despiece'
+import { aristasDe, materialAristas, materialHolograma } from '../lib/holograma'
 import { OPCIONES_INICIALES, PALETAS, construirLlavero, type OpcionesLlavero } from '../lib/llavero'
 
 /**
@@ -13,24 +14,42 @@ import { OPCIONES_INICIALES, PALETAS, construirLlavero, type OpcionesLlavero } f
  *
  * `modo` es lo que el comprador quiere inspeccionar: el acabado, o la malla.
  */
-export type Modo = 'textura' | 'malla' | 'arcilla'
+export type Modo = 'textura' | 'malla' | 'arcilla' | 'holograma'
+
+/** Un material de holograma y uno de aristas para todas las piezas: comparten el reloj. */
+let holo: { cuerpo: THREE.ShaderMaterial; aristas: THREE.LineBasicMaterial } | null = null
+const materialesHolo = () => (holo ??= { cuerpo: materialHolograma(), aristas: materialAristas() })
 
 function aplicarModo(raiz: THREE.Object3D, modo: Modo) {
-  raiz.traverse((o) => {
-    const mesh = o as THREE.Mesh
-    if (!mesh.isMesh) return
+  const mallas: THREE.Mesh[] = []
+  raiz.traverse((o) => void ((o as THREE.Mesh).isMesh && mallas.push(o as THREE.Mesh)))
+  for (const mesh of mallas) {
     // Se guarda el material original la primera vez para poder volver a él.
     mesh.userData.original ??= mesh.material
+    mesh.getObjectByName('aristas-holo')?.removeFromParent()
     if (modo === 'textura') mesh.material = mesh.userData.original
     else if (modo === 'malla') mesh.material = new THREE.MeshBasicMaterial({ color: '#0E9F93', wireframe: true, transparent: true, opacity: 0.6 })
-    else mesh.material = new THREE.MeshStandardMaterial({ color: '#d9d4cc', roughness: 0.75 })
-  })
+    else if (modo === 'holograma') {
+      const { cuerpo, aristas } = materialesHolo()
+      mesh.material = cuerpo
+      const e = aristasDe(mesh.geometry)
+      if (e) {
+        const l = new THREE.LineSegments(e, aristas)
+        l.name = 'aristas-holo'
+        l.raycast = () => {}
+        mesh.add(l)
+      }
+    } else mesh.material = new THREE.MeshStandardMaterial({ color: '#d9d4cc', roughness: 0.75 })
+  }
 }
 
 /**
- * Kit: las piezas en el suelo, ordenadas como vienen en la caja (por color,
- * las altas atrás). El `.glb` va con Y arriba; `mesaDePiezas` piensa con Z
- * arriba, así que se le pasa (x, −z, y) y se vuelve igual.
+ * Kit: las piezas como en un tablero frente a la cámara, cada una con su
+ * cara de frente, ordenadas por color en filas de arriba abajo y numeradas
+ * como en «Cómo se arma». Es la misma `mesaDePiezas` del estudio, pero con
+ * la mesa de pie: su «suelo» es el fondo del modelo (z mínima) y sus filas
+ * van en X e Y. Así se ven todas desde la ficha, también las piezas planas
+ * (una placa de pie, en el suelo, quedaría escondida tras la de delante).
  */
 function kitDe(raiz: THREE.Object3D, nodos: THREE.Object3D[], colores: string[]) {
   // Cajas en el espacio de la raíz (donde viven las posiciones de los nodos), cuelgue de donde cuelgue.
@@ -39,14 +58,14 @@ function kitDe(raiz: THREE.Object3D, nodos: THREE.Object3D[], colores: string[])
   const caja = (o: THREE.Object3D) => new THREE.Box3().setFromObject(o).applyMatrix4(inv)
   const cajas: CajaPieza[] = nodos.map((o, i) => {
     const b = caja(o)
-    return { id: String(i), color: colores[i] ?? '#cccccc', min: [b.min.x, -b.max.z, b.min.y], max: [b.max.x, -b.min.z, b.max.y] }
+    return { id: String(i), color: colores[i] ?? '#cccccc', min: b.min.toArray(), max: b.max.toArray() }
   })
   const { desplazar } = mesaDePiezas(cajas, { minimo: 0, proporcion: 0.25 })
   return nodos.map((o, i) => {
     const [dx, dy, dz] = desplazar.get(String(i))!
     const b = caja(o)
     const arriba = new THREE.Vector3((b.min.x + b.max.x) / 2, b.max.y, (b.min.z + b.max.z) / 2).sub(o.position)
-    return { lejos: o.position.clone().add(new THREE.Vector3(dx, dz, -dy)), arriba }
+    return { lejos: o.position.clone().add(new THREE.Vector3(dx, dy, dz)), arriba }
   })
 }
 
@@ -159,6 +178,7 @@ function PBR({ modelo, modo }: { modelo: Modelo3D; modo: Modo }) {
       {modo === 'textura' && <meshStandardMaterial {...maps} />}
       {modo === 'malla' && <meshBasicMaterial color="#0E9F93" wireframe transparent opacity={0.6} />}
       {modo === 'arcilla' && <meshStandardMaterial color="#d9d4cc" roughness={0.75} />}
+      {modo === 'holograma' && <primitive object={materialesHolo().cuerpo} attach="material" />}
     </mesh>
   )
 }
@@ -170,6 +190,7 @@ function LlaveroNombre({ opciones, modo }: { opciones: OpcionesLlavero; modo: Mo
   const p = PALETAS[opciones.paleta]
   const material = (color: string) =>
     modo === 'malla' ? <meshBasicMaterial color="#0E9F93" wireframe transparent opacity={0.6} />
+    : modo === 'holograma' ? <primitive object={materialesHolo().cuerpo} attach="material" />
     : modo === 'arcilla' ? <meshStandardMaterial color="#d9d4cc" roughness={0.75} />
     : <meshStandardMaterial color={color} roughness={0.45} />
   return (

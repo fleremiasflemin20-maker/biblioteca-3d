@@ -13,6 +13,7 @@ const MODOS: { id: Modo; nombre: string }[] = [
   { id: 'textura', nombre: 'Textura' },
   { id: 'arcilla', nombre: 'Arcilla' },
   { id: 'malla', nombre: 'Malla' },
+  { id: 'holograma', nombre: 'Holograma' },
 ]
 
 /**
@@ -102,6 +103,8 @@ export function Ficha({
           <div aria-hidden className="hud-esquinas pointer-events-none absolute inset-0 z-[1]">
             <i /><i /><i /><i />
           </div>
+          {/* Holograma: líneas de barrido, viñeta y grano de señal sobre el visor (decorado, no se puede tocar). */}
+          {modo === 'holograma' && <div aria-hidden className="holo-capa pointer-events-none absolute inset-0 z-[2]" />}
           <Visor modelo={modelo} modo={modo} tinta={cat.tinta} zoom margen={1.25} opciones={modelo.personalizable ? vista : undefined} separado={separado} kit={partes === 'kit'} />
 
           {modelo.piezas && (

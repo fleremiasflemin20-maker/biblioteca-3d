@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import { Bounds, ContactShadows, Environment, OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
 import { AlCargar, Pieza, type Modo } from './Pieza'
+import { CampoRuido } from './CampoRuido'
 import type { Modelo3D } from '../lib/catalogo'
 import type { OpcionesLlavero } from '../lib/llavero'
 
@@ -77,7 +78,7 @@ export function Visor({
           </Normalizar>
         </Bounds>
         <AlCargar onListo={listo} />
-        <ContactShadows position={[0, -1.001, 0]} opacity={0.35} scale={6} blur={2.6} far={3} />
+        {modo === 'holograma' ? <CampoRuido /> : <ContactShadows position={[0, -1.001, 0]} opacity={0.35} scale={6} blur={2.6} far={3} />}
       </Suspense>
 
       <OrbitControls
