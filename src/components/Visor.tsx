@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import { Bounds, ContactShadows, Environment, OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
 import { AlCargar, Pieza, type Modo } from './Pieza'
+import { CampoRuido } from './CampoRuido'
 import type { Modelo3D } from '../lib/catalogo'
 import type { OpcionesLlavero } from '../lib/llavero'
 
@@ -39,6 +40,7 @@ export function Visor({
   margen = 1.3,
   opciones,
   separado,
+  kit,
 }: {
   modelo: Modelo3D
   modo?: Modo
@@ -47,6 +49,7 @@ export function Visor({
   margen?: number
   opciones?: OpcionesLlavero
   separado?: boolean
+  kit?: boolean
 }) {
   const [cargado, setCargado] = useState<string | null>(null)
   const listo = useCallback(() => setCargado(modelo.id), [modelo.id])
@@ -71,11 +74,11 @@ export function Visor({
         <Environment preset="city" />
         <Bounds key={modelo.id} fit clip observe margin={margen}>
           <Normalizar>
-            <Pieza modelo={modelo} modo={modo} opciones={opciones} separado={separado} />
+            <Pieza modelo={modelo} modo={modo} opciones={opciones} separado={separado} kit={kit} />
           </Normalizar>
         </Bounds>
         <AlCargar onListo={listo} />
-        <ContactShadows position={[0, -1.001, 0]} opacity={0.35} scale={6} blur={2.6} far={3} />
+        {modo === 'holograma' ? <CampoRuido /> : <ContactShadows position={[0, -1.001, 0]} opacity={0.35} scale={6} blur={2.6} far={3} />}
       </Suspense>
 
       <OrbitControls
