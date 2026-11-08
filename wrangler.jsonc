@@ -20,7 +20,7 @@
     {
       "binding": "DB",
       "database_name": "biblioteca-3d-club",
-      "database_id": "PENDIENTE-npm-run-club-preparar",
+      "database_id": "5273b0fb-88a3-41df-9f87-9ba11bc50917",
       "migrations_dir": "migrations"
     }
   ],
