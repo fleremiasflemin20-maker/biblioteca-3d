@@ -1,6 +1,7 @@
 import { useEffect, useState, type CSSProperties } from 'react'
 import { BookOpen, Camera, ChevronLeft, ChevronRight, FileText, Hand, Layers, MessageCircle, Send, ShoppingBag, Star, Wand2, X } from 'lucide-react'
 import { Visor } from './Visor'
+import { ArchivosClub } from './Club'
 import type { Modo } from './Pieza'
 import { CATEGORIAS, CORREO, canalesPedido, enlaceCompra, peso, precio, rutaDescarga, triangulos, type Modelo3D } from '../lib/catalogo'
 import { ICONO_CATEGORIA } from '../lib/iconos'
@@ -275,6 +276,8 @@ export function Ficha({
               ))}
             </div>
           </div>
+
+          <ArchivosClub id={modelo.id} />
 
           {modelo.documentos && modelo.documentos.length > 0 && (
             <div>

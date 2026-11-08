@@ -224,3 +224,11 @@
 @media (prefers-reduced-motion: reduce) {
   .globo-historia, .globo-historia-cuerpo { animation: none; }
 }
+
+/* Club Flemin: el botón de la cabecera late suave para que se vea. */
+.btn-club { animation: club-late 2.4s ease-in-out infinite; }
+@keyframes club-late {
+  0%, 100% { box-shadow: 0 0 22px rgba(255, 140, 40, 0.45), inset 0 -2px 0 rgba(0, 0, 0, 0.25); }
+  50% { box-shadow: 0 0 40px rgba(255, 194, 61, 0.85), inset 0 -2px 0 rgba(0, 0, 0, 0.25); }
+}
+@media (prefers-reduced-motion: reduce) { .btn-club { animation: none; } }

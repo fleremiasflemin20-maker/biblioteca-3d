@@ -9,6 +9,8 @@ import { Portadas } from './components/Portadas'
 import { ModoManos } from './components/ModoManos'
 import { Inicio, useInicio } from './components/Inicio'
 import { Musica } from './components/Musica'
+import { BotonClub, PanelClub } from './components/Club'
+import { abrirClub, iniciarClub } from './lib/club'
 import { Avisos, PanelLogros } from './components/Trofeos'
 import { CATALOGO, CATEGORIAS, CORREO, REDES, WHATSAPP, type Modelo3D } from './lib/catalogo'
 import { PISTAS } from './lib/musica'
@@ -51,6 +53,15 @@ export default function App() {
     setEstudioCrudo(e)
     const hash = e ? '#estudio' : ''
     if (location.hash !== hash) history.replaceState(null, '', hash || location.pathname + location.search)
+  }, [])
+  // El Club Flemin solo existe donde corre el Worker (Cloudflare); en GitHub Pages se esconde solo.
+  useEffect(() => {
+    iniciarClub()
+    // Enlace directo para compartir: …/#club abre la explicación del Club.
+    if (location.hash === '#club') abrirClub('info')
+    const alCambiar = () => location.hash === '#club' && abrirClub('info')
+    window.addEventListener('hashchange', alCambiar)
+    return () => window.removeEventListener('hashchange', alCambiar)
   }, [])
   useEffect(() => {
     const cambio = () => setEstudioCrudo(estudioDesdeHash())
@@ -195,6 +206,8 @@ export default function App() {
                 <Plus size={16} /> <span className="hidden lg:inline">Subir</span>
               </button>
             )}
+            {/* Club Flemin: lo primero de la barra, para que se vea en cualquier pantalla. */}
+            <BotonClub />
             {/* Recorrido 3D: la sala con las figuras en pedestales. Flemin Studio: la web aparte, por su portada. */}
             <button type="button" onClick={() => setEstudio({ vista: 'sala' })} className="btn-juego btn-plasma !px-3.5" title="Recorre la sala de figuras en 3D">
               <Box size={16} /> <span className="hidden sm:inline">Recorrido 3D</span>
@@ -515,6 +528,7 @@ export default function App() {
         />
       )}
       {subiendo && <Subir onCerrar={() => setSubiendo(false)} />}
+      <PanelClub />
       {logros && <PanelLogros onCerrar={() => setLogros(false)} />}
       {inicio.ver && <Inicio onEntrar={inicio.cerrar} />}
       <Avisos />
