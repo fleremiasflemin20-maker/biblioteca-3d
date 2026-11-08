@@ -32,7 +32,7 @@
   ],
   "vars": {
     // Precio que se muestra en la web. El que se cobra es el del plan de PayPal.
-    "PRECIO_CLUB": "12",
+    "PRECIO_CLUB": "9.99",
     // 'sandbox' para probar con cuentas falsas de PayPal; 'live' para cobrar de verdad.
     "PAYPAL_ENTORNO": "sandbox",
     // Se rellenan al crear la app y el plan en developer.paypal.com (ver CLUB.md).

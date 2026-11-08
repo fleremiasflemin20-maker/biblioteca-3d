@@ -3,13 +3,13 @@
  * del plan. Se corre una vez por entorno (sandbox y después live):
  *
  *   PowerShell:
- *   $env:PAYPAL_CLIENT_ID="..."; $env:PAYPAL_SECRETO="..."; $env:PAYPAL_ENTORNO="sandbox"; npm run club:plan -- 12
+ *   $env:PAYPAL_CLIENT_ID="..."; $env:PAYPAL_SECRETO="..."; $env:PAYPAL_ENTORNO="sandbox"; npm run club:plan -- 9.99
  *
- * El número es el precio mensual en USD (12 si no se pone). Copia el
+ * El número es el precio mensual en USD (9.99 si no se pone). Copia el
  * "PAYPAL_PLAN_ID" que imprime en wrangler.jsonc.
  */
 const { PAYPAL_CLIENT_ID: id, PAYPAL_SECRETO: secreto, PAYPAL_ENTORNO: entorno = 'sandbox' } = process.env
-const precio = Number(process.argv[2] ?? 12).toFixed(2)
+const precio = Number(process.argv[2] ?? 9.99).toFixed(2)
 if (!id || !secreto) {
   console.error('Faltan PAYPAL_CLIENT_ID y PAYPAL_SECRETO (de developer.paypal.com → Apps & Credentials).')
   process.exit(1)

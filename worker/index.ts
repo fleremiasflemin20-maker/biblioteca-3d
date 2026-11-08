@@ -72,7 +72,7 @@ async function api(req: Request, url: URL, env: Entorno): Promise<Response> {
 
   if (ruta === '/api/club/config' && metodo === 'GET') {
     return json({
-      precio: env.PRECIO_CLUB ?? '12',
+      precio: env.PRECIO_CLUB ?? '9.99',
       paypal: env.PAYPAL_CLIENT_ID && env.PAYPAL_PLAN_ID ? { clientId: env.PAYPAL_CLIENT_ID, planId: env.PAYPAL_PLAN_ID } : null,
       whatsapp: env.WHATSAPP ?? '593979523040',
     })

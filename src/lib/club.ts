@@ -18,14 +18,20 @@ export type ConfigClub = { precio: string; paypal: { clientId: string; planId: s
 type Estado = {
   cargado: boolean
   disponible: boolean
-  config: ConfigClub | null
+  config: ConfigClub
   usuario: UsuarioClub | null
   suscripcion: Suscripcion | null
   modelos: Set<string>
   panel: boolean
+  pestana: PestanaClub
 }
 
-let estado: Estado = { cargado: false, disponible: false, config: null, usuario: null, suscripcion: null, modelos: new Set(), panel: false }
+export type PestanaClub = 'info' | 'cuenta'
+/** Lo que se enseña aunque el servidor no responda (GitHub Pages o antes de cargar). */
+export const PRECIO_CLUB = '9.99'
+const CONFIG_BASE: ConfigClub = { precio: PRECIO_CLUB, paypal: null, whatsapp: '593979523040' }
+
+let estado: Estado = { cargado: false, disponible: false, config: CONFIG_BASE, usuario: null, suscripcion: null, modelos: new Set(), panel: false, pestana: 'info' }
 const oyentes = new Set<() => void>()
 const cambiar = (parcial: Partial<Estado>) => {
   estado = { ...estado, ...parcial }
@@ -41,7 +47,10 @@ export const useClub = () =>
     () => estado,
   )
 
-export const abrirClub = () => cambiar({ panel: true })
+/** Abre el Club. Sin pestaña: la explicación para quien no es socio, su cuenta para quien sí. */
+export const abrirClub = (pestana?: PestanaClub) =>
+  cambiar({ panel: true, pestana: pestana ?? (estado.suscripcion?.activa ? 'cuenta' : 'info') })
+export const verPestana = (pestana: PestanaClub) => cambiar({ pestana })
 export const cerrarClub = () => cambiar({ panel: false })
 
 export async function pedir<T>(ruta: string, cuerpo?: unknown): Promise<T> {
@@ -81,7 +90,7 @@ export async function iniciarClub() {
         .catch(() => {}),
     ])
   } catch {
-    cambiar({ disponible: false })
+    cambiar({ disponible: false, config: CONFIG_BASE })
   } finally {
     cambiar({ cargado: true })
   }

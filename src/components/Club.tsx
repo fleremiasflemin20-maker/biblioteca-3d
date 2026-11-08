@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Crown, Download, Lock, LogOut, MessageCircle, ShieldCheck, X } from 'lucide-react'
+import { Check, Crown, Download, Lock, LogOut, MessageCircle, ShieldCheck, Sparkles, X } from 'lucide-react'
 import {
   abrirClub,
   archivosDe,
@@ -16,6 +16,8 @@ import {
   type ArchivoClub,
   type ConfigClub,
   type UsuarioClub,
+  type PestanaClub,
+  verPestana,
 } from '../lib/club'
 
 /**
@@ -25,17 +27,34 @@ import {
 
 const campo = 'w-full bg-white/[0.07] px-3.5 py-2.5 font-chakra text-[14px] text-white outline-none ring-1 ring-inset ring-white/15 transition placeholder:text-white/35 focus:ring-[#FFC23D]/70'
 
-/** El botón de la cabecera. */
+/** El botón de la cabecera: siempre a la vista, aunque el servidor del Club no esté. */
 export function BotonClub() {
   const club = useClub()
-  if (!club.disponible) return null
   const socio = club.suscripcion?.activa
   return (
-    <button type="button" onClick={abrirClub} className={`btn-juego !px-3.5 ${socio ? '' : 'btn-fuego'}`} title="Club Flemin: descargas ilimitadas con suscripción mensual">
-      <Crown size={16} /> <span className="hidden md:inline">{socio ? 'Socio' : club.usuario ? 'Mi Club' : 'Club'}</span>
+    <button
+      type="button"
+      onClick={() => abrirClub()}
+      className={`btn-juego shrink-0 !px-3.5 ${socio ? '' : 'btn-fuego btn-club'}`}
+      title={`Club Flemin: descarga los STL y 3MF por ${club.config.precio} USD al mes`}
+    >
+      <Crown size={16} /> <span>{socio ? 'Socio del Club' : 'Únete al Club'}</span>
     </button>
   )
 }
+
+const PASOS = [
+  { n: '1', titulo: 'Crea tu cuenta', texto: 'Solo tu correo y una contraseña.' },
+  { n: '2', titulo: 'Activa el Club', texto: 'Con PayPal o tarjeta, o por transferencia y Deuna por WhatsApp.' },
+  { n: '3', titulo: 'Descarga e imprime', texto: 'Abre cualquier modelo y baja sus archivos cuantas veces quieras.' },
+]
+
+const INCLUYE = [
+  'Los STL, 3MF y demás archivos de impresión de los modelos de la Biblioteca.',
+  'Descargas ilimitadas mientras tu suscripción esté activa.',
+  'Todo lo que ya está en la web y todo lo que vamos sumando, en una sola suscripción.',
+  'Sin permanencia: cancelas cuando quieras y sigues descargando hasta el final del mes pagado.',
+]
 
 export function PanelClub() {
   const club = useClub()
@@ -45,12 +64,16 @@ export function PanelClub() {
     window.addEventListener('keydown', tecla)
     return () => window.removeEventListener('keydown', tecla)
   }, [club.panel])
-  if (!club.panel || !club.config) return null
-  const precio = club.config.precio
+  if (!club.panel) return null
+  const { precio } = club.config
+  const pestanas: { id: PestanaClub; nombre: string }[] = [
+    { id: 'info', nombre: '¿Qué es el Club?' },
+    { id: 'cuenta', nombre: club.usuario ? 'Mi cuenta' : 'Unirme' },
+  ]
 
   return (
     <div className="fixed inset-0 z-[65] grid place-items-center bg-black/75 p-3 backdrop-blur-sm" onClick={cerrarClub} role="dialog" aria-modal aria-label="Club Flemin">
-      <div onClick={(e) => e.stopPropagation()} className="panel-sel entra flex max-h-[94svh] w-[min(96vw,560px)] flex-col overflow-hidden bg-[#120d20] text-white ring-1 ring-white/15">
+      <div onClick={(e) => e.stopPropagation()} className="panel-sel entra flex max-h-[94svh] w-[min(96vw,600px)] flex-col overflow-hidden bg-[#120d20] text-white ring-1 ring-white/15">
         <div className="relative flex items-center gap-4 border-b border-white/10 bg-gradient-to-r from-[#FF6A13]/40 via-[#FF2D8A]/25 to-transparent px-5 py-4">
           <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-gradient-to-br from-[#FFE27A] to-[#FF6A13] text-[#140f22] shadow-[0_0_24px_rgba(255,194,61,0.55)]">
             <Crown size={26} strokeWidth={2.4} />
@@ -58,32 +81,119 @@ export function PanelClub() {
           <div className="min-w-0 flex-1">
             <p className="font-chakra text-[11px] uppercase tracking-[0.28em] text-[#FFC23D]">Suscripción mensual</p>
             <p className="font-flemin text-2xl leading-tight">Club Flemin</p>
-            <p className="mt-0.5 text-[13px] text-white/65">Descarga todos los STL y 3MF del Club, sin límite.</p>
+            <p className="mt-0.5 text-[13px] text-white/65">Descarga los STL y 3MF de la Biblioteca, sin límite.</p>
           </div>
           <button type="button" onClick={cerrarClub} aria-label="Cerrar" className="grid h-9 w-9 shrink-0 place-items-center bg-white/10 hover:bg-white/20">
             <X size={18} />
           </button>
         </div>
 
-        <div className="sin-barra flex flex-col gap-5 overflow-y-auto px-5 py-5">
-          <div className="flex items-end justify-between gap-3">
-            <p className="bg-gradient-to-b from-[#FFE08A] to-[#FF8A2F] bg-clip-text font-flemin text-5xl leading-none text-transparent">
-              {precio} USD<span className="font-chakra text-lg text-white/60"> /mes</span>
-            </p>
-            <p className="text-right font-chakra text-[11.5px] uppercase tracking-[0.16em] text-white/55">
-              {club.modelos.size} {club.modelos.size === 1 ? 'modelo' : 'modelos'}
-              <br />
-              en el Club
-            </p>
-          </div>
+        <div className="grid grid-cols-2 gap-1 border-b border-white/10 bg-black/20 p-1.5" role="tablist">
+          {pestanas.map((t) => (
+            <button
+              key={t.id}
+              type="button"
+              role="tab"
+              aria-selected={club.pestana === t.id}
+              onClick={() => verPestana(t.id)}
+              className={`py-2.5 font-chakra text-[12.5px] font-bold uppercase tracking-[0.14em] transition ${club.pestana === t.id ? 'bg-white/15 text-white' : 'text-white/50 hover:text-white'}`}
+            >
+              {t.nombre}
+            </button>
+          ))}
+        </div>
 
-          {!club.usuario ? (
-            <Acceso />
+        <div className="sin-barra flex flex-col gap-5 overflow-y-auto px-5 py-5">
+          {club.pestana === 'info' ? (
+            <Explicacion precio={precio} />
           ) : (
-            <Cuenta usuario={club.usuario} config={club.config} />
+            <>
+              <p className="bg-gradient-to-b from-[#FFE08A] to-[#FF8A2F] bg-clip-text font-flemin text-5xl leading-none text-transparent">
+                {precio} USD<span className="font-chakra text-lg text-white/60"> /mes</span>
+              </p>
+              {!club.disponible ? (
+                <SinServidor config={club.config} />
+              ) : !club.usuario ? (
+                <Acceso />
+              ) : (
+                <Cuenta usuario={club.usuario} config={club.config} />
+              )}
+            </>
           )}
         </div>
       </div>
+    </div>
+  )
+}
+
+/** La pestaña que cuenta qué es el Club, cuánto cuesta y qué incluye. */
+function Explicacion({ precio }: { precio: string }) {
+  const club = useClub()
+  return (
+    <div className="flex flex-col gap-5">
+      <div className="corte-sm bg-gradient-to-br from-[#FF6A13]/20 via-[#FF2D8A]/10 to-transparent p-4 ring-1 ring-inset ring-[#FFC23D]/35">
+        <p className="font-chakra text-[11px] font-bold uppercase tracking-[0.24em] text-[#FFC23D]">Por solo</p>
+        <p className="bg-gradient-to-b from-[#FFE08A] to-[#FF8A2F] whitespace-nowrap bg-clip-text font-flemin text-[44px] leading-none text-transparent sm:text-6xl">
+          {precio} USD<span className="font-chakra text-base text-white/60 sm:text-xl"> /mes</span>
+        </p>
+        <p className="mt-2 text-[14.5px] leading-relaxed text-white/85">
+          Con tu suscripción mensual accedes a la Biblioteca y descargas los archivos <b>STL</b>, <b>3MF</b> y demás
+          formatos de impresión de los modelos de la web, para imprimirlos en tu casa o en tu taller.
+        </p>
+      </div>
+
+      <ul className="flex flex-col gap-2">
+        {INCLUYE.map((t) => (
+          <li key={t} className="flex gap-2.5 text-[14px] leading-snug text-white/85">
+            <Check size={18} className="mt-0.5 shrink-0 text-[#3BE0A0]" /> {t}
+          </li>
+        ))}
+      </ul>
+
+      <div className="flex items-center gap-3 bg-gradient-to-r from-[#8A3CFF]/25 to-transparent p-3.5 ring-1 ring-inset ring-[#8A3CFF]/45">
+        <Sparkles size={22} className="shrink-0 text-[#C77DFF]" />
+        <p className="text-[13.5px] leading-snug text-white/85">
+          <b>Estamos actualizando la Biblioteca:</b> cada semana subimos personajes y modelos nuevos, y todos entran a tu suscripción sin pagar nada extra.
+        </p>
+      </div>
+
+      <ol className="grid gap-2 sm:grid-cols-3">
+        {PASOS.map((p) => (
+          <li key={p.n} className="bg-white/[0.04] p-3 ring-1 ring-inset ring-white/10">
+            <span className="font-flemin text-2xl text-[#FFC23D]">{p.n}</span>
+            <p className="font-chakra text-[13px] font-bold uppercase tracking-[0.1em]">{p.titulo}</p>
+            <p className="mt-1 text-[12.5px] leading-snug text-white/60">{p.texto}</p>
+          </li>
+        ))}
+      </ol>
+
+      <button type="button" onClick={() => verPestana('cuenta')} className="btn-juego btn-fuego !h-14 w-full !text-[15px]">
+        <Crown size={18} /> {club.suscripcion?.activa ? 'Ver mi cuenta' : club.usuario ? 'Activar mi suscripción' : 'Únete al Club'}
+      </button>
+      <p className="text-center text-[11.5px] text-white/40">Archivos para uso personal. No se permite revenderlos ni compartirlos.</p>
+    </div>
+  )
+}
+
+/** Donde no hay servidor del Club (la copia de GitHub Pages): se apunta a la web principal. */
+function SinServidor({ config }: { config: ConfigClub }) {
+  const principal = 'https://biblioteca-3d.fleremiasflemin.workers.dev/#club'
+  return (
+    <div className="flex flex-col gap-3">
+      <p className="text-[14px] leading-relaxed text-white/75">Las cuentas del Club se crean en la web principal de la Biblioteca.</p>
+      {location.host !== new URL(principal).host && (
+        <a href={principal} className="btn-juego btn-fuego !h-12 w-full !text-[14px]">
+          <Crown size={17} /> Ir a la Biblioteca y unirme
+        </a>
+      )}
+      <a
+        href={`https://wa.me/${config.whatsapp}?text=${encodeURIComponent(`Hola, quiero unirme al Club Flemin (${config.precio} USD/mes).`)}`}
+        target="_blank"
+        rel="noreferrer"
+        className="btn-juego !h-12 w-full !text-[13px]"
+      >
+        <MessageCircle size={17} /> Pregúntanos por WhatsApp
+      </a>
     </div>
   )
 }
@@ -370,7 +480,7 @@ export function ArchivosClub({ id }: { id: string }) {
             ) : (
               <button
                 type="button"
-                onClick={abrirClub}
+                onClick={() => abrirClub('cuenta')}
                 className="flex w-full items-center gap-2 bg-white/[0.04] px-3 py-2 text-left text-[13.5px] text-white/70 ring-1 ring-inset ring-white/10 transition hover:bg-white/10"
               >
                 <Lock size={14} className="shrink-0 text-white/45" />
@@ -382,7 +492,7 @@ export function ArchivosClub({ id }: { id: string }) {
         ))}
       </ul>
       {!activa && (
-        <button type="button" onClick={abrirClub} className="btn-juego btn-fuego mt-3 w-full">
+        <button type="button" onClick={() => abrirClub('cuenta')} className="btn-juego btn-fuego mt-3 w-full">
           <Crown size={15} /> {club.usuario ? 'Activar el Club' : 'Únete al Club'}
         </button>
       )}

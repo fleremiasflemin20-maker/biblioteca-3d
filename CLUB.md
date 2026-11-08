@@ -37,7 +37,7 @@ Navegador ──► Worker (worker/index.ts) ──► D1  (cuentas, sesiones, s
    - Crea el plan mensual (el número es el precio en USD):
      ```powershell
      $env:PAYPAL_CLIENT_ID="AQUÍ_EL_CLIENT_ID"; $env:PAYPAL_SECRETO="AQUÍ_EL_SECRET"; $env:PAYPAL_ENTORNO="sandbox"
-     npm run club:plan -- 12
+     npm run club:plan -- 9.99
      ```
    - Pon en `wrangler.jsonc` → `vars`: `PAYPAL_CLIENT_ID`, `PAYPAL_PLAN_ID` y `PRECIO_CLUB`.
    - Guarda el secreto en Cloudflare (no va en GitHub):
