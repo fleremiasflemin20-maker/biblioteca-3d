@@ -7,12 +7,13 @@
  * esconde todo lo del Club.
  */
 import { useSyncExternalStore } from 'react'
+import type { Perfil } from '../../worker/perfil.ts'
 
 const BASE = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '')
 export const API = `${BASE}/api`
 
 export type Suscripcion = { activa: boolean; vence: number | null; proveedor: string | null; estado: string | null }
-export type UsuarioClub = { id: string; correo: string; admin: boolean }
+export type UsuarioClub = { id: string; correo: string; nombre: string | null; admin: boolean }
 export type ConfigClub = { precio: string; paypal: { clientId: string; planId: string } | null; whatsapp: string }
 
 type Estado = {
@@ -97,7 +98,7 @@ export async function iniciarClub() {
 }
 
 export const entrar = (correo: string, clave: string) => pedir('/entrar', { correo, clave }).then(refrescarUsuario)
-export const crearCuenta = (correo: string, clave: string) => pedir('/registro', { correo, clave }).then(refrescarUsuario)
+export const crearCuenta = (datos: { correo: string; clave: string; nombre: string; perfil: Perfil }) => pedir('/registro', datos).then(refrescarUsuario)
 export const salir = () => pedir('/salir', {}).then(refrescarUsuario)
 export const confirmarPayPal = (subscriptionID: string) => pedir('/paypal/confirmar', { subscriptionID }).then(refrescarUsuario)
 

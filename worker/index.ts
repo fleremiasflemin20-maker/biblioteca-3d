@@ -28,11 +28,12 @@ import {
   venceManual,
   venceSegunPayPal,
 } from './logica.ts'
+import { limpiarNombre, limpiarPerfil } from './perfil.ts'
 
 const COOKIE = 'club_sesion'
 const PREFIJO = 'modelos/'
 
-type Usuario = { id: string; correo: string }
+type Usuario = { id: string; correo: string; nombre: string | null }
 type Suscripcion = { proveedor: string; referencia: string | null; estado: string; vence: number }
 
 const json = (datos: unknown, estado = 200, extra?: HeadersInit) => {
@@ -89,7 +90,7 @@ async function api(req: Request, url: URL, env: Entorno): Promise<Response> {
     if (!u) return json({ usuario: null })
     let s = await suscripcionDe(env, u.id)
     if (s && s.proveedor === 'paypal' && s.referencia && s.vence < Date.now()) s = (await sincronizarPayPal(env, u.id, s.referencia).catch(() => null)) ?? s
-    return json({ usuario: { id: u.id, correo: u.correo, admin: esAdmin(env, u.correo) }, suscripcion: resumen(s) })
+    return json({ usuario: { id: u.id, correo: u.correo, nombre: u.nombre, admin: esAdmin(env, u.correo) }, suscripcion: resumen(s) })
   }
   if (ruta === '/api/club/modelos' && metodo === 'GET') return modelosDelClub(env)
 
@@ -129,12 +130,21 @@ async function api(req: Request, url: URL, env: Entorno): Promise<Response> {
     if (!u || !esAdmin(env, u.correo)) return error('Solo para el administrador.', 403)
     if (ruta === '/api/admin/socios' && metodo === 'GET') {
       const { results } = await env.DB.prepare(
-        `SELECT u.correo, u.creado, s.proveedor, s.estado, s.vence,
+        `SELECT u.correo, u.nombre, u.perfil, u.creado, s.proveedor, s.estado, s.vence,
                 (SELECT COUNT(*) FROM descargas d WHERE d.usuario_id = u.id) AS descargas
            FROM usuarios u LEFT JOIN suscripciones s ON s.usuario_id = u.id
           ORDER BY COALESCE(s.vence, 0) DESC, u.creado DESC LIMIT 500`,
       ).all()
-      return json({ socios: results })
+      const socios = (results as Record<string, unknown>[]).map((r) => {
+        let perfil = null
+        try {
+          perfil = r.perfil ? JSON.parse(String(r.perfil)) : null
+        } catch {
+          /* perfil dañado: se ignora */
+        }
+        return { ...r, perfil }
+      })
+      return json({ socios })
     }
     if (ruta === '/api/admin/activar' && metodo === 'POST') {
       const { correo, dias } = (await req.json().catch(() => ({}))) as { correo?: string; dias?: number }
@@ -157,14 +167,18 @@ async function api(req: Request, url: URL, env: Entorno): Promise<Response> {
 /* ── Cuentas ─────────────────────────────────────────────────── */
 
 async function registro(req: Request, url: URL, env: Entorno) {
-  const { correo, clave } = (await req.json().catch(() => ({}))) as { correo?: string; clave?: string }
+  const { correo, clave, nombre, perfil } = (await req.json().catch(() => ({}))) as { correo?: string; clave?: string; nombre?: string; perfil?: unknown }
   const c = normalizarCorreo(correo)
+  const n = limpiarNombre(nombre)
+  if (!n) return error('Cuéntanos cómo te llamas.')
   if (!correoValido(c)) return error('Escribe un correo válido.')
   const p = problemaClave(clave)
   if (p) return error(p)
   if (await env.DB.prepare('SELECT 1 FROM usuarios WHERE correo = ?').bind(c).first()) return error('Ya existe una cuenta con ese correo. Inicia sesión.', 409)
   const id = nuevoId()
-  await env.DB.prepare('INSERT INTO usuarios (id, correo, clave, creado) VALUES (?, ?, ?, ?)').bind(id, c, await cifrarClave(clave!), Date.now()).run()
+  await env.DB.prepare('INSERT INTO usuarios (id, correo, clave, creado, nombre, perfil) VALUES (?, ?, ?, ?, ?, ?)')
+    .bind(id, c, await cifrarClave(clave!), Date.now(), n, JSON.stringify(limpiarPerfil(perfil)))
+    .run()
   return iniciarSesion(env, url, id)
 }
 
@@ -198,7 +212,7 @@ async function iniciarSesion(env: Entorno, url: URL, usuarioId: string) {
 async function usuarioDe(req: Request, env: Entorno): Promise<Usuario | null> {
   const t = leerCookie(req.headers.get('cookie'), COOKIE)
   if (!t) return null
-  return env.DB.prepare('SELECT u.id, u.correo FROM sesiones s JOIN usuarios u ON u.id = s.usuario_id WHERE s.token = ? AND s.expira > ?')
+  return env.DB.prepare('SELECT u.id, u.correo, u.nombre FROM sesiones s JOIN usuarios u ON u.id = s.usuario_id WHERE s.token = ? AND s.expira > ?')
     .bind(await hashToken(t), Date.now())
     .first<Usuario>()
 }
