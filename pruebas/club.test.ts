@@ -86,3 +86,29 @@ test('leer la cookie de sesión', () => {
   assert.equal(leerCookie('a=1; club_sesion=abc-def_; b=2', 'club_sesion'), 'abc-def_')
   assert.equal(leerCookie(null, 'club_sesion'), null)
 })
+
+test('el perfil del registro solo guarda valores conocidos', async () => {
+  const { limpiarPerfil, limpiarNombre } = await import('../worker/perfil.ts')
+  const p = limpiarPerfil({
+    universos: ['dragon-ball', 'inventado', 'dragon-ball', 5],
+    impresiones: ['figuras-pintar'],
+    impresora: 'resina',
+    nivel: 'dios',
+    pedido: '  Vegeta\nBlue  ',
+    whatsapp: '+593 97 952 3040',
+    ciudad: 'x'.repeat(100),
+    novedades: true,
+    admin: true,
+  })
+  assert.deepEqual(p.universos, ['dragon-ball'])
+  assert.deepEqual(p.impresiones, ['figuras-pintar'])
+  assert.equal(p.impresora, 'resina')
+  assert.equal(p.nivel, undefined)
+  assert.equal(p.pedido, 'Vegeta Blue')
+  assert.equal(p.whatsapp, '+593979523040')
+  assert.equal(p.ciudad?.length, 60)
+  assert.equal('admin' in p, false)
+  assert.deepEqual(limpiarPerfil(null), { universos: [], impresiones: [], impresora: undefined, nivel: undefined, uso: undefined, pedido: undefined, whatsapp: undefined, ciudad: undefined, novedades: false })
+  assert.equal(limpiarNombre('   '), undefined)
+  assert.equal(limpiarNombre(' Ana  María '), 'Ana María')
+})

@@ -5,9 +5,7 @@ import {
   archivosDe,
   cerrarClub,
   confirmarPayPal,
-  crearCuenta,
   enlaceDescarga,
-  entrar,
   fecha,
   megas,
   pedir,
@@ -19,6 +17,8 @@ import {
   type PestanaClub,
   verPestana,
 } from '../lib/club'
+import { Acceso } from './ClubAcceso'
+import { IMPRESIONES, IMPRESORAS, UNIVERSOS, type Perfil } from '../../worker/perfil.ts'
 
 /**
  * Club Flemin: suscripción mensual que deja descargar todos los STL, 3MF y
@@ -198,62 +198,6 @@ function SinServidor({ config }: { config: ConfigClub }) {
   )
 }
 
-function Acceso() {
-  const [modo, setModo] = useState<'crear' | 'entrar'>('crear')
-  const [correo, setCorreo] = useState('')
-  const [clave, setClave] = useState('')
-  const [ocupado, setOcupado] = useState(false)
-  const [error, setError] = useState('')
-
-  async function enviar(e: React.FormEvent) {
-    e.preventDefault()
-    setOcupado(true)
-    setError('')
-    try {
-      await (modo === 'crear' ? crearCuenta(correo, clave) : entrar(correo, clave))
-    } catch (err) {
-      setError((err as Error).message)
-    } finally {
-      setOcupado(false)
-    }
-  }
-
-  return (
-    <form onSubmit={enviar} className="flex flex-col gap-3">
-      <div className="grid grid-cols-2 gap-1 bg-white/[0.05] p-1">
-        {(['crear', 'entrar'] as const).map((m) => (
-          <button
-            key={m}
-            type="button"
-            onClick={() => setModo(m)}
-            className={`py-2 font-chakra text-[12.5px] font-bold uppercase tracking-[0.14em] transition ${modo === m ? 'bg-white/15 text-white' : 'text-white/50 hover:text-white'}`}
-          >
-            {m === 'crear' ? 'Crear cuenta' : 'Iniciar sesión'}
-          </button>
-        ))}
-      </div>
-      <input type="email" required autoComplete="email" placeholder="Tu correo" value={correo} onChange={(e) => setCorreo(e.target.value)} className={campo} />
-      <input
-        type="password"
-        required
-        minLength={8}
-        autoComplete={modo === 'crear' ? 'new-password' : 'current-password'}
-        placeholder={modo === 'crear' ? 'Contraseña (mínimo 8)' : 'Contraseña'}
-        value={clave}
-        onChange={(e) => setClave(e.target.value)}
-        className={campo}
-      />
-      {error && <p className="text-[13px] text-[#FF7A6B]">{error}</p>}
-      <button type="submit" disabled={ocupado} className="btn-juego btn-fuego !h-12 w-full !text-[14px] disabled:opacity-60">
-        {ocupado ? 'Un momento…' : modo === 'crear' ? 'Crear mi cuenta' : 'Entrar'}
-      </button>
-      <p className="text-[12px] leading-relaxed text-white/45">
-        {modo === 'crear' ? 'Primero creas tu cuenta y después activas la suscripción.' : '¿Olvidaste tu contraseña? Escríbenos por WhatsApp y te ayudamos.'}
-      </p>
-    </form>
-  )
-}
-
 function Cuenta({ usuario, config }: { usuario: UsuarioClub; config: ConfigClub }) {
   const { suscripcion } = useClub()
   const activa = suscripcion?.activa
@@ -266,6 +210,7 @@ function Cuenta({ usuario, config }: { usuario: UsuarioClub; config: ConfigClub 
       <div className={`flex items-center gap-3 p-3.5 ring-1 ${activa ? 'bg-gradient-to-r from-[#3BE0A0]/15 to-transparent ring-[#3BE0A0]/40' : 'bg-white/[0.04] ring-white/10'}`}>
         {activa ? <ShieldCheck size={22} className="shrink-0 text-[#3BE0A0]" /> : <Lock size={20} className="shrink-0 text-white/50" />}
         <div className="min-w-0 flex-1 leading-snug">
+          {usuario.nombre && <p className="font-flemin text-[17px] leading-tight">Hola, {usuario.nombre.split(' ')[0]}</p>}
           <p className="truncate text-[13px] text-white/60">{usuario.correo}</p>
           <p className="text-[14.5px] font-semibold">
             {activa
@@ -380,7 +325,39 @@ function BotonPayPal({ usuario, paypal }: { usuario: UsuarioClub; paypal: { clie
   )
 }
 
-type Socio = { correo: string; creado: number; proveedor: string | null; estado: string | null; vence: number | null; descargas: number }
+type Socio = { correo: string; nombre: string | null; perfil: Perfil | null; creado: number; proveedor: string | null; estado: string | null; vence: number | null; descargas: number }
+
+const nombreDe = (lista: readonly { id: string; nombre: string }[], id: string) => lista.find((x) => x.id === id)?.nombre ?? id
+
+/** Lo que más piden los socios, para decidir qué personajes subir cada semana. */
+function Gustos({ socios }: { socios: Socio[] }) {
+  const contar = (lista: readonly { id: string; nombre: string }[], clave: 'universos' | 'impresiones') =>
+    lista
+      .map((x) => ({ nombre: x.nombre, n: socios.filter((s) => s.perfil?.[clave]?.includes(x.id)).length }))
+      .filter((x) => x.n > 0)
+      .sort((a, b) => b.n - a.n)
+      .slice(0, 5)
+  const filas = [
+    { titulo: 'Personajes', datos: contar(UNIVERSOS, 'universos') },
+    { titulo: 'Impresiones', datos: contar(IMPRESIONES, 'impresiones') },
+  ].filter((f) => f.datos.length > 0)
+  if (filas.length === 0) return null
+  return (
+    <div className="grid gap-2 sm:grid-cols-2">
+      {filas.map((f) => (
+        <div key={f.titulo} className="bg-white/[0.04] p-2.5">
+          <p className="mb-1 font-chakra text-[10.5px] font-bold uppercase tracking-[0.18em] text-white/50">Lo que más piden · {f.titulo}</p>
+          {f.datos.map((d) => (
+            <p key={d.nombre} className="flex justify-between text-[12.5px]">
+              <span>{d.nombre}</span>
+              <span className="tabular-nums text-[#FFC23D]">{d.n}</span>
+            </p>
+          ))}
+        </div>
+      ))}
+    </div>
+  )
+}
 
 /** Panel del administrador: activar a mano a quien pagó por transferencia. */
 function Admin() {
@@ -418,16 +395,34 @@ function Admin() {
         </div>
         {aviso && <p className="text-[13px] text-white/70">{aviso}</p>}
       </form>
-      <ul className="flex max-h-56 flex-col gap-1 overflow-y-auto text-[12.5px]">
+      <Gustos socios={socios} />
+      <ul className="flex max-h-72 flex-col gap-1 overflow-y-auto text-[12.5px]">
         {socios.map((s) => (
-          <li key={s.correo} className="flex items-center gap-2 bg-white/[0.04] px-2.5 py-1.5">
-            <span className={`h-2 w-2 shrink-0 rounded-full ${s.vence && s.vence > ahora ? 'bg-[#3BE0A0]' : 'bg-white/25'}`} />
-            <button type="button" onClick={() => setCorreo(s.correo)} className="min-w-0 flex-1 truncate text-left hover:text-[#FFC23D]">
-              {s.correo}
-            </button>
-            <span className="shrink-0 text-white/45">
-              {s.vence ? `${s.proveedor} · ${fecha(s.vence)}` : 'sin suscripción'} · {s.descargas} ↓
-            </span>
+          <li key={s.correo} className="bg-white/[0.04] px-2.5 py-1.5">
+            <div className="flex items-center gap-2">
+              <span className={`h-2 w-2 shrink-0 rounded-full ${s.vence && s.vence > ahora ? 'bg-[#3BE0A0]' : 'bg-white/25'}`} />
+              <button type="button" onClick={() => setCorreo(s.correo)} className="min-w-0 flex-1 truncate text-left hover:text-[#FFC23D]">
+                {s.nombre ? `${s.nombre} · ` : ''}
+                {s.correo}
+              </button>
+              <span className="shrink-0 text-white/45">
+                {s.vence ? `${s.proveedor} · ${fecha(s.vence)}` : 'sin suscripción'} · {s.descargas} ↓
+              </span>
+            </div>
+            {s.perfil && (
+              <p className="mt-0.5 pl-4 text-[11.5px] leading-snug text-white/45">
+                {[
+                  ...s.perfil.universos.map((id) => nombreDe(UNIVERSOS, id)),
+                  ...s.perfil.impresiones.map((id) => nombreDe(IMPRESIONES, id)),
+                  s.perfil.impresora && nombreDe(IMPRESORAS, s.perfil.impresora),
+                  s.perfil.ciudad,
+                  s.perfil.whatsapp && `WhatsApp ${s.perfil.whatsapp}`,
+                ]
+                  .filter(Boolean)
+                  .join(' · ')}
+                {s.perfil.pedido && <span className="block text-[#FFC23D]/80">Quiere: {s.perfil.pedido}</span>}
+              </p>
+            )}
           </li>
         ))}
         {socios.length === 0 && <li className="text-white/45">Aún no hay cuentas.</li>}
