@@ -40,7 +40,7 @@
     "PAYPAL_CLIENT_ID": "",
     "PAYPAL_PLAN_ID": "",
     // Quien entre con estos correos ve el panel de administrador (activar socios a mano).
-    "ADMIN_CORREOS": "fleremias@outlook.com",
+    "ADMIN_CORREOS": "fleremias@outlook.com,fleremiasflemin20@gmail.com",
     "WHATSAPP": "593979523040"
   }
 }

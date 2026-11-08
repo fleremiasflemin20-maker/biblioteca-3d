@@ -48,7 +48,7 @@ Navegador ──► Worker (worker/index.ts) ──► D1  (cuentas, sesiones, s
      URL `https://biblioteca-3d.fleremiasflemin.workers.dev/api/paypal/webhook`,
      eventos `BILLING.SUBSCRIPTION.*` y `PAYMENT.SALE.COMPLETED`.
 4. **Administrador:** en `wrangler.jsonc`, `ADMIN_CORREOS` lleva el correo con el que te
-   registrarás en la web (por defecto `fleremias@outlook.com`). Con esa cuenta, el panel
+   registrarás en la web (`fleremias@outlook.com` y `fleremiasflemin20@gmail.com`). Con esa cuenta, el panel
    del Club muestra la lista de socios y el formulario para activar días a mano.
 5. **Publicar:** `npm run desplegar`.
 6. **Probar** con una cuenta comprador de prueba de PayPal (developer.paypal.com →
