@@ -80,6 +80,22 @@ async function api(req: Request, url: URL, env: Entorno): Promise<Response> {
   }
   if (ruta === '/api/registro' && metodo === 'POST') return registro(req, url, env)
   if (ruta === '/api/entrar' && metodo === 'POST') return entrar(req, url, env)
+  if (ruta === '/api/clave' && metodo === 'POST') {
+    const u = await usuarioDe(req, env)
+    if (!u) return error('Inicia sesión primero.', 401)
+    const { actual, nueva } = (await req.json().catch(() => ({}))) as { actual?: string; nueva?: string }
+    const fila = await env.DB.prepare('SELECT clave FROM usuarios WHERE id = ?').bind(u.id).first<{ clave: string }>()
+    if (!fila || typeof actual !== 'string' || !(await comprobarClave(actual, fila.clave))) return error('La contraseña actual no es correcta.', 401)
+    const p = problemaClave(nueva)
+    if (p) return error(p)
+    // Se cierran las demás sesiones: si alguien conocía la contraseña provisional, queda fuera.
+    const t = leerCookie(req.headers.get('cookie'), COOKIE)
+    await env.DB.batch([
+      env.DB.prepare('UPDATE usuarios SET clave = ? WHERE id = ?').bind(await cifrarClave(nueva!), u.id),
+      env.DB.prepare('DELETE FROM sesiones WHERE usuario_id = ? AND token != ?').bind(u.id, t ? await hashToken(t) : ''),
+    ])
+    return json({ ok: true })
+  }
   if (ruta === '/api/salir' && metodo === 'POST') {
     const t = leerCookie(req.headers.get('cookie'), COOKIE)
     if (t) await env.DB.prepare('DELETE FROM sesiones WHERE token = ?').bind(await hashToken(t)).run()
