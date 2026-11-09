@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { CONTENIDO_KIT, PINCELES, type KitPintura } from '../lib/kitPintura'
 
 const BASE = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '')
-export const PROMO_KIT = `${BASE}/promo/kit-pintura-hero.webp`
+export const PROMO_KIT = `${BASE}/promo/kit-pintura-hero-v2.webp`
 
 /** La paleta como gotas de pintura, cada una con su nombre. */
 export function Gotas({ colores, chicas = false }: { colores: KitPintura['colores']; chicas?: boolean }) {
