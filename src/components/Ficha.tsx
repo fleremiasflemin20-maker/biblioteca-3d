@@ -8,6 +8,8 @@ import { ICONO_CATEGORIA } from '../lib/iconos'
 import { coste, estrellas, rareza } from '../lib/rareza'
 import { enlaceStudio } from '../lib/studio'
 import { enlaceHistoria } from '../lib/historias'
+import { detalleKit, kitDe } from '../lib/kitPintura'
+import { BloqueKit, ExplicacionKit } from './KitPintura'
 import { ICONOS, MEDIDAS, OPCIONES_INICIALES, PALETAS, describirPedido, type IconoId, type OpcionesLlavero, type PaletaId } from '../lib/llavero'
 
 const MODOS: { id: Modo; nombre: string }[] = [
@@ -40,6 +42,7 @@ export function Ficha({
 }) {
   const [modo, setModo] = useState<Modo>('textura')
   /** Cómo se enseñan las piezas de un modelo por partes: armado, separado por donde se saca, o el kit en el suelo. */
+  const [explicarKit, setExplicarKit] = useState(false)
   const [partes, setPartes] = useState<'armado' | 'partes' | 'kit'>('armado')
   const separado = partes === 'partes'
   const [opciones, setOpciones] = useState<OpcionesLlavero>({ ...OPCIONES_INICIALES, nombre: '' })
@@ -78,6 +81,7 @@ export function Ficha({
   ]
 
   const r = rareza(modelo)
+  const kit = kitDe(modelo)
   const etiqueta = 'mb-2 block font-chakra text-[11px] font-semibold uppercase tracking-[0.22em] text-[#FFC23D]'
   const chip = 'pestana px-3 py-1.5 font-chakra text-[12.5px] font-semibold transition-colors'
 
@@ -208,6 +212,8 @@ export function Ficha({
               </ol>
             </div>
           )}
+
+          {kit && <BloqueKit kit={kit} etiqueta={etiqueta} onExplicar={() => setExplicarKit(true)} />}
 
           {modelo.personalizable && (
             <div className="corte flex flex-col gap-5 bg-white/[0.04] p-4 ring-1 ring-inset ring-white/10">
@@ -363,7 +369,7 @@ export function Ficha({
               <div className="flex flex-col gap-2">
                 <p className="font-chakra text-[12px] font-semibold uppercase tracking-[0.2em] text-white/60">Pídelo por</p>
                 <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
-                  {canalesPedido(modelo, modelo.personalizable ? describirPedido(vista) : undefined).map((c) => {
+                  {canalesPedido(modelo, modelo.personalizable ? describirPedido(vista) : kit ? detalleKit(kit) : undefined).map((c) => {
                     const Icono = c.id === 'instagram' ? Camera : c.id === 'telegram' ? Send : MessageCircle
                     return (
                       <a
@@ -390,6 +396,7 @@ export function Ficha({
           </div>
         </div>
       </div>
+      {explicarKit && <ExplicacionKit onCerrar={() => setExplicarKit(false)} />}
     </div>
   )
 }

@@ -6,6 +6,7 @@ import { enlaceHistoria } from './lib/historias'
 import { Seleccion } from './components/Seleccion'
 import { Subir } from './components/Subir'
 import { Portadas } from './components/Portadas'
+import { ExplicacionKit, PROMO_KIT } from './components/KitPintura'
 import { ModoManos } from './components/ModoManos'
 import { Inicio, useInicio } from './components/Inicio'
 import { Musica } from './components/Musica'
@@ -40,6 +41,7 @@ export default function App() {
   const [orden, setOrden] = useState<Orden>('recientes')
   const [acabado, setAcabado] = useState<Acabado>('todos')
   const [abierto, setAbierto] = useState<string | null>(null)
+  const [explicarKit, setExplicarKit] = useState(false)
   const [subiendo, setSubiendo] = useState(false)
   const [sinPortada, setSinPortada] = useState(0)
   const [manos, setManos] = useState<Manos | null>(null)
@@ -330,7 +332,7 @@ export default function App() {
                   [
                     { id: 'todos', nombre: 'Todos', n: conteo.todos },
                     { id: 'color', nombre: 'A color', n: conteo.color },
-                    { id: 'sin-textura', nombre: 'Sin textura', n: conteo['sin-textura'] },
+                    { id: 'sin-textura', nombre: 'Para pintar', n: conteo['sin-textura'] },
                   ] as const
                 ).map((o) => (
                   <button
@@ -351,6 +353,29 @@ export default function App() {
                 ))}
               </div>
             </div>
+
+            {acabado !== 'color' && conteo['sin-textura'] > 0 && (
+              <div className="corte relative mb-12 grid overflow-hidden bg-gradient-to-r from-[#FF5FA2]/20 via-[#FFC23D]/10 to-[#2AC3FF]/20 ring-1 ring-inset ring-white/15 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
+                <img src={PROMO_KIT} alt="Figura en blanco con su paleta, pinturas y pinceles" loading="lazy" className="h-full max-h-[340px] w-full object-cover" />
+                <div className="flex flex-col justify-center gap-3 p-5 md:p-8">
+                  <p className="font-chakra text-[11px] font-semibold uppercase tracking-[0.3em] text-[#FFC23D]">Nuevo · Kit para pintar</p>
+                  <h3 className="font-flemin text-[clamp(1.5rem,3vw,2.4rem)] leading-tight text-white">Píntalo tú, con sus colores exactos</h3>
+                  <p className="text-[15px] leading-relaxed text-white/70">
+                    Las figuras en blanco llegan en una cajita con la paleta exacta del personaje, pintura para PLA, imprimación, barniz y sus pinceles.
+                  </p>
+                  <div className="mt-1 flex flex-wrap gap-2">
+                    {acabado !== 'sin-textura' && (
+                      <button type="button" onClick={() => setAcabado('sin-textura')} className="btn-fuego px-4 py-2 font-chakra text-[12.5px] font-bold uppercase tracking-[0.14em]">
+                        Ver figuras para pintar
+                      </button>
+                    )}
+                    <button type="button" onClick={() => setExplicarKit(true)} className="corte-sm bg-white/10 px-4 py-2 font-chakra text-[12.5px] font-bold uppercase tracking-[0.14em] text-white ring-1 ring-inset ring-white/25 hover:bg-white/20">
+                      Qué trae la cajita
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {lista.length ? (
               <div key={`${c.id}-${orden}-${acabado}`}>
@@ -379,7 +404,7 @@ export default function App() {
                                 {g.categoria.nombre}
                               </h3>
                               <p className="mt-1.5 flex items-center gap-2 font-chakra text-[11px] font-semibold uppercase tracking-[0.2em] text-white/55">
-                                <span className={`rareza px-2 py-0.5 ${g.blanco ? 'text-white/80 ring-1 ring-white/30' : 'bg-white text-[#140f22]'}`}>{g.blanco ? 'Sin textura' : 'A color'}</span>
+                                <span className={`rareza px-2 py-0.5 ${g.blanco ? 'text-white/80 ring-1 ring-white/30' : 'bg-white text-[#140f22]'}`}>{g.blanco ? 'Para pintar' : 'A color'}</span>
                                 <span className="tabular-nums">{g.modelos.length} figuras</span>
                               </p>
                             </div>
@@ -554,6 +579,7 @@ export default function App() {
       )}
 
       {/* Solo en desarrollo: fotografía las piezas que aún no tienen portada. */}
+      {explicarKit && <ExplicacionKit onCerrar={() => setExplicarKit(false)} onVer={() => (setExplicarKit(false), setAcabado('sin-textura'))} />}
       {pendientes.length > 0 && <Portadas pendientes={pendientes} alAvanzar={setSinPortada} />}
       {sinPortada > 0 && (
         <p className="fixed bottom-6 left-1/2 z-40 -translate-x-1/2 bg-black/80 px-4 py-2 font-chakra text-xs uppercase tracking-wider text-white ring-1 ring-white/20">

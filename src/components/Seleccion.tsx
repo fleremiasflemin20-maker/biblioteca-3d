@@ -33,7 +33,7 @@ const FIGURA_INICIAL = 'saiyan-dios-azul-hd-a'
 const FILTROS: { id: Acabado; nombre: string }[] = [
   { id: 'todos', nombre: 'Todo' },
   { id: 'color', nombre: 'A color' },
-  { id: 'sin-textura', nombre: 'Sin color' },
+  { id: 'sin-textura', nombre: 'Para pintar' },
 ]
 
 /** Recién subida: los últimos diez días llevan la etiqueta de nueva. */
@@ -607,7 +607,7 @@ export function Seleccion({
           {/* Ficha técnica en chapas, como los atributos de un luchador. */}
           <div key={`${actual.id}-f`} className="entra-nombre mt-2.5 flex flex-wrap justify-end gap-1.5 font-chakra text-[10.5px] font-semibold uppercase tracking-[0.14em]" style={{ animationDelay: '120ms' }}>
             {esNueva(actual) && <span className="chapa bg-[#FF2D8A] text-white">Nuevo</span>}
-            <span className={`chapa ${actual.sinTextura ? 'text-white/85 ring-1 ring-white/40' : 'bg-white/90 text-[#140f22]'}`}>{actual.sinTextura ? 'Sin color' : 'A color'}</span>
+            <span className={`chapa ${actual.sinTextura ? 'text-white/85 ring-1 ring-white/40' : 'bg-white/90 text-[#140f22]'}`}>{actual.sinTextura ? 'Para pintar' : 'A color'}</span>
             {actual.triangulos ? <span className="chapa bg-black/45 text-white/80 ring-1 ring-white/15">{triangulos(actual.triangulos)} tris</span> : null}
             <span className="chapa bg-black/45 text-white/80 ring-1 ring-white/15">{actual.formatos.join(' · ')}</span>
           </div>
@@ -780,7 +780,7 @@ export function Seleccion({
                   const sigue = gi > 0 && grupos[gi - 1].categoria.id === g.categoria.id
                   const enSeccion = grupos.filter((x) => x.categoria.id === g.categoria.id).reduce((n, x) => n + x.modelos.length, 0)
                   const sello = (
-                    <span className={`shrink-0 px-1.5 py-px text-[9.5px] tracking-[0.12em] ${g.blanco ? 'text-white/70 ring-1 ring-white/30' : 'bg-white/90 text-[#140f22]'}`}>{g.blanco ? 'Sin color' : 'A color'}</span>
+                    <span className={`shrink-0 px-1.5 py-px text-[9.5px] tracking-[0.12em] ${g.blanco ? 'text-white/70 ring-1 ring-white/30' : 'bg-white/90 text-[#140f22]'}`}>{g.blanco ? 'Para pintar' : 'A color'}</span>
                   )
                   return [
                     sigue ? (
@@ -844,7 +844,7 @@ export function Seleccion({
           </div>
           <p className="flex items-center justify-between gap-3 font-chakra text-[11px] uppercase tracking-[0.18em] text-white/45">
             <span className="truncate">
-              {grupoActual ? `${grupoActual.categoria.nombre} · ${grupoActual.blanco ? 'Sin color' : 'A color'}` : c.nombre}
+              {grupoActual ? `${grupoActual.categoria.nombre} · ${grupoActual.blanco ? 'Para pintar' : 'A color'}` : c.nombre}
             </span>
             <span className="shrink-0 tabular-nums">{lista.length ? `${i + 1} / ${lista.length}` : '0'}</span>
           </p>
