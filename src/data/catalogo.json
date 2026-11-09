@@ -1,5 +1,119 @@
 [
   {
+    "id": "artista-marcial-trenza-chibi-a",
+    "nombre": "Artista Marcial de la Trenza Chibi · A",
+    "categoria": "anime",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "El joven artista marcial en chibi: cabello negro con su trenza, sonrisa confiada, camisa china roja con botones dorados, pantalón gris oscuro y zapatillas de kung fu.",
+    "archivo": "meshy/artista-marcial-trenza-chibi-a.glb",
+    "peso": 2569364,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-11-09",
+    "triangulos": 424388,
+    "portada": "artista-marcial-trenza-chibi-a.webp"
+  },
+  {
+    "id": "artista-marcial-trenza-chibi-b",
+    "nombre": "Artista Marcial de la Trenza Chibi · B",
+    "categoria": "anime",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "La misma figura chibi con otro acabado: camisa china roja de puños blancos, pantalón azul marino y zapatillas negras con suela blanca. La trenza cae sobre el hombro.",
+    "archivo": "meshy/artista-marcial-trenza-chibi-b.glb",
+    "peso": 2600420,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-11-09",
+    "triangulos": 424388,
+    "portada": "artista-marcial-trenza-chibi-b.webp"
+  },
+  {
+    "id": "cerdito-negro-panuelo-chibi",
+    "nombre": "Cerdito Negro del Pañuelo",
+    "categoria": "anime",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "El cerdito negro más famoso del anime de artes marciales, sentado y con su pañuelo amarillo de manchas al cuello. Ojos enormes y orejas puntiagudas, listo para el escritorio.",
+    "archivo": "meshy/cerdito-negro-panuelo-chibi.glb",
+    "peso": 1369928,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-11-09",
+    "triangulos": 203204,
+    "portada": "cerdito-negro-panuelo-chibi.webp"
+  },
+  {
+    "id": "cerdito-negro-disfraz-azul-chibi",
+    "nombre": "Cerdito Negro · Disfraz Azul",
+    "categoria": "anime",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "El cerdito negro del pañuelo amarillo con un pijama-disfraz azul de alienígena de orejas largas. Sentado, panza celeste y patitas rosadas: una pieza tierna para regalar.",
+    "archivo": "meshy/cerdito-negro-disfraz-azul-chibi.glb",
+    "peso": 2971340,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-11-09",
+    "triangulos": 497654,
+    "portada": "cerdito-negro-disfraz-azul-chibi.webp"
+  },
+  {
+    "id": "guerrero-bestia-chibi",
+    "nombre": "Guerrero Bestia Chibi",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "El erudito saiyan en su forma Bestia, en chibi: cabello blanco plateado en llamarada, ojos rojos, gi morado con faja roja y muñequeras negras. Cabeza grande y cuerpo compacto.",
+    "archivo": "meshy/guerrero-bestia-chibi.glb",
+    "peso": 586820,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-11-09",
+    "triangulos": 30797,
+    "portada": "guerrero-bestia-chibi.webp"
+  },
+  {
+    "id": "guerrero-bestia",
+    "nombre": "Guerrero Bestia",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "El erudito saiyan en su forma Bestia, de cuerpo entero: melena blanca plateada, gi morado con faja roja, muñequeras negras y botas, con los puños listos para pelear.",
+    "archivo": "meshy/guerrero-bestia.glb",
+    "peso": 4281480,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-11-09",
+    "triangulos": 734232,
+    "portada": "guerrero-bestia.webp"
+  },
+  {
     "id": "saiyan-dios-azul-hd-a",
     "nombre": "Saiyan Dios Azul · Hiperdetalle A",
     "categoria": "hiperdetalle",
