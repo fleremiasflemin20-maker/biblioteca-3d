@@ -28,7 +28,7 @@ import { desbloquear, marcarVista, nivel, ponerSonido, sfx, useMando, useProgres
 const COLUMNAS = 6
 const MAX_PEDIDO = 5
 /** La figura con la que se abre la biblioteca para todos: la primera que se ve. */
-const FIGURA_INICIAL = 'fusion-fase4-chibi-a'
+const FIGURA_INICIAL = 'saiyan-dios-azul-hd-a'
 
 const FILTROS: { id: Acabado; nombre: string }[] = [
   { id: 'todos', nombre: 'Todo' },

@@ -3,7 +3,7 @@ import { BookOpen, Camera, ChevronLeft, ChevronRight, FileText, Hand, Layers, Me
 import { Visor } from './Visor'
 import { ArchivosClub } from './Club'
 import type { Modo } from './Pieza'
-import { CATEGORIAS, CORREO, canalesPedido, enlaceCompra, peso, precio, rutaDescarga, triangulos, type Modelo3D } from '../lib/catalogo'
+import { CATEGORIAS, CORREO, canalesPedido, enlaceCompra, peso, precio, rutaDescarga, textoArmado, triangulos, type Modelo3D } from '../lib/catalogo'
 import { ICONO_CATEGORIA } from '../lib/iconos'
 import { coste, estrellas, rareza } from '../lib/rareza'
 import { enlaceStudio } from '../lib/studio'
@@ -71,6 +71,7 @@ export function Ficha({
           { etiqueta: 'Triángulos', valor: triangulos(modelo.triangulos) },
           { etiqueta: 'Vista previa', valor: peso(modelo.peso) },
         ]),
+    ...(textoArmado(modelo) ? [{ etiqueta: 'Armado', valor: modelo.piezas?.length ? `Por piezas: ${modelo.piezas.length} para armar` : 'Completa, de una sola pieza' }] : []),
     { etiqueta: 'Origen', valor: modelo.origen ?? '—' },
     { etiqueta: 'Licencia', valor: modelo.licencia ?? 'Uso personal y comercial' },
     ...(modelo.autor ? [{ etiqueta: 'Diseño original', valor: modelo.autor }] : []),
