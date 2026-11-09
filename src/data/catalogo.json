@@ -1,5 +1,690 @@
 [
   {
+    "id": "saiyan-dios-azul-hd-a",
+    "nombre": "Saiyan Dios Azul · Hiperdetalle A",
+    "categoria": "hiperdetalle",
+    "precio": 25,
+    "formatos": [
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Figura completa, de una sola pieza, con 2 millones de triángulos de detalle: cabello azul en mechones afilados, músculos marcados bajo el gi naranja, el kanji en el pecho y las muñequeras y botas con sus cordones. Pose firme de guardia.",
+    "archivo": "hiperdetalle/saiyan-dios-azul-hd-a.glb",
+    "peso": 8801736,
+    "origen": "Diseño propio · generado con Hi3D",
+    "destacado": true,
+    "alta": "2026-11-08",
+    "licencia": "Fan art · solo uso personal",
+    "portada": "saiyan-dios-azul-hd-a.webp",
+    "triangulos": 2000000
+  },
+  {
+    "id": "saiyan-dios-azul-hd-b",
+    "nombre": "Saiyan Dios Azul · Hiperdetalle B",
+    "categoria": "hiperdetalle",
+    "precio": 25,
+    "formatos": [
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Figura completa, de una sola pieza: el mismo guerrero de cabello azul con los brazos abajo, la mirada seria y los pliegues del pantalón tallados uno a uno. 2 millones de triángulos.",
+    "archivo": "hiperdetalle/saiyan-dios-azul-hd-b.glb",
+    "peso": 8812452,
+    "origen": "Diseño propio · generado con Hi3D",
+    "destacado": true,
+    "alta": "2026-11-08",
+    "licencia": "Fan art · solo uso personal",
+    "portada": "saiyan-dios-azul-hd-b.webp",
+    "triangulos": 2000000
+  },
+  {
+    "id": "saiyan-dios-azul-hd-c",
+    "nombre": "Saiyan Dios Azul · Hiperdetalle C",
+    "categoria": "hiperdetalle",
+    "precio": 25,
+    "formatos": [
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Figura completa, de una sola pieza, en postura de combate: puños cerrados, gi naranja intenso con faja azul y botas con suela negra. Cada arruga de la tela y cada vena del brazo se ven.",
+    "archivo": "hiperdetalle/saiyan-dios-azul-hd-c.glb",
+    "peso": 8836988,
+    "origen": "Diseño propio · generado con Hi3D",
+    "destacado": true,
+    "alta": "2026-11-08",
+    "licencia": "Fan art · solo uso personal",
+    "portada": "saiyan-dios-azul-hd-c.webp",
+    "triangulos": 2000000
+  },
+  {
+    "id": "saiyan-realista-hd",
+    "nombre": "Saiyan Clásico · Hiperdetalle",
+    "categoria": "hiperdetalle",
+    "precio": 25,
+    "formatos": [
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Figura completa, de una sola pieza: el héroe de siempre con su cabello negro en punta, gi naranja y azul y botas rojas, a escala realista. 2 millones de triángulos para que se lean hasta los nudos de las botas.",
+    "archivo": "hiperdetalle/saiyan-realista-hd.glb",
+    "peso": 8698852,
+    "origen": "Diseño propio · generado con Hi3D",
+    "destacado": true,
+    "alta": "2026-11-08",
+    "licencia": "Fan art · solo uso personal",
+    "portada": "saiyan-realista-hd.webp",
+    "triangulos": 2000000
+  },
+  {
+    "id": "artista-marcial-pelirroja-almohada-hd",
+    "nombre": "Artista Marcial Pelirroja · Pijama",
+    "categoria": "hiperdetalle",
+    "precio": 25,
+    "formatos": [
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Figura completa, de una sola pieza: trenza roja con lazo, pijama rosa con volantes en los puños, almohada en la mano y pies descalzos. Una escena de anime clásica con todo el detalle de la tela.",
+    "archivo": "hiperdetalle/artista-marcial-pelirroja-almohada-hd.glb",
+    "peso": 8676576,
+    "origen": "Diseño propio · generado con Hi3D",
+    "destacado": true,
+    "alta": "2026-11-08",
+    "licencia": "Fan art · solo uso personal",
+    "portada": "artista-marcial-pelirroja-almohada-hd.webp",
+    "triangulos": 2000000
+  },
+  {
+    "id": "ninja-capa-nubes-rojas-hd",
+    "nombre": "Ninja de la Capa de Nubes Rojas",
+    "categoria": "hiperdetalle",
+    "precio": 25,
+    "formatos": [
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Figura completa, de una sola pieza: capa negra con las nubes rojas y su forro, bandana rayada en la frente, malla en el cuello y sandalias ninja. Hasta las costuras de la capa están talladas.",
+    "archivo": "hiperdetalle/ninja-capa-nubes-rojas-hd.glb",
+    "peso": 8628892,
+    "origen": "Diseño propio · generado con Hi3D",
+    "destacado": true,
+    "alta": "2026-11-08",
+    "licencia": "Fan art · solo uso personal",
+    "portada": "ninja-capa-nubes-rojas-hd.webp",
+    "triangulos": 2000000
+  },
+  {
+    "id": "ninja-legendario-armadura-roja-hd",
+    "nombre": "Ninja Legendario · Armadura Roja",
+    "categoria": "hiperdetalle",
+    "precio": 25,
+    "formatos": [
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Figura completa, de una sola pieza: melena larga y salvaje, armadura samurái de placas rojas, brazos cruzados y el abanico de guerra a la espalda. Cada placa lleva su borde y su cordón.",
+    "archivo": "hiperdetalle/ninja-legendario-armadura-roja-hd.glb",
+    "peso": 8683088,
+    "origen": "Diseño propio · generado con Hi3D",
+    "destacado": true,
+    "alta": "2026-11-08",
+    "licencia": "Fan art · solo uso personal",
+    "portada": "ninja-legendario-armadura-roja-hd.webp",
+    "triangulos": 2000000
+  },
+  {
+    "id": "guerrero-mecha-negro-hd",
+    "nombre": "Dragón Mecha Negro",
+    "categoria": "hiperdetalle",
+    "precio": 25,
+    "formatos": [
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Figura completa, de una sola pieza: armadura negra y plateada, alas de placas hexagonales, garras dobles en los brazos y casco con cuernos. Un mecha de 2 millones de triángulos lleno de remaches y filos.",
+    "archivo": "hiperdetalle/guerrero-mecha-negro-hd.glb",
+    "peso": 8955756,
+    "origen": "Diseño propio · generado con Hi3D",
+    "destacado": true,
+    "alta": "2026-11-08",
+    "licencia": "Fan art · solo uso personal",
+    "portada": "guerrero-mecha-negro-hd.webp",
+    "triangulos": 1978010
+  },
+  {
+    "id": "guerrero-dragon-blindado-hd-piezas",
+    "nombre": "Dragón Blindado · Kit de 43 Piezas",
+    "categoria": "hiperdetalle",
+    "precio": 28,
+    "formatos": [
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Para armar por piezas: el dragón guerrero de armadura verde y dorada viene en 43 piezas que se imprimen por separado (alas, casco, coraza, garras de manos y pies…) y se montan como un kit de modelismo. Cada pieza con su textura y sus escamas.",
+    "archivo": "hiperdetalle/guerrero-dragon-blindado-hd-piezas.glb",
+    "peso": 13458836,
+    "origen": "Diseño propio · generado con Hi3D",
+    "destacado": true,
+    "alta": "2026-11-08",
+    "licencia": "Fan art · solo uso personal",
+    "piezas": [
+      {
+        "nombre": "Pie derecho",
+        "color": "#2f6b3a",
+        "detalle": "Armadura verde con el relieve de las escamas.",
+        "salida": [
+          -0.126,
+          -0.271,
+          -0.027
+        ]
+      },
+      {
+        "nombre": "Pie izquierdo",
+        "color": "#2f6b3a",
+        "detalle": "Armadura verde con el relieve de las escamas.",
+        "salida": [
+          0.127,
+          -0.271,
+          -0.023
+        ]
+      },
+      {
+        "nombre": "Garra exterior pie derecho",
+        "color": "#e3d7b0",
+        "detalle": "Garra afilada; va a presión en su ranura.",
+        "salida": [
+          -0.165,
+          -0.25,
+          0.008
+        ]
+      },
+      {
+        "nombre": "Garra central pie derecho",
+        "color": "#e3d7b0",
+        "detalle": "Garra afilada; va a presión en su ranura.",
+        "salida": [
+          -0.144,
+          -0.261,
+          0.036
+        ]
+      },
+      {
+        "nombre": "Garra interior pie derecho",
+        "color": "#e3d7b0",
+        "detalle": "Garra afilada; va a presión en su ranura.",
+        "salida": [
+          -0.116,
+          -0.27,
+          0.058
+        ]
+      },
+      {
+        "nombre": "Garra exterior pie izquierdo",
+        "color": "#e3d7b0",
+        "detalle": "Garra afilada; va a presión en su ranura.",
+        "salida": [
+          0.163,
+          -0.252,
+          0.012
+        ]
+      },
+      {
+        "nombre": "Garra central pie izquierdo",
+        "color": "#e3d7b0",
+        "detalle": "Garra afilada; va a presión en su ranura.",
+        "salida": [
+          0.141,
+          -0.262,
+          0.04
+        ]
+      },
+      {
+        "nombre": "Garra interior pie izquierdo",
+        "color": "#e3d7b0",
+        "detalle": "Garra afilada; va a presión en su ranura.",
+        "salida": [
+          0.116,
+          -0.27,
+          0.058
+        ]
+      },
+      {
+        "nombre": "Talonera derecha",
+        "color": "#2f6b3a",
+        "detalle": "Armadura verde con el relieve de las escamas.",
+        "salida": [
+          -0.131,
+          -0.268,
+          -0.034
+        ]
+      },
+      {
+        "nombre": "Talonera izquierda",
+        "color": "#2f6b3a",
+        "detalle": "Armadura verde con el relieve de las escamas.",
+        "salida": [
+          0.126,
+          -0.27,
+          -0.034
+        ]
+      },
+      {
+        "nombre": "Pierna derecha",
+        "color": "#2f6b3a",
+        "detalle": "Armadura verde con el relieve de las escamas.",
+        "salida": [
+          -0.132,
+          -0.27,
+          0
+        ]
+      },
+      {
+        "nombre": "Pierna izquierda",
+        "color": "#2f6b3a",
+        "detalle": "Armadura verde con el relieve de las escamas.",
+        "salida": [
+          0.127,
+          -0.272,
+          0
+        ]
+      },
+      {
+        "nombre": "Rodillera derecha",
+        "color": "#c9a646",
+        "detalle": "Placa dorada de la armadura.",
+        "salida": [
+          -0.157,
+          -0.255,
+          0.01
+        ]
+      },
+      {
+        "nombre": "Rodillera izquierda",
+        "color": "#c9a646",
+        "detalle": "Placa dorada de la armadura.",
+        "salida": [
+          0.157,
+          -0.255,
+          0.01
+        ]
+      },
+      {
+        "nombre": "Muslo derecho",
+        "color": "#2f6b3a",
+        "detalle": "Armadura verde con el relieve de las escamas.",
+        "salida": [
+          -0.16,
+          -0.251,
+          0.034
+        ]
+      },
+      {
+        "nombre": "Muslo izquierdo",
+        "color": "#2f6b3a",
+        "detalle": "Armadura verde con el relieve de las escamas.",
+        "salida": [
+          0.152,
+          -0.257,
+          0.035
+        ]
+      },
+      {
+        "nombre": "Faldón delantero",
+        "color": "#c9a646",
+        "detalle": "Placa dorada de la armadura.",
+        "salida": [
+          0,
+          -0.205,
+          0.219
+        ]
+      },
+      {
+        "nombre": "Cadera",
+        "color": "#2f6b3a",
+        "detalle": "Armadura verde con el relieve de las escamas.",
+        "salida": [
+          -0.042,
+          -0.294,
+          -0.042
+        ]
+      },
+      {
+        "nombre": "Faldón trasero",
+        "color": "#2f6b3a",
+        "detalle": "Armadura verde con el relieve de las escamas.",
+        "salida": [
+          0,
+          -0.157,
+          -0.255
+        ]
+      },
+      {
+        "nombre": "Cintura",
+        "color": "#2b3a8c",
+        "detalle": "Pieza de unión azul oscuro, queda casi oculta.",
+        "salida": [
+          0,
+          -0.26,
+          0.149
+        ]
+      },
+      {
+        "nombre": "Abdomen",
+        "color": "#c9a646",
+        "detalle": "Placa dorada de la armadura.",
+        "salida": [
+          0,
+          -0.166,
+          0.25
+        ]
+      },
+      {
+        "nombre": "Placa central del pecho",
+        "color": "#c9a646",
+        "detalle": "Placa dorada de la armadura.",
+        "salida": [
+          -0.027,
+          0.299,
+          0
+        ]
+      },
+      {
+        "nombre": "Coraza del pecho",
+        "color": "#c9a646",
+        "detalle": "Placa dorada de la armadura.",
+        "salida": [
+          -0.024,
+          0.263,
+          0.143
+        ]
+      },
+      {
+        "nombre": "Torso y armazón de las alas",
+        "color": "#2f6b3a",
+        "detalle": "Armadura verde con el relieve de las escamas.",
+        "salida": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nombre": "Cuello y hombros",
+        "color": "#2f6b3a",
+        "detalle": "Armadura verde con el relieve de las escamas.",
+        "salida": [
+          -0.02,
+          0.293,
+          -0.061
+        ]
+      },
+      {
+        "nombre": "Nuca",
+        "color": "#2b3a8c",
+        "detalle": "Pieza de unión azul oscuro, queda casi oculta.",
+        "salida": [
+          0,
+          0.295,
+          -0.053
+        ]
+      },
+      {
+        "nombre": "Hombrera derecha",
+        "color": "#2f6b3a",
+        "detalle": "Armadura verde con el relieve de las escamas.",
+        "salida": [
+          -0.299,
+          0.02,
+          0.01
+        ]
+      },
+      {
+        "nombre": "Hombrera izquierda",
+        "color": "#2f6b3a",
+        "detalle": "Armadura verde con el relieve de las escamas.",
+        "salida": [
+          0.299,
+          0.019,
+          0.019
+        ]
+      },
+      {
+        "nombre": "Muñequera derecha",
+        "color": "#c9a646",
+        "detalle": "Placa dorada de la armadura.",
+        "salida": [
+          -0.277,
+          -0.052,
+          0.104
+        ]
+      },
+      {
+        "nombre": "Antebrazo izquierdo",
+        "color": "#2f6b3a",
+        "detalle": "Armadura verde con el relieve de las escamas.",
+        "salida": [
+          0.287,
+          -0.067,
+          0.057
+        ]
+      },
+      {
+        "nombre": "Muñequera izquierda",
+        "color": "#c9a646",
+        "detalle": "Placa dorada de la armadura.",
+        "salida": [
+          0.281,
+          -0.079,
+          0.07
+        ]
+      },
+      {
+        "nombre": "Garra de la mano derecha (1)",
+        "color": "#e3d7b0",
+        "detalle": "Garra afilada; va a presión en su ranura.",
+        "salida": [
+          -0.255,
+          -0.096,
+          0.125
+        ]
+      },
+      {
+        "nombre": "Garra de la mano derecha (2)",
+        "color": "#e3d7b0",
+        "detalle": "Garra afilada; va a presión en su ranura.",
+        "salida": [
+          -0.237,
+          -0.099,
+          0.154
+        ]
+      },
+      {
+        "nombre": "Garra de la mano izquierda (1)",
+        "color": "#e3d7b0",
+        "detalle": "Garra afilada; va a presión en su ranura.",
+        "salida": [
+          0.27,
+          -0.103,
+          0.08
+        ]
+      },
+      {
+        "nombre": "Garra de la mano izquierda (2)",
+        "color": "#e3d7b0",
+        "detalle": "Garra afilada; va a presión en su ranura.",
+        "salida": [
+          0.266,
+          -0.073,
+          0.119
+        ]
+      },
+      {
+        "nombre": "Garra de la mano izquierda (3)",
+        "color": "#e3d7b0",
+        "detalle": "Garra afilada; va a presión en su ranura.",
+        "salida": [
+          0.244,
+          -0.057,
+          0.165
+        ]
+      },
+      {
+        "nombre": "Ala derecha",
+        "color": "#4f8a55",
+        "detalle": "Placas del ala con su armazón.",
+        "salida": [
+          -0.204,
+          0.153,
+          -0.158
+        ]
+      },
+      {
+        "nombre": "Ala izquierda",
+        "color": "#4f8a55",
+        "detalle": "Placas del ala con su armazón.",
+        "salida": [
+          0.206,
+          0.15,
+          -0.159
+        ]
+      },
+      {
+        "nombre": "Punta del ala derecha",
+        "color": "#4f8a55",
+        "detalle": "Placas del ala con su armazón.",
+        "salida": [
+          -0.249,
+          0.078,
+          -0.148
+        ]
+      },
+      {
+        "nombre": "Punta del ala izquierda",
+        "color": "#4f8a55",
+        "detalle": "Placas del ala con su armazón.",
+        "salida": [
+          0.25,
+          0.077,
+          -0.146
+        ]
+      },
+      {
+        "nombre": "Casco con cuernos",
+        "color": "#c9a646",
+        "detalle": "Placa dorada de la armadura.",
+        "salida": [
+          0,
+          0.294,
+          0.06
+        ]
+      },
+      {
+        "nombre": "Penacho trasero",
+        "color": "#c9a646",
+        "detalle": "Placa dorada de la armadura.",
+        "salida": [
+          0,
+          0.282,
+          -0.102
+        ]
+      },
+      {
+        "nombre": "Púa de la nuca",
+        "color": "#e3d7b0",
+        "detalle": "Garra afilada; va a presión en su ranura.",
+        "salida": [
+          0.124,
+          0.225,
+          -0.155
+        ]
+      }
+    ],
+    "portada": "guerrero-dragon-blindado-hd-piezas.webp",
+    "triangulos": 2297031
+  },
+  {
+    "id": "saiyan-azul-hd-piezas",
+    "nombre": "Saiyan Azul · Kit de 6 Piezas",
+    "categoria": "hiperdetalle",
+    "precio": 22,
+    "formatos": [
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Para armar por piezas: cabeza, torso, dos brazos y dos piernas que se imprimen por separado y se montan. Malla en blanco para pintar a mano; en la vista 3D cada pieza va en un tono para distinguirla.",
+    "archivo": "hiperdetalle/saiyan-azul-hd-piezas.glb",
+    "peso": 2652720,
+    "origen": "Diseño propio · generado con Hi3D",
+    "destacado": true,
+    "alta": "2026-11-08",
+    "licencia": "Fan art · solo uso personal",
+    "piezas": [
+      {
+        "nombre": "Pierna derecha",
+        "color": "#73d073",
+        "detalle": "Pantalón con sus pliegues y la bota. Sube hasta encajar bajo la faja.",
+        "salida": [
+          -0.08,
+          -0.3,
+          0
+        ]
+      },
+      {
+        "nombre": "Pierna izquierda",
+        "color": "#ffbb42",
+        "detalle": "La otra pierna, con la bota y el cordón tallados.",
+        "salida": [
+          0.08,
+          -0.3,
+          0
+        ]
+      },
+      {
+        "nombre": "Brazo derecho",
+        "color": "#ffdeb6",
+        "detalle": "Brazo con la muñequera; se une al hombro del torso.",
+        "salida": [
+          -0.3,
+          0,
+          0
+        ]
+      },
+      {
+        "nombre": "Brazo izquierdo",
+        "color": "#cbf0c2",
+        "detalle": "Brazo con el puño cerrado y la muñequera.",
+        "salida": [
+          0.3,
+          0,
+          0
+        ]
+      },
+      {
+        "nombre": "Torso",
+        "color": "#d7e5f5",
+        "detalle": "Gi, camiseta y faja: la pieza central donde se monta todo.",
+        "salida": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nombre": "Cabeza",
+        "color": "#62b6db",
+        "detalle": "Cara y cabello en punta en una sola pieza; va sobre el cuello.",
+        "salida": [
+          0,
+          0.32,
+          0
+        ]
+      }
+    ],
+    "sinTextura": true,
+    "portada": "saiyan-azul-hd-piezas.webp",
+    "triangulos": 844822
+  },
+  {
     "id": "espadachin-rubio-chibi",
     "nombre": "Espadachín Rubio Chibi",
     "categoria": "siete-pecados",

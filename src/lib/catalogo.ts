@@ -60,7 +60,7 @@ export type Modelo3D = {
   texturas?: { carpeta: string; map: string; normalMap: string; roughnessMap: string; metalnessMap: string }
 }
 
-export type CategoriaId = 'tecnologia' | 'mecanica' | 'autos' | 'dragon-ball-z' | 'caballeros-del-zodiaco' | 'siete-pecados' | 'your-name' | 'anime' | 'marvel' | 'dc' | 'seres-flemin' | 'munecos' | 'halloween' | 'soportes-ps5' | 'accesorios'
+export type CategoriaId = 'hiperdetalle' | 'tecnologia' | 'mecanica' | 'autos' | 'dragon-ball-z' | 'caballeros-del-zodiaco' | 'siete-pecados' | 'your-name' | 'anime' | 'marvel' | 'dc' | 'seres-flemin' | 'munecos' | 'halloween' | 'soportes-ps5' | 'accesorios'
 
 export type Categoria = {
   id: CategoriaId | 'todo'
@@ -80,6 +80,7 @@ export type Categoria = {
  */
 export const CATEGORIAS: Categoria[] = [
   { id: 'todo', nombre: 'Todo', clave: 'ALL', desde: '#00E5D1', hasta: '#2AC3FF', tinta: '#3BE0D0', punto: '#18181B' },
+  { id: 'hiperdetalle', nombre: 'Leyendas Hiperdetalle', clave: 'HD', desde: '#00F0FF', hasta: '#B04DFF', tinta: '#7FF6FF', punto: '#0891B2' },
   { id: 'tecnologia', nombre: 'Tecnología', clave: 'TEC', desde: '#00E5D1', hasta: '#2A7BFF', tinta: '#4DE8FF', punto: '#0284C7' },
   { id: 'mecanica', nombre: 'Mecánica', clave: 'MEC', desde: '#FFB800', hasta: '#FF5E2F', tinta: '#FFC24D', punto: '#D97706' },
   { id: 'autos', nombre: 'Autos', clave: 'AUT', desde: '#FF3B3B', hasta: '#FF8A2F', tinta: '#FF7A6B', punto: '#DC2626' },
@@ -109,6 +110,14 @@ export const rutaPortada =(m: Modelo3D) => (m.portada ? `${BASE}/portadas/${m.po
 /* Los precios no se muestran: todo lo pagado se cotiza por WhatsApp.
    El campo `precio` del catálogo se conserva solo para uso interno (rareza). */
 export const precio = (n: number) => (n === 0 ? 'Gratis' : '')
+
+/**
+ * Cómo llega la figura: completa (de una pieza) o por piezas para armar. Se
+ * enseña en las secciones donde las dos cosas conviven (la colección
+ * Hiperdetalle); en el resto, las piezas ya se ven en la ficha.
+ */
+export const textoArmado = (m: Modelo3D) =>
+  m.categoria !== 'hiperdetalle' ? undefined : m.piezas?.length ? `Por piezas · ${m.piezas.length}` : 'Completa'
 
 export const peso = (b?: number) => (!b ? '—' : b < 1048576 ? `${Math.max(1, Math.round(b / 1024))} KB` : `${(b / 1048576).toFixed(1)} MB`)
 

@@ -20,7 +20,7 @@ import { familia } from '../../lib/orden'
  * otra propiedad ajena; esas piezas siguen en la tienda.
  */
 /** Secciones con personajes de terceros: se venden en la tienda, pero no se exhiben en la sala. */
-const AJENAS = new Set<string>(['dragon-ball-z', 'caballeros-del-zodiaco', 'siete-pecados', 'your-name', 'halloween'])
+const AJENAS = new Set<string>(['hiperdetalle', 'dragon-ball-z', 'caballeros-del-zodiaco', 'siete-pecados', 'your-name', 'halloween'])
 /** Piezas de secciones propias que llevan un personaje ajeno (el soporte de Kurama). */
 const ajena = (m: Modelo3D) => AJENAS.has(m.categoria) || familia(m) === 'soporte-ps5-kurama'
 
