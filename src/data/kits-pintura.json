@@ -1,0 +1,1617 @@
+{
+  "athena-saori-chibi-escultura": {
+    "colores": [
+      {
+        "nombre": "Lila",
+        "hex": "#a77bc8"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      },
+      {
+        "nombre": "Dorado",
+        "hex": "#c9a646"
+      },
+      {
+        "nombre": "Piel clara",
+        "hex": "#f2d2b6"
+      },
+      {
+        "nombre": "Celeste",
+        "hex": "#8ccbf0"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      }
+    ]
+  },
+  "bandido-inmortal-chibi-escultura": {
+    "base": "bandido-inmortal-chibi",
+    "colores": [
+      {
+        "nombre": "Gris claro",
+        "hex": "#bac8d3"
+      },
+      {
+        "nombre": "Rojo oscuro",
+        "hex": "#630c1b"
+      },
+      {
+        "nombre": "Blanco hueso",
+        "hex": "#eed9ca"
+      },
+      {
+        "nombre": "Rojo carmesí",
+        "hex": "#b61a31"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      }
+    ]
+  },
+  "cerdito-rosa-low-poly-escultura": {
+    "base": "cerdito-rosa-low-poly",
+    "colores": [
+      {
+        "nombre": "Rosa",
+        "hex": "#f894b4"
+      },
+      {
+        "nombre": "Rosa chicle",
+        "hex": "#fc507c"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#0e0c0d"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "chica-lazo-rojo-chibi-escultura-a": {
+    "base": "chica-lazo-rojo-chibi-a",
+    "colores": [
+      {
+        "nombre": "Negro",
+        "hex": "#282734"
+      },
+      {
+        "nombre": "Gris oscuro",
+        "hex": "#513e3c"
+      },
+      {
+        "nombre": "Verde oliva",
+        "hex": "#59693d"
+      },
+      {
+        "nombre": "Piel melocotón",
+        "hex": "#f4bf9e"
+      },
+      {
+        "nombre": "Gris",
+        "hex": "#7a7263"
+      },
+      {
+        "nombre": "Blanco hueso",
+        "hex": "#e8dfd7"
+      },
+      {
+        "nombre": "Rojo carmesí",
+        "hex": "#a34029"
+      }
+    ]
+  },
+  "chica-lazo-rojo-chibi-escultura-b": {
+    "base": "chica-lazo-rojo-chibi-b",
+    "colores": [
+      {
+        "nombre": "Azul marino",
+        "hex": "#19203e"
+      },
+      {
+        "nombre": "Gris",
+        "hex": "#90939b"
+      },
+      {
+        "nombre": "Piel clara",
+        "hex": "#fac9b0"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f2f6fd"
+      },
+      {
+        "nombre": "Rojo",
+        "hex": "#bf2a1c"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#050813"
+      },
+      {
+        "nombre": "Chocolate",
+        "hex": "#311618"
+      },
+      {
+        "nombre": "Azul acero",
+        "hex": "#4c5976"
+      }
+    ]
+  },
+  "cosmic-fusion-warrior-escultura": {
+    "base": "cosmic-fusion-warrior-anime-intenso",
+    "colores": [
+      {
+        "nombre": "Cian",
+        "hex": "#01e3ff"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#e3feff"
+      },
+      {
+        "nombre": "Azul acero",
+        "hex": "#26537c"
+      },
+      {
+        "nombre": "Piel melocotón",
+        "hex": "#feb6a9"
+      },
+      {
+        "nombre": "Azul marino",
+        "hex": "#132043"
+      },
+      {
+        "nombre": "Amarillo",
+        "hex": "#fdfc07"
+      },
+      {
+        "nombre": "Celeste",
+        "hex": "#12b0dc"
+      },
+      {
+        "nombre": "Violeta",
+        "hex": "#e095ff"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      }
+    ]
+  },
+  "estudiante-tokio-chibi-escultura": {
+    "base": "estudiante-tokio-chibi",
+    "colores": [
+      {
+        "nombre": "Chocolate",
+        "hex": "#3d2a20"
+      },
+      {
+        "nombre": "Gris claro",
+        "hex": "#b1b5bb"
+      },
+      {
+        "nombre": "Piel clara",
+        "hex": "#f9d4b9"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#212c32"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#eff1f5"
+      },
+      {
+        "nombre": "Piel melocotón",
+        "hex": "#ebb190"
+      }
+    ]
+  },
+  "figura-01": {
+    "colores": [
+      {
+        "nombre": "Verde oscuro",
+        "hex": "#1f5a2c"
+      },
+      {
+        "nombre": "Verde lima",
+        "hex": "#a6d84a"
+      },
+      {
+        "nombre": "Amarillo",
+        "hex": "#f7d724"
+      },
+      {
+        "nombre": "Blanco hueso",
+        "hex": "#e8e0cc"
+      },
+      {
+        "nombre": "Rojo oscuro",
+        "hex": "#6e1418"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      }
+    ]
+  },
+  "fusion-fase4-chibi-escultura-a": {
+    "base": "fusion-fase4-chibi-a",
+    "colores": [
+      {
+        "nombre": "Rojo",
+        "hex": "#bb230c"
+      },
+      {
+        "nombre": "Gris",
+        "hex": "#8e8d8f"
+      },
+      {
+        "nombre": "Rojo carmesí",
+        "hex": "#8d201c"
+      },
+      {
+        "nombre": "Piel melocotón",
+        "hex": "#e8b193"
+      },
+      {
+        "nombre": "Gris claro",
+        "hex": "#cac6c6"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      },
+      {
+        "nombre": "Azul oscuro",
+        "hex": "#18549c"
+      },
+      {
+        "nombre": "Naranja",
+        "hex": "#e9851e"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "fusion-fase4-chibi-escultura-b": {
+    "base": "fusion-fase4-chibi-b",
+    "colores": [
+      {
+        "nombre": "Rojo",
+        "hex": "#c82c11"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#040706"
+      },
+      {
+        "nombre": "Piel melocotón",
+        "hex": "#e3bca2"
+      },
+      {
+        "nombre": "Rojo oscuro",
+        "hex": "#851316"
+      },
+      {
+        "nombre": "Gris claro",
+        "hex": "#d3d4d7"
+      },
+      {
+        "nombre": "Azul oscuro",
+        "hex": "#135ab1"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "gato-sabio-chibi-escultura-a": {
+    "base": "gato-sabio-chibi-a",
+    "colores": [
+      {
+        "nombre": "Gris claro",
+        "hex": "#d1d4df"
+      },
+      {
+        "nombre": "Marrón",
+        "hex": "#5f3b1e"
+      },
+      {
+        "nombre": "Gris",
+        "hex": "#a3a7ad"
+      },
+      {
+        "nombre": "Rosa",
+        "hex": "#db708f"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "gato-sabio-chibi-escultura-b": {
+    "base": "gato-sabio-chibi-b",
+    "colores": [
+      {
+        "nombre": "Blanco",
+        "hex": "#d8e0e8"
+      },
+      {
+        "nombre": "Marrón",
+        "hex": "#613f22"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      }
+    ]
+  },
+  "guerrera-gigante-chibi-escultura-a": {
+    "base": "guerrera-gigante-chibi-a",
+    "colores": [
+      {
+        "nombre": "Marrón",
+        "hex": "#5e3723"
+      },
+      {
+        "nombre": "Naranja",
+        "hex": "#ec700c"
+      },
+      {
+        "nombre": "Piel melocotón",
+        "hex": "#f7bb99"
+      },
+      {
+        "nombre": "Cobre",
+        "hex": "#a24b10"
+      },
+      {
+        "nombre": "Marrón claro",
+        "hex": "#ad765a"
+      },
+      {
+        "nombre": "Azul acero",
+        "hex": "#3e7b8f"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "guerrera-gigante-chibi-escultura-b": {
+    "base": "guerrera-gigante-chibi-b",
+    "colores": [
+      {
+        "nombre": "Chocolate",
+        "hex": "#503220"
+      },
+      {
+        "nombre": "Piel clara",
+        "hex": "#e0bca5"
+      },
+      {
+        "nombre": "Naranja",
+        "hex": "#cd6906"
+      },
+      {
+        "nombre": "Marrón",
+        "hex": "#6f4524"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "guerrero-del-sol-chibi-escultura": {
+    "base": "guerrero-del-sol-chibi",
+    "colores": [
+      {
+        "nombre": "Mostaza",
+        "hex": "#dea93d"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#09090a"
+      },
+      {
+        "nombre": "Piel melocotón",
+        "hex": "#ecbd9f"
+      },
+      {
+        "nombre": "Azul oscuro",
+        "hex": "#151b7a"
+      },
+      {
+        "nombre": "Púrpura oscuro",
+        "hex": "#15165c"
+      },
+      {
+        "nombre": "Dorado",
+        "hex": "#e6af69"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "guerrero-futuro-chibi-escultura-a": {
+    "base": "guerrero-futuro-chibi-a",
+    "colores": [
+      {
+        "nombre": "Lila",
+        "hex": "#977dc0"
+      },
+      {
+        "nombre": "Piel clara",
+        "hex": "#f2caac"
+      },
+      {
+        "nombre": "Azul oscuro",
+        "hex": "#443c92"
+      },
+      {
+        "nombre": "Gris claro",
+        "hex": "#91a7ae"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#17252d"
+      },
+      {
+        "nombre": "Mostaza",
+        "hex": "#deaa2b"
+      },
+      {
+        "nombre": "Naranja",
+        "hex": "#c85319"
+      },
+      {
+        "nombre": "Chocolate",
+        "hex": "#342012"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "guerrero-futuro-chibi-escultura-b": {
+    "base": "guerrero-futuro-chibi-b",
+    "colores": [
+      {
+        "nombre": "Lila",
+        "hex": "#a390be"
+      },
+      {
+        "nombre": "Azul oscuro",
+        "hex": "#554596"
+      },
+      {
+        "nombre": "Piel melocotón",
+        "hex": "#efc2a8"
+      },
+      {
+        "nombre": "Gris oscuro",
+        "hex": "#585958"
+      },
+      {
+        "nombre": "Gris claro",
+        "hex": "#a2acae"
+      },
+      {
+        "nombre": "Dorado",
+        "hex": "#b38f3a"
+      },
+      {
+        "nombre": "Celeste",
+        "hex": "#5caac8"
+      },
+      {
+        "nombre": "Chocolate",
+        "hex": "#402a1e"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "guerrero-reptiliano-escultura": {
+    "base": "guerrero-reptiliano",
+    "colores": [
+      {
+        "nombre": "Negro",
+        "hex": "#25241c"
+      },
+      {
+        "nombre": "Gris oscuro",
+        "hex": "#706153"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "hechicera-violeta-chibi-escultura-a": {
+    "base": "hechicera-violeta-chibi-a",
+    "colores": [
+      {
+        "nombre": "Púrpura oscuro",
+        "hex": "#341d74"
+      },
+      {
+        "nombre": "Morado",
+        "hex": "#63419f"
+      },
+      {
+        "nombre": "Piel clara",
+        "hex": "#fcdecb"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#efe6fd"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      }
+    ]
+  },
+  "hechicera-violeta-chibi-escultura-b": {
+    "base": "hechicera-violeta-chibi-b",
+    "colores": [
+      {
+        "nombre": "Púrpura oscuro",
+        "hex": "#2c1d5c"
+      },
+      {
+        "nombre": "Azul oscuro",
+        "hex": "#52338c"
+      },
+      {
+        "nombre": "Piel clara",
+        "hex": "#f6d1c2"
+      },
+      {
+        "nombre": "Lila",
+        "hex": "#c6b1e6"
+      },
+      {
+        "nombre": "Azul marino",
+        "hex": "#0e062d"
+      },
+      {
+        "nombre": "Violeta",
+        "hex": "#a184cb"
+      },
+      {
+        "nombre": "Rosa pálido",
+        "hex": "#ded2e8"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "mascara-ghostface": {
+    "colores": [
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      },
+      {
+        "nombre": "Gris claro",
+        "hex": "#c8c8c8"
+      }
+    ]
+  },
+  "mascara-hockey-jason-a": {
+    "colores": [
+      {
+        "nombre": "Blanco hueso",
+        "hex": "#ece6d4"
+      },
+      {
+        "nombre": "Rojo",
+        "hex": "#c0272d"
+      },
+      {
+        "nombre": "Gris desgaste",
+        "hex": "#8a8a80"
+      }
+    ]
+  },
+  "mascara-hockey-jason-b": {
+    "colores": [
+      {
+        "nombre": "Blanco hueso",
+        "hex": "#ece6d4"
+      },
+      {
+        "nombre": "Rojo",
+        "hex": "#c0272d"
+      },
+      {
+        "nombre": "Gris desgaste",
+        "hex": "#8a8a80"
+      }
+    ]
+  },
+  "mascara-michael-a": {
+    "colores": [
+      {
+        "nombre": "Blanco hueso",
+        "hex": "#e8e0cc"
+      },
+      {
+        "nombre": "Castaño",
+        "hex": "#4a3020"
+      },
+      {
+        "nombre": "Gris piedra",
+        "hex": "#9a948a"
+      }
+    ]
+  },
+  "mascara-michael-b": {
+    "colores": [
+      {
+        "nombre": "Blanco hueso",
+        "hex": "#e8e0cc"
+      },
+      {
+        "nombre": "Castaño",
+        "hex": "#4a3020"
+      },
+      {
+        "nombre": "Gris piedra",
+        "hex": "#9a948a"
+      }
+    ]
+  },
+  "maton-de-traje-chibi-escultura": {
+    "colores": [
+      {
+        "nombre": "Gris oscuro",
+        "hex": "#3d4148"
+      },
+      {
+        "nombre": "Piel clara",
+        "hex": "#f2d2b6"
+      },
+      {
+        "nombre": "Castaño",
+        "hex": "#4a3020"
+      },
+      {
+        "nombre": "Rojo",
+        "hex": "#b52a2a"
+      },
+      {
+        "nombre": "Gris",
+        "hex": "#808080"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "monje-guerrero-chibi-escultura": {
+    "base": "monje-guerrero-chibi",
+    "colores": [
+      {
+        "nombre": "Piel melocotón",
+        "hex": "#f3bba7"
+      },
+      {
+        "nombre": "Naranja",
+        "hex": "#e95f13"
+      },
+      {
+        "nombre": "Azul marino",
+        "hex": "#0a366d"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#e8e8e9"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#0f080c"
+      }
+    ]
+  },
+  "pequeno-viajero-chibi-escultura": {
+    "base": "pequeno-viajero-chibi",
+    "colores": [
+      {
+        "nombre": "Verde lima",
+        "hex": "#8bda0e"
+      },
+      {
+        "nombre": "Naranja",
+        "hex": "#dd6106"
+      },
+      {
+        "nombre": "Verde",
+        "hex": "#509b00"
+      },
+      {
+        "nombre": "Crema",
+        "hex": "#ffecc9"
+      },
+      {
+        "nombre": "Turquesa",
+        "hex": "#78d5ce"
+      },
+      {
+        "nombre": "Amarillo dorado",
+        "hex": "#ecb008"
+      },
+      {
+        "nombre": "Blanco hueso",
+        "hex": "#c2d1c0"
+      },
+      {
+        "nombre": "Azul oscuro",
+        "hex": "#234a9c"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      }
+    ]
+  },
+  "principe-saiyan-chibi-escultura": {
+    "base": "principe-saiyan-chibi-a",
+    "colores": [
+      {
+        "nombre": "Negro",
+        "hex": "#090909"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#e8ecf2"
+      },
+      {
+        "nombre": "Azul",
+        "hex": "#0542c4"
+      },
+      {
+        "nombre": "Piel clara",
+        "hex": "#f2caad"
+      },
+      {
+        "nombre": "Amarillo dorado",
+        "hex": "#e6be09"
+      }
+    ]
+  },
+  "rey-hada-chibi-escultura-a": {
+    "base": "rey-hada-chibi-a",
+    "colores": [
+      {
+        "nombre": "Naranja",
+        "hex": "#e27118"
+      },
+      {
+        "nombre": "Piel bronceada",
+        "hex": "#cba469"
+      },
+      {
+        "nombre": "Verde lima",
+        "hex": "#a1c334"
+      },
+      {
+        "nombre": "Piel clara",
+        "hex": "#e8c4a7"
+      },
+      {
+        "nombre": "Turquesa",
+        "hex": "#60bcb0"
+      },
+      {
+        "nombre": "Azul marino",
+        "hex": "#28456d"
+      },
+      {
+        "nombre": "Verde oscuro",
+        "hex": "#244b04"
+      },
+      {
+        "nombre": "Naranja claro",
+        "hex": "#ef910e"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "rey-hada-chibi-escultura-b": {
+    "base": "rey-hada-chibi-b",
+    "colores": [
+      {
+        "nombre": "Verde lima",
+        "hex": "#8ada0e"
+      },
+      {
+        "nombre": "Naranja",
+        "hex": "#dd6106"
+      },
+      {
+        "nombre": "Verde",
+        "hex": "#509a00"
+      },
+      {
+        "nombre": "Crema",
+        "hex": "#ffecc9"
+      },
+      {
+        "nombre": "Turquesa",
+        "hex": "#78d5cf"
+      },
+      {
+        "nombre": "Amarillo dorado",
+        "hex": "#ecb008"
+      },
+      {
+        "nombre": "Azul oscuro",
+        "hex": "#234a9c"
+      },
+      {
+        "nombre": "Blanco hueso",
+        "hex": "#c2d0bf"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      }
+    ]
+  },
+  "saiyan-azul-hd-piezas": {
+    "colores": [
+      {
+        "nombre": "Cian",
+        "hex": "#4dd8ff"
+      },
+      {
+        "nombre": "Naranja",
+        "hex": "#f07a1a"
+      },
+      {
+        "nombre": "Azul marino",
+        "hex": "#1c2a5a"
+      },
+      {
+        "nombre": "Piel clara",
+        "hex": "#f2d2b6"
+      },
+      {
+        "nombre": "Azul oscuro",
+        "hex": "#1f2f80"
+      },
+      {
+        "nombre": "Amarillo dorado",
+        "hex": "#f2b705"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "saiyan-dorado-batalla-chibi-escultura": {
+    "base": "saiyan-dorado-batalla-chibi",
+    "colores": [
+      {
+        "nombre": "Amarillo",
+        "hex": "#f0cf43"
+      },
+      {
+        "nombre": "Piel clara",
+        "hex": "#f3c7b0"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#090909"
+      },
+      {
+        "nombre": "Naranja",
+        "hex": "#e66f26"
+      },
+      {
+        "nombre": "Azul acero",
+        "hex": "#194d7a"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "saiyan-dorado-chibi-escultura-a": {
+    "base": "saiyan-dorado-chibi-a",
+    "colores": [
+      {
+        "nombre": "Amarillo",
+        "hex": "#e6c62b"
+      },
+      {
+        "nombre": "Azul oscuro",
+        "hex": "#0559a2"
+      },
+      {
+        "nombre": "Piel melocotón",
+        "hex": "#e8b48d"
+      },
+      {
+        "nombre": "Naranja",
+        "hex": "#f4601d"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "saiyan-dorado-chibi-escultura-b": {
+    "base": "saiyan-dorado-chibi-b",
+    "colores": [
+      {
+        "nombre": "Amarillo",
+        "hex": "#e4c31b"
+      },
+      {
+        "nombre": "Marrón claro",
+        "hex": "#b4987a"
+      },
+      {
+        "nombre": "Piel melocotón",
+        "hex": "#f0bb9d"
+      },
+      {
+        "nombre": "Naranja",
+        "hex": "#f5731f"
+      },
+      {
+        "nombre": "Azul oscuro",
+        "hex": "#1f4b96"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "saiyan-fase4-chibi-clasico-escultura-a": {
+    "base": "saiyan-fase4-chibi-clasico-a",
+    "colores": [
+      {
+        "nombre": "Negro",
+        "hex": "#090909"
+      },
+      {
+        "nombre": "Dorado",
+        "hex": "#b38e3c"
+      },
+      {
+        "nombre": "Rojo carmesí",
+        "hex": "#c22445"
+      },
+      {
+        "nombre": "Piel clara",
+        "hex": "#fcd0b5"
+      },
+      {
+        "nombre": "Azul acero",
+        "hex": "#25587a"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "saiyan-fase4-chibi-clasico-escultura-b": {
+    "base": "saiyan-fase4-chibi-clasico-b",
+    "colores": [
+      {
+        "nombre": "Negro",
+        "hex": "#080808"
+      },
+      {
+        "nombre": "Rojo carmesí",
+        "hex": "#d61045"
+      },
+      {
+        "nombre": "Piel clara",
+        "hex": "#f7cab3"
+      },
+      {
+        "nombre": "Amarillo",
+        "hex": "#dec940"
+      },
+      {
+        "nombre": "Azul marino",
+        "hex": "#2b5593"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "saiyan-fase4-chibi-clasico-escultura-c": {
+    "base": "saiyan-fase4-chibi-clasico-c",
+    "colores": [
+      {
+        "nombre": "Negro",
+        "hex": "#0d0d0d"
+      },
+      {
+        "nombre": "Gris oscuro",
+        "hex": "#636363"
+      },
+      {
+        "nombre": "Rojo",
+        "hex": "#d91144"
+      },
+      {
+        "nombre": "Piel melocotón",
+        "hex": "#f7c5a6"
+      },
+      {
+        "nombre": "Amarillo",
+        "hex": "#d8c136"
+      },
+      {
+        "nombre": "Azul oscuro",
+        "hex": "#1a5094"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "saiyan-fase4-chibi-daima-escultura-a": {
+    "base": "saiyan-fase4-chibi-daima-a",
+    "colores": [
+      {
+        "nombre": "Magenta",
+        "hex": "#920949"
+      },
+      {
+        "nombre": "Piel clara",
+        "hex": "#edc3ab"
+      },
+      {
+        "nombre": "Amarillo",
+        "hex": "#e4cb32"
+      },
+      {
+        "nombre": "Azul marino",
+        "hex": "#0b4678"
+      },
+      {
+        "nombre": "Rojo carmesí",
+        "hex": "#9a092c"
+      },
+      {
+        "nombre": "Gris claro",
+        "hex": "#a1a1a1"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "saiyan-fase4-chibi-daima-escultura-b": {
+    "base": "saiyan-fase4-chibi-daima-b",
+    "colores": [
+      {
+        "nombre": "Rojo carmesí",
+        "hex": "#a20e15"
+      },
+      {
+        "nombre": "Rosa chicle",
+        "hex": "#e53465"
+      },
+      {
+        "nombre": "Piel clara",
+        "hex": "#f5cfb2"
+      },
+      {
+        "nombre": "Amarillo",
+        "hex": "#dec539"
+      },
+      {
+        "nombre": "Azul oscuro",
+        "hex": "#1d5399"
+      },
+      {
+        "nombre": "Azul marino",
+        "hex": "#0a2857"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "saiyan-fase4-chibi-daima-escultura-c": {
+    "base": "saiyan-fase4-chibi-daima-c",
+    "colores": [
+      {
+        "nombre": "Rojo carmesí",
+        "hex": "#910844"
+      },
+      {
+        "nombre": "Púrpura oscuro",
+        "hex": "#7b3276"
+      },
+      {
+        "nombre": "Piel melocotón",
+        "hex": "#e7bea5"
+      },
+      {
+        "nombre": "Mostaza",
+        "hex": "#d3bb2e"
+      },
+      {
+        "nombre": "Azul marino",
+        "hex": "#0a4484"
+      },
+      {
+        "nombre": "Rojo oscuro",
+        "hex": "#5c2218"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "saiyan-legendario-chibi-escultura-a": {
+    "base": "saiyan-legendario-chibi-dorado",
+    "colores": [
+      {
+        "nombre": "Verde lima",
+        "hex": "#bbe13b"
+      },
+      {
+        "nombre": "Piel melocotón",
+        "hex": "#edb8a3"
+      },
+      {
+        "nombre": "Verde",
+        "hex": "#8cb858"
+      },
+      {
+        "nombre": "Gris claro",
+        "hex": "#d3d6de"
+      },
+      {
+        "nombre": "Púrpura oscuro",
+        "hex": "#5f1877"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#0c0d1d"
+      },
+      {
+        "nombre": "Crema",
+        "hex": "#e8dc9b"
+      },
+      {
+        "nombre": "Gris",
+        "hex": "#686a6e"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "saiyan-legendario-chibi-escultura-b": {
+    "base": "saiyan-legendario-chibi-dorado",
+    "colores": [
+      {
+        "nombre": "Verde lima",
+        "hex": "#bbe13b"
+      },
+      {
+        "nombre": "Piel melocotón",
+        "hex": "#edb8a3"
+      },
+      {
+        "nombre": "Verde",
+        "hex": "#8cb858"
+      },
+      {
+        "nombre": "Gris claro",
+        "hex": "#d3d6de"
+      },
+      {
+        "nombre": "Púrpura oscuro",
+        "hex": "#5f1877"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#0c0d1d"
+      },
+      {
+        "nombre": "Crema",
+        "hex": "#e8dc9b"
+      },
+      {
+        "nombre": "Gris",
+        "hex": "#686a6e"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "saiyan-legendario-ova-chibi-escultura-a": {
+    "base": "saiyan-legendario-ova-chibi-a",
+    "colores": [
+      {
+        "nombre": "Verde",
+        "hex": "#498840"
+      },
+      {
+        "nombre": "Piel melocotón",
+        "hex": "#daa893"
+      },
+      {
+        "nombre": "Rojo carmesí",
+        "hex": "#8c0f2d"
+      },
+      {
+        "nombre": "Dorado",
+        "hex": "#a88d43"
+      },
+      {
+        "nombre": "Gris claro",
+        "hex": "#b8b8ba"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "saiyan-legendario-ova-chibi-escultura-b": {
+    "base": "saiyan-legendario-ova-chibi-b",
+    "colores": [
+      {
+        "nombre": "Verde",
+        "hex": "#4a904b"
+      },
+      {
+        "nombre": "Piel melocotón",
+        "hex": "#e9b89e"
+      },
+      {
+        "nombre": "Rojo carmesí",
+        "hex": "#a3092e"
+      },
+      {
+        "nombre": "Dorado",
+        "hex": "#a08a32"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#dcdbde"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      }
+    ]
+  },
+  "samurai-errante-chibi-escultura-a": {
+    "base": "samurai-errante-chibi-a",
+    "colores": [
+      {
+        "nombre": "Negro",
+        "hex": "#090909"
+      },
+      {
+        "nombre": "Naranja",
+        "hex": "#de5d1b"
+      },
+      {
+        "nombre": "Piel melocotón",
+        "hex": "#edb69b"
+      },
+      {
+        "nombre": "Marrón claro",
+        "hex": "#a7905e"
+      },
+      {
+        "nombre": "Marrón",
+        "hex": "#76563e"
+      },
+      {
+        "nombre": "Azul marino",
+        "hex": "#0b1a42"
+      },
+      {
+        "nombre": "Chocolate",
+        "hex": "#30181d"
+      },
+      {
+        "nombre": "Gris oscuro",
+        "hex": "#1d270d"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "samurai-errante-chibi-escultura-b": {
+    "base": "samurai-errante-chibi-b",
+    "colores": [
+      {
+        "nombre": "Negro",
+        "hex": "#090909"
+      },
+      {
+        "nombre": "Piel melocotón",
+        "hex": "#f6c5a8"
+      },
+      {
+        "nombre": "Naranja",
+        "hex": "#e86b1b"
+      },
+      {
+        "nombre": "Marrón claro",
+        "hex": "#978466"
+      },
+      {
+        "nombre": "Chocolate",
+        "hex": "#56332a"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "samurai-errante-chibi-escultura-c": {
+    "base": "samurai-errante-chibi-c",
+    "colores": [
+      {
+        "nombre": "Negro",
+        "hex": "#090909"
+      },
+      {
+        "nombre": "Naranja",
+        "hex": "#e77227"
+      },
+      {
+        "nombre": "Piel melocotón",
+        "hex": "#f1bfa1"
+      },
+      {
+        "nombre": "Marrón claro",
+        "hex": "#a08969"
+      },
+      {
+        "nombre": "Verde oscuro",
+        "hex": "#24501f"
+      },
+      {
+        "nombre": "Azul marino",
+        "hex": "#080b28"
+      },
+      {
+        "nombre": "Chocolate",
+        "hex": "#4b2320"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "senor-guerra-escultura": {
+    "base": "senor-guerra-acorazado",
+    "colores": [
+      {
+        "nombre": "Negro",
+        "hex": "#362f2c"
+      },
+      {
+        "nombre": "Gris oscuro",
+        "hex": "#604d42"
+      },
+      {
+        "nombre": "Gris",
+        "hex": "#8b786e"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "soporte-ps5-kurama-escultura-a": {
+    "base": "soporte-ps5-kurama",
+    "colores": [
+      {
+        "nombre": "Rojo",
+        "hex": "#df2501"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#020202"
+      },
+      {
+        "nombre": "Azul",
+        "hex": "#0529c0"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "soporte-ps5-kurama-escultura-b": {
+    "base": "soporte-ps5-kurama",
+    "colores": [
+      {
+        "nombre": "Rojo",
+        "hex": "#df2501"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#020202"
+      },
+      {
+        "nombre": "Azul",
+        "hex": "#0529c0"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#f4f2ee"
+      }
+    ]
+  },
+  "vibrant-saiyan-escultura": {
+    "base": "vibrant-saiyan-showdown",
+    "colores": [
+      {
+        "nombre": "Gris oscuro",
+        "hex": "#323a44"
+      },
+      {
+        "nombre": "Blanco",
+        "hex": "#dfe7f3"
+      },
+      {
+        "nombre": "Azul marino",
+        "hex": "#081634"
+      },
+      {
+        "nombre": "Azul acero",
+        "hex": "#465f85"
+      },
+      {
+        "nombre": "Azul oscuro",
+        "hex": "#073971"
+      },
+      {
+        "nombre": "Celeste",
+        "hex": "#93aac6"
+      },
+      {
+        "nombre": "Piel bronceada",
+        "hex": "#e7997f"
+      },
+      {
+        "nombre": "Rojo carmesí",
+        "hex": "#953419"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1e1e1e"
+      }
+    ]
+  },
+  "visor-ciclope": {
+    "colores": [
+      {
+        "nombre": "Rojo rubí",
+        "hex": "#c4122a"
+      },
+      {
+        "nombre": "Amarillo dorado",
+        "hex": "#f2b705"
+      },
+      {
+        "nombre": "Gris oscuro",
+        "hex": "#4a4a4a"
+      }
+    ]
+  }
+}

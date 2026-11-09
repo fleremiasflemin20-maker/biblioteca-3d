@@ -2,6 +2,7 @@ import type { CSSProperties } from 'react'
 import { Box, Star } from 'lucide-react'
 import { CATEGORIAS, precio, rutaPortada, textoArmado, triangulos, type Modelo3D } from '../lib/catalogo'
 import { ICONO_CATEGORIA } from '../lib/iconos'
+import { kitDe } from '../lib/kitPintura'
 import { enlaceHistoria } from '../lib/historias'
 import { coste, estrellas, rareza } from '../lib/rareza'
 
@@ -19,6 +20,7 @@ export function Tarjeta({ modelo, numero, onAbrir }: { modelo: Modelo3D; numero?
   const leg = r.nombre === 'Legendaria'
   const detalle = estrellas(modelo)
   const armado = textoArmado(modelo)
+  const kit = kitDe(modelo)
 
   return (
     <button
@@ -57,7 +59,16 @@ export function Tarjeta({ modelo, numero, onAbrir }: { modelo: Modelo3D; numero?
                 </span>
               )}
               {modelo.sinTextura && (
-                <span className="bg-black/60 px-2 py-0.5 font-chakra text-[9.5px] font-semibold uppercase tracking-[0.14em] text-white/80 ring-1 ring-white/25">Sin color</span>
+                <span className="flex items-center gap-1.5 bg-black/60 px-2 py-0.5 font-chakra text-[9.5px] font-semibold uppercase tracking-[0.14em] text-white/85 ring-1 ring-white/25">
+                  {kit ? 'Kit para pintar' : 'Para pintar'}
+                  {kit && (
+                    <span className="flex" aria-hidden>
+                      {kit.colores.slice(0, 5).map((c, i) => (
+                        <span key={i} className="-mr-0.5 h-2 w-2 rounded-full ring-1 ring-black/40" style={{ background: c.hex }} />
+                      ))}
+                    </span>
+                  )}
+                </span>
               )}
             </span>
           )}
