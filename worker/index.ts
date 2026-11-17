@@ -29,6 +29,7 @@ import {
   venceSegunPayPal,
 } from './logica.ts'
 import { limpiarNombre, limpiarPerfil } from './perfil.ts'
+import { PREFIJO_PAQUETES, type PedidoPayPal, pagoCompleto, paqueteValido, precioPaquete, puedeBajarPaquete } from './paquetes.ts'
 
 const COOKIE = 'club_sesion'
 const PREFIJO = 'modelos/'
@@ -75,6 +76,8 @@ async function api(req: Request, url: URL, env: Entorno): Promise<Response> {
     return json({
       precio: env.PRECIO_CLUB ?? '9.99',
       paypal: env.PAYPAL_CLIENT_ID && env.PAYPAL_PLAN_ID ? { clientId: env.PAYPAL_CLIENT_ID, planId: env.PAYPAL_PLAN_ID } : null,
+      // Los paquetes se cobran con un pago único: basta el Client ID (y el secreto en el Worker).
+      paypalPaquetes: env.PAYPAL_CLIENT_ID || null,
       whatsapp: env.WHATSAPP ?? '593979523040',
     })
   }
@@ -106,7 +109,29 @@ async function api(req: Request, url: URL, env: Entorno): Promise<Response> {
     if (!u) return json({ usuario: null })
     let s = await suscripcionDe(env, u.id)
     if (s && s.proveedor === 'paypal' && s.referencia && s.vence < Date.now()) s = (await sincronizarPayPal(env, u.id, s.referencia).catch(() => null)) ?? s
-    return json({ usuario: { id: u.id, correo: u.correo, nombre: u.nombre, admin: esAdmin(env, u.correo) }, suscripcion: resumen(s) })
+    return json({
+      usuario: { id: u.id, correo: u.correo, nombre: u.nombre, admin: esAdmin(env, u.correo) },
+      suscripcion: resumen(s),
+      paquetes: await paquetesDe(env, u.id),
+    })
+  }
+
+  let p = ruta.match(/^\/api\/paquetes\/([^/]+)\/archivos$/)
+  if (p && metodo === 'GET') {
+    const id = decodeURIComponent(p[1])
+    if (!paqueteValido(id)) return error('Paquete no válido.', 404)
+    const objetos = await listarTodo(env, `${PREFIJO_PAQUETES}${id}/`)
+    return json({ archivos: objetos.map((o) => ({ nombre: o.key.slice(PREFIJO_PAQUETES.length + id.length + 1), tamano: o.size })) })
+  }
+  p = ruta.match(/^\/api\/paquetes\/([^/]+)\/descargar\/([^/]+)$/)
+  if (p && metodo === 'GET') return descargarPaquete(req, env, decodeURIComponent(p[1]), decodeURIComponent(p[2]))
+  p = ruta.match(/^\/api\/paquetes\/([^/]+)\/paypal\/(orden|capturar)$/)
+  if (p && metodo === 'POST') {
+    const paquete = decodeURIComponent(p[1])
+    if (!paqueteValido(paquete)) return error('Paquete no válido.', 404)
+    const u = await usuarioDe(req, env)
+    if (!u) return error('Inicia sesión primero.', 401)
+    return p[2] === 'orden' ? ordenPayPal(env, u.id, paquete) : capturarPayPal(req, env, u.id, paquete)
   }
   if (ruta === '/api/club/modelos' && metodo === 'GET') return modelosDelClub(env)
 
@@ -174,6 +199,16 @@ async function api(req: Request, url: URL, env: Entorno): Promise<Response> {
       const vence = d > 0 ? venceManual(previa?.vence ?? 0, d, ahora) : ahora
       await guardarSuscripcion(env, destino.id, { proveedor: previa?.proveedor === 'paypal' && d > 0 ? 'paypal' : 'manual', referencia: previa?.referencia ?? null, estado: d > 0 ? 'MANUAL' : 'CANCELADA', vence })
       return json({ ok: true, vence })
+    }
+    if (ruta === '/api/admin/paquete' && metodo === 'POST') {
+      // Venta de un paquete pagado por transferencia, Deuna o PayPal: se le da (o se le quita) a la cuenta.
+      const { correo, paquete, quitar } = (await req.json().catch(() => ({}))) as { correo?: string; paquete?: string; quitar?: boolean }
+      if (typeof paquete !== 'string' || !paqueteValido(paquete)) return error('Paquete no válido.')
+      const destino = await env.DB.prepare('SELECT id FROM usuarios WHERE correo = ?').bind(normalizarCorreo(correo)).first<{ id: string }>()
+      if (!destino) return error('No hay ninguna cuenta con ese correo. Pídele que la cree primero.', 404)
+      if (quitar) await env.DB.prepare('DELETE FROM compras WHERE usuario_id = ? AND paquete = ?').bind(destino.id, paquete).run()
+      else await env.DB.prepare('INSERT OR IGNORE INTO compras (usuario_id, paquete, fecha) VALUES (?, ?, ?)').bind(destino.id, paquete, Date.now()).run()
+      return json({ ok: true })
     }
   }
 
@@ -256,17 +291,20 @@ async function guardarSuscripcion(env: Entorno, usuarioId: string, s: Suscripcio
 
 const basePayPal = (env: Entorno) => (env.PAYPAL_ENTORNO === 'live' ? 'https://api-m.paypal.com' : 'https://api-m.sandbox.paypal.com')
 
-async function consultarPayPal(env: Entorno, id: string): Promise<SuscripcionPayPal | null> {
+async function tokenPayPal(env: Entorno) {
   if (!env.PAYPAL_CLIENT_ID || !env.PAYPAL_SECRETO) throw new Error('Falta configurar PayPal (PAYPAL_CLIENT_ID y el secreto PAYPAL_SECRETO).')
-  const base = basePayPal(env)
-  const t = await fetch(`${base}/v1/oauth2/token`, {
+  const t = await fetch(`${basePayPal(env)}/v1/oauth2/token`, {
     method: 'POST',
     headers: { authorization: `Basic ${btoa(`${env.PAYPAL_CLIENT_ID}:${env.PAYPAL_SECRETO}`)}`, 'content-type': 'application/x-www-form-urlencoded' },
     body: 'grant_type=client_credentials',
   })
   if (!t.ok) throw new Error(`PayPal rechazó las credenciales (${t.status}).`)
-  const { access_token } = (await t.json()) as { access_token: string }
-  const r = await fetch(`${base}/v1/billing/subscriptions/${encodeURIComponent(id)}`, { headers: { authorization: `Bearer ${access_token}` } })
+  return ((await t.json()) as { access_token: string }).access_token
+}
+
+async function consultarPayPal(env: Entorno, id: string): Promise<SuscripcionPayPal | null> {
+  const access_token = await tokenPayPal(env)
+  const r = await fetch(`${basePayPal(env)}/v1/billing/subscriptions/${encodeURIComponent(id)}`, { headers: { authorization: `Bearer ${access_token}` } })
   if (r.status === 404) return null
   if (!r.ok) throw new Error(`PayPal respondió ${r.status} al consultar ${id}.`)
   return (await r.json()) as SuscripcionPayPal
@@ -327,10 +365,63 @@ async function descargar(req: Request, env: Entorno, id: string, nombre: string)
   if (s && s.vence <= Date.now() && s.proveedor === 'paypal' && s.referencia) s = await sincronizarPayPal(env, u.id, s.referencia).catch(() => s)
   if (!s || s.vence <= Date.now()) return error('Tu suscripción no está activa.', 402)
 
-  const clave = `${PREFIJO}${id}/${nombre}`
+  return entregar(env, u.id, `${PREFIJO}${id}/${nombre}`, nombre)
+}
+
+const paquetesDe = async (env: Entorno, usuarioId: string) =>
+  ((await env.DB.prepare('SELECT paquete FROM compras WHERE usuario_id = ?').bind(usuarioId).all<{ paquete: string }>()).results ?? []).map((r) => r.paquete)
+
+async function descargarPaquete(req: Request, env: Entorno, paquete: string, nombre: string) {
+  if (!paqueteValido(paquete) || !nombreArchivoValido(nombre)) return error('Archivo no válido.')
+  const u = await usuarioDe(req, env)
+  if (!u) return error('Inicia sesión para descargar.', 401)
+  let s = await suscripcionDe(env, u.id)
+  if (s && s.vence <= Date.now() && s.proveedor === 'paypal' && s.referencia) s = await sincronizarPayPal(env, u.id, s.referencia).catch(() => s)
+  if (!puedeBajarPaquete(paquete, await paquetesDe(env, u.id), !!s && s.vence > Date.now())) return error('Compra el paquete o activa el Club para descargarlo.', 402)
+  return entregar(env, u.id, `${PREFIJO_PAQUETES}${paquete}/${nombre}`, nombre)
+}
+
+/** Crea el pedido de PayPal (pago único). custom_id liga el pago a esta cuenta y a este paquete. */
+async function ordenPayPal(env: Entorno, usuarioId: string, paquete: string) {
+  const r = await fetch(`${basePayPal(env)}/v2/checkout/orders`, {
+    method: 'POST',
+    headers: { authorization: `Bearer ${await tokenPayPal(env)}`, 'content-type': 'application/json' },
+    body: JSON.stringify({
+      intent: 'CAPTURE',
+      purchase_units: [
+        {
+          reference_id: paquete,
+          custom_id: `${usuarioId}|${paquete}`,
+          description: `Biblioteca 3D · paquete ${paquete}`,
+          amount: { currency_code: 'USD', value: precioPaquete(paquete) },
+        },
+      ],
+      application_context: { shipping_preference: 'NO_SHIPPING', brand_name: 'Biblioteca 3D Flemin' },
+    }),
+  })
+  if (!r.ok) return error(`PayPal no pudo crear el pedido (${r.status}).`, 502)
+  const { id } = (await r.json()) as { id: string }
+  return json({ id })
+}
+
+/** Cobra el pedido aprobado y, si PayPal confirma el pago completo, da el paquete a la cuenta. */
+async function capturarPayPal(req: Request, env: Entorno, usuarioId: string, paquete: string) {
+  const { orderID } = (await req.json().catch(() => ({}))) as { orderID?: string }
+  if (!orderID || !/^[A-Z0-9]{8,40}$/.test(orderID)) return error('Pedido no válido.')
+  const r = await fetch(`${basePayPal(env)}/v2/checkout/orders/${orderID}/capture`, {
+    method: 'POST',
+    headers: { authorization: `Bearer ${await tokenPayPal(env)}`, 'content-type': 'application/json' },
+  })
+  const pedido = (await r.json().catch(() => null)) as PedidoPayPal | null
+  if (!pedido || !pagoCompleto(pedido, usuarioId, paquete)) return error('PayPal no confirmó el pago. Si se te cobró, escríbenos por WhatsApp.', 402)
+  await env.DB.prepare('INSERT OR IGNORE INTO compras (usuario_id, paquete, fecha) VALUES (?, ?, ?)').bind(usuarioId, paquete, Date.now()).run()
+  return json({ ok: true, paquetes: await paquetesDe(env, usuarioId) })
+}
+
+async function entregar(env: Entorno, usuarioId: string, clave: string, nombre: string) {
   const obj = await env.ARCHIVOS.get(clave)
   if (!obj) return error('Ese archivo ya no existe.', 404)
-  await env.DB.prepare('INSERT INTO descargas (usuario_id, clave, fecha) VALUES (?, ?, ?)').bind(u.id, clave, Date.now()).run()
+  await env.DB.prepare('INSERT INTO descargas (usuario_id, clave, fecha) VALUES (?, ?, ?)').bind(usuarioId, clave, Date.now()).run()
 
   const h = new Headers()
   obj.writeHttpMetadata(h)

@@ -1,5 +1,5 @@
 import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
-import { Box, Gamepad2, Hand, MessageCircle, Plus, Scissors, Search, Sparkles, Trophy, Zap } from 'lucide-react'
+import { Box, Gamepad2, Hand, MessageCircle, Package, Plus, Scissors, Search, Sparkles, Trophy, Zap } from 'lucide-react'
 import { Tarjeta } from './components/Tarjeta'
 import { Ficha } from './components/Ficha'
 import { enlaceHistoria } from './lib/historias'
@@ -11,6 +11,7 @@ import { ModoManos } from './components/ModoManos'
 import { Inicio, useInicio } from './components/Inicio'
 import { Musica } from './components/Musica'
 import { BotonClub, PanelClub } from './components/Club'
+import { SeccionPaquetes } from './components/Paquetes'
 import { abrirClub, iniciarClub } from './lib/club'
 import { Avisos, PanelLogros } from './components/Trofeos'
 import { CATALOGO, CATEGORIAS, CORREO, REDES, WHATSAPP, type Modelo3D } from './lib/catalogo'
@@ -210,6 +211,9 @@ export default function App() {
             )}
             {/* Club Flemin: lo primero de la barra, para que se vea en cualquier pantalla. */}
             <BotonClub />
+            <a href="#paquetes" className="btn-juego !px-3.5" title="Paquetes de modelos para descargar">
+              <Package size={16} /> <span className="hidden md:inline">Paquetes</span>
+            </a>
             {/* Recorrido 3D: la sala con las figuras en pedestales. Flemin Studio: la web aparte, por su portada. */}
             <button type="button" onClick={() => setEstudio({ vista: 'sala' })} className="btn-juego btn-plasma !px-3.5" title="Recorre la sala de figuras en 3D">
               <Box size={16} /> <span className="hidden sm:inline">Recorrido 3D</span>
@@ -443,6 +447,9 @@ export default function App() {
             )}
           </div>
         </section>
+
+        {/* ── Paquetes de descarga: solo fotos; los archivos tras comprar ── */}
+        <SeccionPaquetes />
 
         {/* ── Cómo funciona: tres misiones ────────────────────── */}
         <section className="relative overflow-hidden border-t border-white/10">
