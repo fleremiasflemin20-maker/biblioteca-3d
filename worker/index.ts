@@ -368,8 +368,14 @@ async function descargar(req: Request, env: Entorno, id: string, nombre: string)
   return entregar(env, u.id, `${PREFIJO}${id}/${nombre}`, nombre)
 }
 
-const paquetesDe = async (env: Entorno, usuarioId: string) =>
-  ((await env.DB.prepare('SELECT paquete FROM compras WHERE usuario_id = ?').bind(usuarioId).all<{ paquete: string }>()).results ?? []).map((r) => r.paquete)
+/** Paquetes comprados. Si aún no se aplicó la migración 0003 (tabla compras), no rompe /api/yo: devuelve []. */
+const paquetesDe = async (env: Entorno, usuarioId: string) => {
+  try {
+    return ((await env.DB.prepare('SELECT paquete FROM compras WHERE usuario_id = ?').bind(usuarioId).all<{ paquete: string }>()).results ?? []).map((r) => r.paquete)
+  } catch {
+    return []
+  }
+}
 
 async function descargarPaquete(req: Request, env: Entorno, paquete: string, nombre: string) {
   if (!paqueteValido(paquete) || !nombreArchivoValido(nombre)) return error('Archivo no válido.')
