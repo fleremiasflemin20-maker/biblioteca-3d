@@ -1,5 +1,427 @@
 [
   {
+    "id": "goku-ssj4-escultura-c",
+    "nombre": "Goku Super Saiyan 4 · C (escultura)",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Tercera pose de Goku SSJ4 en malla sin color, para imprimir en blanco.",
+    "archivo": "meshy/goku-ssj4-escultura-c.glb",
+    "peso": 1919332,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-11-18",
+    "sinTextura": true,
+    "triangulos": 460784,
+    "portada": "goku-ssj4-escultura-c.webp"
+  },
+  {
+    "id": "goku-ssj4-escultura-b",
+    "nombre": "Goku Super Saiyan 4 · B (escultura)",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "La malla de Goku SSJ4 B sin color, para imprimir en blanco y pintar.",
+    "archivo": "meshy/goku-ssj4-escultura-b.glb",
+    "peso": 1595224,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-11-18",
+    "sinTextura": true,
+    "triangulos": 382350,
+    "portada": "goku-ssj4-escultura-b.webp"
+  },
+  {
+    "id": "goku-ssj4-b",
+    "nombre": "Goku Super Saiyan 4 · B",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Segunda pose de Goku en Super Saiyan 4, con textura a color.",
+    "archivo": "meshy/goku-ssj4-b.glb",
+    "peso": 2568408,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-11-18",
+    "triangulos": 382352,
+    "portada": "goku-ssj4-b.webp"
+  },
+  {
+    "id": "goku-ssj4-escultura-a",
+    "nombre": "Goku Super Saiyan 4 · A (escultura)",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "La malla de Goku SSJ4 A sin color, lista para imprimir en blanco y pintar.",
+    "archivo": "meshy/goku-ssj4-escultura-a.glb",
+    "peso": 1690920,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-11-18",
+    "sinTextura": true,
+    "triangulos": 410686,
+    "portada": "goku-ssj4-escultura-a.webp"
+  },
+  {
+    "id": "goku-ssj4-a",
+    "nombre": "Goku Super Saiyan 4 · A",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Goku en Super Saiyan 4: pelo negro largo, pelaje rojo y cola, con textura a color.",
+    "archivo": "meshy/goku-ssj4-a.glb",
+    "peso": 2642444,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-11-18",
+    "triangulos": 410686,
+    "portada": "goku-ssj4-a.webp"
+  },
+  {
+    "id": "goku-ssj4-armable",
+    "nombre": "Goku Super Saiyan 4 · Armable",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Goku en Super Saiyan 4 en 12 piezas con encastres cuadrados: se imprimen por separado (cada una en su color) y se ensamblan.",
+    "archivo": "meshy/goku-ssj4-armable.glb",
+    "peso": 2488484,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-11-18",
+    "piezas": [
+      {
+        "nombre": "Pieza 1",
+        "color": "#e8503a",
+        "detalle": "Se imprime aparte y encaja con las demás."
+      },
+      {
+        "nombre": "Pieza 2",
+        "color": "#2f7de1",
+        "detalle": "Se imprime aparte y encaja con las demás."
+      },
+      {
+        "nombre": "Pieza 3",
+        "color": "#f5b82e",
+        "detalle": "Se imprime aparte y encaja con las demás."
+      },
+      {
+        "nombre": "Pieza 4",
+        "color": "#3bb273",
+        "detalle": "Se imprime aparte y encaja con las demás."
+      },
+      {
+        "nombre": "Pieza 5",
+        "color": "#9b59b6",
+        "detalle": "Se imprime aparte y encaja con las demás."
+      },
+      {
+        "nombre": "Pieza 6",
+        "color": "#ff8a00",
+        "detalle": "Se imprime aparte y encaja con las demás."
+      },
+      {
+        "nombre": "Pieza 7",
+        "color": "#1abc9c",
+        "detalle": "Se imprime aparte y encaja con las demás."
+      },
+      {
+        "nombre": "Pieza 8",
+        "color": "#e84393",
+        "detalle": "Se imprime aparte y encaja con las demás."
+      },
+      {
+        "nombre": "Pieza 9",
+        "color": "#34495e",
+        "detalle": "Se imprime aparte y encaja con las demás."
+      },
+      {
+        "nombre": "Pieza 10",
+        "color": "#f1c40f",
+        "detalle": "Se imprime aparte y encaja con las demás."
+      },
+      {
+        "nombre": "Pieza 11",
+        "color": "#16a085",
+        "detalle": "Se imprime aparte y encaja con las demás."
+      },
+      {
+        "nombre": "Pieza 12",
+        "color": "#c0392b",
+        "detalle": "Se imprime aparte y encaja con las demás."
+      }
+    ],
+    "triangulos": 443494,
+    "portada": "goku-ssj4-armable.webp"
+  },
+  {
+    "id": "soporte-exhibicion-super-saiyan",
+    "nombre": "Soporte de Exhibición Super Saiyan",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Peana negra y naranja con llamas azules, logo de Dragon Ball Z y esfera del dragón; dos pernos para fijar la figura.",
+    "archivo": "meshy/soporte-exhibicion-super-saiyan.glb",
+    "peso": 2187500,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-11-18",
+    "triangulos": 293356,
+    "portada": "soporte-exhibicion-super-saiyan.webp"
+  },
+  {
+    "id": "goku-oleada-energia",
+    "nombre": "Goku · Oleada de Energía",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Goku liberando una oleada de energía, con el aura en plena explosión.",
+    "archivo": "meshy/goku-oleada-energia.glb",
+    "peso": 2856020,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-11-18",
+    "triangulos": 404986,
+    "portada": "goku-oleada-energia.webp"
+  },
+  {
+    "id": "goku-estatua-llama-azul",
+    "nombre": "Goku · Estatua Llama Azul",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Estatua de Goku rodeado de un aura de llamas azules sobre su peana.",
+    "archivo": "meshy/goku-estatua-llama-azul.glb",
+    "peso": 2624608,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-11-18",
+    "triangulos": 378240,
+    "portada": "goku-estatua-llama-azul.webp"
+  },
+  {
+    "id": "arena-cristal-dbz",
+    "nombre": "Arena de Cristal · Dragon Ball Z",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Peana de piedra con cristales azules, logo de Dragon Ball Z, Shenlong y esfera del dragón; trae dos pernos para fijar la figura.",
+    "archivo": "meshy/arena-cristal-dbz.glb",
+    "peso": 2573456,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-11-18",
+    "triangulos": 354164,
+    "portada": "arena-cristal-dbz.webp"
+  },
+  {
+    "id": "rompecabezas-amistad-dbz-piezas",
+    "nombre": "Rompecabezas 3D Amistad · por piezas",
+    "categoria": "rompecabezas-3d",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "La versión separada del rompecabezas de amistad: las piezas vienen sueltas para imprimirlas y encajarlas.",
+    "archivo": "meshy/rompecabezas-amistad-dbz-piezas.glb",
+    "peso": 1696500,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-11-18",
+    "piezas": [
+      {
+        "nombre": "Pieza 1",
+        "color": "#e8503a",
+        "detalle": "Se imprime aparte y encaja con las demás."
+      },
+      {
+        "nombre": "Pieza 2",
+        "color": "#2f7de1",
+        "detalle": "Se imprime aparte y encaja con las demás."
+      }
+    ],
+    "triangulos": 223142,
+    "portada": "rompecabezas-amistad-dbz-piezas.webp"
+  },
+  {
+    "id": "rompecabezas-amistad-dbz",
+    "nombre": "Rompecabezas 3D Amistad · A",
+    "categoria": "rompecabezas-3d",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Goku cargando a Gohan con el logo de Dragon Ball Z, en relieve sobre un rompecabezas azul enmarcado. Se imprime, se pinta y se arma.",
+    "archivo": "meshy/rompecabezas-amistad-dbz.glb",
+    "peso": 1562680,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-11-18",
+    "triangulos": 214812,
+    "portada": "rompecabezas-amistad-dbz.webp"
+  },
+  {
+    "id": "rompecabezas-amistad-dbz-c",
+    "nombre": "Rompecabezas 3D Amistad · C",
+    "categoria": "rompecabezas-3d",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Goku y Gohan en relieve sobre un rompecabezas de fondo gris con marco claro, otra versión del acabado.",
+    "archivo": "meshy/rompecabezas-amistad-dbz-c.glb",
+    "peso": 1808456,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-11-18",
+    "triangulos": 257316,
+    "portada": "rompecabezas-amistad-dbz-c.webp"
+  },
+  {
+    "id": "rompecabezas-amistad-dbz-b",
+    "nombre": "Rompecabezas 3D Amistad · B",
+    "categoria": "rompecabezas-3d",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Goku y Gohan en relieve sobre un rompecabezas azul con marco negro y textura envejecida. Se imprime, se pinta y se arma.",
+    "archivo": "meshy/rompecabezas-amistad-dbz-b.glb",
+    "peso": 1850540,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-11-18",
+    "triangulos": 257316,
+    "portada": "rompecabezas-amistad-dbz-b.webp"
+  },
+  {
+    "id": "base-llama-azul-dbz-piezas",
+    "nombre": "Base Llama Azul · por piezas",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "La misma peana de llamas azules separada en 4 piezas para imprimir cada color aparte y ensamblar.",
+    "archivo": "meshy/base-llama-azul-dbz-piezas.glb",
+    "peso": 1281188,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-11-18",
+    "piezas": [
+      {
+        "nombre": "Pieza 1",
+        "color": "#e8503a",
+        "detalle": "Se imprime aparte y encaja con las demás."
+      },
+      {
+        "nombre": "Pieza 2",
+        "color": "#2f7de1",
+        "detalle": "Se imprime aparte y encaja con las demás."
+      },
+      {
+        "nombre": "Pieza 3",
+        "color": "#f5b82e",
+        "detalle": "Se imprime aparte y encaja con las demás."
+      },
+      {
+        "nombre": "Pieza 4",
+        "color": "#3bb273",
+        "detalle": "Se imprime aparte y encaja con las demás."
+      }
+    ],
+    "triangulos": 161128,
+    "portada": "base-llama-azul-dbz-piezas.webp"
+  },
+  {
+    "id": "base-llama-azul-dbz",
+    "nombre": "Base Llama Azul · Dragon Ball Z",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Peana redonda para figuras, con el logo de Dragon Ball Z al frente, una esfera del dragón y un muro de llamas azules detrás.",
+    "archivo": "meshy/base-llama-azul-dbz.glb",
+    "peso": 1180744,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-11-18",
+    "triangulos": 153146,
+    "portada": "base-llama-azul-dbz.webp"
+  },
+  {
+    "id": "retrato-blocky-goku",
+    "nombre": "Retrato Blocky de Goku",
+    "categoria": "cuadros-3d",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Cuadro en relieve de Goku en estilo blocky, con volúmenes facetados que resaltan con luz rasante. Para colgar o poner de pie en un estante.",
+    "archivo": "meshy/retrato-blocky-goku.glb",
+    "peso": 6783452,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-11-18",
+    "triangulos": 1004336,
+    "portada": "retrato-blocky-goku.webp"
+  },
+  {
     "id": "espadachin-rubio-chibi",
     "nombre": "Espadachín Rubio Chibi",
     "categoria": "siete-pecados",

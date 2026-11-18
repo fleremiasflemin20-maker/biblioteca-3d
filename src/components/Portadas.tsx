@@ -27,8 +27,15 @@ function Disparo({ modelo, alTerminar }: { modelo: Modelo3D; alTerminar: () => v
     const tic = () => {
       if (!vivo) return
       if (++cuadros < 3) return requestAnimationFrame(tic)
-      camera.position.set(2.15, 1.0, 3.15)
-      camera.lookAt(0, 0, 0)
+      // Encuadre por la caja de la pieza: las anchas y bajas (peanas, kits
+      // en el suelo) se quedaban medio fuera mirando siempre al origen.
+      const caja = new THREE.Box3().setFromObject(scene)
+      const centro = caja.getCenter(new THREE.Vector3())
+      const radio = caja.getBoundingSphere(new THREE.Sphere()).radius
+      const mitad = THREE.MathUtils.degToRad((camera as THREE.PerspectiveCamera).fov / 2)
+      const dir = new THREE.Vector3(2.15, 1.0, 3.15).normalize()
+      camera.position.copy(centro).addScaledVector(dir, (radio / Math.sin(mitad)) * 0.92)
+      camera.lookAt(centro)
       gl.render(scene, camera)
       const tris = contarTriangulos(scene)
       gl.domElement.toBlob(
