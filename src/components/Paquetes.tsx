@@ -42,7 +42,7 @@ export function SeccionPaquetes() {
   if (PAQUETES.length === 0) return null
   return (
     <section id="paquetes" className="relative scroll-mt-36 overflow-hidden border-t border-white/10">
-      <div className="relative mx-auto max-w-[1600px] px-4 py-24 md:px-6">
+      <div className="relative mx-auto max-w-[1600px] px-4 py-14 md:px-6">
         <p className="font-chakra text-[11px] font-semibold uppercase tracking-[0.4em] text-[#FFC23D]">Descarga digital</p>
         <h2 className="titulo-seccion mt-2 text-[clamp(2rem,4.5vw,3.6rem)]" style={{ '--d': '#8A3CFF' } as CSSProperties}>
           Paquetes

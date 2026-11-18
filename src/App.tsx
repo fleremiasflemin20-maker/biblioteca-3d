@@ -263,6 +263,9 @@ export default function App() {
           onLogros={abrirLogros}
         />
 
+        {/* ── Paquetes de descarga: justo bajo el visor, antes del catálogo y del kit para pintar ── */}
+        <SeccionPaquetes />
+
         {/* Cinta de secciones que desfila entre la arena y el catálogo. */}
         <div aria-hidden className="relative overflow-hidden border-y border-white/10 bg-gradient-to-r from-[#8A3CFF] via-[#FF2D8A] to-[#FF6A13] py-2.5">
           <div className="cinta gap-10 font-flemin text-[15px] uppercase tracking-wide text-[#140f22]">
@@ -447,9 +450,6 @@ export default function App() {
             )}
           </div>
         </section>
-
-        {/* ── Paquetes de descarga: solo fotos; los archivos tras comprar ── */}
-        <SeccionPaquetes />
 
         {/* ── Cómo funciona: tres misiones ────────────────────── */}
         <section className="relative overflow-hidden border-t border-white/10">
