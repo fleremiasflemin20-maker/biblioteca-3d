@@ -22,5 +22,34 @@
       "paquetes/dragon-ball-z-01/10.webp"
     ],
     "pagoInternacional": ""
+  },
+  {
+    "id": "gta-vi-01",
+    "nombre": "Paquete GTA VI 01",
+    "lema": "Vice City en tu repisa",
+    "precio": "2.50",
+    "descripcion": "58 modelos inspirados en GTA VI para imprimir: estatuas y figuras de Jason y Lucía (juntos y por separado, de cuerpo entero, bustos y chibis), versiones Funko, line art y HueForge, más extras de Vice City como el flamenco, el manatí Chunkee, réplicas de armas de utilería y displays de colección. Todo en una sola descarga.",
+    "modelos": 58,
+    "peso": "1,6 GB",
+    "color": "#FF2D8A",
+    "fotos": [
+      "paquetes/gta-vi-01/21.webp",
+      "paquetes/gta-vi-01/38.webp",
+      "paquetes/gta-vi-01/16.webp",
+      "paquetes/gta-vi-01/14.webp",
+      "paquetes/gta-vi-01/15.webp",
+      "paquetes/gta-vi-01/17.webp",
+      "paquetes/gta-vi-01/02.webp",
+      "paquetes/gta-vi-01/10.webp",
+      "paquetes/gta-vi-01/12.webp",
+      "paquetes/gta-vi-01/22.webp",
+      "paquetes/gta-vi-01/26.webp",
+      "paquetes/gta-vi-01/51.webp",
+      "paquetes/gta-vi-01/52.webp",
+      "paquetes/gta-vi-01/53.webp",
+      "paquetes/gta-vi-01/44.webp",
+      "paquetes/gta-vi-01/08.webp"
+    ],
+    "pagoInternacional": ""
   }
 ]

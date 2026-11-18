@@ -7,6 +7,7 @@
  */
 export const PRECIOS: Record<string, string> = {
   'dragon-ball-z-01': '2.50',
+  'gta-vi-01': '2.50',
 }
 
 export const PREFIJO_PAQUETES = 'paquetes/'
