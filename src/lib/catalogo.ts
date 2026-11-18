@@ -60,7 +60,7 @@ export type Modelo3D = {
   texturas?: { carpeta: string; map: string; normalMap: string; roughnessMap: string; metalnessMap: string }
 }
 
-export type CategoriaId = 'hiperdetalle' | 'tecnologia' | 'mecanica' | 'autos' | 'dragon-ball-z' | 'caballeros-del-zodiaco' | 'siete-pecados' | 'your-name' | 'anime' | 'marvel' | 'dc' | 'seres-flemin' | 'munecos' | 'halloween' | 'soportes-ps5' | 'accesorios'
+export type CategoriaId = 'hiperdetalle' | 'tecnologia' | 'mecanica' | 'autos' | 'dragon-ball-z' | 'caballeros-del-zodiaco' | 'siete-pecados' | 'your-name' | 'anime' | 'marvel' | 'dc' | 'seres-flemin' | 'munecos' | 'halloween' | 'soportes-ps5' | 'accesorios' | 'cuadros-3d' | 'rompecabezas-3d'
 
 export type Categoria = {
   id: CategoriaId | 'todo'
@@ -96,6 +96,8 @@ export const CATEGORIAS: Categoria[] = [
   { id: 'halloween', nombre: 'Máscaras de Halloween', clave: 'HLW', desde: '#FF7A00', hasta: '#5B0FB8', tinta: '#FF9A3D', punto: '#EA580C' },
   { id: 'soportes-ps5', nombre: 'Soportes de mando PS5', clave: 'PS5', desde: '#2E6BFF', hasta: '#00D4FF', tinta: '#5AA9FF', punto: '#2563EB' },
   { id: 'accesorios', nombre: 'Hogar y accesorios', clave: 'ACC', desde: '#2AC3FF', hasta: '#7B2CFF', tinta: '#7CC8FF', punto: '#0D9488' },
+  { id: 'cuadros-3d', nombre: 'Cuadros 3D', clave: 'CDR', desde: '#FFB347', hasta: '#C2185B', tinta: '#FFC98A', punto: '#BE185D' },
+  { id: 'rompecabezas-3d', nombre: 'Rompecabezas 3D', clave: 'RMP', desde: '#3BE07A', hasta: '#2A5BFF', tinta: '#7CF0A8', punto: '#059669' },
 ]
 
 export const CATALOGO = (datos as Modelo3D[]).filter((m) => !m.oculto)

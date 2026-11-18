@@ -1,4 +1,4 @@
-import { Car, Crown, Cog, Cpu, Flame, Gamepad2, Gem, Ghost, LayoutGrid, Orbit, Shield, Sparkles, Star, Sword, Sunset, ToyBrick, Zap, type LucideIcon } from 'lucide-react'
+import { Car, Crown, Cog, Cpu, Flame, Frame, Gamepad2, Gem, Ghost, LayoutGrid, Orbit, Puzzle, Shield, Sparkles, Star, Sword, Sunset, ToyBrick, Zap, type LucideIcon } from 'lucide-react'
 import type { CategoriaId } from './catalogo'
 
 /** Un icono por sección, para las píldoras del filtro y las tarjetas. */
@@ -20,4 +20,6 @@ export const ICONO_CATEGORIA: Record<CategoriaId | 'todo', LucideIcon> = {
   halloween: Ghost,
   'soportes-ps5': Gamepad2,
   accesorios: Gem,
+  'cuadros-3d': Frame,
+  'rompecabezas-3d': Puzzle,
 }

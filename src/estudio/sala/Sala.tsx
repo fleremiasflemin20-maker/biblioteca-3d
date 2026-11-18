@@ -22,7 +22,10 @@ import { familia } from '../../lib/orden'
 /** Secciones con personajes de terceros: se venden en la tienda, pero no se exhiben en la sala. */
 const AJENAS = new Set<string>(['hiperdetalle', 'dragon-ball-z', 'caballeros-del-zodiaco', 'siete-pecados', 'your-name', 'halloween'])
 /** Piezas de secciones propias que llevan un personaje ajeno (el soporte de Kurama). */
-const ajena = (m: Modelo3D) => AJENAS.has(m.categoria) || familia(m) === 'soporte-ps5-kurama'
+const ajena = (m: Modelo3D) =>
+  AJENAS.has(m.categoria) || familia(m) === 'soporte-ps5-kurama' ||
+  // Cuadros y rompecabezas son secciones mixtas: fuera los que llevan Dragon Ball.
+  /dragon ball|dbz|goku|saiyan/i.test(`${m.id} ${m.nombre}`)
 
 export const OBRAS_PUBLICAS: Modelo3D[] = (() => {
   const propias = CATALOGO.filter((m) => !ajena(m))
