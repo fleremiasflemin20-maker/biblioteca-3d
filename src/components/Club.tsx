@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Check, Crown, Download, Lock, LogOut, MessageCircle, ShieldCheck, Sparkles, X } from 'lucide-react'
+import { Check, Crown, Download, KeyRound, Lock, LogOut, MessageCircle, ShieldCheck, Sparkles, X } from 'lucide-react'
 import {
   abrirClub,
   archivosDe,
@@ -242,6 +242,8 @@ function Cuenta({ usuario, config }: { usuario: UsuarioClub; config: ConfigClub 
 
       {usuario.admin && <Admin />}
 
+      <CambiarClave />
+
       <button type="button" onClick={() => salir()} className="flex items-center justify-center gap-2 self-center font-chakra text-[12px] uppercase tracking-[0.16em] text-white/45 hover:text-white">
         <LogOut size={14} /> Cerrar sesión
       </button>
@@ -328,6 +330,54 @@ function BotonPayPal({ usuario, paypal }: { usuario: UsuarioClub; paypal: { clie
 type Socio = { correo: string; nombre: string | null; perfil: Perfil | null; creado: number; proveedor: string | null; estado: string | null; vence: number | null; descargas: number }
 
 const nombreDe = (lista: readonly { id: string; nombre: string }[], id: string) => lista.find((x) => x.id === id)?.nombre ?? id
+
+/** Cambiar la contraseña (por ejemplo, la provisional que se dio al crear la cuenta). */
+function CambiarClave() {
+  const [abierto, setAbierto] = useState(false)
+  const [actual, setActual] = useState('')
+  const [nueva, setNueva] = useState('')
+  const [aviso, setAviso] = useState<{ ok: boolean; texto: string } | null>(null)
+  const [ocupado, setOcupado] = useState(false)
+
+  async function guardar(e: React.FormEvent) {
+    e.preventDefault()
+    setOcupado(true)
+    setAviso(null)
+    try {
+      await pedir('/clave', { actual, nueva })
+      setAviso({ ok: true, texto: 'Listo, tu contraseña cambió.' })
+      setActual('')
+      setNueva('')
+    } catch (err) {
+      setAviso({ ok: false, texto: (err as Error).message })
+    } finally {
+      setOcupado(false)
+    }
+  }
+
+  if (!abierto)
+    return (
+      <button type="button" onClick={() => setAbierto(true)} className="flex items-center justify-center gap-2 self-center font-chakra text-[12px] uppercase tracking-[0.16em] text-white/45 hover:text-white">
+        <KeyRound size={14} /> Cambiar contraseña
+      </button>
+    )
+  return (
+    <form onSubmit={guardar} className="flex flex-col gap-2 border-t border-white/10 pt-4">
+      <p className="font-chakra text-[12px] font-bold uppercase tracking-[0.2em] text-white/60">Cambiar contraseña</p>
+      <input type="password" required autoComplete="current-password" placeholder="Contraseña actual" value={actual} onChange={(e) => setActual(e.target.value)} className={campo} />
+      <input type="password" required minLength={8} autoComplete="new-password" placeholder="Nueva contraseña (mínimo 8)" value={nueva} onChange={(e) => setNueva(e.target.value)} className={campo} />
+      {aviso && <p className={`text-[13px] ${aviso.ok ? 'text-[#3BE0A0]' : 'text-[#FF7A6B]'}`}>{aviso.texto}</p>}
+      <div className="flex gap-2">
+        <button type="submit" disabled={ocupado} className="btn-juego btn-fuego flex-1 disabled:opacity-60">
+          {ocupado ? 'Guardando…' : 'Guardar'}
+        </button>
+        <button type="button" onClick={() => setAbierto(false)} className="btn-juego">
+          Cerrar
+        </button>
+      </div>
+    </form>
+  )
+}
 
 /** Lo que más piden los socios, para decidir qué personajes subir cada semana. */
 function Gustos({ socios }: { socios: Socio[] }) {

@@ -1,7 +1,8 @@
 import type { CSSProperties } from 'react'
 import { Box, Star } from 'lucide-react'
-import { CATEGORIAS, precio, rutaPortada, triangulos, type Modelo3D } from '../lib/catalogo'
+import { CATEGORIAS, precio, rutaPortada, textoArmado, triangulos, type Modelo3D } from '../lib/catalogo'
 import { ICONO_CATEGORIA } from '../lib/iconos'
+import { kitDe } from '../lib/kitPintura'
 import { enlaceHistoria } from '../lib/historias'
 import { coste, estrellas, rareza } from '../lib/rareza'
 
@@ -18,6 +19,8 @@ export function Tarjeta({ modelo, numero, onAbrir }: { modelo: Modelo3D; numero?
   const r = rareza(modelo)
   const leg = r.nombre === 'Legendaria'
   const detalle = estrellas(modelo)
+  const armado = textoArmado(modelo)
+  const kit = kitDe(modelo)
 
   return (
     <button
@@ -48,8 +51,26 @@ export function Tarjeta({ modelo, numero, onAbrir }: { modelo: Modelo3D; numero?
           {numero !== undefined && (
             <span className="absolute right-2.5 top-8 z-[3] font-chakra text-[10px] font-semibold tabular-nums tracking-wider text-white/45">No.{String(numero).padStart(3, '0')}</span>
           )}
-          {modelo.sinTextura && (
-            <span className="absolute bottom-2 left-2 z-[3] bg-black/60 px-2 py-0.5 font-chakra text-[9.5px] font-semibold uppercase tracking-[0.14em] text-white/80 ring-1 ring-white/25">Sin color</span>
+          {(modelo.sinTextura || armado) && (
+            <span className="absolute bottom-2 left-2 z-[3] flex flex-col items-start gap-1">
+              {armado && (
+                <span className="bg-black/60 px-2 py-0.5 font-chakra text-[9.5px] font-semibold uppercase tracking-[0.14em] text-white/90 ring-1" style={{ '--tw-ring-color': cat.tinta } as CSSProperties}>
+                  {armado}
+                </span>
+              )}
+              {modelo.sinTextura && (
+                <span className="flex items-center gap-1.5 bg-black/60 px-2 py-0.5 font-chakra text-[9.5px] font-semibold uppercase tracking-[0.14em] text-white/85 ring-1 ring-white/25">
+                  {kit ? 'Kit para pintar' : 'Para pintar'}
+                  {kit && (
+                    <span className="flex" aria-hidden>
+                      {kit.colores.slice(0, 5).map((c, i) => (
+                        <span key={i} className="-mr-0.5 h-2 w-2 rounded-full ring-1 ring-black/40" style={{ background: c.hex }} />
+                      ))}
+                    </span>
+                  )}
+                </span>
+              )}
+            </span>
           )}
           <span className="btn-fuego absolute bottom-2 right-2 z-[3] translate-y-2 px-2.5 py-1 font-chakra text-[10.5px] font-bold uppercase tracking-[0.12em] opacity-0 transition-all duration-300 [clip-path:polygon(6px_0,100%_0,calc(100%-6px)_100%,0_100%)] group-hover:translate-y-0 group-hover:opacity-100">
             {enlaceHistoria(modelo) ? 'Ver su historia ↗' : 'Ver en 3D'}

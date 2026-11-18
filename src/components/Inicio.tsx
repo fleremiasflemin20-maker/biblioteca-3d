@@ -10,7 +10,7 @@ import { TituloFlemin } from './TituloFlemin'
  */
 const LLAVE = 'inicio-visto'
 // En el desfile solo personajes: las piezas técnicas no lucen como retrato.
-const FIGURAS: string[] = ['dragon-ball-z', 'caballeros-del-zodiaco', 'siete-pecados', 'your-name', 'anime', 'marvel', 'dc', 'seres-flemin', 'munecos']
+const FIGURAS: string[] = ['hiperdetalle', 'dragon-ball-z', 'caballeros-del-zodiaco', 'siete-pecados', 'your-name', 'anime', 'marvel', 'dc', 'seres-flemin', 'munecos']
 
 export function useInicio() {
   const [ver, setVer] = useState(() => {
