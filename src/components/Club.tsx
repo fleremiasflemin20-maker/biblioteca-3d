@@ -18,6 +18,7 @@ import {
   verPestana,
 } from '../lib/club'
 import { Acceso } from './ClubAcceso'
+import { PAQUETES } from './Paquetes'
 import { IMPRESIONES, IMPRESORAS, UNIVERSOS, type Perfil } from '../../worker/perfil.ts'
 
 /**
@@ -52,6 +53,7 @@ const PASOS = [
 const INCLUYE = [
   'Los STL, 3MF y demás archivos de impresión de los modelos de la Biblioteca.',
   'Descargas ilimitadas mientras tu suscripción esté activa.',
+  'Todos los paquetes de descarga (Dragon Ball Z, GTA VI y los que vamos sumando) sin pagarlos aparte.',
   'Todo lo que ya está en la web y todo lo que vamos sumando, en una sola suscripción.',
   'Sin permanencia: cancelas cuando quieras y sigues descargando hasta el final del mes pagado.',
 ]
@@ -445,6 +447,7 @@ function Admin() {
         </div>
         {aviso && <p className="text-[13px] text-white/70">{aviso}</p>}
       </form>
+      <DarPaquete correo={correo} setCorreo={setCorreo} />
       <Gustos socios={socios} />
       <ul className="flex max-h-72 flex-col gap-1 overflow-y-auto text-[12.5px]">
         {socios.map((s) => (
@@ -478,6 +481,44 @@ function Admin() {
         {socios.length === 0 && <li className="text-white/45">Aún no hay cuentas.</li>}
       </ul>
     </div>
+  )
+}
+
+/** Venta de un paquete pagado con Deuna o transferencia: se le da a la cuenta del cliente. */
+function DarPaquete({ correo, setCorreo }: { correo: string; setCorreo: (c: string) => void }) {
+  const [paquete, setPaquete] = useState(PAQUETES[0]?.id ?? '')
+  const [aviso, setAviso] = useState('')
+  if (PAQUETES.length === 0) return null
+
+  async function dar(e: React.FormEvent, quitar = false) {
+    e.preventDefault()
+    setAviso('')
+    try {
+      await pedir('/admin/paquete', { correo, paquete, quitar })
+      const p = PAQUETES.find((x) => x.id === paquete)?.nombre ?? paquete
+      setAviso(quitar ? `${p} quitado de ${correo}.` : `${p} activado para ${correo}: ya puede descargarlo.`)
+    } catch (err) {
+      setAviso((err as Error).message)
+    }
+  }
+
+  return (
+    <form onSubmit={dar} className="flex flex-col gap-2 border-t border-white/10 pt-3">
+      <p className="font-chakra text-[11px] font-bold uppercase tracking-[0.2em] text-white/55">Dar un paquete (pago por Deuna o transferencia)</p>
+      <input type="email" required placeholder="Correo de la cuenta del cliente" value={correo} onChange={(e) => setCorreo(e.target.value)} className={campo} />
+      <div className="flex gap-2">
+        <select value={paquete} onChange={(e) => setPaquete(e.target.value)} className={`${campo} flex-1`} aria-label="Paquete">
+          {PAQUETES.map((p) => (
+            <option key={p.id} value={p.id} className="bg-[#140f22]">
+              {p.nombre}
+            </option>
+          ))}
+        </select>
+        <button type="submit" className="btn-juego btn-fuego">Dar</button>
+        <button type="button" onClick={(e) => dar(e, true)} className="btn-juego" title="Quitar el paquete de esta cuenta">Quitar</button>
+      </div>
+      {aviso && <p className="text-[13px] text-white/70">{aviso}</p>}
+    </form>
   )
 }
 

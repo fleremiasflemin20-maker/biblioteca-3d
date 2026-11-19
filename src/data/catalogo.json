@@ -1,8 +1,27 @@
 [
   {
+    "id": "frieza-dominio",
+    "nombre": "Dominio de Freezer",
+    "categoria": "cuadros-3d",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "STL",
+      "3MF"
+    ],
+    "descripcion": "Cuadro en caja con las transformaciones de Freezer en relieve sobre un fondo de energía, logo de Dragon Ball Z y cristales morados; marco negro con esquinas metálicas.",
+    "archivo": "meshy/frieza-dominio.glb",
+    "peso": 4041280,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-11-19",
+    "portada": "frieza-dominio.webp",
+    "triangulos": 613270
+  },
+  {
     "id": "goku-ssj4-escultura-c",
     "nombre": "Goku Super Saiyan 4 · C (escultura)",
-    "categoria": "dragon-ball-z",
+    "categoria": "hiperdetalle",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -22,7 +41,7 @@
   {
     "id": "goku-ssj4-escultura-b",
     "nombre": "Goku Super Saiyan 4 · B (escultura)",
-    "categoria": "dragon-ball-z",
+    "categoria": "hiperdetalle",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -42,7 +61,7 @@
   {
     "id": "goku-ssj4-b",
     "nombre": "Goku Super Saiyan 4 · B",
-    "categoria": "dragon-ball-z",
+    "categoria": "hiperdetalle",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -61,7 +80,7 @@
   {
     "id": "goku-ssj4-escultura-a",
     "nombre": "Goku Super Saiyan 4 · A (escultura)",
-    "categoria": "dragon-ball-z",
+    "categoria": "hiperdetalle",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -81,7 +100,7 @@
   {
     "id": "goku-ssj4-a",
     "nombre": "Goku Super Saiyan 4 · A",
-    "categoria": "dragon-ball-z",
+    "categoria": "hiperdetalle",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -100,7 +119,7 @@
   {
     "id": "goku-ssj4-armable",
     "nombre": "Goku Super Saiyan 4 · Armable",
-    "categoria": "dragon-ball-z",
+    "categoria": "hiperdetalle",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -200,7 +219,7 @@
   {
     "id": "goku-oleada-energia",
     "nombre": "Goku · Oleada de Energía",
-    "categoria": "dragon-ball-z",
+    "categoria": "hiperdetalle",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -219,7 +238,7 @@
   {
     "id": "goku-estatua-llama-azul",
     "nombre": "Goku · Estatua Llama Azul",
-    "categoria": "dragon-ball-z",
+    "categoria": "hiperdetalle",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -500,7 +519,7 @@
   {
     "id": "guerrero-bestia-chibi",
     "nombre": "Guerrero Bestia Chibi",
-    "categoria": "dragon-ball-z",
+    "categoria": "hiperdetalle",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -519,7 +538,7 @@
   {
     "id": "guerrero-bestia",
     "nombre": "Guerrero Bestia",
-    "categoria": "dragon-ball-z",
+    "categoria": "hiperdetalle",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -3060,7 +3079,7 @@
   {
     "id": "cosmic-fusion-warrior-original",
     "nombre": "Cosmic Fusion Warrior",
-    "categoria": "dragon-ball-z",
+    "categoria": "hiperdetalle",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -3079,7 +3098,7 @@
   {
     "id": "cosmic-fusion-warrior-vibrante",
     "nombre": "Cosmic Fusion Warrior · Vibrante",
-    "categoria": "dragon-ball-z",
+    "categoria": "hiperdetalle",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -3098,7 +3117,7 @@
   {
     "id": "cosmic-fusion-warrior-ultra-pop",
     "nombre": "Cosmic Fusion Warrior · Ultra Pop",
-    "categoria": "dragon-ball-z",
+    "categoria": "hiperdetalle",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -3117,7 +3136,7 @@
   {
     "id": "cosmic-fusion-warrior-anime-intenso",
     "nombre": "Cosmic Fusion Warrior · Anime Intenso",
-    "categoria": "dragon-ball-z",
+    "categoria": "hiperdetalle",
     "precio": 19,
     "formatos": [
       "GLB",
@@ -3136,7 +3155,7 @@
   {
     "id": "cosmic-fusion-warrior-escultura",
     "nombre": "Cosmic Fusion Warrior · Escultura",
-    "categoria": "dragon-ball-z",
+    "categoria": "hiperdetalle",
     "precio": 12,
     "formatos": [
       "GLB",
@@ -3156,7 +3175,7 @@
   {
     "id": "cosmic-fusion-warrior-segmentado",
     "nombre": "Cosmic Fusion Warrior · Por Piezas",
-    "categoria": "dragon-ball-z",
+    "categoria": "hiperdetalle",
     "precio": 22,
     "formatos": [
       "GLB",
@@ -3213,7 +3232,7 @@
   {
     "id": "dragon-ball-sparking",
     "nombre": "Cuadro Sparking Zero",
-    "categoria": "dragon-ball-z",
+    "categoria": "cuadros-3d",
     "precio": 24,
     "formatos": [
       "GLB",
@@ -3232,7 +3251,7 @@
   {
     "id": "limit-break-clash-a",
     "nombre": "Limit Break Clash · A",
-    "categoria": "dragon-ball-z",
+    "categoria": "hiperdetalle",
     "precio": 29,
     "formatos": [
       "GLB",
@@ -3251,7 +3270,7 @@
   {
     "id": "limit-break-clash-b",
     "nombre": "Limit Break Clash · B",
-    "categoria": "dragon-ball-z",
+    "categoria": "hiperdetalle",
     "precio": 29,
     "formatos": [
       "GLB",
@@ -3270,7 +3289,7 @@
   {
     "id": "vibrant-saiyan-showdown",
     "nombre": "Vibrant Saiyan Showdown",
-    "categoria": "dragon-ball-z",
+    "categoria": "hiperdetalle",
     "precio": 27,
     "formatos": [
       "GLB",
@@ -3289,7 +3308,7 @@
   {
     "id": "vibrant-saiyan-escultura",
     "nombre": "Vibrant Saiyan Showdown · Escultura",
-    "categoria": "dragon-ball-z",
+    "categoria": "hiperdetalle",
     "precio": 15,
     "formatos": [
       "GLB",
@@ -3310,7 +3329,7 @@
   {
     "id": "vibrant-saiyan-segmentado",
     "nombre": "Vibrant Saiyan Showdown · Por Piezas",
-    "categoria": "dragon-ball-z",
+    "categoria": "hiperdetalle",
     "precio": 32,
     "formatos": [
       "GLB",
@@ -3382,7 +3401,7 @@
   {
     "id": "gogeta-ssj4",
     "nombre": "Gogeta SSJ4",
-    "categoria": "dragon-ball-z",
+    "categoria": "hiperdetalle",
     "precio": 29,
     "formatos": [
       "GLB",

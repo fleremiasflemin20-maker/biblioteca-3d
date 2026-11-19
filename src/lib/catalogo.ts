@@ -80,6 +80,9 @@ export type Categoria = {
  */
 export const CATEGORIAS: Categoria[] = [
   { id: 'todo', nombre: 'Todo', clave: 'ALL', desde: '#00E5D1', hasta: '#2AC3FF', tinta: '#3BE0D0', punto: '#18181B' },
+  // Arriba del todo, justo bajo los paquetes y la publicidad del kit para pintar.
+  { id: 'rompecabezas-3d', nombre: 'Rompecabezas 3D', clave: 'RMP', desde: '#3BE07A', hasta: '#2A5BFF', tinta: '#7CF0A8', punto: '#059669' },
+  { id: 'cuadros-3d', nombre: 'Cuadros 3D', clave: 'CDR', desde: '#FFB347', hasta: '#C2185B', tinta: '#FFC98A', punto: '#BE185D' },
   { id: 'hiperdetalle', nombre: 'Leyendas Hiperdetalle', clave: 'HD', desde: '#00F0FF', hasta: '#B04DFF', tinta: '#7FF6FF', punto: '#0891B2' },
   { id: 'tecnologia', nombre: 'Tecnología', clave: 'TEC', desde: '#00E5D1', hasta: '#2A7BFF', tinta: '#4DE8FF', punto: '#0284C7' },
   { id: 'mecanica', nombre: 'Mecánica', clave: 'MEC', desde: '#FFB800', hasta: '#FF5E2F', tinta: '#FFC24D', punto: '#D97706' },
@@ -96,8 +99,6 @@ export const CATEGORIAS: Categoria[] = [
   { id: 'halloween', nombre: 'Máscaras de Halloween', clave: 'HLW', desde: '#FF7A00', hasta: '#5B0FB8', tinta: '#FF9A3D', punto: '#EA580C' },
   { id: 'soportes-ps5', nombre: 'Soportes de mando PS5', clave: 'PS5', desde: '#2E6BFF', hasta: '#00D4FF', tinta: '#5AA9FF', punto: '#2563EB' },
   { id: 'accesorios', nombre: 'Hogar y accesorios', clave: 'ACC', desde: '#2AC3FF', hasta: '#7B2CFF', tinta: '#7CC8FF', punto: '#0D9488' },
-  { id: 'cuadros-3d', nombre: 'Cuadros 3D', clave: 'CDR', desde: '#FFB347', hasta: '#C2185B', tinta: '#FFC98A', punto: '#BE185D' },
-  { id: 'rompecabezas-3d', nombre: 'Rompecabezas 3D', clave: 'RMP', desde: '#3BE07A', hasta: '#2A5BFF', tinta: '#7CF0A8', punto: '#059669' },
 ]
 
 export const CATALOGO = (datos as Modelo3D[]).filter((m) => !m.oculto)
