@@ -1,5 +1,5 @@
 import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
-import { Box, Gamepad2, Hand, MessageCircle, Plus, Scissors, Search, Sparkles, Trophy, Zap } from 'lucide-react'
+import { Box, Gamepad2, Hand, MessageCircle, Package, Plus, Scissors, Search, Sparkles, Trophy, Zap } from 'lucide-react'
 import { Tarjeta } from './components/Tarjeta'
 import { Ficha } from './components/Ficha'
 import { enlaceHistoria } from './lib/historias'
@@ -11,6 +11,7 @@ import { ModoManos } from './components/ModoManos'
 import { Inicio, useInicio } from './components/Inicio'
 import { Musica } from './components/Musica'
 import { BotonClub, PanelClub } from './components/Club'
+import { SeccionPaquetes } from './components/Paquetes'
 import { abrirClub, iniciarClub } from './lib/club'
 import { Avisos, PanelLogros } from './components/Trofeos'
 import { CATALOGO, CATEGORIAS, CORREO, REDES, WHATSAPP, type Modelo3D } from './lib/catalogo'
@@ -210,6 +211,9 @@ export default function App() {
             )}
             {/* Club Flemin: lo primero de la barra, para que se vea en cualquier pantalla. */}
             <BotonClub />
+            <a href="#paquetes" className="btn-juego !px-3.5" title="Paquetes de modelos para descargar">
+              <Package size={16} /> <span className="hidden md:inline">Paquetes</span>
+            </a>
             {/* Recorrido 3D: la sala con las figuras en pedestales. Flemin Studio: la web aparte, por su portada. */}
             <button type="button" onClick={() => setEstudio({ vista: 'sala' })} className="btn-juego btn-plasma !px-3.5" title="Recorre la sala de figuras en 3D">
               <Box size={16} /> <span className="hidden sm:inline">Recorrido 3D</span>
@@ -258,6 +262,9 @@ export default function App() {
           onCatalogo={irAlCatalogo}
           onLogros={abrirLogros}
         />
+
+        {/* ── Paquetes de descarga: justo bajo el visor, antes del catálogo y del kit para pintar ── */}
+        <SeccionPaquetes />
 
         {/* Cinta de secciones que desfila entre la arena y el catálogo. */}
         <div aria-hidden className="relative overflow-hidden border-y border-white/10 bg-gradient-to-r from-[#8A3CFF] via-[#FF2D8A] to-[#FF6A13] py-2.5">

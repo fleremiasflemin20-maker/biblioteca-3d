@@ -14,7 +14,7 @@ export const API = `${BASE}/api`
 
 export type Suscripcion = { activa: boolean; vence: number | null; proveedor: string | null; estado: string | null }
 export type UsuarioClub = { id: string; correo: string; nombre: string | null; admin: boolean }
-export type ConfigClub = { precio: string; paypal: { clientId: string; planId: string } | null; whatsapp: string }
+export type ConfigClub = { precio: string; paypal: { clientId: string; planId: string } | null; paypalPaquetes?: string | null; whatsapp: string }
 
 type Estado = {
   cargado: boolean
@@ -23,6 +23,8 @@ type Estado = {
   usuario: UsuarioClub | null
   suscripcion: Suscripcion | null
   modelos: Set<string>
+  /** Paquetes comprados por esta cuenta. */
+  paquetes: Set<string>
   panel: boolean
   pestana: PestanaClub
 }
@@ -32,7 +34,7 @@ export type PestanaClub = 'info' | 'cuenta'
 export const PRECIO_CLUB = '9.99'
 const CONFIG_BASE: ConfigClub = { precio: PRECIO_CLUB, paypal: null, whatsapp: '593979523040' }
 
-let estado: Estado = { cargado: false, disponible: false, config: CONFIG_BASE, usuario: null, suscripcion: null, modelos: new Set(), panel: false, pestana: 'info' }
+let estado: Estado = { cargado: false, disponible: false, config: CONFIG_BASE, usuario: null, suscripcion: null, modelos: new Set(), paquetes: new Set(), panel: false, pestana: 'info' }
 const oyentes = new Set<() => void>()
 const cambiar = (parcial: Partial<Estado>) => {
   estado = { ...estado, ...parcial }
@@ -70,10 +72,10 @@ export async function pedir<T>(ruta: string, cuerpo?: unknown): Promise<T> {
 /** Vuelve a preguntar quién soy (tras entrar, salir o pagar). */
 export async function refrescarUsuario() {
   try {
-    const yo = await pedir<{ usuario: UsuarioClub | null; suscripcion?: Suscripcion }>('/yo')
-    cambiar({ usuario: yo.usuario, suscripcion: yo.suscripcion ?? null })
+    const yo = await pedir<{ usuario: UsuarioClub | null; suscripcion?: Suscripcion; paquetes?: string[] }>('/yo')
+    cambiar({ usuario: yo.usuario, suscripcion: yo.suscripcion ?? null, paquetes: new Set(yo.paquetes ?? []) })
   } catch {
-    cambiar({ usuario: null, suscripcion: null })
+    cambiar({ usuario: null, suscripcion: null, paquetes: new Set() })
   }
 }
 
@@ -105,6 +107,14 @@ export const confirmarPayPal = (subscriptionID: string) => pedir('/paypal/confir
 export type ArchivoClub = { nombre: string; tamano: number }
 export const archivosDe = (id: string) => pedir<{ archivos: ArchivoClub[] }>(`/archivos/${encodeURIComponent(id)}`).then((r) => r.archivos)
 export const enlaceDescarga = (id: string, nombre: string) => `${API}/descargar/${encodeURIComponent(id)}/${encodeURIComponent(nombre)}`
+
+/* ── Paquetes de descarga ─────────────────────────────────────── */
+export const archivosPaquete = (id: string) => pedir<{ archivos: ArchivoClub[] }>(`/paquetes/${encodeURIComponent(id)}/archivos`).then((r) => r.archivos)
+export const enlacePaquete = (id: string, nombre: string) => `${API}/paquetes/${encodeURIComponent(id)}/descargar/${encodeURIComponent(nombre)}`
+export const ordenPaquete = (id: string) => pedir<{ id: string }>(`/paquetes/${encodeURIComponent(id)}/paypal/orden`, {}).then((r) => r.id)
+export const capturarPaquete = (id: string, orderID: string) => pedir(`/paquetes/${encodeURIComponent(id)}/paypal/capturar`, { orderID }).then(refrescarUsuario)
+/** ¿Puede bajar este paquete? Lo compró o tiene el Club activo. */
+export const tienePaquete = (e: { paquetes: Set<string>; suscripcion: Suscripcion | null }, id: string) => e.paquetes.has(id) || !!e.suscripcion?.activa
 
 export const fecha = (ms: number) => new Date(ms).toLocaleDateString('es-EC', { day: 'numeric', month: 'long', year: 'numeric' })
 export const megas = (b: number) => (b >= 1048576 ? `${(b / 1048576).toFixed(1)} MB` : `${Math.max(1, Math.round(b / 1024))} KB`)
