@@ -45,18 +45,20 @@ export function Musica() {
   }, [volumen, silencio])
 
   // Primer gesto del visitante: empieza a sonar (si no la pausó antes).
+  // No basta con el primer evento: un toque que acaba en desplazamiento (en
+  // el móvil casi siempre) o una tecla como Tab no cuentan como permiso para
+  // sonar y `play()` falla. Se sigue intentando con cada gesto hasta que suene.
   useEffect(() => {
     if (leer('musica-pausada', false)) return
+    const GESTOS = ['pointerdown', 'pointerup', 'click', 'touchend', 'keydown'] as const
     const arrancar = () => {
-      audio.current?.play().catch(() => {})
-      quitar()
+      const a = audio.current
+      if (!a || leer('musica-pausada', false)) return quitar()
+      if (!a.paused) return quitar()
+      a.play().then(quitar, () => {})
     }
-    const quitar = () => {
-      window.removeEventListener('pointerdown', arrancar)
-      window.removeEventListener('keydown', arrancar)
-    }
-    window.addEventListener('pointerdown', arrancar)
-    window.addEventListener('keydown', arrancar)
+    const quitar = () => GESTOS.forEach((g) => window.removeEventListener(g, arrancar, true))
+    GESTOS.forEach((g) => window.addEventListener(g, arrancar, true))
     return quitar
   }, [])
 
