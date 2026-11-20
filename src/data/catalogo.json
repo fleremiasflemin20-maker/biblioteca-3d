@@ -1,5 +1,122 @@
 [
   {
+    "id": "saiyan-nino-chibi",
+    "nombre": "Saiyan Niño Chibi",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Figura chibi del pequeño saiyan: cabello negro en punta, gi naranja con cinto azul, muñequeras y los puños listos para pelear. Estilo juguete coleccionable.",
+    "archivo": "meshy/saiyan-nino-chibi.glb",
+    "peso": 3700284,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-11-20",
+    "portada": "saiyan-nino-chibi.webp",
+    "triangulos": 622712
+  },
+  {
+    "id": "saiyan-nino-chibi-escultura",
+    "nombre": "Saiyan Niño Chibi · Escultura",
+    "categoria": "dragon-ball-z",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar del Saiyan Niño Chibi, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/saiyan-nino-chibi-escultura.glb",
+    "peso": 2439644,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-11-20",
+    "sinTextura": true,
+    "portada": "saiyan-nino-chibi-escultura.webp",
+    "triangulos": 622712
+  },
+  {
+    "id": "guerrero-rose-furia-divina",
+    "nombre": "Guerrero Rosé · Furia Divina",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Estatua del guerrero de cabello rosa en pose de ataque, con gi negro y gris y faja roja, frente a un aura morada de llamas sobre una base de roca agrietada.",
+    "archivo": "meshy/guerrero-rose-furia-divina.glb",
+    "peso": 9219028,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-11-20",
+    "portada": "guerrero-rose-furia-divina.webp",
+    "triangulos": 1631780
+  },
+  {
+    "id": "guerrero-rose-furia-divina-escultura",
+    "nombre": "Guerrero Rosé · Furia Divina · Escultura",
+    "categoria": "dragon-ball-z",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la estatua Furia Divina, con el aura y la base de roca, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/guerrero-rose-furia-divina-escultura.glb",
+    "peso": 6445808,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-11-20",
+    "sinTextura": true,
+    "portada": "guerrero-rose-furia-divina-escultura.webp",
+    "triangulos": 1631780
+  },
+  {
+    "id": "saiyan-legendario-furia-esmeralda",
+    "nombre": "Saiyan Legendario · Furia Esmeralda",
+    "categoria": "dragon-ball-z",
+    "precio": 19,
+    "formatos": [
+      "GLB",
+      "FBX",
+      "OBJ"
+    ],
+    "descripcion": "Estatua del guerrero legendario gritando con los puños cerrados: melena verde, joyas doradas, faja magenta y un aura esmeralda que estalla entre rocas.",
+    "archivo": "meshy/saiyan-legendario-furia-esmeralda.glb",
+    "peso": 12099764,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": true,
+    "alta": "2026-11-20",
+    "portada": "saiyan-legendario-furia-esmeralda.webp",
+    "triangulos": 2167944
+  },
+  {
+    "id": "saiyan-legendario-furia-esmeralda-escultura",
+    "nombre": "Saiyan Legendario · Furia Esmeralda · Escultura",
+    "categoria": "dragon-ball-z",
+    "precio": 12,
+    "formatos": [
+      "GLB",
+      "OBJ",
+      "STL"
+    ],
+    "descripcion": "Malla sin texturizar de la estatua Furia Esmeralda, con el aura y las rocas, lista para pintar o imprimir en 3D.",
+    "archivo": "meshy/saiyan-legendario-furia-esmeralda-escultura.glb",
+    "peso": 8541240,
+    "origen": "Diseño propio · generado con Meshy AI",
+    "destacado": false,
+    "alta": "2026-11-20",
+    "sinTextura": true,
+    "portada": "saiyan-legendario-furia-esmeralda-escultura.webp",
+    "triangulos": 2167944
+  },
+  {
     "id": "frieza-dominio",
     "nombre": "Dominio de Freezer",
     "categoria": "cuadros-3d",
