@@ -374,3 +374,47 @@
 .cartas-comic .titulo-seccion { font-family: 'Bangers', 'Dela Gothic One', sans-serif; letter-spacing: 0.03em; -webkit-text-stroke: 5px #121019; text-shadow: 5px 5px 0 #121019; transform: skewX(-4deg) rotate(-1deg); }
 .cartas-comic .eco-seccion { font-family: 'Bangers', sans-serif; -webkit-text-stroke: 1.5px color-mix(in srgb, var(--d) 35%, transparent); letter-spacing: 0.05em; }
 .cartas-comic .hexagono { box-shadow: 3px 3px 0 #121019; }
+
+/* ── Desfile 3D de «Uno por uno» (DesfileComic.tsx): una figura por tramo de scroll ── */
+.uxu-escena { isolation: isolate; background: var(--d); border-top: 4px solid #121019; border-bottom: 4px solid #121019; }
+.uxu-fondo { position: absolute; inset: -30%; z-index: -2; background: repeating-conic-gradient(from 0deg at 50% 52%, var(--d) 0deg 5deg, color-mix(in srgb, var(--h) 65%, white) 5deg 10deg); transition: background 0.6s; }
+@media (min-width: 768px) { .uxu-fondo { background: repeating-conic-gradient(from 0deg at 62% 50%, var(--d) 0deg 5deg, color-mix(in srgb, var(--h) 65%, white) 5deg 10deg); } }
+.uxu-trama { position: absolute; inset: 0; z-index: -1; background: radial-gradient(circle, rgba(18, 16, 25, 0.35) 1.1px, transparent 1.5px) 0 0 / 7px 7px; -webkit-mask-image: radial-gradient(60% 60% at 50% 45%, transparent 35%, black 100%); mask-image: radial-gradient(60% 60% at 50% 45%, transparent 35%, black 100%); }
+.uxu-eco { position: absolute; z-index: 0; left: 50%; top: 8%; transform: translateX(-50%) rotate(-3deg); white-space: nowrap; font-size: clamp(3rem, 13vw, 11rem); line-height: 1; color: rgba(255, 255, 255, 0.22); -webkit-text-stroke: 2px rgba(18, 16, 25, 0.35); text-shadow: none; pointer-events: none; animation: uxu-eco 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes uxu-eco { from { opacity: 0; letter-spacing: 0.3em; } }
+.uxu-lienzo { inset: 0; z-index: 2; }
+.uxu-portada { position: absolute; z-index: 1; left: 50%; top: 10%; height: 50%; width: auto; max-width: 80%; transform: translateX(-50%); object-fit: contain; transition: opacity 0.5s; filter: drop-shadow(2px 0 0 #121019) drop-shadow(-2px 0 0 #121019) drop-shadow(0 2px 0 #121019) drop-shadow(0 -2px 0 #121019) drop-shadow(6px 8px 0 rgba(18, 16, 25, 0.4)) saturate(1.2); animation: uxu-sube 0.5s cubic-bezier(0.22, 1.3, 0.4, 1) both; }
+@keyframes uxu-sube { from { transform: translate(-50%, 40px) scale(0.85); opacity: 0; } }
+.uxu-onomatopeya { position: absolute; z-index: 3; right: 5%; top: 9%; font-size: clamp(2.2rem, 7vw, 5.5rem); color: #FFE45C; transform: rotate(var(--r)); pointer-events: none; animation: uxu-pum 0.55s cubic-bezier(0.22, 1.6, 0.36, 1) both; }
+@keyframes uxu-pum { 0% { transform: rotate(var(--r)) scale(0.2); opacity: 0; } 100% { transform: rotate(var(--r)) scale(1); } }
+.uxu-globo { position: absolute; z-index: 3; left: 6%; top: 11%; max-width: 40%; padding: 0.5em 1em; font: 400 clamp(14px, 1.6vw, 22px)/1.1 'Bangers', Impact, sans-serif; letter-spacing: 0.04em; color: #121019; background: #fff; border: 3px solid #121019; border-radius: 50%; text-align: center; animation: uxu-pum 0.6s 0.15s cubic-bezier(0.22, 1.6, 0.36, 1) both; --r: -3deg; }
+.uxu-globo::after { content: ''; position: absolute; right: 18%; bottom: -14px; border: 8px solid transparent; border-top: 14px solid #121019; }
+.uxu-texto { position: absolute; z-index: 4; left: 12px; right: 12px; bottom: 12px; display: flex; flex-direction: column; gap: 8px; padding: 14px 14px 16px; background: #FAF7EE; color: #121019; border: 3px solid #121019; box-shadow: 6px 6px 0 #121019; animation: uxu-cartela 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes uxu-cartela { from { transform: translateY(24px) rotate(-1deg); opacity: 0; } }
+.uxu-nombre { font-size: clamp(1.6rem, 5.5vw, 3.4rem); line-height: 0.95; color: #fff; -webkit-text-stroke: 2px #121019; text-shadow: 3px 3px 0 #121019; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.uxu-descripcion { display: none; font-size: 14px; line-height: 1.45; color: rgba(18, 16, 25, 0.78); -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.uxu-riel { position: absolute; z-index: 4; right: 10px; top: 18%; bottom: 34%; width: 6px; background: rgba(18, 16, 25, 0.25); border: 1.5px solid #121019; }
+.uxu-riel-lleno { position: absolute; inset: 0; background: #FFE45C; transform-origin: top; transform: scaleY(0); }
+.uxu-riel i { position: absolute; left: -5px; width: 13px; height: 3px; border: 1px solid #121019; }
+.uxu-mandos { position: absolute; z-index: 5; right: 12px; top: 12px; display: flex; gap: 6px; }
+.uxu-mandos .libro-capitulos { height: 36px; background: rgba(18, 16, 25, 0.75); border-color: #121019; }
+.uxu-pista { position: absolute; z-index: 5; left: 50%; bottom: 40%; transform: translateX(-50%); padding: 4px 12px; color: #121019; background: #FFE45C; border: 3px solid #121019; box-shadow: 4px 4px 0 #121019; white-space: nowrap; }
+.uxu-mandos ~ .uxu-pista { pointer-events: none; }
+@media (max-width: 767px) {
+  .uxu-lienzo { bottom: 30%; }
+  .uxu-onomatopeya { top: 15%; }
+  .uxu-globo { top: 15%; max-width: 46%; }
+  .uxu-mandos { top: 10px; right: 10px; left: 10px; justify-content: flex-end; }
+  .uxu-mandos select { max-width: 55vw; }
+}
+@media (min-width: 768px) {
+  .uxu-texto { left: 4%; right: auto; bottom: auto; top: 50%; width: min(36%, 460px); padding: 22px 22px 24px; gap: 12px; transform: translateY(-50%) rotate(-1deg); animation-name: uxu-cartela-pc; }
+  @keyframes uxu-cartela-pc { from { transform: translate(-30px, -50%) rotate(-3deg); opacity: 0; } to { transform: translateY(-50%) rotate(-1deg); } }
+  .uxu-descripcion { display: -webkit-box; }
+  .uxu-lienzo { left: 30%; }
+  .uxu-portada { left: 65%; top: 14%; height: 70%; }
+  .uxu-globo { left: auto; right: 34%; top: 12%; max-width: 22%; }
+  .uxu-riel { right: 18px; top: 22%; bottom: 22%; }
+  .uxu-pista { left: 65%; bottom: 8%; }
+}
+@media (prefers-reduced-motion: reduce) { .uxu-eco, .uxu-portada, .uxu-onomatopeya, .uxu-globo, .uxu-texto { animation: none; } }
