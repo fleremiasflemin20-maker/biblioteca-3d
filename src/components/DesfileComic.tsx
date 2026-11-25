@@ -1,4 +1,4 @@
-import { Suspense, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
+import { Suspense, memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
@@ -46,7 +46,7 @@ const tieneGlb = (m: Modelo3D) => !m.personalizable
 const facil = (x: number) => 1 - Math.pow(1 - THREE.MathUtils.clamp(x, 0, 1), 3)
 
 /** La figura actual, animada según cuánto se ha bajado dentro de su tramo. */
-function Figura({ m, i, estado, onListo }: { m: Modelo3D; i: number; estado: { current: Estado }; onListo: (id: string) => void }) {
+const Figura = memo(function Figura({ m, i, estado, onListo }: { m: Modelo3D; i: number; estado: { current: Estado }; onListo: (id: string) => void }) {
   const g = useRef<THREE.Group>(null)
   const listo = useCallback(() => onListo(m.id), [m.id, onListo])
   // Al irse, se libera su memoria de vídeo (si vuelve, three.js la sube otra vez sola).
@@ -78,12 +78,27 @@ function Figura({ m, i, estado, onListo }: { m: Modelo3D; i: number; estado: { c
   })
   return (
     <group ref={g}>
+      {/* Antes de que Normalizar mida, este grupo vuelve a su sitio: si no, mide la figura ya movida y encogida. */}
+      <EnReposo destino={g} />
       <Normalizar>
         <Pieza modelo={m} />
       </Normalizar>
       <AlCargar onListo={listo} />
     </group>
   )
+})
+
+/** Deja el grupo animado sin mover ni escalar (corre antes que el efecto de Normalizar, que es su hermano siguiente). */
+function EnReposo({ destino }: { destino: { current: THREE.Group | null } }) {
+  useLayoutEffect(() => {
+    const o = destino.current
+    if (!o) return
+    o.position.set(0, 0, 0)
+    o.rotation.set(0, 0, 0)
+    o.scale.setScalar(1)
+    o.updateMatrixWorld(true)
+  })
+  return null
 }
 
 /** Suelta de memoria las figuras que ya quedaron lejos (geometría, texturas y la caché de useGLTF). */
@@ -125,7 +140,7 @@ function SombraSuelo() {
     c.width = c.height = 128
     const g = c.getContext('2d')!
     const r = g.createRadialGradient(64, 64, 0, 64, 64, 64)
-    r.addColorStop(0, 'rgba(18,16,25,0.55)')
+    r.addColorStop(0, 'rgba(18,16,25,0.4)')
     r.addColorStop(1, 'rgba(18,16,25,0)')
     g.fillStyle = r
     g.fillRect(0, 0, 128, 128)
@@ -134,7 +149,7 @@ function SombraSuelo() {
   useEffect(() => () => textura.dispose(), [textura])
   return (
     <mesh position={[0, -1.02, 0]} rotation-x={-Math.PI / 2}>
-      <planeGeometry args={[3.2, 1.6]} />
+      <planeGeometry args={[2.4, 1.2]} />
       <meshBasicMaterial map={textura} transparent depthWrite={false} />
     </mesh>
   )
