@@ -1,0 +1,206 @@
+/* "La Incursión": tomo de manga. Mismos tokens que el rediseño cómic de la
+   Biblioteca (tinta #121019, papel #FAF7EE, cartela #FFE45C, Bangers). */
+:root {
+  --tinta: #121019;
+  --papel: #faf7ee;
+  --cartela: #ffe45c;
+  --rojo: #ff2a3d;
+  --violeta: #b46bff;
+  --sombra: 5px 5px 0 var(--tinta);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background-color: var(--tinta);
+  background-image: radial-gradient(rgba(180, 107, 255, 0.16) 1.4px, transparent 1.6px);
+  background-size: 14px 14px;
+  color: var(--tinta);
+  font-family: 'Comic Neue', 'Trebuchet MS', sans-serif;
+  overflow: hidden;
+}
+button { font: inherit; cursor: pointer; }
+
+/* ---------- libro y hojas ---------- */
+.lector { position: fixed; inset: 0; display: flex; flex-direction: column; }
+.libro { position: relative; flex: 1; perspective: 2600px; overflow: hidden; }
+.hoja {
+  position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden;
+  background: var(--papel);
+  background-image: radial-gradient(rgba(18, 16, 25, 0.07) 1px, transparent 1.2px);
+  background-size: 9px 9px;
+  transform-origin: left center; backface-visibility: hidden;
+  scrollbar-width: thin;
+}
+.hoja.debajo { z-index: 1; }
+.hoja.encima { z-index: 2; box-shadow: 0 0 40px rgba(0, 0, 0, 0.4); }
+.hoja:empty { display: none; }
+.gira-adelante { animation: girar-adelante 0.75s cubic-bezier(0.5, 0.05, 0.35, 1) forwards; }
+.gira-atras { animation: girar-atras 0.75s cubic-bezier(0.5, 0.05, 0.35, 1) forwards; }
+@keyframes girar-adelante {
+  0% { transform: rotateY(0); filter: brightness(1); }
+  60% { filter: brightness(0.7); }
+  100% { transform: rotateY(-100deg); filter: brightness(0.4); }
+}
+@keyframes girar-atras {
+  0% { transform: rotateY(-100deg); filter: brightness(0.4); }
+  100% { transform: rotateY(0); filter: brightness(1); }
+}
+
+/* ---------- controles ---------- */
+.controles {
+  display: flex; align-items: center; gap: 10px; padding: 8px 16px calc(8px + env(safe-area-inset-bottom));
+  background: var(--tinta); border-top: 3px solid var(--tinta);
+}
+.controles[hidden] { display: none; }
+.ctrl {
+  background: var(--cartela); color: var(--tinta); border: 3px solid var(--papel); border-radius: 6px;
+  font-family: 'Bangers', sans-serif; font-size: 22px; letter-spacing: 1px; padding: 4px 16px; min-width: 48px; min-height: 44px;
+}
+.ctrl:hover { background: #fff; }
+.ctrl-portada { font-size: 18px; }
+.progreso { flex: 1; height: 10px; border: 2px solid var(--papel); border-radius: 6px; overflow: hidden; }
+.progreso-barra { height: 100%; width: 0; background: linear-gradient(90deg, var(--cartela), var(--violeta)); transition: width 0.5s; }
+
+/* ---------- portada ---------- */
+.portada {
+  min-height: 100%; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); gap: 40px;
+  padding: 40px max(16px, 4vw); align-items: center;
+}
+.portada-tomo {
+  position: relative; background: var(--tinta); color: var(--papel); border: 6px solid var(--tinta);
+  box-shadow: 12px 12px 0 var(--violeta); padding: 0 0 32px; transform: rotate(-1deg);
+}
+.portada-arte { aspect-ratio: 16 / 9; overflow: hidden; border-bottom: 6px solid var(--cartela); }
+.portada-arte img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.portada-sello {
+  margin: 20px 28px 0; font-family: 'Bangers', sans-serif; letter-spacing: 3px; font-size: 20px; color: var(--cartela);
+}
+.portada-titulo {
+  margin: 0 28px; font-family: 'Bangers', sans-serif; font-weight: 400; line-height: 0.9;
+  font-size: clamp(56px, 9vw, 150px); color: var(--cartela);
+  -webkit-text-stroke: 3px var(--tinta); text-shadow: 6px 6px 0 var(--rojo), 10px 10px 0 var(--tinta);
+}
+.portada-titulo span { font-size: 0.5em; display: block; color: var(--papel); }
+.portada-kanji {
+  position: absolute; right: 24px; bottom: 90px; margin: 0; font-family: 'Dela Gothic One', sans-serif;
+  writing-mode: vertical-rl; font-size: clamp(36px, 5vw, 72px); color: var(--rojo); opacity: 0.9;
+}
+.portada-gancho { margin: 14px 28px 22px; max-width: 34em; font-size: 18px; line-height: 1.45; color: rgba(250, 247, 238, 0.85); }
+.portada-tomo .boton-comic { margin-left: 28px; }
+
+.boton-comic {
+  display: inline-block; background: var(--cartela); color: var(--tinta); border: 3px solid var(--tinta);
+  box-shadow: var(--sombra); font-family: 'Bangers', sans-serif; font-size: 24px; letter-spacing: 1.5px;
+  padding: 10px 26px; text-decoration: none; transition: transform 0.15s, box-shadow 0.15s;
+}
+.boton-comic:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--tinta); }
+.boton-oscuro { background: var(--tinta); color: var(--papel); border-color: var(--papel); box-shadow: 5px 5px 0 var(--violeta); }
+
+.indice {
+  background: var(--papel); border: 4px solid var(--tinta); box-shadow: var(--sombra); padding: 24px; transform: rotate(0.8deg);
+}
+.indice-rotulo { margin: 0 0 12px; font-family: 'Bangers', sans-serif; font-size: 34px; letter-spacing: 2px; }
+.indice ol { list-style: none; margin: 0; padding: 0; }
+.indice li + li { border-top: 2px dashed rgba(18, 16, 25, 0.25); }
+.indice button {
+  width: 100%; display: flex; align-items: center; gap: 12px; padding: 10px 4px; background: none; border: 0;
+  text-align: left; font-size: 17px; font-weight: 700; color: var(--tinta); min-height: 44px;
+}
+.indice button:hover { background: var(--cartela); }
+.indice-kanji { font-family: 'Bangers', sans-serif; font-size: 26px; color: var(--rojo); width: 1.4em; text-align: center; }
+.indice-pag { margin-left: auto; font-size: 14px; opacity: 0.55; font-weight: 400; }
+.volver { display: inline-block; margin-top: 18px; color: var(--tinta); font-weight: 700; }
+.aviso { margin: 18px 0 0; font-size: 12px; line-height: 1.5; opacity: 0.6; }
+
+/* ---------- página ---------- */
+.pagina { max-width: min(1600px, calc((100vh - 170px) * 16 / 9 + 64px)); margin: 0 auto; padding: 18px 32px 40px; }
+.pagina-cabecera {
+  display: flex; align-items: baseline; gap: 12px; border-bottom: 4px solid var(--tinta); padding-bottom: 6px; margin-bottom: 14px;
+}
+.pagina-kanji { font-family: 'Bangers', sans-serif; color: var(--rojo); font-size: 24px; }
+.pagina-cap { font-family: 'Bangers', sans-serif; font-size: 22px; letter-spacing: 1.5px; }
+.pagina-titulo { font-weight: 700; opacity: 0.7; }
+.pagina-num { margin-left: auto; font-family: 'Bangers', sans-serif; font-size: 20px; }
+.rotulo-cap {
+  margin: 4px 0 16px; font-family: 'Bangers', sans-serif; font-weight: 400; font-size: clamp(34px, 5vw, 72px);
+  color: var(--cartela); -webkit-text-stroke: 2px var(--tinta); text-shadow: 4px 4px 0 var(--tinta); letter-spacing: 2px;
+  animation: entra-rotulo 0.6s 0.2s both;
+}
+.rotulo-kanji { font-family: 'Dela Gothic One', sans-serif; color: var(--rojo); -webkit-text-stroke: 0; margin-right: 0.3em; font-size: 0.8em; }
+@keyframes entra-rotulo { from { transform: translateX(-30px) skewX(-12deg); opacity: 0; } }
+
+.vineta {
+  position: relative; margin: 0; container-type: inline-size; border: 5px solid var(--tinta); box-shadow: 8px 8px 0 var(--tinta);
+  background: var(--tinta); aspect-ratio: 16 / 9;
+}
+.vineta img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.cartela {
+  position: absolute; left: 2cqw; top: 2cqw; max-width: 42cqw; background: var(--cartela); border: 3px solid var(--tinta);
+  box-shadow: var(--sombra); padding: 0.9cqw 1.2cqw; font-size: clamp(12px, 1.45cqw, 26px); line-height: 1.35; font-weight: 700;
+  animation: aparece 0.5s both;
+}
+
+/* ---------- globos ---------- */
+.globos { position: absolute; inset: 0; pointer-events: none; }
+.globo {
+  position: absolute; left: calc(var(--x) * 100%); top: calc(var(--y) * 100%); transform: translateX(-50%);
+  max-width: 26cqw; background: #fff; border: 3px solid var(--tinta); border-radius: 50% / 42%;
+  padding: 1.3cqw 2cqw; text-align: center; font-size: clamp(11px, 1.4cqw, 26px); line-height: 1.25; font-weight: 700;
+  box-shadow: 3px 3px 0 rgba(18, 16, 25, 0.35); animation: globo 0.45s var(--d) both cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+.globo-quien {
+  display: block; font-family: 'Bangers', sans-serif; font-weight: 400; letter-spacing: 1px; font-size: 0.85em; color: var(--rojo);
+}
+.globo::after {
+  content: ''; position: absolute; width: 1.8cqw; height: 2cqw; background: #fff; border: 3px solid var(--tinta);
+  border-top: 0; border-left: 0; left: 44%; bottom: -1.05cqw; transform: rotate(45deg) skew(12deg, 12deg);
+}
+.cola-izq::after { left: -0.9cqw; top: 45%; bottom: auto; transform: rotate(135deg) skew(12deg, 12deg); }
+.cola-der::after { right: -0.9cqw; left: auto; top: 45%; bottom: auto; transform: rotate(-45deg) skew(12deg, 12deg); }
+.globo-grito {
+  border-radius: 0; background: #fff; font-family: 'Bangers', sans-serif; font-weight: 400; letter-spacing: 1px;
+  font-size: clamp(13px, 1.7cqw, 32px); border: 0; padding: 2.6cqw 3.2cqw; filter: drop-shadow(3px 0 0 var(--tinta)) drop-shadow(-3px 0 0 var(--tinta)) drop-shadow(0 3px 0 var(--tinta)) drop-shadow(0 -3px 0 var(--tinta));
+  clip-path: polygon(0% 18%, 12% 22%, 8% 0%, 26% 14%, 36% 0%, 46% 14%, 60% 0%, 66% 16%, 84% 4%, 82% 22%, 100% 20%, 90% 40%, 100% 56%, 86% 64%, 96% 86%, 76% 80%, 70% 100%, 56% 84%, 44% 100%, 36% 82%, 18% 96%, 18% 78%, 0% 80%, 10% 60%, 0% 44%, 10% 34%);
+}
+.globo-grito::after { display: none; }
+.globo-grito .globo-quien { color: var(--violeta); }
+@keyframes globo { from { transform: translateX(-50%) scale(0.2); opacity: 0; } }
+@keyframes aparece { from { opacity: 0; transform: translateY(-8px); } }
+
+/* El diálogo en lista solo se usa en pantallas estrechas (ver abajo). */
+.dialogo { display: none; }
+
+/* ---------- fin ---------- */
+.fin { min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px 16px; }
+.fin-rotulo {
+  margin: 0; font-family: 'Bangers', sans-serif; font-size: clamp(48px, 9vw, 120px); color: var(--cartela);
+  -webkit-text-stroke: 3px var(--tinta); text-shadow: 6px 6px 0 var(--tinta);
+}
+.fin-texto { font-size: 20px; font-weight: 700; }
+.fin-botones { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; margin-top: 16px; }
+
+/* ---------- móvil ---------- */
+@media (max-width: 860px) {
+  .portada { grid-template-columns: 1fr; padding: 24px 16px 40px; gap: 32px; }
+  .portada-tomo { transform: none; box-shadow: 8px 8px 0 var(--violeta); }
+  .portada-kanji { bottom: auto; top: 10px; right: 10px; font-size: 34px; color: var(--cartela); text-shadow: 2px 2px 0 var(--tinta); }
+  .indice { transform: none; }
+}
+@media (max-width: 700px) {
+  .pagina { padding: 12px 12px 32px; }
+  .pagina-titulo { display: none; }
+  .vineta { border-width: 3px; box-shadow: 5px 5px 0 var(--tinta); }
+  /* En 375 px los globos encima de la viñeta serían ilegibles o la taparían:
+     la imagen queda limpia y el diálogo se lee debajo, como en un webtoon. */
+  .globos, .cartela { display: none; }
+  .dialogo { display: block; margin-top: 18px; }
+  .linea { background: #fff; border: 3px solid var(--tinta); border-radius: 18px; padding: 10px 14px; margin: 0 0 12px; font-weight: 700; line-height: 1.35; box-shadow: 3px 3px 0 var(--tinta); }
+  .linea b { display: block; font-family: 'Bangers', sans-serif; font-weight: 400; color: var(--rojo); letter-spacing: 1px; }
+  .linea-grito { font-family: 'Bangers', sans-serif; font-weight: 400; font-size: 20px; letter-spacing: 1px; }
+  .ctrl-portada { display: none; }
+}
+.narracion-movil { display: none; }
+@media (max-width: 700px) { .narracion-movil { display: block; background: var(--cartela); border: 3px solid var(--tinta); padding: 10px 12px; margin: 14px 0 0; font-weight: 700; line-height: 1.4; box-shadow: 4px 4px 0 var(--tinta); } }
+@media (prefers-reduced-motion: reduce) {
+  .globo, .cartela, .rotulo-cap { animation: none; }
+}

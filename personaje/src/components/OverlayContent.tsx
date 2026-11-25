@@ -5,6 +5,9 @@ import { AUTOR, REDES } from '../lib/autor'
 import { ELEGIDA } from '../lib/figura'
 import type { Capitulo } from '../lib/personajes'
 import { enlaceCompra, precio } from '../../../src/lib/catalogo'
+import { HISTORIA_DE } from '../../../src/lib/historias'
+import { vinetasDe } from '../../../src/lib/ova'
+import { VidaMultiverso } from './VidaMultiverso'
 
 /** Degradado bajo el texto: sin él, el blanco sobre la figura no llega a 4.5:1. */
 type Scrim = 'left' | 'right' | 'bottom' | 'none'
@@ -190,12 +193,24 @@ export const OverlayContent = forwardRef<HTMLDivElement>(function OverlayContent
         {p.tecnicasNota && <p className="mt-8 max-w-2xl text-body text-paper/55">{p.tecnicasNota}</p>}
       </Chapter>
 
-      {/* ── 7 · Cierre ───────────────────────────────────────────────────── */}
+      {/* ── 7 · Su vida en el multiverso (OVA La Incursión) ─────────────── */}
+      {vinetasDe(HISTORIA_DE[modelo.id]).length > 0 && (
+        <Chapter align="left" scrim="bottom" className="md:justify-end md:pb-32">
+          <Eyebrow>06 — Su vida en el multiverso</Eyebrow>
+          <p className="mt-5 max-w-2xl text-body text-paper/70">
+            Escenas de nuestra OVA <span className="text-paper">La Incursión</span>, dibujadas a partir de las figuras de la
+            Biblioteca: peleas contra personajes de otros mundos y ratos de tregua.
+          </p>
+          <VidaMultiverso historia={HISTORIA_DE[modelo.id]} />
+        </Chapter>
+      )}
+
+      {/* ── 8 · Cierre ───────────────────────────────────────────────────── */}
       {/* Relleno inferior extra: es el capítulo con más contenido y en vertical
           no cabe de una pantalla, así que la última línea acababa por debajo del
           selector de render, que flota fijo. */}
       <Chapter align="left" scrim="left" className="pb-52 md:pb-28">
-        <Eyebrow>06 — Quién firma esto</Eyebrow>
+        <Eyebrow>07 — Quién firma esto</Eyebrow>
         <TituloVivo className="mt-5" entrada="giro" lineas={['¿Hacemos algo así?']} />
 
         {/*

@@ -1,0 +1,128 @@
+{
+ "goku": {
+  "glb": "/models/meshy/saiyan-dorado-chibi-a.glb"
+ },
+ "goku-batalla": {
+  "glb": "/models/meshy/saiyan-dorado-batalla-chibi.glb"
+ },
+ "goku-nino": {
+  "glb": "/models/meshy/saiyan-nino-chibi.glb"
+ },
+ "vegeta": {
+  "glb": "/models/meshy/principe-saiyan-chibi-a.glb",
+  "corte": 0.05
+ },
+ "gogeta4": {
+  "glb": "/models/meshy/fusion-fase4-chibi-a.glb"
+ },
+ "gogetablue": {
+  "glb": "/models/descargas/cosmic-fusion-warrior-original.glb"
+ },
+ "piccolo": {
+  "glb": "/models/subidos/piccolo-chibi.glb"
+ },
+ "broly": {
+  "glb": "/models/meshy/saiyan-legendario-ova-chibi-a.glb"
+ },
+ "broly-verde": {
+  "glb": "/models/meshy/saiyan-legendario-chibi-verde.glb"
+ },
+ "trunks": {
+  "glb": "/models/meshy/guerrero-futuro-chibi-a.glb"
+ },
+ "krilin": {
+  "glb": "/models/meshy/monje-guerrero-chibi.glb"
+ },
+ "yajirobe": {
+  "glb": "/models/meshy/samurai-errante-chibi-a.glb"
+ },
+ "karin": {
+  "glb": "/models/meshy/gato-sabio-chibi-a.glb"
+ },
+ "goku4": {
+  "glb": "/models/meshy/saiyan-fase4-chibi-clasico-a.glb",
+  "corte": 0.065
+ },
+ "black": {
+  "glb": "/models/meshy/guerrero-rose-furia-divina.glb",
+  "corte": false
+ },
+ "seiya": {
+  "glb": "/models/subidos/seiya-pegaso-chibi.glb"
+ },
+ "shiryu": {
+  "glb": "/models/subidos/shiryu-dragon-chibi.glb"
+ },
+ "hyoga": {
+  "glb": "/models/subidos/hyoga-cisne-chibi.glb"
+ },
+ "shun": {
+  "glb": "/models/subidos/shun-andromeda-chibi.glb"
+ },
+ "ikki": {
+  "glb": "/models/subidos/ikki-fenix-chibi.glb"
+ },
+ "aioria": {
+  "glb": "/models/subidos/aioria-leo-chibi.glb"
+ },
+ "saga": {
+  "glb": "/models/subidos/saga-geminis-chibi.glb"
+ },
+ "athena": {
+  "glb": "/models/subidos/athena-saori-chibi-escultura.glb",
+  "corte": 0.105,
+  "emisivo": "#ffd27a",
+  "emisivoI": 0.18
+ },
+ "meliodas": {
+  "glb": "/models/meshy/espadachin-rubio-chibi.glb"
+ },
+ "diane": {
+  "glb": "/models/meshy/guerrera-gigante-chibi-a.glb"
+ },
+ "king": {
+  "glb": "/models/meshy/rey-hada-chibi-b.glb"
+ },
+ "merlin": {
+  "glb": "/models/meshy/hechicera-violeta-chibi-a.glb"
+ },
+ "escanor": {
+  "glb": "/models/meshy/guerrero-del-sol-chibi.glb",
+  "corte": 0.065
+ },
+ "ban": {
+  "glb": "/models/meshy/bandido-inmortal-chibi.glb",
+  "corte": 0.055
+ },
+ "ranma": {
+  "glb": "/models/meshy/artista-marcial-trenza-chibi-a.glb"
+ },
+ "pchan": {
+  "glb": "/models/meshy/cerdito-negro-panuelo-chibi.glb"
+ },
+ "mitsuha": {
+  "glb": "/models/meshy/chica-lazo-rojo-chibi-a.glb",
+  "corte": 0.145
+ },
+ "taki": {
+  "glb": "/models/meshy/estudiante-tokio-chibi.glb"
+ },
+ "itachi": {
+  "glb": "/models/hiperdetalle/ninja-capa-nubes-rojas-hd.glb"
+ },
+ "madara": {
+  "glb": "/models/hiperdetalle/ninja-legendario-armadura-roja-hd.glb"
+ },
+ "encapuchado": {
+  "glb": "/models/descargas/higgsfield-01.glb"
+ },
+ "centinela": {
+  "glb": "/models/meshy/cyber-draconian-sentinel.glb"
+ },
+ "tirano": {
+  "glb": "/models/meshy/emerald-tyrant-throne.glb"
+ },
+ "octavio": {
+  "glb": "/models/meshy/maton-de-traje-chibi.glb"
+ }
+}

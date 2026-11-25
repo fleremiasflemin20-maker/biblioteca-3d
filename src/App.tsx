@@ -1,6 +1,7 @@
 import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
-import { Box, Gamepad2, Hand, MessageCircle, Package, Plus, Scissors, Search, Sparkles, Trophy, Zap } from 'lucide-react'
+import { BookOpen, Box, Gamepad2, Hand, MessageCircle, Package, Plus, Scissors, Search, Sparkles, Trophy, Zap } from 'lucide-react'
 import { LibroComic } from './components/LibroComic'
+import { enlaceOva } from './lib/ova'
 import { Tarjeta } from './components/Tarjeta'
 import { Ficha } from './components/Ficha'
 import { enlaceHistoria } from './lib/historias'
@@ -212,6 +213,10 @@ export default function App() {
             )}
             {/* Club Flemin: lo primero de la barra, para que se vea en cualquier pantalla. */}
             <BotonClub />
+            {/* La OVA propia: un tomo de manga con los personajes de la Biblioteca. */}
+            <a href={enlaceOva()} className="btn-juego !px-3.5" title="Leer la OVA «La Incursión»">
+              <BookOpen size={16} /> <span className="hidden md:inline">OVA</span>
+            </a>
             <a href="#paquetes" className="btn-juego !px-3.5" title="Paquetes de modelos para descargar">
               <Package size={16} /> <span className="hidden md:inline">Paquetes</span>
             </a>

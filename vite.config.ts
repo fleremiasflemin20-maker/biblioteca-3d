@@ -20,6 +20,8 @@ export default defineConfig(() => ({
       input: {
         main: resolve(import.meta.dirname, 'index.html'),
         personaje: resolve(import.meta.dirname, 'personaje/index.html'),
+        // La OVA "La Incursión": un tomo de manga que se lee hoja a hoja.
+        ova: resolve(import.meta.dirname, 'ova/index.html'),
       },
     },
   },
