@@ -1,5 +1,6 @@
 import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 import { Box, Gamepad2, Hand, MessageCircle, Package, Plus, Scissors, Search, Sparkles, Trophy, Zap } from 'lucide-react'
+import { LibroComic } from './components/LibroComic'
 import { Tarjeta } from './components/Tarjeta'
 import { Ficha } from './components/Ficha'
 import { enlaceHistoria } from './lib/historias'
@@ -385,60 +386,79 @@ export default function App() {
             )}
 
             {lista.length ? (
-              <div key={`${c.id}-${orden}-${acabado}`}>
-                {grupos.map((g, k) => {
-                  const Icono = ICONO_CATEGORIA[g.categoria.id]
-                  // Con una sola sección y un solo acabado el título de arriba ya lo dice todo.
-                  const conTitulo = grupos.length > 1
-                  const desde = grupos.slice(0, k).reduce((n, x) => n + x.modelos.length, 0)
-                  return (
-                    <div key={`${g.categoria.id}-${g.blanco}`} className={`relative ${k ? 'mt-20' : ''}`}>
-                      {conTitulo && (
-                        <div className="relative mb-8">
-                          {/* El nombre de la sección en eco gigante detrás del rótulo. */}
-                          <p aria-hidden className="eco-seccion pointer-events-none absolute -top-7 left-16 hidden text-[clamp(3rem,7vw,6.5rem)] md:block" style={{ '--d': g.categoria.desde } as CSSProperties}>
-                            {g.categoria.nombre}
-                          </p>
-                          <div className="relative flex items-center gap-4">
-                            <span
-                              className="hexagono grid h-14 w-16 shrink-0 place-items-center text-white"
-                              style={{ background: `linear-gradient(135deg, ${g.categoria.desde}, ${g.categoria.hasta})` }}
-                            >
-                              <Icono size={24} />
-                            </span>
-                            <div className="min-w-0">
-                              <h3 className="titulo-seccion truncate text-[clamp(1.4rem,3vw,2.4rem)]" style={{ '--d': g.categoria.desde } as CSSProperties}>
-                                {g.categoria.nombre}
-                              </h3>
-                              <p className="mt-1.5 flex items-center gap-2 font-chakra text-[11px] font-semibold uppercase tracking-[0.2em] text-white/55">
-                                <span className={`rareza px-2 py-0.5 ${g.blanco ? 'text-white/80 ring-1 ring-white/30' : 'bg-white text-[#140f22]'}`}>{g.blanco ? 'Para pintar' : 'A color'}</span>
-                                <span className="tabular-nums">{g.modelos.length} figuras</span>
-                              </p>
+              <>
+              {/* Todas las figuras como un cómic: capítulos por sección y viñetas que se pasan hoja a hoja. */}
+              <LibroComic
+                grupos={grupos}
+                onAbrir={(m) => {
+                  // Las figuras de Dragon Ball abren además su historia en otra pestaña.
+                  const historia = enlaceHistoria(m)
+                  if (historia) window.open(historia, '_blank', 'noopener')
+                  setAbierto(m.id)
+                }}
+              />
+              {/* Después del libro, todas las figuras una por una, como cartas de cómic. */}
+              <div className="cartas-comic mt-24">
+                <div className="mb-10 flex flex-wrap items-center gap-4">
+                  <p className="cartela-comic -rotate-1 px-3 py-1 font-comic text-[clamp(1.4rem,3vw,2.2rem)] uppercase leading-none tracking-wider">Uno por uno</p>
+                  <p className="font-chakra text-[12px] font-semibold uppercase tracking-[0.25em] text-white/60">Toda la colección en cartas · toca una para verla en 3D</p>
+                </div>
+                <div key={`${c.id}-${orden}-${acabado}`}>
+                  {grupos.map((g, k) => {
+                    const Icono = ICONO_CATEGORIA[g.categoria.id]
+                    // Con una sola sección y un solo acabado el título de arriba ya lo dice todo.
+                    const conTitulo = grupos.length > 1
+                    const desde = grupos.slice(0, k).reduce((n, x) => n + x.modelos.length, 0)
+                    return (
+                      <div key={`${g.categoria.id}-${g.blanco}`} className={`relative ${k ? 'mt-20' : ''}`}>
+                        {conTitulo && (
+                          <div className="relative mb-8">
+                            {/* El nombre de la sección en eco gigante detrás del rótulo. */}
+                            <p aria-hidden className="eco-seccion pointer-events-none absolute -top-7 left-16 hidden text-[clamp(3rem,7vw,6.5rem)] md:block" style={{ '--d': g.categoria.desde } as CSSProperties}>
+                              {g.categoria.nombre}
+                            </p>
+                            <div className="relative flex items-center gap-4">
+                              <span
+                                className="hexagono grid h-14 w-16 shrink-0 place-items-center text-white"
+                                style={{ background: `linear-gradient(135deg, ${g.categoria.desde}, ${g.categoria.hasta})` }}
+                              >
+                                <Icono size={24} />
+                              </span>
+                              <div className="min-w-0">
+                                <h3 className="titulo-seccion truncate text-[clamp(1.4rem,3vw,2.4rem)]" style={{ '--d': g.categoria.desde } as CSSProperties}>
+                                  {g.categoria.nombre}
+                                </h3>
+                                <p className="mt-1.5 flex items-center gap-2 font-chakra text-[11px] font-semibold uppercase tracking-[0.2em] text-white/55">
+                                  <span className={`rareza px-2 py-0.5 ${g.blanco ? 'text-white/80 ring-1 ring-white/30' : 'bg-white text-[#140f22]'}`}>{g.blanco ? 'Para pintar' : 'A color'}</span>
+                                  <span className="tabular-nums">{g.modelos.length} figuras</span>
+                                </p>
+                              </div>
+                              <span className="ml-2 hidden h-[2px] flex-1 sm:block" style={{ background: `linear-gradient(90deg, ${g.categoria.desde}, ${g.categoria.hasta}55, transparent)` }} />
                             </div>
-                            <span className="ml-2 hidden h-[2px] flex-1 sm:block" style={{ background: `linear-gradient(90deg, ${g.categoria.desde}, ${g.categoria.hasta}55, transparent)` }} />
                           </div>
+                        )}
+                        <div className="grid grid-cols-2 gap-x-3 gap-y-5 sm:gap-x-5 sm:gap-y-7 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
+                          {g.modelos.map((m, i) => (
+                            <div key={m.id} className="entra" style={{ animationDelay: `${Math.min(i, 12) * 35}ms` }}>
+                              <Tarjeta
+                                modelo={m}
+                                numero={desde + i + 1}
+                                onAbrir={() => {
+                                  // Las figuras de Dragon Ball abren además su historia en otra pestaña.
+                                  const historia = enlaceHistoria(m)
+                                  if (historia) window.open(historia, '_blank', 'noopener')
+                                  setAbierto(m.id)
+                                }}
+                              />
+                            </div>
+                          ))}
                         </div>
-                      )}
-                      <div className="grid grid-cols-2 gap-x-3 gap-y-5 sm:gap-x-5 sm:gap-y-7 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
-                        {g.modelos.map((m, i) => (
-                          <div key={m.id} className="entra" style={{ animationDelay: `${Math.min(i, 12) * 35}ms` }}>
-                            <Tarjeta
-                              modelo={m}
-                              numero={desde + i + 1}
-                              onAbrir={() => {
-                                // Las figuras de Dragon Ball abren además su historia en otra pestaña.
-                                const historia = enlaceHistoria(m)
-                                if (historia) window.open(historia, '_blank', 'noopener')
-                                setAbierto(m.id)
-                              }}
-                            />
-                          </div>
-                        ))}
                       </div>
-                    </div>
-                  )
-                })}
+                    )
+                  })}
+                </div>
               </div>
+              </>
             ) : (
               <div className="cristal corte px-6 py-20 text-center">
                 <p className="font-flemin text-2xl">Nada por aquí todavía</p>

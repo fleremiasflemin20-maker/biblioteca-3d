@@ -226,3 +226,151 @@
 @media (prefers-reduced-motion: reduce) {
   .holo-capa::after { animation: none; }
 }
+
+/* ── Cómic y manga (ver lib/comic.ts) ─────────────────────────────────── */
+
+/* Pantalla de título: la pila de cómics revueltos. */
+.pila-comics { --mx: 0; --my: 0; background: #1a1424; }
+.pila-sitio { position: absolute; width: var(--cw); aspect-ratio: 2 / 3; transform: translate(-50%, -50%) translate(calc(var(--mx) * var(--p) * -1px), calc(var(--my) * var(--p) * -1px)); transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+.pila-tapa { width: 100%; height: 100%; transform: rotate(var(--r)); animation: tapa-cae 0.75s var(--d) cubic-bezier(0.22, 1.35, 0.4, 1) both; }
+.pila-tapa > div { width: 100%; height: 100%; }
+.pila-tapa img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 3px; box-shadow: 0 2px 0 rgba(255, 255, 255, 0.35) inset, 0 14px 28px -6px rgba(0, 0, 0, 0.7), 0 2px 6px rgba(0, 0, 0, 0.5); animation: tapa-flota 7s ease-in-out infinite alternate; }
+@keyframes tapa-cae {
+  0% { opacity: 0; transform: translateY(-70vh) rotate(calc(var(--r) + 70deg)) scale(1.35); }
+  70% { opacity: 1; }
+  100% { opacity: 1; transform: rotate(var(--r)); }
+}
+@keyframes tapa-flota { from { transform: translate(0, 0) rotate(-1.2deg); } to { transform: translate(4px, -6px) rotate(1.2deg); } }
+.pila-salta { animation: tapa-salta 0.9s cubic-bezier(0.22, 1.4, 0.36, 1); }
+@keyframes tapa-salta { 0% { transform: translateY(30px) scale(0.9); filter: brightness(0.7); } 55% { transform: translateY(-26px) scale(1.12) rotate(-6deg); filter: brightness(1.15); } 100% { transform: none; } }
+
+/* Recuadros de narración y rótulos de cómic. */
+.cartela-comic { background: #FFE45C; color: #121019; border: 3px solid #121019; box-shadow: 5px 5px 0 #121019; }
+.rotulo-comic { font-family: 'Bangers', 'Dela Gothic One', Impact, sans-serif; letter-spacing: 0.04em; -webkit-text-stroke: 2px #121019; paint-order: stroke fill; text-shadow: 4px 4px 0 #121019; }
+.boom-start { position: relative; padding: 0.55em 1.6em 0.5em; color: #121019; background: #fff; clip-path: polygon(0% 18%, 6% 0%, 18% 12%, 30% 0%, 42% 10%, 55% 0%, 66% 12%, 80% 0%, 90% 14%, 100% 6%, 96% 34%, 100% 55%, 95% 74%, 100% 100%, 84% 88%, 70% 100%, 58% 88%, 44% 100%, 32% 88%, 18% 100%, 8% 86%, 0% 96%, 4% 66%, 0% 46%, 5% 30%); animation: boom-start 1.1s ease-in-out infinite; }
+@keyframes boom-start { 0%, 100% { transform: scale(1) rotate(-2deg); } 50% { transform: scale(1.08) rotate(2deg); } }
+
+@media (prefers-reduced-motion: reduce) { .pila-tapa, .pila-tapa img, .pila-salta, .boom-start { animation: none; } }
+
+/* Escenario de selección: tira de páginas de cómic a color que pasa despacio (dos copias, se repite en bucle). */
+.fondo-paginas { overflow: hidden; filter: saturate(1.15) brightness(0.8); }
+.fondo-paginas > i { position: absolute; inset: 0 auto 0 0; height: 100%; aspect-ratio: 5.79; background: var(--pag-l) repeat-x 0 0 / auto 100%; animation: paginas-pasan 150s linear infinite; }
+@media (min-width: 1024px) { .fondo-paginas > i { background-image: var(--pag); } }
+@keyframes paginas-pasan { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .fondo-paginas > i { animation: none; } }
+
+/* ── Libro de cómic del catálogo (LibroComic.tsx) ─────────────────────── */
+.libro-zona { --papel: #FAF7EE; --tinta-c: #121019; }
+.libro { position: relative; margin: 0 auto; perspective: 2600px; touch-action: pan-y; user-select: none; }
+.libro-doble { aspect-ratio: 1.42; width: min(100%, 1320px, calc((100svh - var(--alto-barra, 64px) - 190px) * 1.42)); min-width: min(100%, 860px); }
+.libro-simple { aspect-ratio: 0.7; width: min(100%, 520px, calc((100svh - var(--alto-barra, 64px) - 200px) * 0.7)); min-width: min(100%, 300px); }
+.libro::before { content: ''; position: absolute; inset: -1.2% -1% -2.2%; background: linear-gradient(90deg, #2a1d12, #4a3220 49%, #1a120b 50%, #4a3220 51%, #2a1d12); border-radius: 10px; box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.06); }
+.libro-simple::before { inset: -1.5% -2.5% -2.5% -1%; background: linear-gradient(90deg, #1a120b, #4a3220 8%, #2a1d12); }
+
+.hoja { position: absolute; top: 0; bottom: 0; width: 50%; overflow: hidden; background: var(--papel); container-type: inline-size; }
+.hoja-izq { left: 0; border-radius: 6px 0 0 6px; }
+.hoja-der { left: 50%; border-radius: 0 6px 6px 0; }
+.libro-simple .hoja { left: 0; width: 100%; border-radius: 3px 6px 6px 3px; }
+/* Papel: grano suave y un brillo curvo hacia el lomo. */
+.hoja::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.25), transparent 50%); mix-blend-mode: soft-light; }
+.hoja-pliegue { position: absolute; top: 0; bottom: 0; width: 9%; pointer-events: none; z-index: 20; }
+.hoja-izq .hoja-pliegue { right: 0; background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.08) 55%, rgba(0, 0, 0, 0.32)); }
+.hoja-der .hoja-pliegue { left: 0; background: linear-gradient(270deg, transparent, rgba(0, 0, 0, 0.08) 55%, rgba(0, 0, 0, 0.32)); }
+.libro-simple .hoja-pliegue { width: 5%; }
+.hoja-numero { position: absolute; bottom: 1.2%; z-index: 21; font: 600 2.4cqw/1 'Chakra Petch', sans-serif; letter-spacing: 0.15em; color: rgba(18, 16, 25, 0.55); }
+.hoja-izq .hoja-numero { left: 4%; }
+.hoja-der .hoja-numero { right: 4%; }
+.libro-lomo { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; transform: translateX(-1px); background: rgba(0, 0, 0, 0.35); z-index: 30; pointer-events: none; }
+.libro-simple .libro-lomo { display: none; }
+
+/* La hoja que gira: dos caras pegadas, una a cada lado. */
+.hoja-giro { position: absolute; top: 0; bottom: 0; width: 50%; transform-style: preserve-3d; z-index: 40; }
+.hoja-giro .cara { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.hoja-giro .cara-atras { transform: rotateY(180deg); }
+.hoja-giro .cara > .hoja { left: 0; width: 100%; }
+.hoja-giro .cara::after { content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 50; animation: hoja-sombra 0.85s ease-in-out both; }
+.hoja-giro-der { left: 50%; transform-origin: left center; animation: giro-adelante 0.85s cubic-bezier(0.45, 0.05, 0.3, 1) both; }
+.hoja-giro-izq { left: 0; transform-origin: right center; animation: giro-atras 0.85s cubic-bezier(0.45, 0.05, 0.3, 1) both; }
+.libro-simple .hoja-giro { left: 0; width: 100%; transform-origin: left center; }
+.hoja-giro-sola { animation: giro-adelante 0.75s cubic-bezier(0.45, 0.05, 0.3, 1) both; }
+.hoja-giro-sola-vuelve { animation: giro-vuelve 0.75s cubic-bezier(0.45, 0.05, 0.3, 1) both; }
+.hoja-reverso { background: var(--papel) radial-gradient(circle, rgba(18, 16, 25, 0.12) 1px, transparent 1.4px) 0 0 / 8px 8px; border-radius: 6px; }
+@keyframes giro-adelante { 0% { transform: rotateY(0); } 50% { transform: rotateY(-90deg) translateZ(18px); } 100% { transform: rotateY(-180deg); } }
+@keyframes giro-atras { 0% { transform: rotateY(0); } 50% { transform: rotateY(90deg) translateZ(18px); } 100% { transform: rotateY(180deg); } }
+@keyframes giro-vuelve { 0% { transform: rotateY(-180deg); } 50% { transform: rotateY(-90deg) translateZ(18px); } 100% { transform: rotateY(0); } }
+@keyframes hoja-sombra { 0%, 100% { background: transparent; } 50% { background: linear-gradient(90deg, rgba(0, 0, 0, 0.35), rgba(255, 255, 255, 0.12) 60%, rgba(0, 0, 0, 0.25)); } }
+
+.libro-esquina { position: absolute; bottom: 0; width: 9%; aspect-ratio: 1; z-index: 45; cursor: pointer; }
+.libro-esquina:disabled { display: none; }
+.libro-esquina-izq { left: 0; background: linear-gradient(45deg, rgba(18, 16, 25, 0.28), rgba(250, 247, 238, 0.9) 48%, transparent 50%); border-bottom-left-radius: 6px; }
+.libro-esquina-der { right: 0; background: linear-gradient(-45deg, rgba(18, 16, 25, 0.28), rgba(250, 247, 238, 0.9) 48%, transparent 50%); border-bottom-right-radius: 6px; animation: esquina-tienta 2.4s ease-in-out infinite; transform-origin: bottom right; }
+@keyframes esquina-tienta { 0%, 70%, 100% { transform: scale(1); } 80% { transform: scale(1.5); } }
+.libro-simple .libro-esquina { width: 14%; }
+
+.libro-boton { display: inline-flex; align-items: center; gap: 4px; height: 44px; padding: 0 16px; font: 400 18px/1 'Bangers', Impact, sans-serif; letter-spacing: 0.06em; text-transform: uppercase; color: #121019; background: #FFE45C; border: 3px solid #121019; box-shadow: 4px 4px 0 #121019; transition: transform 0.15s, box-shadow 0.15s; }
+.libro-boton:hover:not(:disabled) { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #121019; }
+.libro-boton:active:not(:disabled) { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #121019; }
+.libro-boton:disabled { opacity: 0.35; }
+.libro-boton-sig { background: #FF5A36; color: #fff; }
+.libro-capitulos { height: 44px; min-width: 0; max-width: 46vw; padding: 0 10px; font: 600 12px/1 'Chakra Petch', sans-serif; text-transform: uppercase; letter-spacing: 0.08em; color: #fff; background: rgba(255, 255, 255, 0.08); border: 2px solid rgba(255, 255, 255, 0.25); }
+.libro-capitulos option { background: #140f22; }
+
+/* Páginas especiales. */
+.hoja-portada { position: absolute; inset: 0; }
+.hoja-capitulo { position: absolute; inset: 3.5%; overflow: hidden; border: 3px solid var(--tinta-c); background: var(--d); }
+.hoja-vinetas { position: absolute; inset: 3.2% 3.2% 5%; display: grid; gap: 2.2cqw; }
+.indice-linea { color: inherit; }
+
+/* Viñeta: borde de tinta con forma un poco torcida, rayos del color de la sección y trama. */
+.vineta { position: relative; min-width: 0; min-height: 0; background: var(--tinta-c, #121019); clip-path: var(--forma); text-align: left; cursor: pointer; }
+.vineta-dentro { position: absolute; inset: 0.65cqw; clip-path: var(--forma); overflow: hidden; background: var(--d); }
+.vineta-rayos { position: absolute; inset: -20%; background: repeating-conic-gradient(from 0deg at var(--c, 50% 55%), var(--d) 0deg 5deg, color-mix(in srgb, var(--h) 70%, white) 5deg 10deg); transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+.vineta-trama { position: absolute; inset: 0; background: radial-gradient(circle, rgba(18, 16, 25, 0.35) 1.1px, transparent 1.5px) 0 0 / 6px 6px; mask-image: radial-gradient(70% 70% at var(--c, 50% 55%), transparent 30%, black 95%); -webkit-mask-image: radial-gradient(70% 70% at var(--c, 50% 55%), transparent 30%, black 95%); }
+.vineta-figura { position: absolute; inset: 6% 4% 14%; width: 92%; height: 80%; object-fit: contain; transform: rotate(var(--giro, 0deg)); filter: drop-shadow(2px 0 0 #121019) drop-shadow(-2px 0 0 #121019) drop-shadow(0 2px 0 #121019) drop-shadow(0 -2px 0 #121019) drop-shadow(5px 6px 0 rgba(18, 16, 25, 0.45)) saturate(1.25) contrast(1.08); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.vineta:hover .vineta-figura, .vineta:focus-visible .vineta-figura { transform: rotate(0deg) scale(1.08) translateY(-2%); }
+.vineta:hover .vineta-rayos { transform: rotate(8deg) scale(1.1); }
+.vineta:focus-visible { outline: none; }
+.vineta:focus-visible .vineta-dentro { box-shadow: inset 0 0 0 4px #FFE45C; }
+.vineta-cartela { position: absolute; left: 0; top: 0; z-index: 3; padding: 0.4cqw 1.4cqw; font: 400 clamp(10px, 2.6cqw, 15px)/1.15 'Bangers', Impact, sans-serif; letter-spacing: 0.08em; box-shadow: 3px 3px 0 #121019; border-width: 2px; }
+.vineta-nombre { position: absolute; inset: auto 0 0 0; z-index: 4; display: flex; flex-direction: column; gap: 0.3cqw; padding: 5cqw 2.2cqw 1.6cqw; background: linear-gradient(transparent, rgba(18, 16, 25, 0.82) 55%); }
+.vineta-nombre .rotulo-comic { font-size: clamp(14px, 4.4cqw, 28px); line-height: 0.95; color: #fff; -webkit-text-stroke: 1.5px #121019; text-shadow: 2px 2px 0 #121019; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.vineta-accion { font: 700 clamp(9px, 2.1cqw, 12px)/1 'Chakra Petch', sans-serif; letter-spacing: 0.16em; text-transform: uppercase; color: #FFE45C; opacity: 0.85; }
+.vineta-onomatopeya { position: absolute; right: 3%; top: 12%; z-index: 2; font-size: clamp(18px, 7.5cqw, 52px); color: #FFE45C; transform: rotate(var(--r)); pointer-events: none; }
+.vineta-globo { position: absolute; right: 4%; top: 6%; z-index: 3; max-width: 52%; padding: 1cqw 2cqw; font: 400 clamp(11px, 2.8cqw, 17px)/1.1 'Bangers', Impact, sans-serif; letter-spacing: 0.04em; color: #121019; background: #fff; border: 2px solid #121019; border-radius: 50%; text-align: center; }
+.vineta-globo::after { content: ''; position: absolute; left: 22%; bottom: -10px; border: 6px solid transparent; border-top: 10px solid #121019; }
+.vineta-nueva { position: absolute; right: 3%; bottom: 22%; z-index: 4; padding: 0.6cqw 1.6cqw; font-size: clamp(12px, 3cqw, 18px); color: #fff; background: #FF2D8A; border: 2px solid #121019; transform: rotate(-8deg); -webkit-text-stroke: 1px #121019; }
+
+/* Viñetas "para pintar": manga en blanco y negro con trama. */
+.vineta-manga .vineta-dentro { background: #fff; }
+.vineta-manga .vineta-rayos { background: repeating-conic-gradient(from 0deg at var(--c, 50% 55%), #fff 0deg 3deg, #d9d6cf 3deg 4deg); }
+.vineta-manga .vineta-trama { background-size: 5px 5px; opacity: 0.8; }
+.vineta-manga .vineta-figura { filter: grayscale(1) brightness(0.78) contrast(1.6) drop-shadow(2px 0 0 #121019) drop-shadow(-2px 0 0 #121019) drop-shadow(0 2px 0 #121019) drop-shadow(0 -2px 0 #121019); }
+.vineta-manga .vineta-cartela { background: #fff; }
+
+@media (max-width: 640px) { .libro-boton { height: 40px; padding: 0 10px; } .libro-capitulos { height: 40px; max-width: 38vw; font-size: 10.5px; } }
+@media (prefers-reduced-motion: reduce) { .hoja-giro, .hoja-giro .cara::after, .libro-esquina-der { animation: none; } }
+
+/* ── "Uno por uno": las cartas del catálogo vestidas de cómic (después del libro) ── */
+.cartas-comic .carta { padding: 3px; background: #121019; clip-path: none; border-radius: 4px; box-shadow: 6px 6px 0 #121019, 6px 6px 0 2px color-mix(in srgb, var(--d) 80%, white); transform: rotate(var(--inclina, 0deg)); }
+.cartas-comic .entra:nth-child(3n + 1) .carta { --inclina: -0.8deg; }
+.cartas-comic .entra:nth-child(3n + 2) .carta { --inclina: 0.6deg; }
+.cartas-comic .carta:hover, .cartas-comic .carta:focus-visible { transform: translate(-3px, -6px) rotate(0deg) scale(1.02); filter: none; box-shadow: 10px 12px 0 #121019, 10px 12px 0 2px color-mix(in srgb, var(--d) 80%, white); }
+.cartas-comic .carta-leg { background: #121019; animation: none; box-shadow: 6px 6px 0 #121019, 0 0 0 3px #FFE45C, 6px 6px 0 3px #FF2D8A; }
+.cartas-comic .carta-dentro { background: #FAF7EE; clip-path: none; border-radius: 2px; }
+.cartas-comic .carta-escena { border-bottom: 3px solid #121019; background: var(--d); }
+.cartas-comic .carta-escena::before { opacity: 1; background: radial-gradient(circle, rgba(18, 16, 25, 0.32) 1.1px, transparent 1.5px) 0 0 / 6px 6px, repeating-conic-gradient(from 0deg at 50% 62%, var(--d) 0deg 5deg, color-mix(in srgb, var(--h) 65%, white) 5deg 10deg); -webkit-mask-image: none; }
+.cartas-comic .carta-escena::after { display: none; }
+.cartas-comic .carta-escena img { filter: drop-shadow(2px 0 0 #121019) drop-shadow(-2px 0 0 #121019) drop-shadow(0 2px 0 #121019) drop-shadow(0 -2px 0 #121019) drop-shadow(5px 6px 0 rgba(18, 16, 25, 0.4)) saturate(1.2); }
+.cartas-comic .holo { display: none; }
+.cartas-comic .carta-dentro > div:last-child { color: #121019; }
+.cartas-comic .carta-dentro > div:last-child > span:first-child { height: 0; }
+.cartas-comic .carta h3 { font-family: 'Bangers', Impact, sans-serif; font-weight: 400; font-size: 19px; letter-spacing: 0.04em; color: #121019; }
+.cartas-comic .carta-dentro > div:last-child p, .cartas-comic .carta-dentro > div:last-child span { color: rgba(18, 16, 25, 0.62); }
+.cartas-comic .carta-dentro > div:last-child svg.text-white\/20 { color: rgba(18, 16, 25, 0.2); }
+.cartas-comic .carta-dentro > div:last-child .fill-\[\#FFC23D\] { fill: #FF8A00; color: #121019; }
+.cartas-comic .carta .rareza { border: 2px solid #121019; }
+.cartas-comic .carta .text-white\/45 { color: rgba(18, 16, 25, 0.7); background: #fff; padding: 0 4px; border: 1.5px solid #121019; }
+/* Rótulos de sección como títulos de cómic. */
+.cartas-comic .titulo-seccion { font-family: 'Bangers', 'Dela Gothic One', sans-serif; letter-spacing: 0.03em; -webkit-text-stroke: 5px #121019; text-shadow: 5px 5px 0 #121019; transform: skewX(-4deg) rotate(-1deg); }
+.cartas-comic .eco-seccion { font-family: 'Bangers', sans-serif; -webkit-text-stroke: 1.5px color-mix(in srgb, var(--d) 35%, transparent); letter-spacing: 0.05em; }
+.cartas-comic .hexagono { box-shadow: 3px 3px 0 #121019; }
