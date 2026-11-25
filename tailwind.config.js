@@ -29,6 +29,7 @@ export default {
         mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
         // Marca Flemin: el Estudio 3D (sala y editor).
         flemin: ['Dela Gothic One', 'Archivo Black', 'Impact', 'sans-serif'],
+        comic: ['Bangers', 'Dela Gothic One', 'Impact', 'sans-serif'],
         chakra: ['Chakra Petch', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       fontSize: {

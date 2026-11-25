@@ -13,6 +13,7 @@ import { enlaceStudio } from '../lib/studio'
 import { enlaceHistoria } from '../lib/historias'
 import { variantes, type Acabado, type Grupo } from '../lib/orden'
 import { coste, estrellas, rareza } from '../lib/rareza'
+import { PAGINAS_URL, PAGINAS_URL_LIGERA } from '../lib/comic'
 import { desbloquear, marcarVista, nivel, ponerSonido, sfx, useMando, useProgreso, vibrar } from '../lib/consola'
 
 /**
@@ -510,13 +511,16 @@ export function Seleccion({
       aria-label="Elige tu figura"
       className="seleccion relative isolate flex flex-col overflow-hidden bg-[#0B0912] text-white lg:block lg:h-[calc(100svh-var(--alto-barra,64px))] lg:min-h-[680px]"
     >
-      {/* Cielo de arena: degradado de la sección, rayos de energía y rejilla de suelo. */}
+      {/* Fondo de cómic a color: páginas con nuestras figuras que desfilan despacio alrededor del escenario,
+          como las páginas de manga de las historias, con el color de la sección por encima. */}
       <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 transition-[background] duration-700" style={{ background: `radial-gradient(70% 60% at 54% 62%, ${tinta}40, transparent 70%), linear-gradient(180deg, #120d24 0%, #1b1238 38%, ${catEscena.desde}2e 64%, #0B0912 100%)` }} />
-        <div className="rayos absolute left-[54%] top-[58%] h-[160vmax] w-[160vmax] -translate-x-1/2 -translate-y-1/2 opacity-[0.16]" style={{ background: `repeating-conic-gradient(from 0deg, ${tinta} 0deg 2deg, transparent 2deg 14deg)`, maskImage: 'radial-gradient(circle, black 0%, transparent 45%)', WebkitMaskImage: 'radial-gradient(circle, black 0%, transparent 45%)' }} />
-        <div className="absolute inset-x-0 bottom-0 h-[42%] opacity-40 [mask-image:linear-gradient(to_top,black,transparent)]" style={{ background: 'linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px) 0 0 / 100% 44px, linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px) 0 0 / 44px 100%', transform: 'perspective(500px) rotateX(55deg)', transformOrigin: 'bottom' }} />
-        <div className="haces absolute inset-x-[25%] bottom-0 top-[20%] opacity-70" />
-        <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_40%,transparent_55%,rgba(0,0,0,0.65))]" />
+        <div className="fondo-paginas absolute inset-0" style={{ '--pag': `url(${PAGINAS_URL})`, '--pag-l': `url(${PAGINAS_URL_LIGERA})` } as CSSProperties}>
+          <i />
+        </div>
+        <div className="absolute inset-0 transition-[background] duration-700" style={{ background: `radial-gradient(42% 52% at 54% 58%, rgba(11,9,18,0.2), rgba(11,9,18,0.62) 100%), linear-gradient(180deg, rgba(11,9,18,0.55) 0%, ${catEscena.desde}26 45%, rgba(11,9,18,0.82) 100%)` }} />
+        <div className="rayos absolute left-[54%] top-[58%] h-[160vmax] w-[160vmax] -translate-x-1/2 -translate-y-1/2 opacity-[0.22] mix-blend-screen" style={{ background: `repeating-conic-gradient(from 0deg, ${tinta} 0deg 2deg, transparent 2deg 14deg)`, maskImage: 'radial-gradient(circle, black 0%, transparent 32%)', WebkitMaskImage: 'radial-gradient(circle, black 0%, transparent 32%)' }} />
+        <div className="haces absolute inset-x-[25%] bottom-0 top-[20%] opacity-60" />
+        <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_40%,transparent_55%,rgba(0,0,0,0.6))]" />
       </div>
       <div aria-hidden className="barrido pointer-events-none absolute inset-0 z-30 opacity-40" />
       <div aria-hidden className="hud-esquinas pointer-events-none absolute inset-0 z-30 hidden lg:block">

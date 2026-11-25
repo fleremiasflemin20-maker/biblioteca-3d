@@ -1,16 +1,15 @@
 import { useCallback, useEffect, useState } from 'react'
-import { CATALOGO, CATEGORIAS, rutaPortada } from '../lib/catalogo'
+import { CATALOGO, CATEGORIAS } from '../lib/catalogo'
 import { audioListo, despertarAudio, sfx, vibrar } from '../lib/consola'
 import { TituloFlemin } from './TituloFlemin'
+import { PilaComics } from './PilaComics'
 
 /**
- * Pantalla de título, como al encender una consola: el logo, un desfile de
- * figuras y "Pulsa START". Sale una vez por visita (sessionStorage) y se
+ * Pantalla de título, como al encender una consola: el logo sobre un montón
+ * de cómics y mangas con nuestras figuras, y "¡Pulsa START!". Sale una vez por visita (sessionStorage) y se
  * quita con cualquier tecla, clic, toque o botón del mando.
  */
 const LLAVE = 'inicio-visto'
-// En el desfile solo personajes: las piezas técnicas no lucen como retrato.
-const FIGURAS: string[] = ['hiperdetalle', 'dragon-ball-z', 'caballeros-del-zodiaco', 'siete-pecados', 'your-name', 'anime', 'marvel', 'dc', 'seres-flemin', 'munecos']
 
 export function useInicio() {
   const [ver, setVer] = useState(() => {
@@ -37,12 +36,6 @@ export function Inicio({ onEntrar }: { onEntrar: () => void }) {
   // sonido y repite la entrada del título con sus efectos; el segundo entra.
   const [bloqueado] = useState(() => !audioListo())
   const [repeticion, setRepeticion] = useState(0)
-  // Dos filas de retratos que desfilan en sentidos opuestos detrás del logo.
-  const [filas] = useState(() => {
-    const con = CATALOGO.filter((m) => m.portada && !m.sinTextura && FIGURAS.includes(m.categoria))
-    const mezcla = [...con].sort(() => Math.random() - 0.5).slice(0, 28)
-    return [mezcla.slice(0, 14), mezcla.slice(14)]
-  })
   const secciones = CATEGORIAS.filter((c) => c.id !== 'todo' && CATALOGO.some((m) => m.categoria === c.id)).length
 
   const entrar = useCallback(() => {
@@ -88,19 +81,13 @@ export function Inicio({ onEntrar }: { onEntrar: () => void }) {
       role="button"
       aria-label="Pulsa para entrar a la biblioteca"
     >
-      <div aria-hidden className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_45%,#3b1a6e_0%,#140a2a_55%,#07050d_100%)]" />
-        <div className="rayos absolute left-1/2 top-[45%] h-[160vmax] w-[160vmax] -translate-x-1/2 -translate-y-1/2 opacity-[0.12]" style={{ background: 'repeating-conic-gradient(from 0deg, #FFC23D 0deg 2deg, transparent 2deg 12deg)', maskImage: 'radial-gradient(circle, black 0%, transparent 40%)', WebkitMaskImage: 'radial-gradient(circle, black 0%, transparent 40%)' }} />
-        {filas.map((fila, k) => (
-          <div key={k} className={`absolute inset-x-0 flex w-max gap-4 opacity-30 ${k ? 'desfile-inverso bottom-[7%]' : 'desfile top-[7%]'}`}>
-            {[...fila, ...fila].map((m, j) => (
-              <img key={`${m.id}-${j}`} src={rutaPortada(m)} alt="" draggable={false} className="h-[18svh] w-[18svh] object-contain" />
-            ))}
-          </div>
-        ))}
-        <div className="haces absolute inset-x-[15%] bottom-0 top-[25%]" />
-        <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.25)_50%)] bg-[length:100%_4px] opacity-40" />
-        <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_50%,transparent_50%,rgba(0,0,0,0.85))]" />
+      {/* Un montón de cómics y mangas revueltos con nuestras figuras en las tapas. */}
+      <PilaComics />
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        {/* Sombra central para que el título se lea sobre la pila, y trama de imprenta encima. */}
+        <div className="absolute inset-0 bg-[radial-gradient(52%_46%_at_50%_50%,rgba(7,5,13,0.94)_0%,rgba(7,5,13,0.82)_50%,rgba(7,5,13,0.1)_100%)]" />
+        <div className="absolute inset-0 opacity-[0.18] [background:radial-gradient(circle,#000_1.2px,transparent_1.6px)_0_0/7px_7px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(130%_100%_at_50%_50%,transparent_60%,rgba(0,0,0,0.7))]" />
       </div>
 
       <div aria-hidden className="hud-esquinas pointer-events-none absolute inset-3">
@@ -108,7 +95,7 @@ export function Inicio({ onEntrar }: { onEntrar: () => void }) {
       </div>
 
       <div className="relative flex flex-col items-center px-4 text-center">
-        <p className="inicio-entra font-chakra text-[12px] font-semibold uppercase tracking-[0.5em] text-[#FFC23D] sm:text-[13px]">Fleremiasflemin presenta</p>
+        <p className="inicio-entra cartela-comic -rotate-2 px-3 py-1 font-comic text-[15px] uppercase tracking-[0.18em] sm:text-[17px]">Fleremiasflemin presenta…</p>
         <h1 className="sr-only">Biblioteca Flemin 3D</h1>
         <TituloFlemin
           key={repeticion}
@@ -125,11 +112,11 @@ export function Inicio({ onEntrar }: { onEntrar: () => void }) {
         <p className="inicio-entra rareza mt-3 bg-gradient-to-r from-[#8A3CFF] to-[#FF2D8A] px-4 py-1 font-chakra text-[11px] font-bold uppercase tracking-[0.35em]" style={{ animationDelay: '0.7s' }}>
           Edición coleccionista
         </p>
-        <p className="parpadeo mt-14 font-chakra text-[clamp(1rem,2.4vw,1.4rem)] font-bold uppercase tracking-[0.4em] text-white">Pulsa start</p>
-        <p className="mt-2 font-chakra text-[11px] uppercase tracking-[0.25em] text-white/40">{bloqueado && repeticion === 0 ? 'Pulsa para ver el título con sonido' : 'Cualquier tecla · clic · botón del mando'}</p>
+        <p className="boom-start mt-12 font-comic text-[clamp(1.5rem,3.4vw,2.3rem)] uppercase leading-none tracking-[0.08em]">¡Pulsa start!</p>
+        <p className="mt-2 font-chakra text-[11px] uppercase tracking-[0.25em] text-white/70 [text-shadow:0_1px_4px_#000]">{bloqueado && repeticion === 0 ? 'Pulsa para ver el título con sonido' : 'Cualquier tecla · clic · botón del mando'}</p>
       </div>
 
-      <p className="absolute bottom-4 font-chakra text-[10.5px] uppercase tracking-[0.25em] text-white/35">© 2026 Flemin Studio · Quito, EC</p>
+      <p className="absolute bottom-4 bg-black/60 px-2 py-0.5 font-chakra text-[10.5px] uppercase tracking-[0.25em] text-white/60">© 2026 Flemin Studio · Quito, EC</p>
     </div>
   )
 }

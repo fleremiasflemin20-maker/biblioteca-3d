@@ -155,6 +155,16 @@ export const sfxTitulo = {
 /** Los efectos de la interfaz, como los de un menú de consola. */
 export const sfx = {
   mover: () => tocar([{ f: 660, t: 0, d: 0.07 }]),
+  /** Pasar la hoja del libro de cómic: un soplido de papel. */
+  hoja: () => {
+    if (!sonidoActivo) return
+    try {
+      audio ??= new AudioContext()
+      soplido(0, 0.32, 0.05, 900, 3800)
+    } catch {
+      /* sin audio */
+    }
+  },
   confirmar: () => tocar([{ f: 880, t: 0, d: 0.08 }, { f: 1320, t: 0.06, d: 0.16 }]),
   seccion: () => tocar([{ f: 520, t: 0, d: 0.06, tipo: 'square', v: 0.035 }, { f: 780, t: 0.05, d: 0.08, tipo: 'square', v: 0.035 }]),
   ruleta: () => tocar([{ f: 990, t: 0, d: 0.04, tipo: 'square', v: 0.03 }]),
