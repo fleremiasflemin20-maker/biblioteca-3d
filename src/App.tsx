@@ -3,6 +3,7 @@ import { BookOpen, Box, Gamepad2, Hand, MessageCircle, Package, Plus, Scissors, 
 import { LibroComic } from './components/LibroComic'
 import { enlaceOva } from './lib/ova'
 import { Tarjeta } from './components/Tarjeta'
+import { DesfileComic } from './components/DesfileComic'
 import { Ficha } from './components/Ficha'
 import { enlaceHistoria } from './lib/historias'
 import { Seleccion } from './components/Seleccion'
@@ -44,6 +45,22 @@ export default function App() {
   const [orden, setOrden] = useState<Orden>('recientes')
   const [acabado, setAcabado] = useState<Acabado>('todos')
   const [abierto, setAbierto] = useState<string | null>(null)
+  // «Uno por uno»: desfile 3D con el scroll (por defecto) o la rejilla de cartas de siempre.
+  const [vistaUno, setVistaUno] = useState<'desfile' | 'cartas'>(() => {
+    try {
+      return localStorage.getItem('uno-por-uno') === 'cartas' ? 'cartas' : 'desfile'
+    } catch {
+      return 'desfile'
+    }
+  })
+  const cambiarVistaUno = (v: 'desfile' | 'cartas') => {
+    setVistaUno(v)
+    try {
+      localStorage.setItem('uno-por-uno', v)
+    } catch {
+      /* sin almacenamiento: solo dura esta visita */
+    }
+  }
   const [explicarKit, setExplicarKit] = useState(false)
   const [subiendo, setSubiendo] = useState(false)
   const [sinPortada, setSinPortada] = useState(0)
@@ -83,6 +100,16 @@ export default function App() {
     if (!b) return
     const ro = new ResizeObserver(() => document.documentElement.style.setProperty('--alto-barra', `${b.offsetHeight}px`))
     ro.observe(b)
+    return () => ro.disconnect()
+  }, [])
+
+  /* La de pestañas del catálogo también se pega: el desfile 3D de «Uno por uno» se queda justo debajo. */
+  const filtros = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const f = filtros.current
+    if (!f) return
+    const ro = new ResizeObserver(() => document.documentElement.style.setProperty('--alto-filtros', `${f.offsetHeight}px`))
+    ro.observe(f)
     return () => ro.disconnect()
   }, [])
 
@@ -290,7 +317,7 @@ export default function App() {
         {/* ── Catálogo ────────────────────────────────────────── */}
         <section id="catalogo" className="relative scroll-mt-20">
           {/* Secciones: fijas bajo la barra al bajar, como las pestañas de un menú. */}
-          <div className="sticky top-[var(--alto-barra,64px)] z-30 border-b border-white/10 bg-[#0b0718]/85 backdrop-blur-xl">
+          <div ref={filtros} className="sticky top-[var(--alto-barra,64px)] z-30 border-b border-white/10 bg-[#0b0718]/85 backdrop-blur-xl">
             <div className="mx-auto flex max-w-[1600px] items-center gap-3 px-4 py-2.5 md:px-6">
               <div className="sin-barra -mx-1 flex flex-1 gap-1.5 overflow-x-auto px-1" role="tablist" aria-label="Secciones">
                 {CATEGORIAS.map((x, i) => {
@@ -406,8 +433,32 @@ export default function App() {
               <div className="cartas-comic mt-24">
                 <div className="mb-10 flex flex-wrap items-center gap-4">
                   <p className="cartela-comic -rotate-1 px-3 py-1 font-comic text-[clamp(1.4rem,3vw,2.2rem)] uppercase leading-none tracking-wider">Uno por uno</p>
-                  <p className="font-chakra text-[12px] font-semibold uppercase tracking-[0.25em] text-white/60">Toda la colección en cartas · toca una para verla en 3D</p>
+                  <p className="font-chakra text-[12px] font-semibold uppercase tracking-[0.25em] text-white/60">
+                    {vistaUno === 'desfile' ? 'Baja y pasan en 3D una por una' : 'Toda la colección en cartas · toca una para verla en 3D'}
+                  </p>
+                  <div className="ml-auto flex gap-2" role="group" aria-label="Cómo ver la colección">
+                    {(['desfile', 'cartas'] as const).map((v) => (
+                      <button
+                        key={v}
+                        type="button"
+                        aria-pressed={vistaUno === v}
+                        onClick={() => cambiarVistaUno(v)}
+                        className={`libro-boton !h-9 !px-3 !text-[15px] ${vistaUno === v ? '' : '!bg-white/90 opacity-70'}`}
+                      >
+                        {v === 'desfile' ? 'Desfile 3D' : 'Cartas'}
+                      </button>
+                    ))}
+                  </div>
                 </div>
+                {vistaUno === 'desfile' ? (
+                  <div className="-mx-4 md:-mx-6">
+                    <DesfileComic
+                      key={`${c.id}-${orden}-${acabado}`}
+                      grupos={grupos}
+                      onAbrir={(m) => setAbierto(m.id)}
+                    />
+                  </div>
+                ) : (
                 <div key={`${c.id}-${orden}-${acabado}`}>
                   {grupos.map((g, k) => {
                     const Icono = ICONO_CATEGORIA[g.categoria.id]
@@ -462,6 +513,7 @@ export default function App() {
                     )
                   })}
                 </div>
+                )}
               </div>
               </>
             ) : (
