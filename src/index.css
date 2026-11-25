@@ -349,3 +349,28 @@
 
 @media (max-width: 640px) { .libro-boton { height: 40px; padding: 0 10px; } .libro-capitulos { height: 40px; max-width: 38vw; font-size: 10.5px; } }
 @media (prefers-reduced-motion: reduce) { .hoja-giro, .hoja-giro .cara::after, .libro-esquina-der { animation: none; } }
+
+/* ── "Uno por uno": las cartas del catálogo vestidas de cómic (después del libro) ── */
+.cartas-comic .carta { padding: 3px; background: #121019; clip-path: none; border-radius: 4px; box-shadow: 6px 6px 0 #121019, 6px 6px 0 2px color-mix(in srgb, var(--d) 80%, white); transform: rotate(var(--inclina, 0deg)); }
+.cartas-comic .entra:nth-child(3n + 1) .carta { --inclina: -0.8deg; }
+.cartas-comic .entra:nth-child(3n + 2) .carta { --inclina: 0.6deg; }
+.cartas-comic .carta:hover, .cartas-comic .carta:focus-visible { transform: translate(-3px, -6px) rotate(0deg) scale(1.02); filter: none; box-shadow: 10px 12px 0 #121019, 10px 12px 0 2px color-mix(in srgb, var(--d) 80%, white); }
+.cartas-comic .carta-leg { background: #121019; animation: none; box-shadow: 6px 6px 0 #121019, 0 0 0 3px #FFE45C, 6px 6px 0 3px #FF2D8A; }
+.cartas-comic .carta-dentro { background: #FAF7EE; clip-path: none; border-radius: 2px; }
+.cartas-comic .carta-escena { border-bottom: 3px solid #121019; background: var(--d); }
+.cartas-comic .carta-escena::before { opacity: 1; background: radial-gradient(circle, rgba(18, 16, 25, 0.32) 1.1px, transparent 1.5px) 0 0 / 6px 6px, repeating-conic-gradient(from 0deg at 50% 62%, var(--d) 0deg 5deg, color-mix(in srgb, var(--h) 65%, white) 5deg 10deg); -webkit-mask-image: none; }
+.cartas-comic .carta-escena::after { display: none; }
+.cartas-comic .carta-escena img { filter: drop-shadow(2px 0 0 #121019) drop-shadow(-2px 0 0 #121019) drop-shadow(0 2px 0 #121019) drop-shadow(0 -2px 0 #121019) drop-shadow(5px 6px 0 rgba(18, 16, 25, 0.4)) saturate(1.2); }
+.cartas-comic .holo { display: none; }
+.cartas-comic .carta-dentro > div:last-child { color: #121019; }
+.cartas-comic .carta-dentro > div:last-child > span:first-child { height: 0; }
+.cartas-comic .carta h3 { font-family: 'Bangers', Impact, sans-serif; font-weight: 400; font-size: 19px; letter-spacing: 0.04em; color: #121019; }
+.cartas-comic .carta-dentro > div:last-child p, .cartas-comic .carta-dentro > div:last-child span { color: rgba(18, 16, 25, 0.62); }
+.cartas-comic .carta-dentro > div:last-child svg.text-white\/20 { color: rgba(18, 16, 25, 0.2); }
+.cartas-comic .carta-dentro > div:last-child .fill-\[\#FFC23D\] { fill: #FF8A00; color: #121019; }
+.cartas-comic .carta .rareza { border: 2px solid #121019; }
+.cartas-comic .carta .text-white\/45 { color: rgba(18, 16, 25, 0.7); background: #fff; padding: 0 4px; border: 1.5px solid #121019; }
+/* Rótulos de sección como títulos de cómic. */
+.cartas-comic .titulo-seccion { font-family: 'Bangers', 'Dela Gothic One', sans-serif; letter-spacing: 0.03em; -webkit-text-stroke: 5px #121019; text-shadow: 5px 5px 0 #121019; transform: skewX(-4deg) rotate(-1deg); }
+.cartas-comic .eco-seccion { font-family: 'Bangers', sans-serif; -webkit-text-stroke: 1.5px color-mix(in srgb, var(--d) 35%, transparent); letter-spacing: 0.05em; }
+.cartas-comic .hexagono { box-shadow: 3px 3px 0 #121019; }
