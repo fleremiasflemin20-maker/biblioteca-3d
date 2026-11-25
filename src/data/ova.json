@@ -1,0 +1,1068 @@
+[
+ {
+  "id": "p-1",
+  "cap": 0,
+  "narra": "Más allá de todos los mundos hay un lugar que nadie ha visto: el Archivo. Cada figura que descansa en sus estantes guarda un universo entero.",
+  "globos": [
+   {
+    "quien": "El Archivista",
+    "texto": "Demasiados mundos... Demasiado ruido.",
+    "x": 0.62,
+    "y": 0.18,
+    "cola": "izq",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "encapuchado"
+  ]
+ },
+ {
+  "id": "p-2",
+  "cap": 0,
+  "narra": "El Archivista no viene solo. Su guardián, el Centinela Dracónico, clava las garras en el primer estante y lo abre como una herida.",
+  "globos": [
+   {
+    "quien": "El Archivista",
+    "texto": "En el Archivo solo cabe un universo. Que peleen. El que quede en pie, se queda.",
+    "x": 0.24,
+    "y": 0.12,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Centinela",
+    "texto": "¡GRRRAAAH!",
+    "x": 0.7,
+    "y": 0.14,
+    "cola": "abajo",
+    "tipo": "grito"
+   }
+  ],
+  "reparto": [
+   "centinela",
+   "encapuchado"
+  ]
+ },
+ {
+  "id": "p-3",
+  "cap": 0,
+  "narra": "Una grieta lleva a otra. Los mundos empiezan a tocarse. A eso lo llamarán, más tarde, las Incursiones.",
+  "globos": [],
+  "reparto": [
+   "encapuchado"
+  ]
+ },
+ {
+  "id": "1-1",
+  "cap": 1,
+  "narra": "Un día cualquiera, en un mundo de cielos naranjas, Goku entrenaba solo... hasta que el cielo se partió.",
+  "globos": [
+   {
+    "quien": "Goku",
+    "texto": "¿Eh? ¿El cielo... se rompió? ¡Siento un ki enorme del otro lado!",
+    "x": 0.3,
+    "y": 0.12,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "goku"
+  ]
+ },
+ {
+  "id": "1-2",
+  "cap": 1,
+  "narra": "Al mismo tiempo, en el Santuario, un caballero de bronce sintió el mismo temblor.",
+  "globos": [
+   {
+    "quien": "Seiya",
+    "texto": "Ese cosmos no es de este mundo... ¿Un enemigo de Athena?",
+    "x": 0.7,
+    "y": 0.12,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "seiya"
+  ]
+ },
+ {
+  "id": "1-3",
+  "cap": 1,
+  "narra": "Los dos mundos quedaron frente a frente. Y cada uno pensó que el otro era el invasor.",
+  "globos": [
+   {
+    "quien": "Goku",
+    "texto": "¡Oye! ¿Tú rompiste mi cielo?",
+    "x": 0.22,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Seiya",
+    "texto": "¡No te dejaré llegar al Santuario!",
+    "x": 0.78,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "goku",
+   "seiya"
+  ]
+ },
+ {
+  "id": "1-4",
+  "cap": 1,
+  "narra": "",
+  "globos": [
+   {
+    "quien": "Goku",
+    "texto": "¡KA-ME-HA-ME-HAAA!",
+    "x": 0.17,
+    "y": 0.12,
+    "cola": "abajo",
+    "tipo": "grito"
+   },
+   {
+    "quien": "Seiya",
+    "texto": "¡METEOROS DE PEGASO!",
+    "x": 0.83,
+    "y": 0.12,
+    "cola": "abajo",
+    "tipo": "grito"
+   }
+  ],
+  "reparto": [
+   "goku",
+   "seiya"
+  ]
+ },
+ {
+  "id": "1-5",
+  "cap": 1,
+  "narra": "Cuando el humo se fue, los dos seguían de pie. Y arriba, en la grieta, alguien los miraba.",
+  "globos": [
+   {
+    "quien": "Goku",
+    "texto": "Je, je... ¡Eres muy fuerte! ¿Peleamos otra vez?",
+    "x": 0.2,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Seiya",
+    "texto": "Espera... ese tipo de la capa. Él abrió la grieta.",
+    "x": 0.8,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "encapuchado",
+   "goku-batalla",
+   "seiya"
+  ]
+ },
+ {
+  "id": "2-1",
+  "cap": 2,
+  "narra": "Si dos mundos chocan, también chocan sus orgullos. El príncipe de los saiyajin encontró al caballero que nunca se arrodilla.",
+  "globos": [
+   {
+    "quien": "Vegeta",
+    "texto": "¡Soy el príncipe de los saiyajin! ¡Nadie me mira desde arriba!",
+    "x": 0.2,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Ikki",
+    "texto": "El fénix renace de sus cenizas. Tú no.",
+    "x": 0.8,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "ikki",
+   "vegeta"
+  ]
+ },
+ {
+  "id": "2-2",
+  "cap": 2,
+  "narra": "Del otro lado del mundo, dos guerreros tranquilos se miraban sin decir nada. Hasta que lo dijeron todo.",
+  "globos": [
+   {
+    "quien": "Piccolo",
+    "texto": "Tu técnica es honesta. La mía no tanto. ¡Makankosappo!",
+    "x": 0.2,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Shiryu",
+    "texto": "¡Dragón Naciente!",
+    "x": 0.8,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "grito"
+   }
+  ],
+  "reparto": [
+   "piccolo",
+   "shiryu"
+  ]
+ },
+ {
+  "id": "2-3",
+  "cap": 2,
+  "narra": "Mientras tanto, a otro mundo le tocó una incursión más pequeña. Mucho más pequeña.",
+  "globos": [
+   {
+    "quien": "Krilin",
+    "texto": "¡Ese cerdito se comió las semillas del ermitaño!",
+    "x": 0.52,
+    "y": 0.12,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Yajirobe",
+    "texto": "¡Eran MIS semillas! ¡Atrápalo!",
+    "x": 0.83,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "P-chan",
+    "texto": "¡Bwi! ¡Bwiii!",
+    "x": 0.15,
+    "y": 0.35,
+    "cola": "abajo",
+    "tipo": "grito"
+   }
+  ],
+  "reparto": [
+   "krilin",
+   "pchan",
+   "yajirobe"
+  ]
+ },
+ {
+  "id": "2-4",
+  "cap": 2,
+  "narra": "En lo alto de su torre, el Maestro Karin miraba la persecución. Octavio también, aunque él estaba un poco perdido.",
+  "globos": [
+   {
+    "quien": "Maestro Karin",
+    "texto": "Las semillas no importan. Esas grietas, en cambio... se están multiplicando.",
+    "x": 0.26,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Octavio",
+    "texto": "¿Alguien sabe en qué universo estoy?",
+    "x": 0.76,
+    "y": 0.12,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "karin",
+   "octavio"
+  ]
+ },
+ {
+  "id": "2-5",
+  "cap": 2,
+  "narra": "Trunks había visto un futuro destruido. Por eso, cuando la grieta se abrió, no esperó a preguntar.",
+  "globos": [
+   {
+    "quien": "Trunks",
+    "texto": "No voy a dejar que otro futuro se pierda.",
+    "x": 0.2,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Hyoga",
+    "texto": "¡Polvo de Diamantes!",
+    "x": 0.63,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "grito"
+   },
+   {
+    "quien": "Shun",
+    "texto": "¡Cadena Nebular, protege!",
+    "x": 0.88,
+    "y": 0.16,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "hyoga",
+   "shun",
+   "trunks"
+  ]
+ },
+ {
+  "id": "3-1",
+  "cap": 3,
+  "narra": "Al reino de Britannia le cayó del cielo un saiyajin legendario. Literalmente.",
+  "globos": [
+   {
+    "quien": "Broly",
+    "texto": "¡KAKAROTTOOO!",
+    "x": 0.5,
+    "y": 0.08,
+    "cola": "abajo",
+    "tipo": "grito"
+   }
+  ],
+  "reparto": [
+   "broly"
+  ]
+ },
+ {
+  "id": "3-2",
+  "cap": 3,
+  "narra": "Los Siete Pecados Capitales no preguntaron de dónde venía. Solo vieron a alguien rompiendo su reino.",
+  "globos": [
+   {
+    "quien": "Diane",
+    "texto": "¡Oye, grandulón! ¡Esas son mis flores!",
+    "x": 0.38,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "King",
+    "texto": "Diane, cuidado. Ese poder no tiene fondo.",
+    "x": 0.12,
+    "y": 0.14,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Broly",
+    "texto": "Grrr...",
+    "x": 0.78,
+    "y": 0.12,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "broly",
+   "diane",
+   "king"
+  ]
+ },
+ {
+  "id": "3-3",
+  "cap": 3,
+  "narra": "Meliodas sonrió. Contra un golpe tan grande, solo había una respuesta.",
+  "globos": [
+   {
+    "quien": "Meliodas",
+    "texto": "Gracias por el ataque. ¡Te lo devuelvo! ¡Full Counter!",
+    "x": 0.2,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "grito"
+   }
+  ],
+  "reparto": [
+   "broly",
+   "meliodas"
+  ]
+ },
+ {
+  "id": "3-4",
+  "cap": 3,
+  "narra": "Al mediodía, el más fuerte de los pecados salió a escena. Y no estaba de humor para compartir el sol.",
+  "globos": [
+   {
+    "quien": "Escanor",
+    "texto": "¿Quién decidió que tú eras el más fuerte? Yo.",
+    "x": 0.24,
+    "y": 0.12,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Broly",
+    "texto": "¡Más! ¡Quiero MÁS!",
+    "x": 0.8,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "grito"
+   }
+  ],
+  "reparto": [
+   "broly-verde",
+   "escanor"
+  ]
+ },
+ {
+  "id": "3-5",
+  "cap": 3,
+  "narra": "Broly cayó dormido, rendido. Y en el claro apareció alguien que tampoco era de ese mundo.",
+  "globos": [
+   {
+    "quien": "Ranma",
+    "texto": "Me caí de una grieta en Nerima. ¿Alguien vio a un cerdito negro?",
+    "x": 0.14,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Merlín",
+    "texto": "Las grietas tienen un patrón. Alguien las está abriendo a propósito.",
+    "x": 0.42,
+    "y": 0.14,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Ban",
+    "texto": "Entonces hay que encontrarlo y darle su merecido.",
+    "x": 0.66,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "ban",
+   "king",
+   "merlin",
+   "ranma"
+  ]
+ },
+ {
+  "id": "4-1",
+  "cap": 4,
+  "narra": "Tokio, al atardecer. Un cometa cruzó el cielo. Pero ese cometa no venía del espacio: venía de otro universo.",
+  "globos": [
+   {
+    "quien": "Mitsuha",
+    "texto": "Ese cometa... ya lo había visto en un sueño.",
+    "x": 0.3,
+    "y": 0.12,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Taki",
+    "texto": "Yo también. Estabas tú.",
+    "x": 0.7,
+    "y": 0.12,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "mitsuha",
+   "taki"
+  ]
+ },
+ {
+  "id": "4-2",
+  "cap": 4,
+  "narra": "El cometa se partió en grietas. Por cada una se veía un mundo distinto: un cielo naranja, un reino verde, un santuario de estrellas.",
+  "globos": [
+   {
+    "quien": "Mitsuha",
+    "texto": "Los mundos se están rompiendo... pero también se están tocando.",
+    "x": 0.5,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "mitsuha"
+  ]
+ },
+ {
+  "id": "4-3",
+  "cap": 4,
+  "narra": "Un cordón trenzado unía sus muñecas. El hilo rojo no se rompía con la grieta: la atravesaba.",
+  "globos": [
+   {
+    "quien": "Taki",
+    "texto": "¡El hilo! ¡Cruza de un mundo al otro!",
+    "x": 0.8,
+    "y": 0.12,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Mitsuha",
+    "texto": "Entonces el hilo no rompe universos... ¡los cose!",
+    "x": 0.2,
+    "y": 0.12,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "mitsuha",
+   "taki"
+  ]
+ },
+ {
+  "id": "4-4",
+  "cap": 4,
+  "narra": "Por la grieta llegó Athena. Ella también había sentido el hilo.",
+  "globos": [
+   {
+    "quien": "Athena",
+    "texto": "Con mi cosmos y su hilo podemos cerrar las Incursiones. Pero necesitamos tiempo.",
+    "x": 0.5,
+    "y": 0.06,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Taki",
+    "texto": "¿Cuánto tiempo?",
+    "x": 0.82,
+    "y": 0.18,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "athena",
+   "mitsuha",
+   "taki"
+  ]
+ },
+ {
+  "id": "5-1",
+  "cap": 5,
+  "narra": "En el Archivo, el Archivista ganó un aliado. Uno que también odiaba que existieran tantos mundos.",
+  "globos": [
+   {
+    "quien": "Guerrero Rosé",
+    "texto": "Un solo universo, sin errores. Qué idea tan hermosa.",
+    "x": 0.5,
+    "y": 0.06,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "El Archivista",
+    "texto": "Entonces ayúdame a apagar los demás.",
+    "x": 0.17,
+    "y": 0.14,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "black",
+   "centinela",
+   "encapuchado"
+  ]
+ },
+ {
+  "id": "5-2",
+  "cap": 5,
+  "narra": "Saga de Géminis, engañado por el Archivista, abrió la Otra Dimensión. Ahora no había mundos separados: había un solo campo de batalla.",
+  "globos": [
+   {
+    "quien": "Saga",
+    "texto": "¡OTRA DIMENSIÓN! ¡Que todos los mundos caigan en el mismo lugar!",
+    "x": 0.55,
+    "y": 0.06,
+    "cola": "abajo",
+    "tipo": "grito"
+   },
+   {
+    "quien": "Aioria",
+    "texto": "¡Saga, despierta! ¡Te están usando!",
+    "x": 0.17,
+    "y": 0.14,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "aioria",
+   "saga"
+  ]
+ },
+ {
+  "id": "5-3",
+  "cap": 5,
+  "narra": "Del mundo de la luna roja salieron dos ninjas legendarios. Sus ojos ya habían visto el fin de muchos mundos.",
+  "globos": [
+   {
+    "quien": "Madara",
+    "texto": "¿Saiyajin? Bailen para mí.",
+    "x": 0.36,
+    "y": 0.06,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Goku",
+    "texto": "Vegeta, este es serio.",
+    "x": 0.66,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Vegeta",
+    "texto": "¡Hmph! Por una vez, peleamos juntos.",
+    "x": 0.88,
+    "y": 0.16,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "goku4",
+   "itachi",
+   "madara",
+   "vegeta"
+  ]
+ },
+ {
+  "id": "5-4",
+  "cap": 5,
+  "narra": "Y entonces, todos contra todos. Nadie sabía quién era el enemigo. Solo sabían que su mundo estaba en peligro.",
+  "globos": [],
+  "reparto": [
+   "broly",
+   "goku",
+   "ikki",
+   "meliodas",
+   "seiya",
+   "trunks"
+  ]
+ },
+ {
+  "id": "5-5",
+  "cap": 5,
+  "narra": "Rosa contra rojo. El aliado del Archivista encontró por fin al rival que buscaba.",
+  "globos": [
+   {
+    "quien": "Guerrero Rosé",
+    "texto": "Tu cuerpo, tu fuerza... en otro mundo serían míos.",
+    "x": 0.2,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Goku",
+    "texto": "¡No hay otro mundo para ti! ¡Kamehameha x10!",
+    "x": 0.8,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "grito"
+   }
+  ],
+  "reparto": [
+   "black",
+   "goku4"
+  ]
+ },
+ {
+  "id": "5-6",
+  "cap": 5,
+  "narra": "Monstruo contra monstruo. Broly, ya despierto, encontró por fin a alguien de su tamaño.",
+  "globos": [
+   {
+    "quien": "Diane",
+    "texto": "¡Ahora sí, grandulón! ¡Ese lagarto es tuyo!",
+    "x": 0.85,
+    "y": 0.12,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Centinela",
+    "texto": "¡GRRRAAAH!",
+    "x": 0.2,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "grito"
+   }
+  ],
+  "reparto": [
+   "broly-verde",
+   "centinela",
+   "diane"
+  ]
+ },
+ {
+  "id": "6-1",
+  "cap": 6,
+  "narra": "De dos líneas de tiempo distintas llegaron dos fusiones. El mismo guerrero, dos veces.",
+  "globos": [
+   {
+    "quien": "Gogeta SSJ4",
+    "texto": "¿Tú también eres yo?",
+    "x": 0.2,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Gogeta Blue",
+    "texto": "Lo soy. Y si peleamos, el multiverso no aguanta.",
+    "x": 0.8,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "gogeta4",
+   "gogetablue"
+  ]
+ },
+ {
+  "id": "6-2",
+  "cap": 6,
+  "narra": "En vez de pelear, se dieron la espalda... y sostuvieron las grietas con las manos.",
+  "globos": [
+   {
+    "quien": "Gogeta SSJ4",
+    "texto": "¡Athena, ahora!",
+    "x": 0.25,
+    "y": 0.08,
+    "cola": "abajo",
+    "tipo": "grito"
+   },
+   {
+    "quien": "Gogeta Blue",
+    "texto": "¡No podremos sostenerlas mucho!",
+    "x": 0.75,
+    "y": 0.08,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "gogeta4",
+   "gogetablue"
+  ]
+ },
+ {
+  "id": "6-3",
+  "cap": 6,
+  "narra": "Athena elevó su cosmos. Mitsuha y Taki tensaron el hilo. Y todos, de todos los mundos, prestaron su energía.",
+  "globos": [
+   {
+    "quien": "Athena",
+    "texto": "Que el hilo una lo que la guerra separó.",
+    "x": 0.5,
+    "y": 0.06,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Goku",
+    "texto": "¡Tomen mi energía!",
+    "x": 0.1,
+    "y": 0.24,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Seiya",
+    "texto": "¡Y la mía!",
+    "x": 0.9,
+    "y": 0.24,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "athena",
+   "goku",
+   "mitsuha",
+   "seiya",
+   "taki"
+  ]
+ },
+ {
+  "id": "6-4",
+  "cap": 6,
+  "narra": "Las grietas se cerraron una a una. Y el Archivista quedó atrapado en lo que más temía: una figura sin pintar, sin mundo propio.",
+  "globos": [
+   {
+    "quien": "El Archivista",
+    "texto": "No... ¡NO! ¡Yo era el Archivo!",
+    "x": 0.62,
+    "y": 0.14,
+    "cola": "izq",
+    "tipo": "grito"
+   }
+  ],
+  "reparto": [
+   "encapuchado"
+  ]
+ },
+ {
+  "id": "e-1",
+  "cap": 7,
+  "narra": "Desde entonces, todos viven en el mismo estante. Cada uno en su mundo. Todos en la misma Biblioteca.",
+  "globos": [
+   {
+    "quien": "Goku",
+    "texto": "¿Y si un día peleamos de nuevo?",
+    "x": 0.13,
+    "y": 0.32,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Seiya",
+    "texto": "Ya sabes dónde encontrarme.",
+    "x": 0.3,
+    "y": 0.24,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "broly",
+   "goku",
+   "meliodas",
+   "mitsuha",
+   "pchan",
+   "seiya",
+   "taki",
+   "vegeta"
+  ]
+ },
+ {
+  "id": "e-2",
+  "cap": 7,
+  "narra": "Pero en un estante olvidado, al fondo del Archivo, un trono esmeralda se encendió.",
+  "globos": [
+   {
+    "quien": "???",
+    "texto": "Así que el Archivista cayó... Bien. Ahora el Archivo es mío.",
+    "x": 0.68,
+    "y": 0.12,
+    "cola": "izq",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "tirano"
+  ]
+ },
+ {
+  "id": "v-1",
+  "cap": 8,
+  "narra": "Goku y Krilin, entrenando como en los viejos tiempos.",
+  "globos": [
+   {
+    "quien": "Krilin",
+    "texto": "¡Esta vez no me ganas!",
+    "x": 0.78,
+    "y": 0.12,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Goku",
+    "texto": "¡Eso dijiste ayer!",
+    "x": 0.22,
+    "y": 0.12,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "goku-nino",
+   "krilin"
+  ]
+ },
+ {
+  "id": "v-2",
+  "cap": 8,
+  "narra": "Picnic de tregua: Yajirobe, el Maestro Karin y P-chan reparten lo que quedó de las semillas.",
+  "globos": [
+   {
+    "quien": "Yajirobe",
+    "texto": "Una para ti, dos para mí...",
+    "x": 0.2,
+    "y": 0.12,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "P-chan",
+    "texto": "¡Bwi!",
+    "x": 0.78,
+    "y": 0.4,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "karin",
+   "pchan",
+   "yajirobe"
+  ]
+ },
+ {
+  "id": "v-3",
+  "cap": 8,
+  "narra": "Piccolo medita flotando. Su alumno, como siempre, no se queda quieto.",
+  "globos": [
+   {
+    "quien": "Piccolo",
+    "texto": "Concéntrate. El ki se siente, no se grita.",
+    "x": 0.25,
+    "y": 0.08,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "goku-nino",
+   "piccolo"
+  ]
+ },
+ {
+  "id": "v-4",
+  "cap": 8,
+  "narra": "Padre e hijo entrenan entre los estantes del Archivo. Vegeta nunca lo dirá, pero está orgulloso.",
+  "globos": [
+   {
+    "quien": "Vegeta",
+    "texto": "Otra vez. Y esta vez, en serio.",
+    "x": 0.78,
+    "y": 0.12,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Trunks",
+    "texto": "¡Sí, papá!",
+    "x": 0.22,
+    "y": 0.14,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "trunks",
+   "vegeta"
+  ]
+ },
+ {
+  "id": "v-5",
+  "cap": 8,
+  "narra": "Después de la guerra, Broly encontró algo que nunca tuvo: una amiga de su tamaño.",
+  "globos": [
+   {
+    "quien": "Diane",
+    "texto": "¿Te gustan las flores, Broly?",
+    "x": 0.78,
+    "y": 0.12,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Broly",
+    "texto": "...Sí.",
+    "x": 0.22,
+    "y": 0.12,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "broly",
+   "diane"
+  ]
+ },
+ {
+  "id": "v-6",
+  "cap": 8,
+  "narra": "Octavio y Ranma, perdidos en Tokio, buscan el camino de vuelta a sus mundos.",
+  "globos": [
+   {
+    "quien": "Octavio",
+    "texto": "¿Seguro que es por aquí?",
+    "x": 0.24,
+    "y": 0.14,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Ranma",
+    "texto": "Nunca estoy seguro de nada.",
+    "x": 0.78,
+    "y": 0.14,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "octavio",
+   "ranma"
+  ]
+ },
+ {
+  "id": "v-7",
+  "cap": 8,
+  "narra": "Dos fases 4 frente a frente: el fusionado y el original. Solo un entrenamiento amistoso... o eso dicen.",
+  "globos": [
+   {
+    "quien": "Gogeta SSJ4",
+    "texto": "Te ves más bajito de lo que recordaba.",
+    "x": 0.22,
+    "y": 0.1,
+    "cola": "abajo",
+    "tipo": "normal"
+   },
+   {
+    "quien": "Goku",
+    "texto": "¡Oye!",
+    "x": 0.78,
+    "y": 0.14,
+    "cola": "abajo",
+    "tipo": "normal"
+   }
+  ],
+  "reparto": [
+   "gogeta4",
+   "goku4"
+  ]
+ }
+]
