@@ -1,6 +1,6 @@
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { ContactShadows, useGLTF } from '@react-three/drei'
+import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 import { ChevronDown, Star } from 'lucide-react'
 import { AlCargar, Pieza } from './Pieza'
@@ -115,6 +115,31 @@ function useMemoriaCorta(pasos: Paso[], indice: number, actualLista: boolean) {
   }, [pasos, indice, actualLista])
 }
 
+/**
+ * Sombra fija en el suelo: un degradado en un plano. ContactShadows volvería a
+ * pintar la escena cada fotograma, y en el móvil eso se nota.
+ */
+function SombraSuelo() {
+  const textura = useMemo(() => {
+    const c = document.createElement('canvas')
+    c.width = c.height = 128
+    const g = c.getContext('2d')!
+    const r = g.createRadialGradient(64, 64, 0, 64, 64, 64)
+    r.addColorStop(0, 'rgba(18,16,25,0.55)')
+    r.addColorStop(1, 'rgba(18,16,25,0)')
+    g.fillStyle = r
+    g.fillRect(0, 0, 128, 128)
+    return new THREE.CanvasTexture(c)
+  }, [])
+  useEffect(() => () => textura.dispose(), [textura])
+  return (
+    <mesh position={[0, -1.02, 0]} rotation-x={-Math.PI / 2}>
+      <planeGeometry args={[3.2, 1.6]} />
+      <meshBasicMaterial map={textura} transparent depthWrite={false} />
+    </mesh>
+  )
+}
+
 function Lienzo({ pasos, indice, estado, listo, onListo }: { pasos: Paso[]; indice: number; estado: { current: Estado }; listo: string | null; onListo: (id: string) => void }) {
   const m = pasos[indice]?.m
   useMemoriaCorta(pasos, indice, listo === m?.id)
@@ -136,7 +161,7 @@ function Lienzo({ pasos, indice, estado, listo, onListo }: { pasos: Paso[]; indi
           <Figura m={m} i={indice} estado={estado} onListo={onListo} />
         </Suspense>
       )}
-      <ContactShadows position={[0, -1.02, 0]} opacity={0.45} scale={6} blur={2.4} far={3} />
+      <SombraSuelo />
     </Canvas>
   )
 }
